@@ -1,0 +1,15 @@
+<?php
+
+namespace Acme\MyBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+class RandomController extends Controller
+{
+    public function indexAction($limit)
+    {
+        return new Response(
+            '<html><body>Number: '.rand(1, $limit).'</body></html>'
+        );
+    }
+}
