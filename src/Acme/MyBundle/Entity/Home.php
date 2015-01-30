@@ -10,11 +10,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Home
 {
 	/**
+	 * @ORM\Column(type="string", length=100)
+	 */
+	protected $address;
+	/**
 	 * @ORM\ManyToOne(targetEntity="Community", inversedBy="homes")
 	 */
 	protected $community;
 	/**
-	 * @ORM\Column(type="string", length=30)
+	 * @ORM\Column(type="string", length=20)
 	 */
 	protected $direction;
 	/**
@@ -32,11 +36,11 @@ class Home
 	 */
 	protected $id;
 	/**
-	 * @ORM\Column(type="decimal")
+	 * @ORM\Column(type="decimal", scale=8)
 	 */
 	protected $latitude;
 	/**
-	 * @ORM\Column(type="decimal")
+	 * @ORM\Column(type="decimal", scale=8)
 	 */
 	protected $longitude;
 	/**
@@ -322,5 +326,28 @@ class Home
     public function getHomeModel()
     {
         return $this->home_model;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return Home
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

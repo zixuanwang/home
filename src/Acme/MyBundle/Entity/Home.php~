@@ -10,11 +10,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Home
 {
 	/**
+	 * @ORM\Column(type="string", length=100)
+	 */
+	protected $address;
+	/**
 	 * @ORM\ManyToOne(targetEntity="Community", inversedBy="homes")
 	 */
 	protected $community;
 	/**
-	 * @ORM\Column(type="string", length=30)
+	 * @ORM\Column(type="string", length=20)
 	 */
 	protected $direction;
 	/**

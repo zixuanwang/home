@@ -13,7 +13,7 @@ class HomeModel
 	/**
 	 * @ORM\OneToOne(targetEntity="Album", mappedBy="home_model")
 	 **/
-	private $album;
+	protected $album;
 	/**
 	 * @ORM\OneToMany(targetEntity="Home", mappedBy="home_model")
 	 */

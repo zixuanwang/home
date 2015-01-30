@@ -13,7 +13,11 @@ class Community
 	/**
 	 * @ORM\OneToOne(targetEntity="Album", mappedBy="community")
 	 **/
-	private $album;
+	protected $album;
+	/**
+	 * @ORM\ManyToOne(targetEntity="Builder", inversedBy="communities")
+	 */
+	protected $builder;
 	/**
 	 * @ORM\Column(type="string", length=30)
 	 */
@@ -49,6 +53,10 @@ class Community
      * @ORM\JoinTable(name="communities_schools")
      **/
 	protected $schools;
+	/**
+	 * @ORM\Column(type="string", length=10)
+	 */
+	protected $zipcode;
 	public function __construct()
 	{
 		$this->homes = new ArrayCollection();
@@ -267,5 +275,51 @@ class Community
     public function getAlbum()
     {
         return $this->album;
+    }
+
+    /**
+     * Set builder
+     *
+     * @param \Acme\MyBundle\Entity\Builder $builder
+     * @return Community
+     */
+    public function setBuilder(\Acme\MyBundle\Entity\Builder $builder = null)
+    {
+        $this->builder = $builder;
+
+        return $this;
+    }
+
+    /**
+     * Get builder
+     *
+     * @return \Acme\MyBundle\Entity\Builder 
+     */
+    public function getBuilder()
+    {
+        return $this->builder;
+    }
+
+    /**
+     * Set zipcode
+     *
+     * @param string $zipcode
+     * @return Community
+     */
+    public function setZipcode($zipcode)
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    /**
+     * Get zipcode
+     *
+     * @return string 
+     */
+    public function getZipcode()
+    {
+        return $this->zipcode;
     }
 }
