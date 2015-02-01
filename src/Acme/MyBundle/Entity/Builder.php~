@@ -25,6 +25,10 @@ class Builder
 	 */
 	protected $id;
 	/**
+	 * @ORM\Column(type="string", length=50)
+	 */
+	protected $name;
+	/**
 	 * @ORM\Column(type="string", length=100)
 	 */
 	protected $website;

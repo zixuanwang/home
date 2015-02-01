@@ -299,4 +299,27 @@ class Community
     {
         return $this->builder;
     }
+
+    /**
+     * Set zipcode
+     *
+     * @param string $zipcode
+     * @return Community
+     */
+    public function setZipcode($zipcode)
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    /**
+     * Get zipcode
+     *
+     * @return string 
+     */
+    public function getZipcode()
+    {
+        return $this->zipcode;
+    }
 }

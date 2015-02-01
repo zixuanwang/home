@@ -25,6 +25,10 @@ class Builder
 	 */
 	protected $id;
 	/**
+	 * @ORM\Column(type="string", length=50)
+	 */
+	protected $name;
+	/**
 	 * @ORM\Column(type="string", length=100)
 	 */
 	protected $website;
@@ -120,5 +124,28 @@ class Builder
     public function getCommunities()
     {
         return $this->communities;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Builder
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

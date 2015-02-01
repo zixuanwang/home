@@ -2,6 +2,7 @@
 // src/Acme/MyBundle/Entity/Home.php
 namespace Acme\MyBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
@@ -36,11 +37,11 @@ class Home
 	 */
 	protected $id;
 	/**
-	 * @ORM\Column(type="decimal")
+	 * @ORM\Column(type="decimal", scale=8)
 	 */
 	protected $latitude;
 	/**
-	 * @ORM\Column(type="decimal")
+	 * @ORM\Column(type="decimal", scale=8)
 	 */
 	protected $longitude;
 	/**
@@ -52,6 +53,11 @@ class Home
 	 */
     protected $price;
     /**
+     * @ORM\ManyToMany(targetEntity="PriceHistory")
+     * @ORM\JoinTable(name="homes_price_history")
+     **/
+    protected $price_history;
+    /**
      * @ORM\Column(type="decimal")
      */
     protected $price_per_foot;
@@ -59,11 +65,19 @@ class Home
      * @ORM\Column(type="string", length=30)
      */
 	protected $status;
+	// ...
+	/**
+	 * @ORM\ManyToMany(targetEntity="User", mappedBy="homes")
+	 **/
+	 private $users;
 	/**
 	 * @ORM\Column(type="integer")
 	 */
     protected $year_built;
-    
+    public function __construct()
+    {
+    	$this->price_history = new ArrayCollection();
+    }
 
     /**
      * Set direction
@@ -326,5 +340,94 @@ class Home
     public function getHomeModel()
     {
         return $this->home_model;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return Home
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Add price_history
+     *
+     * @param \Acme\MyBundle\Entity\PriceHistory $priceHistory
+     * @return Home
+     */
+    public function addPriceHistory(\Acme\MyBundle\Entity\PriceHistory $priceHistory)
+    {
+        $this->price_history[] = $priceHistory;
+
+        return $this;
+    }
+
+    /**
+     * Remove price_history
+     *
+     * @param \Acme\MyBundle\Entity\PriceHistory $priceHistory
+     */
+    public function removePriceHistory(\Acme\MyBundle\Entity\PriceHistory $priceHistory)
+    {
+        $this->price_history->removeElement($priceHistory);
+    }
+
+    /**
+     * Get price_history
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPriceHistory()
+    {
+        return $this->price_history;
+    }
+
+    /**
+     * Add users
+     *
+     * @param \Acme\MyBundle\Entity\User $users
+     * @return Home
+     */
+    public function addUser(\Acme\MyBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \Acme\MyBundle\Entity\User $users
+     */
+    public function removeUser(\Acme\MyBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

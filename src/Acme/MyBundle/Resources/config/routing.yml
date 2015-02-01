@@ -1,3 +1,6 @@
 random:
     path:     /random/{limit}
     defaults: { _controller: AcmeMyBundle:Random:index }
+manage:
+    path:     /manage/{type}
+    defaults: { _controller: AcmeMyBundle:Manage:index }
