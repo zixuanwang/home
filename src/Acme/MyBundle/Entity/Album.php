@@ -4,6 +4,7 @@ namespace Acme\MyBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * @ORM\Entity
  * @ORM\Table(name="album")
@@ -30,20 +31,8 @@ class Album
 	protected $name;
 	/**
 	 * @ORM\OneToMany(targetEntity="Photo", mappedBy="album")
-	 */
-	protected $photos;
-	/**
-	 * @ORM\Column(type="string", length=100)
-	 */
-	protected $title;
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->photos = new ArrayCollection();
-    }
-
+	 **/
+	public $photos;
     /**
      * Get id
      *
@@ -75,29 +64,6 @@ class Album
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return Album
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     /**
@@ -178,4 +144,35 @@ class Album
     {
         return $this->photos;
     }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Album
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 }

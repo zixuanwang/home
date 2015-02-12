@@ -127,6 +127,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        // album
+        if (0 === strpos($pathinfo, '/album') && preg_match('#^/album/(?P<type>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'album')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\AlbumController::indexAction',));
+        }
+
         // random
         if (0 === strpos($pathinfo, '/random') && preg_match('#^/random/(?P<limit>[^/]++)$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'random')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\RandomController::indexAction',));

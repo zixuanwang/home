@@ -1,0 +1,21 @@
+ {% extends '::base.html.twig' %}
+
+ {% block body %}
+<div class="container-fluid">
+	<form name="album_form" action="{{url('album', {'type': 'add'})}}" method="post">
+		<div class="form-group">
+	    	<label for="exampleInputEmail1">Title</label>
+	    	<input name="album_name" type="text" class="form-control" placeholder="Title of the Album">
+	  	</div>
+	  	{% for filename in filenames %}
+			<div class="row">
+				<img src="{{'/' ~ filename}}" class="img-rounded" alt="Responsive image">
+			</div>
+			<div class="row">
+				<input name="{{filename}}" type="text" class="form-control" placeholder="Name of Photo">
+			</div>
+	  	{% endfor %}
+	  	<button class="btn btn-default" type="submit">Submit</button>
+	</form>
+</div>
+ {% endblock %}

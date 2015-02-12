@@ -1,18 +1,21 @@
-<?php 
+<?php
 // src/Acme/MyBundle/Entity/Photo.php
 namespace Acme\MyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="photo")
  */
-class Photo
-{
+class Photo {
 	/**
 	 * @ORM\ManyToOne(targetEntity="Album", inversedBy="photos")
-	 */
-	protected $album;
+	 **/
+	private $album;
 	/**
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
@@ -26,84 +29,78 @@ class Photo
 	/**
 	 * @ORM\Column(type="string", length=100)
 	 */
-	protected $title;
+	protected $path;
+	/**
+	 * Get id
+	 *
+	 * @return integer
+	 */
+	public function getId() {
+		return $this->id;
+	}
+	
+	/**
+	 * Set name
+	 *
+	 * @param string $name        	
+	 * @return Photo
+	 */
+	public function setName($name) {
+		$this->name = $name;
+		
+		return $this;
+	}
+	
+	/**
+	 * Get name
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		return $this->name;
+	}
+	
+	/**
+	 * Set album
+	 *
+	 * @param \Acme\MyBundle\Entity\Album $album        	
+	 * @return Photo
+	 */
+	public function setAlbum(\Acme\MyBundle\Entity\Album $album = null) {
+		$this->album = $album;
+		
+		return $this;
+	}
+	
+	/**
+	 * Get album
+	 *
+	 * @return \Acme\MyBundle\Entity\Album
+	 */
+	public function getAlbum() {
+		return $this->album;
+	}
 
     /**
-     * Get id
+     * Set path
      *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
+     * @param string $path
      * @return Photo
      */
-    public function setName($name)
+    public function setPath($path)
     {
-        $this->name = $name;
+        $this->path = $path;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get path
      *
      * @return string 
      */
-    public function getName()
+    public function getPath()
     {
-        return $this->name;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return Photo
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set album
-     *
-     * @param \Acme\MyBundle\Entity\Album $album
-     * @return Photo
-     */
-    public function setAlbum(\Acme\MyBundle\Entity\Album $album = null)
-    {
-        $this->album = $album;
-
-        return $this;
-    }
-
-    /**
-     * Get album
-     *
-     * @return \Acme\MyBundle\Entity\Album 
-     */
-    public function getAlbum()
-    {
-        return $this->album;
+        return $this->path;
     }
 }
