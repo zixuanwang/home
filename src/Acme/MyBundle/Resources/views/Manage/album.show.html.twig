@@ -1,20 +1,28 @@
  {% extends '::base.html.twig' %}
 
  {% block body %}
-<div class="container-fluid">
-	<form name="album_form" action="{{url('album', {'type': 'add'})}}" method="post">
-		<div class="form-group">
-	    	<label for="exampleInputEmail1">Title</label>
-	    	<input name="album_name" type="text" class="form-control" placeholder="Title of the Album">
-	  	</div>
+<div class="container">
+	<h2>Give Names to Images</h2>
+	<hr/>
+	<form name="album_form" action="{{url('manage', {'type': 'album'})}}" method="post">
+		<input type="hidden" name="model_id" value="{{model_id}}">
 	  	{% for filename in filenames %}
-			<div class="row">
-				<img src="{{'/' ~ filename}}" class="img-rounded" alt="Responsive image">
-			</div>
-			<div class="row">
-				<input name="{{filename}}" type="text" class="form-control" placeholder="Name of Photo">
-			</div>
+	  	<div class="media">
+			<div class="media-left media-middle">
+		      	<img class="media-object" src="{{'/uploads/'~filename~'.jpg'}}" style="height: 100px">
+		  	</div>
+		  	<div class="media-body">
+		    	<input name="{{filename}}" type="text" class="form-control">
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="cover" id="cover" value="{{filename}}">
+					    Set as Cover
+					  </label>
+					</div>
+		  	</div>
+		</div>
 	  	{% endfor %}
+	  	<hr/>
 	  	<button class="btn btn-default" type="submit">Submit</button>
 	</form>
 </div>

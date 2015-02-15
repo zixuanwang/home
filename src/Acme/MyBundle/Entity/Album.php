@@ -16,6 +16,10 @@ class Album
 	 **/
 	protected $community;
 	/**
+	 * @ORM\OneToOne(targetEntity="Photo")
+	 **/
+	protected $cover;
+	/**
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
@@ -25,10 +29,6 @@ class Album
 	 * @ORM\OneToOne(targetEntity="HomeModel", inversedBy="album")
 	 **/
 	protected $home_model;
-	/**
-	 * @ORM\Column(type="string", length=100)
-	 */
-	protected $name;
 	/**
 	 * @ORM\OneToMany(targetEntity="Photo", mappedBy="album")
 	 **/
@@ -41,29 +41,6 @@ class Album
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Album
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
@@ -144,29 +121,6 @@ class Album
     {
         return $this->photos;
     }
-
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return Album
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * Get path
-     *
-     * @return string 
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
     /**
      * Constructor
      */
@@ -175,4 +129,27 @@ class Album
         $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
+    /**
+     * Set cover
+     *
+     * @param \Acme\MyBundle\Entity\Photo $cover
+     * @return Album
+     */
+    public function setCover(\Acme\MyBundle\Entity\Photo $cover = null)
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
+
+    /**
+     * Get cover
+     *
+     * @return \Acme\MyBundle\Entity\Photo 
+     */
+    public function getCover()
+    {
+        return $this->cover;
+    }
 }

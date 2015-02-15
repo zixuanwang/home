@@ -216,6 +216,7 @@ class appProdProjectContainer extends Container
             'twig.loader' => 'getTwig_LoaderService',
             'twig.translation.extractor' => 'getTwig_Translation_ExtractorService',
             'uri_signer' => 'getUriSignerService',
+            'utility' => 'getUtilityService',
             'validator' => 'getValidatorService',
             'validator.builder' => 'getValidator_BuilderService',
             'validator.email' => 'getValidator_EmailService',
@@ -1146,6 +1147,10 @@ class appProdProjectContainer extends Container
     {
         return $this->services['uri_signer'] = new \Symfony\Component\HttpKernel\UriSigner('327a7dc6ddf39c76b9824363def15ac6286964d7');
     }
+    protected function getUtilityService()
+    {
+        return $this->services['utility'] = new \Acem\MyBundle\Controller\Utility();
+    }
     protected function getValidatorService()
     {
         return $this->services['validator'] = $this->get('validator.builder')->getValidator();
@@ -1256,7 +1261,7 @@ class appProdProjectContainer extends Container
             'kernel.root_dir' => $this->targetDirs[2],
             'kernel.environment' => 'prod',
             'kernel.debug' => false,
-            'kernel.name' => 'ap_',
+            'kernel.name' => 'app',
             'kernel.cache_dir' => __DIR__,
             'kernel.logs_dir' => ($this->targetDirs[2].'/logs'),
             'kernel.bundles' => array(

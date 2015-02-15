@@ -15,7 +15,7 @@ class Builder
 	 */
 	protected $communities;
 	/**
-	 * @ORM\Column(type="string", length=1000)
+	 * @ORM\Column(type="string", length=10000)
 	 */
 	protected $description;
 	/**

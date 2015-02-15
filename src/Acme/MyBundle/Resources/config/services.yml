@@ -1,4 +1,3 @@
 services:
-#    acme_my.example:
-#        class: Acme\MyBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    utility:
+        class: Acem\MyBundle\Controller\Utility

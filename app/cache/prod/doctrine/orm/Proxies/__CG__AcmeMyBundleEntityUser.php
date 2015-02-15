@@ -287,4 +287,26 @@ class User extends \Acme\MyBundle\Entity\User implements \Doctrine\ORM\Proxy\Pro
         return parent::getHomes();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function setType($type)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setType', array($type));
+
+        return parent::setType($type);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getType()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getType', array());
+
+        return parent::getType();
+    }
+
 }

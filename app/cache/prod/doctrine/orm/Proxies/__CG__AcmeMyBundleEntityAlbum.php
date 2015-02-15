@@ -36,7 +36,7 @@ class Album extends \Acme\MyBundle\Entity\Album implements \Doctrine\ORM\Proxy\P
      *
      * @see \Doctrine\Common\Persistence\Proxy::__getLazyProperties
      */
-    public static $lazyPropertiesDefaults = array();
+    public static $lazyPropertiesDefaults = array('photos' => NULL);
 
 
 
@@ -46,16 +46,60 @@ class Album extends \Acme\MyBundle\Entity\Album implements \Doctrine\ORM\Proxy\P
      */
     public function __construct($initializer = null, $cloner = null)
     {
+        unset($this->photos);
 
         $this->__initializer__ = $initializer;
         $this->__cloner__      = $cloner;
     }
 
+    /**
+     * 
+     * @param string $name
+     */
+    public function __get($name)
+    {
+        if (array_key_exists($name, $this->__getLazyProperties())) {
+            $this->__initializer__ && $this->__initializer__->__invoke($this, '__get', array($name));
 
+            return $this->$name;
+        }
 
+        trigger_error(sprintf('Undefined property: %s::$%s', __CLASS__, $name), E_USER_NOTICE);
+    }
 
+    /**
+     * 
+     * @param string $name
+     * @param mixed  $value
+     */
+    public function __set($name, $value)
+    {
+        if (array_key_exists($name, $this->__getLazyProperties())) {
+            $this->__initializer__ && $this->__initializer__->__invoke($this, '__set', array($name, $value));
 
+            $this->$name = $value;
 
+            return;
+        }
+
+        $this->$name = $value;
+    }
+
+    /**
+     * 
+     * @param  string $name
+     * @return boolean
+     */
+    public function __isset($name)
+    {
+        if (array_key_exists($name, $this->__getLazyProperties())) {
+            $this->__initializer__ && $this->__initializer__->__invoke($this, '__isset', array($name));
+
+            return isset($this->$name);
+        }
+
+        return false;
+    }
 
     /**
      * 
@@ -64,10 +108,10 @@ class Album extends \Acme\MyBundle\Entity\Album implements \Doctrine\ORM\Proxy\P
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'community', 'id', 'home_model', 'name', 'photos', 'title');
+            return array('__isInitialized__', 'community', 'cover', 'id', 'home_model', 'photos');
         }
 
-        return array('__isInitialized__', 'community', 'id', 'home_model', 'name', 'photos', 'title');
+        return array('__isInitialized__', 'community', 'cover', 'id', 'home_model');
     }
 
     /**
@@ -89,6 +133,7 @@ class Album extends \Acme\MyBundle\Entity\Album implements \Doctrine\ORM\Proxy\P
                 }
             };
 
+            unset($this->photos);
         }
     }
 
@@ -191,50 +236,6 @@ class Album extends \Acme\MyBundle\Entity\Album implements \Doctrine\ORM\Proxy\P
     /**
      * {@inheritDoc}
      */
-    public function setName($name)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setName', array($name));
-
-        return parent::setName($name);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getName()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getName', array());
-
-        return parent::getName();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setTitle($title)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTitle', array($title));
-
-        return parent::setTitle($title);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getTitle()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTitle', array());
-
-        return parent::getTitle();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function setCommunity(\Acme\MyBundle\Entity\Community $community = NULL)
     {
 
@@ -307,6 +308,28 @@ class Album extends \Acme\MyBundle\Entity\Album implements \Doctrine\ORM\Proxy\P
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPhotos', array());
 
         return parent::getPhotos();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCover(\Acme\MyBundle\Entity\Photo $cover = NULL)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCover', array($cover));
+
+        return parent::setCover($cover);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCover()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCover', array());
+
+        return parent::getCover();
     }
 
 }

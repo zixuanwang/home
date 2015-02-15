@@ -132,19 +132,26 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'album')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\AlbumController::indexAction',));
         }
 
-        // random
-        if (0 === strpos($pathinfo, '/random') && preg_match('#^/random/(?P<limit>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'random')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\RandomController::indexAction',));
-        }
+        if (0 === strpos($pathinfo, '/m')) {
+            // manage
+            if (0 === strpos($pathinfo, '/manage') && preg_match('#^/manage/(?P<type>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'manage')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\ManageController::indexAction',));
+            }
 
-        // manage
-        if (0 === strpos($pathinfo, '/manage') && preg_match('#^/manage/(?P<type>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'manage')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\ManageController::indexAction',));
+            // model
+            if (0 === strpos($pathinfo, '/model') && preg_match('#^/model/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'model')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\ModelController::indexAction',));
+            }
+
         }
 
         // homepage
-        if ($pathinfo === '/app/example') {
-            return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'homepage');
+            }
+
+            return array (  '_controller' => 'Acme\\MyBundle\\Controller\\HomeController::indexAction',  '_route' => 'homepage',);
         }
 
         // _welcome

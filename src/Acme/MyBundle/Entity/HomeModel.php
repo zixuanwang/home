@@ -15,6 +15,14 @@ class HomeModel
 	 **/
 	protected $album;
 	/**
+	 * @ORM\Column(type="string", length=1000, nullable=true)
+	 */
+	protected $description;
+	/**
+	 * @ORM\OneToOne(targetEntity="Album")
+	 **/
+	protected $floor_plan;
+	/**
 	 * @ORM\OneToMany(targetEntity="Home", mappedBy="home_model")
 	 */
 	protected $homes;
@@ -29,7 +37,7 @@ class HomeModel
 	 */
 	protected $name;
 	/**
-	 * @ORM\Column(type="decimal")
+	 * @ORM\Column(type="decimal", scale=2)
 	 */
     protected $num_baths;
     /**
@@ -47,10 +55,15 @@ class HomeModel
     /**
      * @ORM\Column(type="decimal")
      */
-    protected $square_feet; 
+    protected $square_feet;
+    /** 
+     * @ORM\Column(type="datetime") 
+     */
+    protected $updated;
     public function __construct()
     {
     	$this->homes = new ArrayCollection();
+    	$this->updated = new \DateTime();
     }  
 
     /**
@@ -255,5 +268,74 @@ class HomeModel
     public function getAlbum()
     {
         return $this->album;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return HomeModel
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return HomeModel
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set floor_plan
+     *
+     * @param \Acme\MyBundle\Entity\Album $floorPlan
+     * @return HomeModel
+     */
+    public function setFloorPlan(\Acme\MyBundle\Entity\Album $floorPlan = null)
+    {
+        $this->floor_plan = $floorPlan;
+
+        return $this;
+    }
+
+    /**
+     * Get floor_plan
+     *
+     * @return \Acme\MyBundle\Entity\Album 
+     */
+    public function getFloorPlan()
+    {
+        return $this->floor_plan;
     }
 }

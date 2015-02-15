@@ -27,19 +27,23 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         $context = $this->context;
         $request = $this->request;
 
-        // random
-        if (0 === strpos($pathinfo, '/random') && preg_match('#^/random/(?P<limit>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'random')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\RandomController::indexAction',));
+        // album
+        if (0 === strpos($pathinfo, '/album') && preg_match('#^/album/(?P<type>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'album')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\AlbumController::indexAction',));
         }
 
         // manage
-        if (0 === strpos($pathinfo, '/manage') && preg_match('#^/manage/(?P<limit>[^/]++)$#s', $pathinfo, $matches)) {
+        if (0 === strpos($pathinfo, '/manage') && preg_match('#^/manage/(?P<type>[^/]++)$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'manage')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\ManageController::indexAction',));
         }
 
         // homepage
-        if ($pathinfo === '/app/example') {
-            return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'homepage');
+            }
+
+            return array (  '_controller' => 'Acme\\MyBundle\\Controller\\HomeController::indexAction',  '_route' => 'homepage',);
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

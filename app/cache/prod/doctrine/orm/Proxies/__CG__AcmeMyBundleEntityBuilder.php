@@ -64,10 +64,10 @@ class Builder extends \Acme\MyBundle\Entity\Builder implements \Doctrine\ORM\Pro
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'communities', 'description', 'id', 'website');
+            return array('__isInitialized__', 'communities', 'description', 'id', 'name', 'website');
         }
 
-        return array('__isInitialized__', 'communities', 'description', 'id', 'website');
+        return array('__isInitialized__', 'communities', 'description', 'id', 'name', 'website');
     }
 
     /**
@@ -263,6 +263,28 @@ class Builder extends \Acme\MyBundle\Entity\Builder implements \Doctrine\ORM\Pro
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCommunities', array());
 
         return parent::getCommunities();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setName($name)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setName', array($name));
+
+        return parent::setName($name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getName', array());
+
+        return parent::getName();
     }
 
 }

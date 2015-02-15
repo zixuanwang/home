@@ -1,9 +1,9 @@
 album:
     path:     /album/{type}
     defaults: { _controller: AcmeMyBundle:Album:index }
-random:
-    path:     /random/{limit}
-    defaults: { _controller: AcmeMyBundle:Random:index }
 manage:
     path:     /manage/{type}
     defaults: { _controller: AcmeMyBundle:Manage:index }
+model:
+    path:     /model/{id}
+    defaults: { _controller: AcmeMyBundle:Model:index }

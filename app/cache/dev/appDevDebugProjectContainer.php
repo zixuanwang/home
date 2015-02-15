@@ -256,6 +256,7 @@ class appDevDebugProjectContainer extends Container
             'twig.loader' => 'getTwig_LoaderService',
             'twig.translation.extractor' => 'getTwig_Translation_ExtractorService',
             'uri_signer' => 'getUriSignerService',
+            'utility' => 'getUtilityService',
             'validator' => 'getValidatorService',
             'validator.builder' => 'getValidator_BuilderService',
             'validator.email' => 'getValidator_EmailService',
@@ -3268,6 +3269,19 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'utility' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Acem\MyBundle\Controller\Utility A Acem\MyBundle\Controller\Utility instance.
+     */
+    protected function getUtilityService()
+    {
+        return $this->services['utility'] = new \Acem\MyBundle\Controller\Utility();
+    }
+
+    /**
      * Gets the 'validator' service.
      *
      * This service is shared.
@@ -3726,7 +3740,7 @@ class appDevDebugProjectContainer extends Container
             'kernel.root_dir' => $this->targetDirs[2],
             'kernel.environment' => 'dev',
             'kernel.debug' => true,
-            'kernel.name' => 'app',
+            'kernel.name' => 'ap_',
             'kernel.cache_dir' => __DIR__,
             'kernel.logs_dir' => ($this->targetDirs[2].'/logs'),
             'kernel.bundles' => array(

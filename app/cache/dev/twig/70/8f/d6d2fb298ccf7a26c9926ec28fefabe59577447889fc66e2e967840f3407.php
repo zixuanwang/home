@@ -36,40 +36,54 @@ class __TwigTemplate_708fd6d2fb298ccf7a26c9926ec28fefabe59577447889fc66e2e967840
     public function block_body($context, array $blocks = array())
     {
         // line 4
-        echo "<div class=\"container-fluid\">
+        echo "<div class=\"container\">
+\t<h2>Give Names to Images</h2>
+\t<hr/>
 \t<form name=\"album_form\" action=\"";
-        // line 5
-        echo $this->env->getExtension('routing')->getUrl("album", array("type" => "add"));
+        // line 7
+        echo $this->env->getExtension('routing')->getUrl("manage", array("type" => "album"));
         echo "\" method=\"post\">
-\t\t<div class=\"form-group\">
-\t    \t<label for=\"exampleInputEmail1\">Title</label>
-\t    \t<input name=\"album_name\" type=\"text\" class=\"form-control\" placeholder=\"Title of the Album\">
-\t  \t</div>
+\t\t<input type=\"hidden\" name=\"model_id\" value=\"";
+        // line 8
+        echo twig_escape_filter($this->env, (isset($context["model_id"]) ? $context["model_id"] : $this->getContext($context, "model_id")), "html", null, true);
+        echo "\">
 \t  \t";
-        // line 10
+        // line 9
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["filenames"]) ? $context["filenames"] : $this->getContext($context, "filenames")));
         foreach ($context['_seq'] as $context["_key"] => $context["filename"]) {
-            // line 11
-            echo "\t\t\t<div class=\"row\">
-\t\t\t\t<img src=\"";
+            // line 10
+            echo "\t  \t<div class=\"media\">
+\t\t\t<div class=\"media-left media-middle\">
+\t\t      \t<img class=\"media-object\" src=\"";
             // line 12
-            echo twig_escape_filter($this->env, ("/" . $context["filename"]), "html", null, true);
-            echo "\" class=\"img-rounded\" alt=\"Responsive image\">
-\t\t\t</div>
-\t\t\t<div class=\"row\">
-\t\t\t\t<input name=\"";
+            echo twig_escape_filter($this->env, (("/uploads/" . $context["filename"]) . ".jpg"), "html", null, true);
+            echo "\" style=\"height: 100px\">
+\t\t  \t</div>
+\t\t  \t<div class=\"media-body\">
+\t\t    \t<input name=\"";
             // line 15
             echo twig_escape_filter($this->env, $context["filename"], "html", null, true);
-            echo "\" type=\"text\" class=\"form-control\" placeholder=\"Name of Photo\">
-\t\t\t</div>
+            echo "\" type=\"text\" class=\"form-control\">
+\t\t\t\t\t<div class=\"radio\">
+\t\t\t\t\t  <label>
+\t\t\t\t\t    <input type=\"radio\" name=\"cover\" id=\"cover\" value=\"";
+            // line 18
+            echo twig_escape_filter($this->env, $context["filename"], "html", null, true);
+            echo "\">
+\t\t\t\t\t    Set as Cover
+\t\t\t\t\t  </label>
+\t\t\t\t\t</div>
+\t\t  \t</div>
+\t\t</div>
 \t  \t";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['filename'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 18
-        echo "\t  \t<button class=\"btn btn-default\" type=\"submit\">Submit</button>
+        // line 25
+        echo "\t  \t<hr/>
+\t  \t<button class=\"btn btn-default\" type=\"submit\">Submit</button>
 \t</form>
 </div>
  ";
@@ -87,6 +101,6 @@ class __TwigTemplate_708fd6d2fb298ccf7a26c9926ec28fefabe59577447889fc66e2e967840
 
     public function getDebugInfo()
     {
-        return array (  72 => 18,  63 => 15,  57 => 12,  54 => 11,  50 => 10,  42 => 5,  39 => 4,  36 => 3,  11 => 1,);
+        return array (  85 => 25,  72 => 18,  66 => 15,  60 => 12,  56 => 10,  52 => 9,  48 => 8,  44 => 7,  39 => 4,  36 => 3,  11 => 1,);
     }
 }

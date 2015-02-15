@@ -64,10 +64,10 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'album', 'homes', 'id', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet');
+            return array('__isInitialized__', 'album', 'description', 'floor_plan', 'homes', 'id', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
         }
 
-        return array('__isInitialized__', 'album', 'homes', 'id', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet');
+        return array('__isInitialized__', 'album', 'description', 'floor_plan', 'homes', 'id', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
     }
 
     /**
@@ -373,6 +373,50 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAlbum', array());
 
         return parent::getAlbum();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDescription($description)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDescription', array($description));
+
+        return parent::setDescription($description);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDescription()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', array());
+
+        return parent::getDescription();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdated($updated)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdated', array($updated));
+
+        return parent::setUpdated($updated);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUpdated()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdated', array());
+
+        return parent::getUpdated();
     }
 
 }
