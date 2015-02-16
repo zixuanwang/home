@@ -11,7 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Community
 {
 	/**
-	 * @ORM\OneToOne(targetEntity="Album", mappedBy="community")
+	 * @ORM\Column(type="string", length=100)
+	 */
+	protected $address;
+	/**
+	 * @ORM\OneToOne(targetEntity="Album")
 	 **/
 	protected $album;
 	/**
@@ -41,11 +45,23 @@ class Community
 	 */
 	protected $id;
 	/**
+	 * @ORM\Column(type="decimal", scale=8, nullable=true)
+	 */
+	protected $latitude;
+	/**
+	 * @ORM\Column(type="decimal", scale=8, nullable=true)
+	 */
+	protected $longitude;
+	/**
+	 * @ORM\OneToOne(targetEntity="Photo")
+	 **/
+	protected $map;
+	/**
 	 * @ORM\Column(type="string", length=30)
 	 */
 	protected $name;
 	/**
-	 * @ORM\Column(type="string", length=30)
+	 * @ORM\Column(type="string", length=30, nullable=true)
 	 */
 	protected $school_district;
     /**
@@ -53,6 +69,10 @@ class Community
      * @ORM\JoinTable(name="communities_schools")
      **/
 	protected $schools;
+	/**
+	 * @ORM\Column(type="string", length=10)
+	 */
+	protected $state;
 	/**
 	 * @ORM\Column(type="string", length=10)
 	 */
@@ -321,5 +341,120 @@ class Community
     public function getZipcode()
     {
         return $this->zipcode;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     * @return Community
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string 
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return Community
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param string $latitude
+     * @return Community
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return string 
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param string $longitude
+     * @return Community
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return string 
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set map
+     *
+     * @param \Acme\MyBundle\Entity\Photo $map
+     * @return Community
+     */
+    public function setMap(\Acme\MyBundle\Entity\Photo $map = null)
+    {
+        $this->map = $map;
+
+        return $this;
+    }
+
+    /**
+     * Get map
+     *
+     * @return \Acme\MyBundle\Entity\Photo 
+     */
+    public function getMap()
+    {
+        return $this->map;
     }
 }

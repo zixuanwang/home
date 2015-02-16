@@ -25,6 +25,10 @@ class Builder
 	 */
 	protected $id;
 	/**
+	 * @ORM\OneToOne(targetEntity="Photo")
+	 **/
+	protected $logo;
+	/**
 	 * @ORM\Column(type="string", length=50)
 	 */
 	protected $name;
@@ -147,5 +151,28 @@ class Builder
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set logo
+     *
+     * @param \Acme\MyBundle\Entity\Photo $logo
+     * @return Builder
+     */
+    public function setLogo(\Acme\MyBundle\Entity\Photo $logo = null)
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * Get logo
+     *
+     * @return \Acme\MyBundle\Entity\Photo 
+     */
+    public function getLogo()
+    {
+        return $this->logo;
     }
 }

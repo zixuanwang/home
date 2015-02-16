@@ -36,16 +36,30 @@ class __TwigTemplate_d4a7281c6f2827873958b9ae8d77993fdbd11d773f3a389ca2e847908a3
     public function block_body($context, array $blocks = array())
     {
         // line 4
-        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_start');
-        echo "
-";
-        // line 5
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'widget');
-        echo "
-";
-        // line 6
-        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
-        echo "
+        echo " <div class=\"container\">
+\t<h2>Add a New Builder</h2>
+\t<hr/>
+\t<form method=\"post\" enctype=\"multipart/form-data\">
+\t  <div class=\"form-group\">
+\t    <label for=\"nameofbuilder\">Name of the Builder</label>
+\t    <input name=\"nameofbuilder\" type=\"text\" class=\"form-control\" id=\"nameofBuilder\" />
+\t  </div>
+\t  <div class=\"form-group\">
+\t    <label for=\"urlofbuilder\">Website Builder</label>
+\t    <input name=\"urlofbuilder\" type=\"text\" class=\"form-control\" id=\"urlofBuilder\" placeholder=\"http://\" />
+\t  </div>
+\t  <div class=\"form-group\">
+\t    <label for=\"description\">Description</label>
+\t    <textarea name=\"description\" class=\"form-control\" id=\"description\" rows=\"4\"></textarea>
+\t  </div>
+\t  <div class=\"form-group\">
+\t\t<label for=\"logofile\">Logo of the Builder</label>
+\t\t<input name=\"logofile\" type=\"file\" id=\"logofile\" accept=\"image/*\" />
+\t  </div>
+\t  <hr/>
+\t  <button type=\"submit\" class=\"btn btn-default\">Add</button>
+\t</form>
+</div>
  ";
     }
 
@@ -61,6 +75,6 @@ class __TwigTemplate_d4a7281c6f2827873958b9ae8d77993fdbd11d773f3a389ca2e847908a3
 
     public function getDebugInfo()
     {
-        return array (  47 => 6,  43 => 5,  39 => 4,  36 => 3,  11 => 1,);
+        return array (  39 => 4,  36 => 3,  11 => 1,);
     }
 }

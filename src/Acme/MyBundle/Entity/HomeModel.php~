@@ -315,4 +315,27 @@ class HomeModel
     {
         return $this->updated;
     }
+
+    /**
+     * Set floor_plan
+     *
+     * @param \Acme\MyBundle\Entity\Album $floorPlan
+     * @return HomeModel
+     */
+    public function setFloorPlan(\Acme\MyBundle\Entity\Album $floorPlan = null)
+    {
+        $this->floor_plan = $floorPlan;
+
+        return $this;
+    }
+
+    /**
+     * Get floor_plan
+     *
+     * @return \Acme\MyBundle\Entity\Album 
+     */
+    public function getFloorPlan()
+    {
+        return $this->floor_plan;
+    }
 }

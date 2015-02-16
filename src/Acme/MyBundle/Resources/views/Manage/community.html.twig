@@ -1,7 +1,64 @@
  {% extends '::base.html.twig' %}
 
  {% block body %}
-{{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
+<div class="container">
+	<h2>Add a New Community</h2>
+	<hr/>
+	<form method="post" enctype="multipart/form-data">
+	  <div class="form-group">
+	    <label for="name">Name of the Community</label>
+	    <input name="name" type="text" class="form-control" id="name" />
+	  </div>
+	  <div class="form-group">
+	    <label for="address">Address</label>
+	    <input name="address" type="text" class="form-control" id="address" />
+	  </div>
+	  <div class="form-group">
+	  	<label for="builder">Choose the Builder</label>
+	    <select name="builder" class="form-control" id="builder">
+	    {% for builder in builders %}
+		  <option>{{builder.getName()}}</option>
+		{% endfor %}
+		</select>
+	  </div>
+	  <div class="form-group">
+	    <label for="longitude">Longitude</label>
+	    <input name="longitude" type="text" class="form-control" id="longitude" />
+	  </div>
+	  <div class="form-group">
+	    <label for="latitude">Latitude</label>
+	    <input name="latitude" type="text" class="form-control" id="latitude" />
+	  </div>
+	  <div class="form-group">
+	    <label for="city">City</label>
+	    <input name="city" type="text" class="form-control" id="city" />
+	  </div>
+	  <div class="form-group">
+	    <label for="county">County</label>
+	    <input name="county" type="text" class="form-control" id="county" />
+	  </div>
+	  <div class="form-group">
+	    <label for="state">State</label>
+	    <input name="state" type="text" class="form-control" id="state" />
+	  </div>
+	  <div class="form-group">
+	    <label for="state">Zipcode</label>
+	    <input name="zipcode" type="text" class="form-control" id="zipcode" />
+	  </div>
+	  <div class="form-group">
+	    <label for="description">Description</label>
+	    <textarea name="description" class="form-control" id="description" rows="4"></textarea>
+	  </div>
+	  <div class="form-group">
+		<label for="map">Map of the Community</label>
+		<input name="map" type="file" id="map" accept="image/*" />
+	  </div>
+	  <div class="form-group">
+	    <label for="images">Images of the Community</label>
+	    <input type="file" id="images" name="images[]" multiple="multiple" accept="image/*" />
+	  </div>
+	  <hr/>
+	  <button type="submit" class="btn btn-default">Add</button>
+	</form>
+</div>
  {% endblock %}

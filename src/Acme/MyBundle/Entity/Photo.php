@@ -23,11 +23,11 @@ class Photo {
 	 */
 	protected $id;
 	/**
-	 * @ORM\Column(type="string", length=100)
+	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	protected $name;
 	/**
-	 * @ORM\Column(type="string", length=100)
+	 * @ORM\Column(type="string", length=100, nullable=false)
 	 */
 	protected $path;
 	/**

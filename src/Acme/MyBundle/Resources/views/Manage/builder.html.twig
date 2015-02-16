@@ -1,7 +1,28 @@
  {% extends '::base.html.twig' %}
 
  {% block body %}
-{{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
+ <div class="container">
+	<h2>Add a New Builder</h2>
+	<hr/>
+	<form method="post" enctype="multipart/form-data">
+	  <div class="form-group">
+	    <label for="nameofbuilder">Name of the Builder</label>
+	    <input name="nameofbuilder" type="text" class="form-control" id="nameofBuilder" />
+	  </div>
+	  <div class="form-group">
+	    <label for="urlofbuilder">Website Builder</label>
+	    <input name="urlofbuilder" type="text" class="form-control" id="urlofBuilder" placeholder="http://" />
+	  </div>
+	  <div class="form-group">
+	    <label for="description">Description</label>
+	    <textarea name="description" class="form-control" id="description" rows="4"></textarea>
+	  </div>
+	  <div class="form-group">
+		<label for="logofile">Logo of the Builder</label>
+		<input name="logofile" type="file" id="logofile" accept="image/*" />
+	  </div>
+	  <hr/>
+	  <button type="submit" class="btn btn-default">Add</button>
+	</form>
+</div>
  {% endblock %}

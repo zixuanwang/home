@@ -12,10 +12,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class Album
 {
 	/**
-	 * @ORM\OneToOne(targetEntity="Community", inversedBy="album")
-	 **/
-	protected $community;
-	/**
 	 * @ORM\OneToOne(targetEntity="Photo")
 	 **/
 	protected $cover;
