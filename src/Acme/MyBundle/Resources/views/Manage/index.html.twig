@@ -1,19 +1,17 @@
- {% extends '::base.html.twig' %}
-
- {% block body %}
-	<form>
-	  <div class="form-group">
-	    <label>Builder Name</label>
-	    <input type="text" class="form-control" placeholder="Enter Builder Name">
-	  </div>
-	  <div class="form-group">
-	    <label>Description</label>
-	    <input type="text" class="form-control" placeholder="Description">
-	  </div>
-	  <div class="form-group">
-	    <label>Website</label>
-	    <input type="text" class="form-control" placeholder="http://">
-	  </div>
-	  <button type="submit" class="btn btn-default">Submit</button>
-	</form>
- {% endblock %}
+ {% extends '::base.html.twig' %} {% block body %}
+<form>
+	<div class="form-group">
+		<label>Builder Name</label> <input type="text" class="form-control"
+			placeholder="Enter Builder Name">
+	</div>
+	<div class="form-group">
+		<label>Description</label> <input type="text" class="form-control"
+			placeholder="Description">
+	</div>
+	<div class="form-group">
+		<label>Website</label> <input type="text" class="form-control"
+			placeholder="http://">
+	</div>
+	<button type="submit" class="btn btn-default">Submit</button>
+</form>
+{% endblock %}

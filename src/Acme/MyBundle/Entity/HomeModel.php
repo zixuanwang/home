@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class HomeModel
 {
 	/**
-	 * @ORM\OneToOne(targetEntity="Album", mappedBy="home_model")
+	 * @ORM\OneToOne(targetEntity="Album")
 	 **/
 	protected $album;
 	/**

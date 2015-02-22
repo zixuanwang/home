@@ -20,78 +20,83 @@ class __TwigTemplate_15d8dfd19560e02fb0a87d953c27b05a933d4526f2c707c8b5840009951
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        echo "<!DOCTYPE html>
-<html>
+        echo "<html>
     <head>
         <meta charset=\"UTF-8\" />
         <title>";
-        // line 5
+        // line 4
         $this->displayBlock('title', $context, $blocks);
         echo "</title>
         ";
-        // line 6
+        // line 5
         $this->displayBlock('stylesheets', $context, $blocks);
+        // line 6
+        echo "        <link rel=\"stylesheet\" type=\"text/css\" href=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("css/bootstrap.css"), "html", null, true);
+        echo "\">
+        <link rel=\"stylesheet\" type=\"text/css\" href=\"";
         // line 7
-        echo "        <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/bootstrap.css\">
-        <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/font-awesome.css\">
-        <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/animate.css\">
-        <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/templatemo-misc.css\">
-        <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/templatemo-style.css\">
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("css/jquery.fancybox.css"), "html", null, true);
+        echo "\">
+        <link rel=\"stylesheet\" type=\"text/css\" href=\"";
+        // line 8
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("css/home.css"), "html", null, true);
+        echo "\">
         <link rel=\"icon\" type=\"image/x-icon\" href=\"";
-        // line 12
+        // line 9
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("favicon.ico"), "html", null, true);
         echo "\" />
     </head>
     <body>
         ";
-        // line 15
+        // line 12
         $this->displayBlock('body', $context, $blocks);
-        // line 16
+        // line 13
         echo "        <script src=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/jquery-1.11.2.js"), "html", null, true);
         echo "\"></script>
         <script src=\"";
-        // line 17
+        // line 14
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/jquery.fancybox.js"), "html", null, true);
+        echo "\"></script>
+        <script src=\"";
+        // line 15
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/bootstrap.js"), "html", null, true);
         echo "\"></script>
         <script src=\"";
-        // line 18
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"), "html", null, true);
+        // line 16
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/isotope.pkgd.js"), "html", null, true);
         echo "\"></script>
         <script src=\"";
-        // line 19
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/plugins.js"), "html", null, true);
-        echo "\"></script>
-        <script src=\"";
-        // line 20
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/main.js"), "html", null, true);
+        // line 17
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/home.js"), "html", null, true);
         echo "\"></script>
         ";
-        // line 21
+        // line 18
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 22
+        // line 19
         echo "    </body>
 </html>
 ";
     }
 
-    // line 5
+    // line 4
     public function block_title($context, array $blocks = array())
     {
         echo "Welcome!";
     }
 
-    // line 6
+    // line 5
     public function block_stylesheets($context, array $blocks = array())
     {
     }
 
-    // line 15
+    // line 12
     public function block_body($context, array $blocks = array())
     {
     }
 
-    // line 21
+    // line 18
     public function block_javascripts($context, array $blocks = array())
     {
     }
@@ -108,6 +113,6 @@ class __TwigTemplate_15d8dfd19560e02fb0a87d953c27b05a933d4526f2c707c8b5840009951
 
     public function getDebugInfo()
     {
-        return array (  95 => 21,  90 => 15,  85 => 6,  79 => 5,  73 => 22,  71 => 21,  67 => 20,  63 => 19,  59 => 18,  55 => 17,  50 => 16,  48 => 15,  42 => 12,  35 => 7,  33 => 6,  29 => 5,  23 => 1,);
+        return array (  100 => 18,  95 => 12,  90 => 5,  84 => 4,  78 => 19,  76 => 18,  72 => 17,  68 => 16,  64 => 15,  60 => 14,  55 => 13,  53 => 12,  47 => 9,  43 => 8,  39 => 7,  34 => 6,  32 => 5,  28 => 4,  23 => 1,);
     }
 }

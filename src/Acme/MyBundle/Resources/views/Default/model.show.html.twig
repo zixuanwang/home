@@ -1,181 +1,47 @@
- {% extends '::base.html.twig' %}
+ {% extends '::base.html.twig' %} {% block body %}
+<h1>Isotope - masonry gutter, with margin bottom</h1>
 
- {% block body %}
-        <section id="pageloader">
-            <div class="loader-item fa fa-spin colored-border"></div>
-        </section> <!-- /#pageloader -->
+<div id="model_container">
+	<div class="model_item width2 height2">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Username</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">1</th>
+					<td>Mark</td>
+					<td>Otto</td>
+					<td>@mdo</td>
+				</tr>
+				<tr>
+					<th scope="row">2</th>
+					<td>Jacob</td>
+					<td>Thornton</td>
+					<td>@fat</td>
+				</tr>
+				<tr>
+					<th scope="row">3</th>
+					<td>Larry</td>
+					<td>the Bird</td>
+					<td>@twitter</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	{% for photo in photos %}
+	<div class="model_item">
+		<a class="fancybox" rel="group"
+			href="{{'/uploads/'~photo.getPath()~'.jpg'}}"> <img width="100%"
+			height="100%" src="{{'/uploads/'~photo.getPath()~'.jpg'}}" alt=""></a>
+	</div>
+	{% endfor %}
+</div>
 
-        <header class="site-header container-fluid">
-            <div class="top-header">
-                <div class="logo col-md-6 col-sm-6">
-                    <h1><a href="index.html"><em>Art</em>Core</a></h1>
-                    <span>Responsive HTML5 Template</span>
-                </div> <!-- /.logo -->
-                <div class="social-top col-md-6 col-sm-6">
-                    <ul>
-                        <li><a href="#" class="fa fa-facebook"></a></li>
-                        <li><a href="#" class="fa fa-twitter"></a></li>
-                        <li><a href="#" class="fa fa-linkedin"></a></li>
-                        <li><a href="#" class="fa fa-google-plus"></a></li>
-                        <li><a href="#" class="fa fa-flickr"></a></li>
-                        <li><a href="#" class="fa fa-rss"></a></li>
-                    </ul>
-                </div> <!-- /.social-top -->
-            </div> <!-- /.top-header -->
-            <div class="main-header">
-                <div class="row">
-                    <div class="main-header-left col-md-3 col-sm-6 col-xs-8">
-                        <a id="search-icon" class="btn-left fa fa-search" href="#search-overlay"></a>
-                        <div id="search-overlay">
-                            <a href="#search-overlay" class="close-search"><i class="fa fa-times-circle"></i></a>
-                            <div class="search-form-holder">
-                                <h2>Type keywords and hit enter</h2>
-                                <form id="search-form" action="#">
-                                    <input type="search" name="s" placeholder="" autocomplete="off" />
-                                </form>
-                            </div>
-                        </div><!-- #search-overlay -->
-                    </div> <!-- /.main-header-left -->
-                    <div class="menu-wrapper col-md-9 col-sm-6 col-xs-4">
-                        <a href="#" class="toggle-menu visible-sm visible-xs"><i class="fa fa-bars"></i></a>
-                        <ul class="sf-menu hidden-xs hidden-sm">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="services.html">Services</a></li>
-                            <li><a href="#">Projects</a>
-                                <ul>
-                                    <li><a href="projects-2.html">Two Columns</a></li>
-                                    <li><a href="projects-3.html">Three Columns</a></li>
-                                    <li><a href="project-details.html">Project Single</a></li>
-                                </ul>
-                            </li>
-                            <li class="active"><a href="#">Blog</a>
-                                <ul>
-                                    <li><a href="blog.html">Blog Masonry</a></li>
-                                    <li><a href="blog-single.html">Post Single</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Pages</a>
-                                <ul>
-                                    <li><a href="our-team.html">Our Team</a></li>
-                                    <li><a href="archives.html">Archives</a></li>
-                                    <li><a href="grids.html">Columns</a></li>
-                                    <li><a href="404.html">404 Page</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div> <!-- /.menu-wrapper -->
-                </div> <!-- /.row -->
-            </div> <!-- /.main-header -->
-            <div id="responsive-menu">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="#">Projects</a>
-                        <ul>
-                            <li><a href="projects-2.html">Two Columns</a></li>
-                            <li><a href="projects-3.html">Three Columns</a></li>
-                            <li><a href="project-details.html">Project Single</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Blog</a>
-                        <ul>
-                            <li><a href="blog.html">Blog Masonry</a></li>
-                            <li><a href="blog-single.html">Post Single</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Pages</a>
-                        <ul>
-                            <li><a href="our-team.html">Our Team</a></li>
-                            <li><a href="archives.html">Archives</a></li>
-                            <li><a href="grids.html">Columns</a></li>
-                            <li><a href="404.html">404 Page</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-        </header> <!-- /.site-header -->
 
-        <div class="content-wrapper">
-            <div class="inner-container container">
-                <div class="row">
-                    <div class="section-header col-md-12">
-                        <h2>{{model.getName()}}</h2>
-                        <span>Subtitle Goes Here</span>
-                    </div> <!-- /.section-header -->
-                </div> <!-- /.row -->
-                <div class="row">
-					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-					  <!-- Indicators -->
-					  <ol class="carousel-indicators">
-					  {% for photo in photos %}
-					  	{% if loop.first %}
-					  		<li data-target="#carousel-example-generic" data-slide-to="{{loop.index}}" class="active"></li>
-					  	{% else %}
-					  		<li data-target="#carousel-example-generic" data-slide-to="{{loop.index}}"></li>
-					  	{% endif %}
-					  {% endfor %}
-					  </ol>
-					
-					  <!-- Wrapper for slides -->
-					  <div class="carousel-inner" role="listbox">
-					  {% for photo in photos %}
-					  	{% if loop.first %}
-					  		<div class="item active">
-       					{% else %}
-       						<div class="item">
-    					{% endif %}
-					      <img src="{{'/uploads/'~photo.getPath()~'.jpg'}}">
-					      <div class="carousel-caption">{{photo.getName()}}</div>
-					    </div>
-					  {% endfor %}  
-					  </div>
-					
-					  <!-- Controls -->
-					  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-					    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-					    <span class="sr-only">Previous</span>
-					  </a>
-					  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-					    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					    <span class="sr-only">Next</span>
-					  </a>
-					</div>
-                    <div class="blog-info col-md-12">
-                        <div class="box-content">
-                            <h2 class="blog-title">Keep Your Stuff Alive And Apply it On Life</h2>
-                            <span class="blog-meta">4 November 2084 by Christina with 3 comments</span>
-                            <p><a href="http://www.templatemo.com/preview/templatemo_423_artcore">Artcore</a> is free HTML5 bootstrap template by <b class="blue">template</b><b class="green">mo</b>. Credit goes to <a rel="nofollow" href="http://unsplash.com">Unsplash</a> for images. Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, blanditiis, esse nemo architecto veniam ipsam et in odit unde cumque. Quidem, sapiente, deserunt accusantium iure minus numquam velit beatae iste corrupti alias atque quisquam praesentium est autem voluptatibus? Magnam, repellendus id quidem reprehenderit eligendi. Voluptas, fugiat cumque earum similique suscipit at labore aut hic voluptatum deserunt aliquid dignissimos corporis facilis in provident atque nihil.</p>
-                            
-                                <blockquote>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam, cum, cumque, mollitia quidem officiis consectetur possimus ut voluptatum eum sit saepe vel nostrum a ad suscipit laborum exercitationem. Rerum, nam.
-                                </blockquote>
-                            
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, maxime, itaque, ut, eligendi consequuntur quasi placeat molestiae nam sunt amet ab officia voluptates dolore error repudiandae fugit aperiam quas facilis? Ipsa, perspiciatis, nam, modi ducimus esse assumenda aut quaerat commodi natus dolorem quo accusantium saepe officiis quasi porro. Possimus, asperiores, nihil, vitae, cumque aperiam perspiciatis velit sit aliquid consectetur neque quidem dolore voluptatem rerum omnis totam impedit sequi eius explicabo culpa facilis. <br><br>Debitis, totam dignissimos fugiat voluptatem esse optio unde alias nulla fuga facere cumque assumenda quod at reiciendis veniam maiores suscipit aperiam mollitia nisi dolorum molestiae omnis natus neque autem minus dicta magnam nobis ipsa ratione recusandae numquam modi asperiores adipisci repudiandae quis beatae placeat ullam atque pariatur expedita.</p>
-                        </div>
-                    </div> <!-- /.blog-info -->
-                    <div class="blog-tags col-md-12">
-                        <span>Tags</span>: 
-                        <a href="#">Developmet</a>
-                        <a href="#">Inspiration</a>
-                        <a href="#">Web Design</a>
-                        <a href="#">Creative UI</a>
-                        <a href="#">templatemo</a>
-                    </div> <!-- /.blog-tags -->
-                </div> <!-- /.row -->
-            </div> <!-- /.inner-content -->
-        </div> <!-- /.content-wrapper -->
- {% endblock %}
- {% block javascripts %}
- <!-- Preloader -->
-<script type="text/javascript">
-    //<![CDATA[
-    $(window).load(function() { // makes sure the whole site is loaded
-        $('.loader-item').fadeOut(); // will first fade out the loading animation
-            $('#pageloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-        $('body').delay(350).css({'overflow-y':'visible'});
-    })
-    //]]>
-</script>
- {% endblock %}
+{% endblock %} {% block javascripts %} {% endblock %}

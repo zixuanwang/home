@@ -145,6 +145,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        // builder
+        if (0 === strpos($pathinfo, '/builder') && preg_match('#^/builder/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'builder')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\BuilderController::indexAction',));
+        }
+
         // homepage
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {

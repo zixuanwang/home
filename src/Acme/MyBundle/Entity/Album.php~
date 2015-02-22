@@ -22,10 +22,6 @@ class Album
 	 */
 	protected $id;
 	/**
-	 * @ORM\OneToOne(targetEntity="HomeModel", inversedBy="album")
-	 **/
-	protected $home_model;
-	/**
 	 * @ORM\OneToMany(targetEntity="Photo", mappedBy="album")
 	 **/
 	public $photos;

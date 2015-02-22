@@ -10,6 +10,7 @@ use Acme\MyBundle\Entity\Photo;
 use Acme\MyBundle\Lib\GlobalConfig;
 use Acme\MyBundle\Lib\Utility;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -30,23 +31,36 @@ class ManageController extends Controller {
 		if ($type == 'model') {
 			return $this->addModel ();
 		}
+		if ($type == 'home') {
+			return $this->addHome ();
+		}
 	}
 	private function addBuilder() {
 		if ($this->get ( 'request' )->getMethod () == 'POST') {
 			$request = Request::createFromGlobals ();
 			$data = $request->request->all ();
-			$builder = new Builder ();
-			$builder->setName ( $data ['nameofbuilder'] );
-			$builder->setWebsite ( $data ['urlofbuilder'] );
-			$builder->setDescription ( $data ['description'] );
-			$filename = $this->upload_file ( $_FILES ['logofile'] )[0];
-			$photo = new Photo ();
-			$photo->setName ( $data ['nameofbuilder'] );
-			$photo->setPath ( Utility::get_stem ( $filename ) );
-			$builder->setLogo ( $photo );
 			$em = $this->getDoctrine ()->getManager ();
+			$builder = new Builder ();
+			$builder->setName ( $data ['name'] );
+			$builder->setWebsite ( $data ['url'] );
+			$builder->setDescription ( $data ['description'] );
+			$logofile = $this->upload_file ( $_FILES ['logofile'] )[0];
+			$images = $this->upload_file ( $_FILES ['images'] );
+			$logo_photo = new Photo ();
+			$logo_photo->setName ( $data ['name'] );
+			$logo_photo->setPath ( Utility::get_stem ( $logofile ) );
+			$builder->setLogo ( $logo_photo );
+			$album = new Album ();
+			foreach ( $images as $image ) {
+				$photo = new Photo ();
+				$photo->setPath ( Utility::get_stem ( $image ) );
+				$photo->setAlbum ( $album );
+				$em->persist ( $photo );
+			}
+			$builder->setAlbum ( $album );
 			$em->persist ( $builder );
-			$em->persist ( $photo );
+			$em->persist ( $album );
+			$em->persist ( $logo_photo );
 			$em->flush ();
 			return new Response ( 'Builder added.' );
 		}
@@ -63,7 +77,7 @@ class ManageController extends Controller {
 			$community->setBuilder ( $builder );
 			$builder->addCommunity ( $community );
 			$community->setAddress ( $data ['address'] );
-			$community->setDescription($data['description']);
+			$community->setDescription ( $data ['description'] );
 			$community->setLongitude ( $data ['longitude'] );
 			$community->setLatitude ( $data ['latitude'] );
 			$community->setCity ( $data ['city'] );
@@ -75,7 +89,7 @@ class ManageController extends Controller {
 			$album = new Album ();
 			$map_photo = new Photo ();
 			$map_photo->setPath ( Utility::get_stem ( $map_path ) );
-			$community->setMap($map_photo);
+			$community->setMap ( $map_photo );
 			foreach ( $image_paths as $image_path ) {
 				$photo = new Photo ();
 				$photo->setPath ( Utility::get_stem ( $image_path ) );
@@ -154,10 +168,23 @@ class ManageController extends Controller {
 		}
 		return $this->render ( 'AcmeMyBundle:Manage:model.html.twig' );
 	}
+	private function addHome() {
+		if ($this->get ( 'request' )->getMethod () == 'GET') {
+			$request = Request::createFromGlobals ();
+			$city = $request->query->get ( 'city' );
+			if (! empty ( $city )) {
+				$repository = $this->getDoctrine ()->getRepository ( 'AcmeMyBundle:Community' );
+				$query = $repository->createQueryBuilder ( 'p' )->where ( 'p.city = :city' )->setParameter ( 'city', $city )->getQuery ();
+				$communities = $query->getResult ();
+				return new JsonResponse ( $communities );
+			}
+		}
+		return $this->render ( 'AcmeMyBundle:Manage:home.html.twig' );
+	}
 	/*
 	 * handle the uploaded files
 	 * input is $_FILES['image']
-	 * output is the array of saved paths
+	 * output is the array of saved paths including prefix and extension.
 	 */
 	private function upload_file($file_array) {
 		$filename = array ();

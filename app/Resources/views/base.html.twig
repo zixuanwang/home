@@ -1,23 +1,20 @@
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="/css/font-awesome.css">
-        <link rel="stylesheet" type="text/css" href="/css/animate.css">
-        <link rel="stylesheet" type="text/css" href="/css/templatemo-misc.css">
-        <link rel="stylesheet" type="text/css" href="/css/templatemo-style.css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fancybox.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/home.css') }}">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         {% block body %}{% endblock %}
         <script src="{{ asset('js/jquery-1.11.2.js') }}"></script>
+        <script src="{{ asset('js/jquery.fancybox.js') }}"></script>
         <script src="{{ asset('js/bootstrap.js') }}"></script>
-        <script src="{{ asset('js/vendor/modernizr-2.6.1-respond-1.1.0.min.js') }}"></script>
-        <script src="{{ asset('js/plugins.js') }}"></script>
-        <script src="{{ asset('js/main.js') }}"></script>
+        <script src="{{ asset('js/isotope.pkgd.js') }}"></script>
+        <script src="{{ asset('js/home.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

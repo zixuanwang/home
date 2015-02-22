@@ -1,0 +1,55 @@
+ {% extends '::base.html.twig' %} {% block body %}
+<section class="wrap">
+	<header class="header">
+		<a href="/" class="headerLogo"><svg>
+			<use xlink:href="/fonts/header.svg#shapeLogo"></use></svg></a>
+		<div class="headerCases">
+			<div class="headerCasesLine"></div>
+			<div class="headerCasesFilters">
+				<button class="cta grey small rounded" data-filter="*">西雅图</button>
+				<button class="cta grey small rounded" data-filter=".digitalt">旧金山</button>
+				<button class="cta grey small rounded" data-filter=".grafisk">洛杉矶</button>
+			</div>
+		</div>
+
+		<div class="headerTools">
+			<p>
+				Fanges på
+				<svg>
+				<use xlink:href="/fonts/header.svg#shapeSmallArrow"></use></svg>
+			</p>
+			<div class="headerToolsIcons">
+				<a href="tel:+4529902543" class="headerToolsIconsMobile"><svg>
+					<use xlink:href="/fonts/header.svg#shapeMobile"></use></svg></a> <a
+					href="mailto:hello@sampedro.dk" class="headerToolsIconsMail"><svg>
+					<use xlink:href="/fonts/header.svg#shapeMail"></use></svg></a>
+			</div>
+		</div>
+	</header>
+	<section class="caseSlider wow fadeIn" data-wow-duration="2.5s"
+		data-wow-offset="0" data-wow-delay="0">
+		<img src="/uploads/5c600a646e224fd5f92fa7a9ca38feeba7743201.jpg" />
+	</section>
+	<section class="content caseHero">
+		<div class="row caseTitle">
+			<div class="col-md-10 col-md-offset-1">
+				<h2 class="fadeInUp" data-wow-duration="0.5s" data-wow-offset="0"
+					data-wow-delay="0">
+					{{ builder.getName() }}<a href="{{ builder.getWebsite() }}"
+						target="_blank"><svg>
+							<use xlink:href="/fonts/header.svg#shapeLink"></use></svg></a>
+				</h2>
+				<p class="fadeInUp" data-wow-duration="0.5s" data-wow-offset="0"
+					data-wow-delay="1s">Kunde: Dating.dk</p>
+			</div>
+		</div>
+		<div class="row caseElementText">
+			<div class="col-md-8 col-md-offset-2">
+				<p>{{ builder.getDescription() }}
+				</p>
+			</div>
+		</div>
+	</section>
+</section>
+
+{% endblock %} {% block javascripts %} {% endblock %}

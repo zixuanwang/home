@@ -7,3 +7,6 @@ manage:
 model:
     path:     /model/{id}
     defaults: { _controller: AcmeMyBundle:Model:index }
+builder:
+    path:     /builder/{name}
+    defaults: { _controller: AcmeMyBundle:Builder:index }

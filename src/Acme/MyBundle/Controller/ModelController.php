@@ -2,7 +2,6 @@
 
 namespace Acme\MyBundle\Controller;
 
-use Acme\MyBundle\Lib\HomePost;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 

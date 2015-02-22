@@ -19,6 +19,10 @@ class Home
 	 */
 	protected $community;
 	/**
+	 * @ORM\Column(type="string", length=1000, nullable=true)
+	 */
+	protected $description;
+	/**
 	 * @ORM\Column(type="string", length=20)
 	 */
 	protected $direction;
@@ -37,11 +41,11 @@ class Home
 	 */
 	protected $id;
 	/**
-	 * @ORM\Column(type="decimal", scale=8)
+	 * @ORM\Column(type="decimal", scale=8, nullable=true)
 	 */
 	protected $latitude;
 	/**
-	 * @ORM\Column(type="decimal", scale=8)
+	 * @ORM\Column(type="decimal", scale=8, nullable=true)
 	 */
 	protected $longitude;
 	/**
@@ -429,5 +433,28 @@ class Home
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Home
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

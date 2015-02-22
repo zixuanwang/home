@@ -33,183 +33,104 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
-    // line 3
     public function block_body($context, array $blocks = array())
     {
-        // line 4
-        echo "        <section id=\"pageloader\">
-            <div class=\"loader-item fa fa-spin colored-border\"></div>
-        </section> <!-- /#pageloader -->
+        // line 2
+        echo " <header class=\"header\">
+\t<a href=\"/\" class=\"headerLogo\"><svg>
+\t\t\t<use xlink:href=\"/fonts/header.svg#shapeLogo\"></use></svg></a>
+\t<div class=\"headerCases\">
+\t\t<div class=\"headerCasesLine\"></div>
+\t\t<div class=\"headerCasesFilters\">
+\t\t\t<button class=\"cta grey small rounded\" data-filter=\"*\">西雅图</button>
+\t\t\t<button class=\"cta grey small rounded\" data-filter=\".digitalt\">旧金山</button>
+\t\t\t<button class=\"cta grey small rounded\" data-filter=\".grafisk\">洛杉矶</button>
+\t\t</div>
+\t</div>
 
-        <header class=\"site-header container-fluid\">
-            <div class=\"top-header\">
-                <div class=\"logo col-md-6 col-sm-6\">
-                    <h1><a href=\"index.html\"><em>Art</em>Core</a></h1>
-                    <span>Responsive HTML5 Template</span>
-                </div> <!-- /.logo -->
-                <div class=\"social-top col-md-6 col-sm-6\">
-                    <ul>
-                        <li><a href=\"#\" class=\"fa fa-facebook\"></a></li>
-                        <li><a href=\"#\" class=\"fa fa-twitter\"></a></li>
-                        <li><a href=\"#\" class=\"fa fa-linkedin\"></a></li>
-                        <li><a href=\"#\" class=\"fa fa-google-plus\"></a></li>
-                        <li><a href=\"#\" class=\"fa fa-flickr\"></a></li>
-                        <li><a href=\"#\" class=\"fa fa-rss\"></a></li>
-                    </ul>
-                </div> <!-- /.social-top -->
-            </div> <!-- /.top-header -->
-            <div class=\"main-header\">
-                <div class=\"row\">
-                    <div class=\"main-header-left col-md-3 col-sm-6 col-xs-8\">
-                        <a id=\"search-icon\" class=\"btn-left fa fa-search\" href=\"#search-overlay\"></a>
-                        <div id=\"search-overlay\">
-                            <a href=\"#search-overlay\" class=\"close-search\"><i class=\"fa fa-times-circle\"></i></a>
-                            <div class=\"search-form-holder\">
-                                <h2>Type keywords and hit enter</h2>
-                                <form id=\"search-form\" action=\"#\">
-                                    <input type=\"search\" name=\"s\" placeholder=\"\" autocomplete=\"off\" />
-                                </form>
-                            </div>
-                        </div><!-- #search-overlay -->
-                    </div> <!-- /.main-header-left -->
-                    <div class=\"menu-wrapper col-md-9 col-sm-6 col-xs-4\">
-                        <a href=\"#\" class=\"toggle-menu visible-sm visible-xs\"><i class=\"fa fa-bars\"></i></a>
-                        <ul class=\"sf-menu hidden-xs hidden-sm\">
-                            <li><a href=\"index.html\">Home</a></li>
-                            <li><a href=\"services.html\">Services</a></li>
-                            <li><a href=\"#\">Projects</a>
-                                <ul>
-                                    <li><a href=\"projects-2.html\">Two Columns</a></li>
-                                    <li><a href=\"projects-3.html\">Three Columns</a></li>
-                                    <li><a href=\"project-details.html\">Project Single</a></li>
-                                </ul>
-                            </li>
-                            <li class=\"active\"><a href=\"#\">Blog</a>
-                                <ul>
-                                    <li><a href=\"blog.html\">Blog Masonry</a></li>
-                                    <li><a href=\"blog-single.html\">Post Single</a></li>
-                                </ul>
-                            </li>
-                            <li><a href=\"#\">Pages</a>
-                                <ul>
-                                    <li><a href=\"our-team.html\">Our Team</a></li>
-                                    <li><a href=\"archives.html\">Archives</a></li>
-                                    <li><a href=\"grids.html\">Columns</a></li>
-                                    <li><a href=\"404.html\">404 Page</a></li>
-                                </ul>
-                            </li>
-                            <li><a href=\"contact.html\">Contact</a></li>
-                        </ul>
-                    </div> <!-- /.menu-wrapper -->
-                </div> <!-- /.row -->
-            </div> <!-- /.main-header -->
-            <div id=\"responsive-menu\">
-                <ul>
-                    <li><a href=\"index.html\">Home</a></li>
-                    <li><a href=\"services.html\">Services</a></li>
-                    <li><a href=\"#\">Projects</a>
-                        <ul>
-                            <li><a href=\"projects-2.html\">Two Columns</a></li>
-                            <li><a href=\"projects-3.html\">Three Columns</a></li>
-                            <li><a href=\"project-details.html\">Project Single</a></li>
-                        </ul>
-                    </li>
-                    <li><a href=\"#\">Blog</a>
-                        <ul>
-                            <li><a href=\"blog.html\">Blog Masonry</a></li>
-                            <li><a href=\"blog-single.html\">Post Single</a></li>
-                        </ul>
-                    </li>
-                    <li><a href=\"#\">Pages</a>
-                        <ul>
-                            <li><a href=\"our-team.html\">Our Team</a></li>
-                            <li><a href=\"archives.html\">Archives</a></li>
-                            <li><a href=\"grids.html\">Columns</a></li>
-                            <li><a href=\"404.html\">404 Page</a></li>
-                        </ul>
-                    </li>
-                    <li><a href=\"contact.html\">Contact</a></li>
-                </ul>
-            </div>
-        </header> <!-- /.site-header -->
+\t<div class=\"headerTools\">
+\t\t<p>
+\t\t\tFanges på
+\t\t\t<svg>
+\t\t\t\t<use xlink:href=\"/fonts/header.svg#shapeSmallArrow\"></use></svg>
+\t\t</p>
+\t\t<div class=\"headerToolsIcons\">
+\t\t\t<a href=\"tel:+4529902543\" class=\"headerToolsIconsMobile\"><svg>
+\t\t\t\t\t<use xlink:href=\"/fonts/header.svg#shapeMobile\"></use></svg></a> <a
+\t\t\t\thref=\"mailto:hello@sampedro.dk\" class=\"headerToolsIconsMail\"><svg>
+\t\t\t\t\t<use xlink:href=\"/fonts/header.svg#shapeMail\"></use></svg></a>
+\t\t</div>
+\t</div>
+</header>
 
-        <div class=\"content-wrapper\">
-            <div class=\"inner-container container\">
-                <div class=\"row\">
-                    <div class=\"section-header col-md-12\">
-                        <h2>Our Blog</h2>
-                        <span>Subtitle Goes Here</span>
-                    </div> <!-- /.section-header -->
-                </div> <!-- /.row -->
-                <div class=\"row\">
-                    <div class=\"blog-masonry masonry-true\">
-                        ";
-        // line 110
+
+
+<div class=\"content-wrapper\">
+\t<div class=\"inner-container container\">
+\t\t<div class=\"row\">
+\t\t\t<div class=\"section-header col-md-12\">
+\t\t\t</div>
+\t\t\t<!-- /.section-header -->
+\t\t</div>
+\t\t<!-- /.row -->
+\t\t<div class=\"row\">
+\t\t\t<div class=\"blog-masonry masonry-true\">
+\t\t\t\t";
+        // line 41
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["home_posts"]) ? $context["home_posts"] : $this->getContext($context, "home_posts")));
         foreach ($context['_seq'] as $context["_key"] => $context["home_post"]) {
-            // line 111
-            echo "                        <div class=\"post-masonry col-md-4 col-sm-6\">
-                            <div class=\"blog-thumb\">
-                                <img src=\"";
-            // line 113
+            // line 42
+            echo "\t\t\t\t<div class=\"post-masonry col-md-4 col-sm-6\">
+\t\t\t\t\t<div class=\"blog-thumb\">
+\t\t\t\t\t\t<img src=\"";
+            // line 44
             echo twig_escape_filter($this->env, (("/uploads/" . $this->getAttribute($context["home_post"], "cover_photo", array())) . ".jpg"), "html", null, true);
             echo "\" alt=\"\">
-                                <div class=\"overlay-b\">
-                                    <div class=\"overlay-inner\">
-                                        <a href=\"blog-single.html\" class=\"fa fa-link\"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=\"blog-body\">
-                                <div class=\"box-content\">
-                                    <h3 class=\"post-title\"><a href=\"blog-single.html\">";
-            // line 122
+\t\t\t\t\t\t<div>hello</div>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"blog-body\">
+\t\t\t\t\t\t<div class=\"box-content\">
+\t\t\t\t\t\t\t<h3 class=\"post-title\">
+\t\t\t\t\t\t\t\t<a href=\"blog-single.html\">";
+            // line 50
             echo twig_escape_filter($this->env, $this->getAttribute($context["home_post"], "name", array()), "html", null, true);
-            echo "</a></h3>
-                                    <span class=\"blog-meta\">";
-            // line 123
+            echo "</a>
+\t\t\t\t\t\t\t</h3>
+\t\t\t\t\t\t\t<span class=\"blog-meta\">";
+            // line 52
             echo twig_escape_filter($this->env, $this->getAttribute($context["home_post"], "post_time", array()), "html", null, true);
             echo "</span>
-                                    <p>";
-            // line 124
+\t\t\t\t\t\t\t<p>";
+            // line 53
             echo twig_escape_filter($this->env, $this->getAttribute($context["home_post"], "description", array()), "html", null, true);
             echo "</p>
-                                </div>
-                            </div>
-                        </div> <!-- /.post-masonry -->
-                        ";
+\t\t\t\t\t\t</div>
+\t\t\t\t\t</div>
+\t\t\t\t</div>
+\t\t\t\t<!-- /.post-masonry -->
+\t\t\t\t";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['home_post'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 129
-        echo "                    </div> <!-- /.blog-masonry -->
-                </div> <!-- /.row -->
-                <div class=\"row\">
-                    <div class=\"col-md-12\">
-                        <div class=\"pagination text-center\">
-                            <ul>
-                                <li><a href=\"javascript:void(0)\">1</a></li>
-                                <li><a href=\"javascript:void(0)\" class=\"active\">2</a></li>
-                                <li><a href=\"javascript:void(0)\">3</a></li>
-                                <li><a href=\"javascript:void(0)\">4</a></li>
-                                <li><a href=\"javascript:void(0)\">...</a></li>
-                                <li><a href=\"javascript:void(0)\">11</a></li>
-                            </ul>
-                        </div> <!-- /.pagination -->
-                    </div> <!-- /.col-md-12 -->
-                </div> <!-- /.row -->
-            </div> <!-- /.inner-content -->
-        </div> <!-- /.content-wrapper -->
- ";
+        // line 59
+        echo "\t\t\t</div>
+\t\t\t<!-- /.blog-masonry -->
+\t\t</div>
+\t\t<!-- /.row -->
+\t</div>
+\t<!-- /.inner-content -->
+</div>
+<!-- /.content-wrapper -->
+";
     }
 
-    // line 148
+    // line 67
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 149
-        echo " <!-- Preloader -->
+        // line 68
+        echo "<!-- Preloader -->
 <script type=\"text/javascript\">
     //<![CDATA[
     \$(window).load(function() { // makes sure the whole site is loaded
@@ -219,7 +140,26 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
     })
     //]]>
 </script>
- ";
+<script src=\"";
+        // line 78
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/jquery.easing.min.js"), "html", null, true);
+        echo "\"></script>
+<script src=\"";
+        // line 79
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/bloxhover.jquery.min.js"), "html", null, true);
+        echo "\"></script>
+<script> 
+    \$(document).ready(function() {
+        \$('.blog-thumb').bloxhover({
+            effect: \"square\", // accepted strings: 'square', 'square reveal', 'vertical', 'vertical reveal', 'vertical alternate', 'vertical alternate reveal', 'horizontal', 'horizontal reveal', 'horizontal alternate', 'horizontal alternate reveal'
+            sliceCount: 8, // the number of slices 
+            color: 'rgba(0, 0, 0, 0.5)', //rgba color of the slices
+            duration: 90, //how long should the animation of each slice last
+            delay: 30 // delay between slice animations
+   \t \t});
+    });
+</script>
+";
     }
 
     public function getTemplateName()
@@ -234,6 +174,6 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
 
     public function getDebugInfo()
     {
-        return array (  212 => 149,  209 => 148,  187 => 129,  176 => 124,  172 => 123,  168 => 122,  156 => 113,  152 => 111,  148 => 110,  40 => 4,  37 => 3,  11 => 1,);
+        return array (  149 => 79,  145 => 78,  133 => 68,  130 => 67,  118 => 59,  106 => 53,  102 => 52,  97 => 50,  88 => 44,  84 => 42,  80 => 41,  39 => 2,  11 => 1,);
     }
 }

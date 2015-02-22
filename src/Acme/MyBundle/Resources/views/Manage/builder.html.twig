@@ -1,28 +1,31 @@
- {% extends '::base.html.twig' %}
-
- {% block body %}
- <div class="container">
+ {% extends '::base.html.twig' %} {% block body %}
+<div class="container">
 	<h2>Add a New Builder</h2>
-	<hr/>
+	<hr />
 	<form method="post" enctype="multipart/form-data">
-	  <div class="form-group">
-	    <label for="nameofbuilder">Name of the Builder</label>
-	    <input name="nameofbuilder" type="text" class="form-control" id="nameofBuilder" />
-	  </div>
-	  <div class="form-group">
-	    <label for="urlofbuilder">Website Builder</label>
-	    <input name="urlofbuilder" type="text" class="form-control" id="urlofBuilder" placeholder="http://" />
-	  </div>
-	  <div class="form-group">
-	    <label for="description">Description</label>
-	    <textarea name="description" class="form-control" id="description" rows="4"></textarea>
-	  </div>
-	  <div class="form-group">
-		<label for="logofile">Logo of the Builder</label>
-		<input name="logofile" type="file" id="logofile" accept="image/*" />
-	  </div>
-	  <hr/>
-	  <button type="submit" class="btn btn-default">Add</button>
+		<div class="form-group">
+			<label for="name">Name of the Builder</label> <input name="name"
+				type="text" class="form-control" id="name" />
+		</div>
+		<div class="form-group">
+			<label for="url">Website Builder</label> <input name="url"
+				type="text" class="form-control" id="url" placeholder="http://" />
+		</div>
+		<div class="form-group">
+			<label for="description">Description</label>
+			<textarea name="description" class="form-control" id="description"
+				rows="4"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="logofile">Logo of the Builder</label> <input
+				name="logofile" type="file" id="logofile" accept="image/*" />
+		</div>
+		<div class="form-group">
+			<label for="images">Images of the Builder</label> <input type="file"
+				id="images" name="images[]" multiple="multiple" accept="image/*" />
+		</div>
+		<hr />
+		<button type="submit" class="btn btn-default">Add</button>
 	</form>
 </div>
- {% endblock %}
+{% endblock %}

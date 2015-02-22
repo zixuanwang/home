@@ -1,0 +1,48 @@
+ {% extends '::base.html.twig' %} {% block body %}
+<div class="container">
+	<h2>Add a New Home</h2>
+	<hr />
+	<form method="post" enctype="multipart/form-data">
+		<div class="form-group">
+			<label for="city">City of the Home</label> <input name="city"
+				type="text" class="form-control" id="city">
+		</div>
+		<div class="form-group">
+			<label for="builder">Builder</label> <select name="builder"
+				class="form-control" id="builder">
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="community">Community</label> <input name="community"
+				type="text" class="form-control" id="community">
+		</div>
+		<hr />
+		<button type="submit" class="btn btn-default">Add</button>
+	</form>
+</div>
+{% endblock %} {% block javascripts %}
+<script>
+ $(document).ready(function($) {
+  $('#city').change(function(e) {
+    //Grab the chosen value on first select list change
+    var selectcity = $(this).val();
+    $('#builder').html('<option value="">Loading...</option>');
+ 
+    if (selectvalue != "") {
+        $.ajax({url: '/manage/home?city=' + selectcity,
+            success: function(output) {
+            	var option;
+				$.each(output, function(i, val){
+					option += '<option>' + val + '</option>';
+				});
+            	$('#builder').html(option);
+            },
+         	error: function (xhr, ajaxOptions, thrownError) {
+           		alert(xhr.status + " "+ thrownError);
+         }});
+    }
+   });
+  }
+});
+ </script>
+{% endblock %}
