@@ -6,47 +6,60 @@
 		<div class="headerCases">
 			<div class="headerCasesLine"></div>
 			<div class="headerCasesFilters">
-				<button class="cta grey small rounded" data-filter="*">西雅图</button>
-				<button class="cta grey small rounded" data-filter=".digitalt">旧金山</button>
-				<button class="cta grey small rounded" data-filter=".grafisk">洛杉矶</button>
-			</div>
-		</div>
-
-		<div class="headerTools">
-			<p>
-				Fanges på
-				<svg>
-				<use xlink:href="/fonts/header.svg#shapeSmallArrow"></use></svg>
-			</p>
-			<div class="headerToolsIcons">
-				<a href="tel:+4529902543" class="headerToolsIconsMobile"><svg>
-					<use xlink:href="/fonts/header.svg#shapeMobile"></use></svg></a> <a
-					href="mailto:hello@sampedro.dk" class="headerToolsIconsMail"><svg>
-					<use xlink:href="/fonts/header.svg#shapeMail"></use></svg></a>
+				<button class="cta grey small rounded">西雅图</button>
+				<button class="cta grey small rounded">旧金山</button>
+				<button class="cta grey small rounded">洛杉矶</button>
 			</div>
 		</div>
 	</header>
-	<section class="caseSlider wow fadeIn" data-wow-duration="2.5s"
-		data-wow-offset="0" data-wow-delay="0">
-		<img src="/uploads/5c600a646e224fd5f92fa7a9ca38feeba7743201.jpg" />
+	<section class="builderSlider">
+		<div id="builder-carousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				{% for photo in builder.getAlbum().getPhotos() %} {% if loop.first
+				%}
+				<li data-target="builder-carousel" data-slide-to="{{ loop.index }}"
+					class="active"></li> {% else %}
+				<li data-target="builder-carousel" data-slide-to="{{ loop.index }}"></li>
+				{% endif %} {% endfor %}
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				{% for photo in builder.getAlbum().getPhotos() %} {% if loop.first
+				%}
+				<div class="item active">
+					{% else %}
+					<div class="item">
+						{% endif %} <img src="{{ '/uploads/'~photo.getPath()~'.jpg' }}">
+					</div>
+					{% endfor %}
+				</div>
+				<!-- Controls -->
+				<a class="left carousel-control" href="#builder-carousel"
+					role="button" data-slide="prev"> <span
+					class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a> <a class="right carousel-control" href="#builder-carousel"
+					role="button" data-slide="next"> <span
+					class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+	
 	</section>
-	<section class="content caseHero">
-		<div class="row caseTitle">
+	<section class="builderContent">
+		<div class="row builderTitle">
 			<div class="col-md-10 col-md-offset-1">
-				<h2 class="fadeInUp" data-wow-duration="0.5s" data-wow-offset="0"
-					data-wow-delay="0">
+				<h2 class="fadeInUp">
 					{{ builder.getName() }}<a href="{{ builder.getWebsite() }}"
-						target="_blank"><svg>
-							<use xlink:href="/fonts/header.svg#shapeLink"></use></svg></a>
+						target="_blank"></a>
 				</h2>
-				<p class="fadeInUp" data-wow-duration="0.5s" data-wow-offset="0"
-					data-wow-delay="1s">Kunde: Dating.dk</p>
 			</div>
 		</div>
 		<div class="row caseElementText">
-			<div class="col-md-8 col-md-offset-2">
-				<p>{{ builder.getDescription() }}
-				</p>
+			<div class="col-md-10 col-md-offset-1">
+				<p>{{ builder.getDescription() }}</p>
 			</div>
 		</div>
 	</section>
