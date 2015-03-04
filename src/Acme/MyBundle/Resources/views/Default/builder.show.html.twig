@@ -1,18 +1,30 @@
  {% extends '::base.html.twig' %} {% block body %}
-<section class="wrap">
-	<header class="header">
-		<a href="/" class="headerLogo"><svg>
-			<use xlink:href="/fonts/header.svg#shapeLogo"></use></svg></a>
-		<div class="headerCases">
-			<div class="headerCasesLine"></div>
-			<div class="headerCasesFilters">
-				<button class="cta grey small rounded">西雅图</button>
-				<button class="cta grey small rounded">旧金山</button>
-				<button class="cta grey small rounded">洛杉矶</button>
+<div class="container">
+	<div class="row">
+		<nav class="navbar navbar-inverse navbar-static-top">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#home-header">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">搜美房</a>
 			</div>
-		</div>
-	</header>
-	<section class="builderSlider">
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="home-header">
+				<ul class="nav navbar-nav headerCases">
+					<li><button class="cta grey small rounded">西雅图</button></li>
+					<li><button class="cta grey small rounded">旧金山</button></li>
+					<li><button class="cta grey small rounded">洛杉矶</button></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</nav>
+	</div>
+
+	<div class="row">
 		<div id="builder-carousel" class="carousel slide" data-ride="carousel">
 			<!-- Indicators -->
 			<ol class="carousel-indicators">
@@ -46,23 +58,17 @@
 					<span class="sr-only">Next</span>
 				</a>
 			</div>
-	
-	</section>
-	<section class="builderContent">
-		<div class="row builderTitle">
-			<div class="col-md-10 col-md-offset-1">
-				<h2 class="fadeInUp">
-					{{ builder.getName() }}<a href="{{ builder.getWebsite() }}"
-						target="_blank"></a>
-				</h2>
+		</div>
+		<div class="row">
+			<h2>
+				{{ builder.getName() }}<a href="{{ builder.getWebsite() }}"
+					target="_blank"></a>
+			</h2>
+			<div class="row caseElementText">
+				<div class="col-md-10 col-md-offset-1">
+					<p>{{ builder.getDescription() }}</p>
+				</div>
 			</div>
 		</div>
-		<div class="row caseElementText">
-			<div class="col-md-10 col-md-offset-1">
-				<p>{{ builder.getDescription() }}</p>
-			</div>
-		</div>
-	</section>
-</section>
-
-{% endblock %} {% block javascripts %} {% endblock %}
+	</div>
+	{% endblock %} {% block javascripts %} {% endblock %}

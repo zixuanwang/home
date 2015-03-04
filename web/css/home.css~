@@ -1,0 +1,244 @@
+/* Wrap */
+/** WRAP **/
+.wrap {
+	background: #f7f7f7;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+/* Header */
+/** HEADER **/
+.header {
+	background: #252425;
+	float: left;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	max-height: 55px;
+	z-index: 1001;
+}
+
+.header .headerLogo {
+	float: left;
+	padding: 11.5px 20px;
+	height: 55px;
+}
+
+.header .headerLogo svg {
+	position: relative;
+	top: 3px;
+	fill: white;
+	width: 115px;
+	height: 26px;
+}
+
+.header .headerCases .headerCasesLine {
+	background: #595959;
+	float: left;
+	width: 1px;
+	height: 34px;
+	margin: 12px 10px 0 10px;
+	/** CSS3 **/
+	-webkit-transform: rotate(220deg);
+	-moz-transform: rotate(220deg);
+	-o-transform: rotate(220deg);
+	/*filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2.2);*/
+	-ms-transform: rotate(220deg);
+}
+
+.headerCases p {
+	font-size: 20px;
+	/*letter-spacing: 0.5px;*/
+	color: white;
+	line-height: 1;
+	float: left;
+	margin: 0;
+	padding: 18px 25px 0 25px;
+}
+
+.headerCases .cta {
+	font-weight: 600;
+	margin-top: 6px;
+	margin-right: 10px;
+}
+
+.headerCases {
+	float: left;
+	margin-left: 30px;
+}
+
+/** SLIDER **/
+.builderSlider {
+	height: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 55px;
+	z-index: 2;
+	background: no-repeat center 0;
+	background-size: cover;
+	-webkit-backface-visibility: hidden;
+}
+
+.builderContent {
+	height: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	z-index: 2;
+	background: no-repeat center 0;
+	background-size: cover;
+	-webkit-backface-visibility: hidden;
+}
+
+/** GENEREL **/
+.cta {
+	background: transparent;
+	border-width: 2px;
+	border-style: solid;
+	text-align: center;
+	letter-spacing: 0.5px;
+	outline: none;
+	position: relative;
+	/** CSS3 **/
+	-webkit-border-radius: 1000px;
+	-moz-border-radius: 1000px;
+	border-radius: 1000px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.cta::after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	/** CSS3 **/
+	-webkit-border-radius: 1000px;
+	-moz-border-radius: 1000px;
+	border-radius: 1000px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.cta.white {
+	border-color: white;
+	color: white;
+}
+
+.cta.white:hover {
+	background: white;
+	color: #252425;
+}
+
+.cta.blue {
+	border-color: #286eab;
+	color: #286eab;
+}
+
+.cta.blue:hover {
+	background: #286eab;
+	color: white;
+}
+
+.cta.grey {
+	border-color: #6e6e6e;
+	color: #6e6e6e;
+}
+
+.cta.grey:hover, .cta.grey.active {
+	border-color: white;
+	color: white;
+}
+
+.cta.black {
+	border-color: #252425;
+	color: #252425;
+}
+
+.cta.black:hover {
+	background: #252425;
+	color: white;
+}
+
+.cta.blue.filled {
+	background: #286eab;
+	color: white;
+}
+
+.cta.blue.filled:hover {
+	background: transparent;
+	border: 2px solid #286eab;
+	color: #286eab;
+}
+
+.cta.small {
+	float: left;
+	font-size: 14px;
+	line-height: 1;
+	padding: 10px 30px;
+}
+
+.cta.big {
+	float: left;
+	font-size: 22px;
+	line-height: 1;
+	padding: 18px 38px;
+}
+
+/** TABLET + MOBILE **/
+/** MOBILE **/
+@media ( max-width : 767px) {
+	.wrap .header {
+		left: 0;
+	}
+	.wrap .header .headerTools {
+		margin-right: 27px;
+	}
+	.wrap .header .headerTools>p {
+		display: none;
+	}
+	.wrap .header .headerCases {
+		background: #f7f7f7;
+		width: 100%;
+		margin-left: 0;
+		position: fixed;
+		top: 55px;
+		left: 0;
+	}
+	.wrap .header .headerCases .headerCasesLine {
+		display: none;
+	}
+	.wrap .header .headerCases p {
+		display: none;
+	}
+	.wrap .header .headerCases>a.cta {
+		width: 42%;
+		margin: 4%;
+		font-size: 16px;
+		text-align: center;
+		padding: 0;
+		border: 0;
+	}
+	.wrap .header .headerCases>a.cta:hover {
+		color: #286eab;
+	}
+	.wrap .header .headerCases .headerCasesFilters {
+		margin-left: 0;
+		width: 100%;
+	}
+	.wrap .header .headerCases .headerCasesFilters .cta {
+		width: 25.33%;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		font-size: 16px;
+		text-align: center;
+		padding: 0;
+		border: 0;
+	}
+	.wrap .header .headerCases .headerCasesFilters .cta.active {
+		color: #252425;
+	}
+}

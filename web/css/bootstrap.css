@@ -4386,8 +4386,8 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 .navbar {
 	position: relative;
 	min-height: 50px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
+	/*margin-bottom: 20px;*/
+	/*border: 1px solid transparent;*/
 }
 
 @media ( min-width : 768px) {
@@ -4855,12 +4855,12 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 }
 
 .navbar-inverse {
-	background-color: #222;
-	border-color: #080808;
+	background-color: #2092d7;
+	border-color: #293e6a;
 }
 
 .navbar-inverse .navbar-brand {
-	color: #9d9d9d;
+	color: #dddddd;
 }
 
 .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus
@@ -4896,7 +4896,7 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 }
 
 .navbar-inverse .navbar-toggle {
-	border-color: #333;
+	/*border-color: #333;*/
 }
 
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus
@@ -4909,7 +4909,7 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 }
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-	border-color: #101010;
+	border-color: #dddddd;
 }
 
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,

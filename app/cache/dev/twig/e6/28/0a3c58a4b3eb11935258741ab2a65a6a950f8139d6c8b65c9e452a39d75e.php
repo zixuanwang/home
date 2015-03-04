@@ -36,25 +36,37 @@ class __TwigTemplate_e6280a3c58a4b3eb11935258741ab2a65a6a950f8139d6c8b65c9e452a3
     public function block_body($context, array $blocks = array())
     {
         // line 2
-        echo "<section class=\"wrap\">
-\t<header class=\"header\">
-\t\t<a href=\"/\" class=\"headerLogo\"><svg>
-\t\t\t<use xlink:href=\"/fonts/header.svg#shapeLogo\"></use></svg></a>
-\t\t<div class=\"headerCases\">
-\t\t\t<div class=\"headerCasesLine\"></div>
-\t\t\t<div class=\"headerCasesFilters\">
-\t\t\t\t<button class=\"cta grey small rounded\">西雅图</button>
-\t\t\t\t<button class=\"cta grey small rounded\">旧金山</button>
-\t\t\t\t<button class=\"cta grey small rounded\">洛杉矶</button>
+        echo "<div class=\"container\">
+\t<div class=\"row\">
+\t\t<nav class=\"navbar navbar-inverse navbar-static-top\">
+\t\t\t<!-- Brand and toggle get grouped for better mobile display -->
+\t\t\t<div class=\"navbar-header\">
+\t\t\t\t<button type=\"button\" class=\"navbar-toggle collapsed\"
+\t\t\t\t\tdata-toggle=\"collapse\" data-target=\"#home-header\">
+\t\t\t\t\t<span class=\"sr-only\">Toggle navigation</span> <span
+\t\t\t\t\t\tclass=\"icon-bar\"></span> <span class=\"icon-bar\"></span> <span
+\t\t\t\t\t\tclass=\"icon-bar\"></span>
+\t\t\t\t</button>
+\t\t\t\t<a class=\"navbar-brand\" href=\"#\">搜美房</a>
 \t\t\t</div>
-\t\t</div>
-\t</header>
-\t<section class=\"builderSlider\">
+\t\t\t<!-- Collect the nav links, forms, and other content for toggling -->
+\t\t\t<div class=\"collapse navbar-collapse\" id=\"home-header\">
+\t\t\t\t<ul class=\"nav navbar-nav headerCases\">
+\t\t\t\t\t<li><button class=\"cta grey small rounded\">西雅图</button></li>
+\t\t\t\t\t<li><button class=\"cta grey small rounded\">旧金山</button></li>
+\t\t\t\t\t<li><button class=\"cta grey small rounded\">洛杉矶</button></li>
+\t\t\t\t</ul>
+\t\t\t</div>
+\t\t\t<!-- /.navbar-collapse -->
+\t\t</nav>
+\t</div>
+
+\t<div class=\"row\">
 \t\t<div id=\"builder-carousel\" class=\"carousel slide\" data-ride=\"carousel\">
 \t\t\t<!-- Indicators -->
 \t\t\t<ol class=\"carousel-indicators\">
 \t\t\t\t";
-        // line 19
+        // line 31
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute((isset($context["builder"]) ? $context["builder"] : $this->getContext($context, "builder")), "getAlbum", array(), "method"), "getPhotos", array(), "method"));
         $context['loop'] = array(
@@ -73,19 +85,19 @@ class __TwigTemplate_e6280a3c58a4b3eb11935258741ab2a65a6a950f8139d6c8b65c9e452a3
         foreach ($context['_seq'] as $context["_key"] => $context["photo"]) {
             echo " ";
             if ($this->getAttribute($context["loop"], "first", array())) {
-                // line 21
+                // line 33
                 echo "\t\t\t\t<li data-target=\"builder-carousel\" data-slide-to=\"";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["loop"], "index", array()), "html", null, true);
                 echo "\"
 \t\t\t\t\tclass=\"active\"></li> ";
             } else {
-                // line 23
+                // line 35
                 echo "\t\t\t\t<li data-target=\"builder-carousel\" data-slide-to=\"";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["loop"], "index", array()), "html", null, true);
                 echo "\"></li>
 \t\t\t\t";
             }
-            // line 24
+            // line 36
             echo " ";
             ++$context['loop']['index0'];
             ++$context['loop']['index'];
@@ -99,13 +111,13 @@ class __TwigTemplate_e6280a3c58a4b3eb11935258741ab2a65a6a950f8139d6c8b65c9e452a3
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['photo'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 25
+        // line 37
         echo "\t\t\t</ol>
 
 \t\t\t<!-- Wrapper for slides -->
 \t\t\t<div class=\"carousel-inner\" role=\"listbox\">
 \t\t\t\t";
-        // line 29
+        // line 41
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute((isset($context["builder"]) ? $context["builder"] : $this->getContext($context, "builder")), "getAlbum", array(), "method"), "getPhotos", array(), "method"));
         $context['loop'] = array(
@@ -124,15 +136,15 @@ class __TwigTemplate_e6280a3c58a4b3eb11935258741ab2a65a6a950f8139d6c8b65c9e452a3
         foreach ($context['_seq'] as $context["_key"] => $context["photo"]) {
             echo " ";
             if ($this->getAttribute($context["loop"], "first", array())) {
-                // line 31
+                // line 43
                 echo "\t\t\t\t<div class=\"item active\">
 \t\t\t\t\t";
             } else {
-                // line 33
+                // line 45
                 echo "\t\t\t\t\t<div class=\"item\">
 \t\t\t\t\t\t";
             }
-            // line 34
+            // line 46
             echo " <img src=\"";
             echo twig_escape_filter($this->env, (("/uploads/" . $this->getAttribute($context["photo"], "getPath", array(), "method")) . ".jpg"), "html", null, true);
             echo "\">
@@ -150,7 +162,7 @@ class __TwigTemplate_e6280a3c58a4b3eb11935258741ab2a65a6a950f8139d6c8b65c9e452a3
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['photo'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 37
+        // line 49
         echo "\t\t\t\t</div>
 \t\t\t\t<!-- Controls -->
 \t\t\t\t<a class=\"left carousel-control\" href=\"#builder-carousel\"
@@ -163,37 +175,31 @@ class __TwigTemplate_e6280a3c58a4b3eb11935258741ab2a65a6a950f8139d6c8b65c9e452a3
 \t\t\t\t\t<span class=\"sr-only\">Next</span>
 \t\t\t\t</a>
 \t\t\t</div>
-\t
-\t</section>
-\t<section class=\"builderContent\">
-\t\t<div class=\"row builderTitle\">
-\t\t\t<div class=\"col-md-10 col-md-offset-1\">
-\t\t\t\t<h2 class=\"fadeInUp\">
-\t\t\t\t\t";
-        // line 55
+\t\t</div>
+\t\t<div class=\"row\">
+\t\t\t<h2>
+\t\t\t\t";
+        // line 64
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["builder"]) ? $context["builder"] : $this->getContext($context, "builder")), "getName", array(), "method"), "html", null, true);
         echo "<a href=\"";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["builder"]) ? $context["builder"] : $this->getContext($context, "builder")), "getWebsite", array(), "method"), "html", null, true);
         echo "\"
-\t\t\t\t\t\ttarget=\"_blank\"></a>
-\t\t\t\t</h2>
-\t\t\t</div>
-\t\t</div>
-\t\t<div class=\"row caseElementText\">
-\t\t\t<div class=\"col-md-10 col-md-offset-1\">
-\t\t\t\t<p>";
-        // line 62
+\t\t\t\t\ttarget=\"_blank\"></a>
+\t\t\t</h2>
+\t\t\t<div class=\"row caseElementText\">
+\t\t\t\t<div class=\"col-md-10 col-md-offset-1\">
+\t\t\t\t\t<p>";
+        // line 69
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["builder"]) ? $context["builder"] : $this->getContext($context, "builder")), "getDescription", array(), "method"), "html", null, true);
         echo "</p>
+\t\t\t\t</div>
 \t\t\t</div>
 \t\t</div>
-\t</section>
-</section>
-
-";
+\t</div>
+\t";
     }
 
-    // line 68
+    // line 74
     public function block_javascripts($context, array $blocks = array())
     {
         echo " ";
@@ -211,6 +217,6 @@ class __TwigTemplate_e6280a3c58a4b3eb11935258741ab2a65a6a950f8139d6c8b65c9e452a3
 
     public function getDebugInfo()
     {
-        return array (  197 => 68,  186 => 62,  174 => 55,  154 => 37,  136 => 34,  132 => 33,  128 => 31,  109 => 29,  103 => 25,  89 => 24,  83 => 23,  77 => 21,  58 => 19,  39 => 2,  11 => 1,);
+        return array (  203 => 74,  193 => 69,  183 => 64,  166 => 49,  148 => 46,  144 => 45,  140 => 43,  121 => 41,  115 => 37,  101 => 36,  95 => 35,  89 => 33,  70 => 31,  39 => 2,  11 => 1,);
     }
 }
