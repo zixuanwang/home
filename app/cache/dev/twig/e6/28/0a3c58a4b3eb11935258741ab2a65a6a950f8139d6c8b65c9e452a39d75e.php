@@ -187,7 +187,7 @@ class __TwigTemplate_e6280a3c58a4b3eb11935258741ab2a65a6a950f8139d6c8b65c9e452a3
 \t\t\t\t\ttarget=\"_blank\"></a>
 \t\t\t</h2>
 \t\t\t<div class=\"row caseElementText\">
-\t\t\t\t<div class=\"col-md-10 col-md-offset-1\">
+\t\t\t\t<div class=\"col-md-12\">
 \t\t\t\t\t<p>";
         // line 69
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["builder"]) ? $context["builder"] : $this->getContext($context, "builder")), "getDescription", array(), "method"), "html", null, true);

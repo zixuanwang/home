@@ -11,17 +11,17 @@ use Doctrine\ORM\Mapping as ORM;
 class HomeModel
 {
 	/**
-	 * @ORM\OneToOne(targetEntity="Album")
-	 **/
-	protected $album;
-	/**
 	 * @ORM\Column(type="string", length=1000, nullable=true)
 	 */
 	protected $description;
 	/**
+	 * @ORM\OneToOne(targetEntity="Photo")
+	 **/
+	protected $facade;
+	/**
 	 * @ORM\OneToOne(targetEntity="Album")
 	 **/
-	protected $floor_plan;
+	protected $floorplans;
 	/**
 	 * @ORM\OneToMany(targetEntity="Home", mappedBy="home_model")
 	 */
@@ -32,6 +32,10 @@ class HomeModel
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 */
 	protected $id;
+	/**
+	 * @ORM\OneToOne(targetEntity="Album")
+	 **/
+	protected $images;
 	/**
 	 * @ORM\Column(type="string", length=30)
 	 */
@@ -248,29 +252,6 @@ class HomeModel
     }
 
     /**
-     * Set album
-     *
-     * @param \Acme\MyBundle\Entity\Album $album
-     * @return HomeModel
-     */
-    public function setAlbum(\Acme\MyBundle\Entity\Album $album = null)
-    {
-        $this->album = $album;
-
-        return $this;
-    }
-
-    /**
-     * Get album
-     *
-     * @return \Acme\MyBundle\Entity\Album 
-     */
-    public function getAlbum()
-    {
-        return $this->album;
-    }
-
-    /**
      * Set description
      *
      * @param string $description
@@ -317,25 +298,71 @@ class HomeModel
     }
 
     /**
-     * Set floor_plan
+     * Set facade
      *
-     * @param \Acme\MyBundle\Entity\Album $floorPlan
+     * @param \Acme\MyBundle\Entity\Photo $facade
      * @return HomeModel
      */
-    public function setFloorPlan(\Acme\MyBundle\Entity\Album $floorPlan = null)
+    public function setFacade(\Acme\MyBundle\Entity\Photo $facade = null)
     {
-        $this->floor_plan = $floorPlan;
+        $this->facade = $facade;
 
         return $this;
     }
 
     /**
-     * Get floor_plan
+     * Get facade
+     *
+     * @return \Acme\MyBundle\Entity\Photo 
+     */
+    public function getFacade()
+    {
+        return $this->facade;
+    }
+
+    /**
+     * Set floorplans
+     *
+     * @param \Acme\MyBundle\Entity\Album $floorplans
+     * @return HomeModel
+     */
+    public function setFloorplans(\Acme\MyBundle\Entity\Album $floorplans = null)
+    {
+        $this->floorplans = $floorplans;
+
+        return $this;
+    }
+
+    /**
+     * Get floorplans
      *
      * @return \Acme\MyBundle\Entity\Album 
      */
-    public function getFloorPlan()
+    public function getFloorplans()
     {
-        return $this->floor_plan;
+        return $this->floorplans;
+    }
+
+    /**
+     * Set images
+     *
+     * @param \Acme\MyBundle\Entity\Album $images
+     * @return HomeModel
+     */
+    public function setImages(\Acme\MyBundle\Entity\Album $images = null)
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Acme\MyBundle\Entity\Album 
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }

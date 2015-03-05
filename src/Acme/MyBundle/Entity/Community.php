@@ -45,14 +45,6 @@ class Community
 	 */
 	protected $id;
 	/**
-	 * @ORM\Column(type="decimal", scale=8, nullable=true)
-	 */
-	protected $latitude;
-	/**
-	 * @ORM\Column(type="decimal", scale=8, nullable=true)
-	 */
-	protected $longitude;
-	/**
 	 * @ORM\OneToOne(targetEntity="Photo")
 	 **/
 	protected $map;

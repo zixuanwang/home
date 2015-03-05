@@ -69,14 +69,6 @@ class __TwigTemplate_d70b3ea16cfa465b901310ad2d49c8b96e463a70d7680394dea94587f58
         echo "\t\t</select>
 \t  </div>
 \t  <div class=\"form-group\">
-\t    <label for=\"longitude\">Longitude</label>
-\t    <input name=\"longitude\" type=\"text\" class=\"form-control\" id=\"longitude\" />
-\t  </div>
-\t  <div class=\"form-group\">
-\t    <label for=\"latitude\">Latitude</label>
-\t    <input name=\"latitude\" type=\"text\" class=\"form-control\" id=\"latitude\" />
-\t  </div>
-\t  <div class=\"form-group\">
 \t    <label for=\"city\">City</label>
 \t    <input name=\"city\" type=\"text\" class=\"form-control\" id=\"city\" />
 \t  </div>

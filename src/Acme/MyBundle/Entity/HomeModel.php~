@@ -11,17 +11,17 @@ use Doctrine\ORM\Mapping as ORM;
 class HomeModel
 {
 	/**
-	 * @ORM\OneToOne(targetEntity="Album")
-	 **/
-	protected $album;
-	/**
 	 * @ORM\Column(type="string", length=1000, nullable=true)
 	 */
 	protected $description;
 	/**
+	 * @ORM\OneToOne(targetEntity="Photo")
+	 **/
+	protected $facade;
+	/**
 	 * @ORM\OneToOne(targetEntity="Album")
 	 **/
-	protected $floor_plan;
+	protected $floorplans;
 	/**
 	 * @ORM\OneToMany(targetEntity="Home", mappedBy="home_model")
 	 */
@@ -32,6 +32,10 @@ class HomeModel
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 */
 	protected $id;
+	/**
+	 * @ORM\OneToOne(targetEntity="Album")
+	 **/
+	protected $images;
 	/**
 	 * @ORM\Column(type="string", length=30)
 	 */

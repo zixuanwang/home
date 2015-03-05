@@ -1,44 +1,57 @@
- {% extends '::base.html.twig' %}
-
- {% block body %}
- <div class="container">
+ {% extends '::base.html.twig' %} {% block body %}
+<div class="container">
 	<h2>Add a New Home Model</h2>
-	<hr/>
+	<hr />
 	<form method="post" enctype="multipart/form-data">
-	  <div class="form-group">
-	    <label for="nameofmodel">Name of the Model</label>
-	    <input name="nameofmodel" type="text" class="form-control" id="nameofmodel" placeholder="Hickory">
-	  </div>
-	  <div class="form-group">
-	    <label for="numofbed">Number of Bedrooms</label>
-	    <input name="numofbed" type="text" class="form-control" id="numofbed" placeholder="4">
-	  </div>
-	  <div class="form-group">
-	    <label for="numofbath">Number of Bathrooms</label>
-	    <input name="numofbath" type="text" class="form-control" id="numofbed" placeholder="2.75">
-	  </div>
-	  <div class="form-group">
-	    <label for="numofgarage">Number of Garage</label>
-	    <input name="numofgarage" type="text" class="form-control" id="numofgarage" placeholder="2">
-	  </div>
-	  <div class="form-group">
-	    <label for="numofstory">Number of Stories</label>
-	    <input name="numofstory" type="text" class="form-control" id="numofstory" placeholder="2">
-	  </div>
-	  <div class="form-group">
-	    <label for="squarefeet">Square Feet</label>
-	    <input name="squarefeet" type="text" class="form-control" id="squarefeet" placeholder="2311">
-	  </div>
-	  <div class="form-group">
-	    <label for="description">Description</label>
-	    <textarea name="description" class="form-control" id="description" rows="4"></textarea>
-	  </div>
-	  <div class="form-group">
-	    <label for="inputimage">Images of the Model</label>
-	    <input type="file" id="inputimage" name="files[]" multiple="multiple" accept="image/*" />
-	  </div>
-	  <hr/>
-	  <button type="submit" class="btn btn-default">Add</button>
+		<div class="form-group">
+			<label for="nameofmodel">Name of the Model</label> <input
+				name="nameofmodel" type="text" class="form-control" id="nameofmodel"
+				placeholder="Hickory">
+		</div>
+		<div class="form-group">
+			<label for="numofbed">Number of Bedrooms</label> <input
+				name="numofbed" type="text" class="form-control" id="numofbed"
+				placeholder="4">
+		</div>
+		<div class="form-group">
+			<label for="numofbath">Number of Bathrooms</label> <input
+				name="numofbath" type="text" class="form-control" id="numofbed"
+				placeholder="2.75">
+		</div>
+		<div class="form-group">
+			<label for="numofgarage">Number of Garage</label> <input
+				name="numofgarage" type="text" class="form-control" id="numofgarage"
+				placeholder="2">
+		</div>
+		<div class="form-group">
+			<label for="numofstory">Number of Stories</label> <input
+				name="numofstory" type="text" class="form-control" id="numofstory"
+				placeholder="2">
+		</div>
+		<div class="form-group">
+			<label for="squarefeet">Square Feet</label> <input name="squarefeet"
+				type="text" class="form-control" id="squarefeet" placeholder="2311">
+		</div>
+		<div class="form-group">
+			<label for="description">Description</label>
+			<textarea name="description" class="form-control" id="description"
+				rows="4"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="facade">Facade of the Model</label> <input type="file"
+				id="facade" name="facade" accept="image/*" />
+		</div>
+		<div class="form-group">
+			<label for="image">Images of the Model</label> <input type="file"
+				id="image" name="image[]" multiple="multiple" accept="image/*" />
+		</div>
+		<div class="form-group">
+			<label for="floorplan">Floorplans of the Model</label> <input
+				type="file" id="floorplan" name="floorplan[]" multiple="multiple"
+				accept="image/*" />
+		</div>
+		<hr />
+		<button type="submit" class="btn btn-default">Add</button>
 	</form>
 </div>
- {% endblock %}
+{% endblock %}

@@ -78,8 +78,6 @@ class ManageController extends Controller {
 			$builder->addCommunity ( $community );
 			$community->setAddress ( $data ['address'] );
 			$community->setDescription ( $data ['description'] );
-			$community->setLongitude ( $data ['longitude'] );
-			$community->setLatitude ( $data ['latitude'] );
 			$community->setCity ( $data ['city'] );
 			$community->setCounty ( $data ['county'] );
 			$community->setState ( $data ['state'] );
@@ -154,17 +152,35 @@ class ManageController extends Controller {
 			$home_model->setSquareFeet ( $data ['squarefeet'] );
 			$home_model->setDescription ( $data ['description'] );
 			$em = $this->getDoctrine ()->getManager ();
+			$facade_path = $this->upload_file ( $_FILES ['facade'] )[0];
+			$image_paths = $this->upload_file ( $_FILES ['image'] );
+			$floorplan_paths = $this->upload_file ( $_FILES ['floorplan'] );
+			// save photos
+			$facade_photo = new Photo ();
+			$facade_photo->setPath ( Utility::get_stem ( $facade_path ) );
+			$home_model->setFacade ( $facade_photo );
+			$em->persist ( $facade_photo );
+			$image_album = new Album ();
+			foreach ( $image_paths as $image_path ) {
+				$photo = new Photo ();
+				$photo->setAlbum ( $image_album );
+				$photo->setPath ( Utility::get_stem ( $image_path ) );
+				$em->persist ( $photo );
+			}
+			$em->persist ( $image_album );
+			$floorplan_album = new Album ();
+			foreach ( $floorplan_paths as $floorplan_path ) {
+				$photo = new Photo ();
+				$photo->setAlbum ( $floorplan_album );
+				$photo->setPath ( Utility::get_stem ( $floorplan_path ) );
+				$em->persist ( $photo );
+			}
+			$em->persist ( $floorplan_album );
+			$home_model->setImages ( $image_album );
+			$home_model->setFloorplans ( $floorplan_album );
 			$em->persist ( $home_model );
 			$em->flush ();
-			$upload_filenames = array ();
-			$filepaths = $this->upload_file ( $_FILES ['files'] );
-			foreach ( $filepaths as $filepath ) {
-				$upload_filenames [] = Utility::get_stem ( $filepath );
-			}
-			return $this->render ( 'AcmeMyBundle:Manage:album.show.html.twig', array (
-					'filenames' => $upload_filenames,
-					'model_id' => $home_model->getId () 
-			) );
+			return new Response ( 'Model added.' );
 		}
 		return $this->render ( 'AcmeMyBundle:Manage:model.html.twig' );
 	}
