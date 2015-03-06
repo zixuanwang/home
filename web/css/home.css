@@ -1,6 +1,5 @@
 /* Header */
 /** HEADER **/
-
 .headerCases .cta {
 	font-weight: 600;
 	margin-top: 6px;
@@ -119,8 +118,8 @@
 }
 
 .cta.small {
-	float: left;.headerCasesFilters
-	font-size: 14px;
+	float: left;
+	font-size: 16px;
 	line-height: 1;
 	padding: 10px 30px;
 }
@@ -130,4 +129,26 @@
 	font-size: 22px;
 	line-height: 1;
 	padding: 18px 38px;
+}
+
+.model_thumb {
+    display: inline-block;
+    width: 340px;
+    height: 220px;
+    border: 0px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-position: center center;
+    background-size: cover;
+}
+
+.floorplan_thumb {
+    display: inline-block;
+    width: 400px;
+    height: 400px;
+    border: 0px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-position: center center;
+    background-size: cover;
 }

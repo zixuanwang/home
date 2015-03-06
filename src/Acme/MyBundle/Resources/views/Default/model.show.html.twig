@@ -1,47 +1,74 @@
  {% extends '::base.html.twig' %} {% block body %}
-<h1>Isotope - masonry gutter, with margin bottom</h1>
-
-<div id="model_container">
-	<div class="model_item width2 height2">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Username</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Larry</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-				</tr>
-			</tbody>
-		</table>
+<div class="container">
+	{{ include('::header.html.twig') }}
+	<div class="row">
+		<div class="col-md-12"><h2 class="text-center">
+			样板间
+			</h2>
+		</div>
 	</div>
-	{% for photo in photos %}
-	<div class="model_item">
-		<a class="fancybox" rel="group"
-			href="{{'/uploads/'~photo.getPath()~'.jpg'}}"> <img width="100%"
-			height="100%" src="{{'/uploads/'~photo.getPath()~'.jpg'}}" alt=""></a>
+	<div class="row">
+		{% for image in images %}
+		<div class="col-xs-12 col-md-4">
+			<a class="fancybox" rel="group"
+				href="{{'/uploads/'~image.getPath()~'.jpg'}}">
+				<div class="model_thumb"
+					style="background-image: url('{{'/uploads/'~image.getPath()~'.jpg'}}');"></div>
+			</a>
+		</div>
+		{% endfor %}
 	</div>
-	{% endfor %}
-</div>
+	<hr />
+	<div class="row">
+		<div class="col-md-12">
+			<h2 class="text-center">户型图</h2>
+		</div>
+	</div>
+	<div class="row">
+		{% for floorplan in floorplans %}
+		<div class="col-xs-12 col-md-6">
+			<a class="fancybox" rel="group"
+				href="{{'/uploads/'~floorplan.getPath()~'.jpg'}}">
+				<div class="floorplan_thumb"
+					style="background-image: url('{{'/uploads/'~floorplan.getPath()~'.jpg'}}');"></div>
+			</a>
+		</div>
+		{% endfor %}
+	</div>
+	<div id="model_container">
+		<div class="model_item width2 height2">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Username</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
 
-{% endblock %} {% block javascripts %} {% endblock %}
+	{% endblock %} {% block javascripts %} {% endblock %}

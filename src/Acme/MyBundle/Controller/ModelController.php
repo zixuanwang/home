@@ -9,7 +9,8 @@ class ModelController extends Controller {
 	public function indexAction($id) {
 		$repository = $this->getDoctrine ()->getRepository ( 'AcmeMyBundle:HomeModel' );
 		$model = $repository->find ( $id );
-		$photos = $model->getAlbum()->getPhotos();
-		return $this->render ( 'AcmeMyBundle:Default:model.show.html.twig', array('photos' => $photos, 'model' => $model) );
+		$images = $model->getImages()->getPhotos();
+		$floorplans = $model->getFloorplans()->getPhotos();
+		return $this->render ( 'AcmeMyBundle:Default:model.show.html.twig', array('images' => $images, 'floorplans' => $floorplans, 'model' => $model) );
 	}
 }
