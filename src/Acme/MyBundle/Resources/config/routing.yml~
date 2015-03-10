@@ -1,6 +1,12 @@
-random:
-    path:     /random/{limit}
-    defaults: { _controller: AcmeMyBundle:Random:index }
+album:
+    path:     /album/{type}
+    defaults: { _controller: AcmeMyBundle:Album:index }
 manage:
-    path:     /manage/{limit}
+    path:     /manage/{type}
     defaults: { _controller: AcmeMyBundle:Manage:index }
+model:
+    path:     /model/{id}
+    defaults: { _controller: AcmeMyBundle:Model:index }
+builder:
+    path:     /builder/{name}
+    defaults: { _controller: AcmeMyBundle:Builder:index }

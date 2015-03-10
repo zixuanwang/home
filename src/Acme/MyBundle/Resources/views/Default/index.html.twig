@@ -1,88 +1,17 @@
  {% extends '::base.html.twig' %} {% block body %}
- <header class="header">
-	<a href="/" class="headerLogo"><svg>
-			<use xlink:href="/fonts/header.svg#shapeLogo"></use></svg></a>
-	<div class="headerCases">
-		<div class="headerCasesLine"></div>
-		<div class="headerCasesFilters">
-			<button class="cta grey small rounded" data-filter="*">西雅图</button>
-			<button class="cta grey small rounded" data-filter=".digitalt">旧金山</button>
-			<button class="cta grey small rounded" data-filter=".grafisk">洛杉矶</button>
-		</div>
-	</div>
-
-	<div class="headerTools">
-		<p>
-			Fanges på
-			<svg>
-				<use xlink:href="/fonts/header.svg#shapeSmallArrow"></use></svg>
-		</p>
-		<div class="headerToolsIcons">
-			<a href="tel:+4529902543" class="headerToolsIconsMobile"><svg>
-					<use xlink:href="/fonts/header.svg#shapeMobile"></use></svg></a> <a
-				href="mailto:hello@sampedro.dk" class="headerToolsIconsMail"><svg>
-					<use xlink:href="/fonts/header.svg#shapeMail"></use></svg></a>
-		</div>
-	</div>
-</header>
-<div class="content-wrapper">
-	<div class="inner-container container">
-		<div class="row">
-			<div class="section-header col-md-12">
+<div class="container">
+	{{ include('::header.html.twig') }}
+	<div class="row model-gallery">
+		<div id="columns">
+			{% for model in models %}
+			<div class="pin">
+				<a href="{{ path('model', {'id': model.getId()}) }}"> <img
+					src="{{ '/uploads/'~model.getFacade().getPath()~'.jpg' }}"></a>
+				<h4>{{ model.getName() }}</h4>
+				<p>{{ (model.getSquareFeet() * 0.092903) | round}} 平方米</p>
 			</div>
-			<!-- /.section-header -->
+			{% endfor %}
 		</div>
-		<!-- /.row -->
-		<div class="row">
-			<div class="blog-masonry masonry-true">
-				{% for home_post in home_posts %}
-				<div class="post-masonry col-md-4 col-sm-6">
-					<div class="blog-thumb">
-						<img src="{{'/uploads/'~home_post.cover_photo~'.jpg'}}" alt="">
-						<div>hello</div>
-					</div>
-					<div class="blog-body">
-						<div class="box-content">
-							<h3 class="post-title">
-								<a href="blog-single.html">{{home_post.name}}</a>
-							</h3>
-							<span class="blog-meta">{{home_post.post_time}}</span>
-							<p>{{home_post.description}}</p>
-						</div>
-					</div>
-				</div>
-				<!-- /.post-masonry -->
-				{% endfor %}
-			</div>
-			<!-- /.blog-masonry -->
-		</div>
-		<!-- /.row -->
 	</div>
-	<!-- /.inner-content -->
 </div>
-<!-- /.content-wrapper -->
-{% endblock %} {% block javascripts %}
-<!-- Preloader -->
-<script type="text/javascript">
-    //<![CDATA[
-    $(window).load(function() { // makes sure the whole site is loaded
-        $('.loader-item').fadeOut(); // will first fade out the loading animation
-            $('#pageloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-        $('body').delay(350).css({'overflow-y':'visible'});
-    })
-    //]]>
-</script>
-<script src="{{ asset('js/jquery.easing.min.js') }}"></script>
-<script src="{{ asset('js/bloxhover.jquery.min.js') }}"></script>
-<script> 
-    $(document).ready(function() {
-        $('.blog-thumb').bloxhover({
-            effect: "square", // accepted strings: 'square', 'square reveal', 'vertical', 'vertical reveal', 'vertical alternate', 'vertical alternate reveal', 'horizontal', 'horizontal reveal', 'horizontal alternate', 'horizontal alternate reveal'
-            sliceCount: 8, // the number of slices 
-            color: 'rgba(0, 0, 0, 0.5)', //rgba color of the slices
-            duration: 90, //how long should the animation of each slice last
-            delay: 30 // delay between slice animations
-   	 	});
-    });
-</script>
 {% endblock %}

@@ -16,17 +16,7 @@ class HomeController extends Controller
     	$query = $repository->createQueryBuilder('p')
     	->orderBy('p.updated', 'DESC')
     	->getQuery();
-    	$home_posts = array();
     	$models = $query->getResult();
-    	foreach ($models as $model){
-    		$album = $model->getAlbum();
-    		$post = new HomePost();
-    		$post->cover_photo = $album->getCover()->getPath();
-    		$post->name = $model->getName();
-    		$post->post_time = $model->getUpdated()->format('Y-m-d H:i:s');
-    		$post->description = $model->getDescription();
-    		$home_posts[] = $post;
-    	}
-    	return $this->render ( 'AcmeMyBundle:Default:index.html.twig', array('home_posts' => $home_posts) );
+    	return $this->render ( 'AcmeMyBundle:Default:index.html.twig', array('models' => $models) );
     }
 }

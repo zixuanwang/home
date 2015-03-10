@@ -1,12 +1,15 @@
 album:
     path:     /album/{type}
     defaults: { _controller: AcmeMyBundle:Album:index }
+builder:
+    path:     /builder/{name}
+    defaults: { _controller: AcmeMyBundle:Builder:index }
+home:
+    path:     /home/
+    defaults: { _controller: AcmeMyBundle:Home:index }
 manage:
     path:     /manage/{type}
     defaults: { _controller: AcmeMyBundle:Manage:index }
 model:
     path:     /model/{id}
     defaults: { _controller: AcmeMyBundle:Model:index }
-builder:
-    path:     /builder/{name}
-    defaults: { _controller: AcmeMyBundle:Builder:index }
