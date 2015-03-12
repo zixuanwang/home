@@ -152,6 +152,7 @@ class ManageController extends Controller {
 			$home_model->setSquareFeet ( $data ['squarefeet'] );
 			$home_model->setDescription ( $data ['description'] );
 			$em = $this->getDoctrine ()->getManager ();
+			print_r($_FILES);
 			$facade_path = $this->upload_file ( $_FILES ['facade'] )[0];
 			$image_paths = $this->upload_file ( $_FILES ['image'] );
 			$floorplan_paths = $this->upload_file ( $_FILES ['floorplan'] );

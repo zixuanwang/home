@@ -23,6 +23,10 @@ class Builder {
 	 */
 	protected $description;
 	/**
+	 * @ORM\OneToMany(targetEntity="HomeModel", mappedBy="builder")
+	 */
+	protected $home_models;
+	/**
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
@@ -188,5 +192,38 @@ class Builder {
     public function getAlbum()
     {
         return $this->album;
+    }
+
+    /**
+     * Add home_models
+     *
+     * @param \Acme\MyBundle\Entity\HomeModel $homeModels
+     * @return Builder
+     */
+    public function addHomeModel(\Acme\MyBundle\Entity\HomeModel $homeModels)
+    {
+        $this->home_models[] = $homeModels;
+
+        return $this;
+    }
+
+    /**
+     * Remove home_models
+     *
+     * @param \Acme\MyBundle\Entity\HomeModel $homeModels
+     */
+    public function removeHomeModel(\Acme\MyBundle\Entity\HomeModel $homeModels)
+    {
+        $this->home_models->removeElement($homeModels);
+    }
+
+    /**
+     * Get home_models
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getHomeModels()
+    {
+        return $this->home_models;
     }
 }

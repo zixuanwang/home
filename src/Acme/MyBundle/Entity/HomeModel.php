@@ -11,6 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
 class HomeModel
 {
 	/**
+	 * @ORM\ManyToOne(targetEntity="Builder", inversedBy="home_models")
+	 */
+	protected $builder;
+	/**
 	 * @ORM\Column(type="string", length=1000, nullable=true)
 	 */
 	protected $description;
@@ -364,5 +368,28 @@ class HomeModel
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Set builder
+     *
+     * @param \Acme\MyBundle\Entity\Builder $builder
+     * @return HomeModel
+     */
+    public function setBuilder(\Acme\MyBundle\Entity\Builder $builder = null)
+    {
+        $this->builder = $builder;
+
+        return $this;
+    }
+
+    /**
+     * Get builder
+     *
+     * @return \Acme\MyBundle\Entity\Builder 
+     */
+    public function getBuilder()
+    {
+        return $this->builder;
     }
 }
