@@ -1,56 +1,82 @@
- {% extends '::base.html.twig' %}
-
- {% block body %}
+ {% extends '::base.html.twig' %} {% block body %}
 <div class="container">
 	<h2>Add a New Community</h2>
-	<hr/>
+	<hr />
 	<form method="post" enctype="multipart/form-data">
-	  <div class="form-group">
-	    <label for="name">Name of the Community</label>
-	    <input name="name" type="text" class="form-control" id="name" />
-	  </div>
-	  <div class="form-group">
-	    <label for="address">Address</label>
-	    <input name="address" type="text" class="form-control" id="address" />
-	  </div>
-	  <div class="form-group">
-	  	<label for="builder">Choose the Builder</label>
-	    <select name="builder" class="form-control" id="builder">
-	    {% for builder in builders %}
-		  <option>{{builder.getName()}}</option>
-		{% endfor %}
-		</select>
-	  </div>
-	  <div class="form-group">
-	    <label for="city">City</label>
-	    <input name="city" type="text" class="form-control" id="city" />
-	  </div>
-	  <div class="form-group">
-	    <label for="county">County</label>
-	    <input name="county" type="text" class="form-control" id="county" />
-	  </div>
-	  <div class="form-group">
-	    <label for="state">State</label>
-	    <input name="state" type="text" class="form-control" id="state" />
-	  </div>
-	  <div class="form-group">
-	    <label for="state">Zipcode</label>
-	    <input name="zipcode" type="text" class="form-control" id="zipcode" />
-	  </div>
-	  <div class="form-group">
-	    <label for="description">Description</label>
-	    <textarea name="description" class="form-control" id="description" rows="4"></textarea>
-	  </div>
-	  <div class="form-group">
-		<label for="map">Map of the Community</label>
-		<input name="map" type="file" id="map" accept="image/*" />
-	  </div>
-	  <div class="form-group">
-	    <label for="images">Images of the Community</label>
-	    <input type="file" id="images" name="images[]" multiple="multiple" accept="image/*" />
-	  </div>
-	  <hr/>
-	  <button type="submit" class="btn btn-default">Add</button>
+		<div class="form-group">
+			<label for="name">Name of the Community</label> <input name="name"
+				type="text" class="form-control" id="name" />
+		</div>
+		<div class="form-group">
+			<label for="address">Address</label> <input name="address"
+				type="text" class="form-control" id="address" />
+		</div>
+		<div class="form-group">
+			<label for="builder">Choose the Builder</label> <select
+				name="builder" class="form-control" id="builder"> 
+				<option> </option>
+				{% for builder in
+				builders %}
+				<option>{{builder.getName()}}</option> {% endfor %}
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="city">City</label> <input name="city" type="text"
+				class="form-control" id="city" />
+		</div>
+		<div class="form-group">
+			<label for="county">County</label> <input name="county" type="text"
+				class="form-control" id="county" />
+		</div>
+		<div class="form-group">
+			<label for="state">State</label> <input name="state" type="text"
+				class="form-control" id="state" />
+		</div>
+		<div class="form-group">
+			<label for="zipcode">Zipcode</label> <input name="zipcode"
+				type="text" class="form-control" id="zipcode" />
+		</div>
+		<div class="form-group">
+			<label for="model">Home Models</label><select multiple
+				class="form-control" name="model[]" id="model">
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="description">Description</label>
+			<textarea name="description" class="form-control" id="description"
+				rows="4"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="map">Map of the Community</label> <input name="map"
+				type="file" id="map" accept="image/*" />
+		</div>
+		<div class="form-group">
+			<label for="images">Images of the Community</label> <input
+				type="file" id="images" name="images[]" multiple="multiple"
+				accept="image/*" />
+		</div>
+		<hr />
+		<button type="submit" class="btn btn-default">Add</button>
 	</form>
 </div>
- {% endblock %}
+{% endblock %} {% block javascripts %}
+<script>
+  $('#builder').change(function(e) {
+    //Grab the chosen value on first select list change
+    var select = $(this).val();
+    if (select != "") {
+        $.ajax({url: '/manage/ajax?target=community&builder=' + select,
+            success: function(output) {
+            	var option;
+				$.each(output, function(i, val){
+					option += '<option>' + val + '</option>';
+				});
+            	$('#model').html(option);
+            },
+         	error: function (xhr, ajaxOptions, thrownError) {
+           		alert(xhr.status + " "+ thrownError);
+         }});
+    }
+   });
+ </script>
+{% endblock %}

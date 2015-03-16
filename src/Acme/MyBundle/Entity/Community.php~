@@ -19,7 +19,7 @@ class Community
 	 **/
 	protected $album;
 	/**
-	 * @ORM\ManyToOne(targetEntity="Builder", inversedBy="communities")
+	 * @ORM\Column(type="string", length=30)
 	 */
 	protected $builder;
 	/**
@@ -27,17 +27,18 @@ class Community
 	 */
 	protected $city;
 	/**
-	 * @ORM\Column(type="string", length=30)
+	 * @ORM\Column(type="string", length=30, nullable=true)
 	 */
 	protected $county;
 	/**
-	 * @ORM\Column(type="string", length=1000)
+	 * @ORM\Column(type="string", length=1000, nullable=true)
 	 */
 	protected $description;
 	/**
-	 * @ORM\OneToMany(targetEntity="Home", mappedBy="community")
+	 * @ORM\ManyToMany(targetEntity="HomeModel", inversedBy="communities")
+	 * @ORM\JoinTable(name="communities_home_models")
 	 */
-	protected $homes;
+	protected $home_models;
 	/**
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
@@ -71,7 +72,7 @@ class Community
 	protected $zipcode;
 	public function __construct()
 	{
-		$this->homes = new ArrayCollection();
+		$this->home_models = new ArrayCollection();
 		$this->schools = new ArrayCollection();
 	}
 
@@ -201,39 +202,6 @@ class Community
     }
 
     /**
-     * Add homes
-     *
-     * @param \Acme\MyBundle\Entity\Home $homes
-     * @return Community
-     */
-    public function addHome(\Acme\MyBundle\Entity\Home $homes)
-    {
-        $this->homes[] = $homes;
-
-        return $this;
-    }
-
-    /**
-     * Remove homes
-     *
-     * @param \Acme\MyBundle\Entity\Home $homes
-     */
-    public function removeHome(\Acme\MyBundle\Entity\Home $homes)
-    {
-        $this->homes->removeElement($homes);
-    }
-
-    /**
-     * Get homes
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getHomes()
-    {
-        return $this->homes;
-    }
-
-    /**
      * Add schools
      *
      * @param \Acme\MyBundle\Entity\School $schools
@@ -287,29 +255,6 @@ class Community
     public function getAlbum()
     {
         return $this->album;
-    }
-
-    /**
-     * Set builder
-     *
-     * @param \Acme\MyBundle\Entity\Builder $builder
-     * @return Community
-     */
-    public function setBuilder(\Acme\MyBundle\Entity\Builder $builder = null)
-    {
-        $this->builder = $builder;
-
-        return $this;
-    }
-
-    /**
-     * Get builder
-     *
-     * @return \Acme\MyBundle\Entity\Builder 
-     */
-    public function getBuilder()
-    {
-        return $this->builder;
     }
 
     /**
@@ -448,5 +393,61 @@ class Community
     public function getMap()
     {
         return $this->map;
+    }
+
+    /**
+     * Add home_models
+     *
+     * @param \Acme\MyBundle\Entity\HomeModel $homeModels
+     * @return Community
+     */
+    public function addHomeModel(\Acme\MyBundle\Entity\HomeModel $homeModels)
+    {
+        $this->home_models[] = $homeModels;
+
+        return $this;
+    }
+
+    /**
+     * Remove home_models
+     *
+     * @param \Acme\MyBundle\Entity\HomeModel $homeModels
+     */
+    public function removeHomeModel(\Acme\MyBundle\Entity\HomeModel $homeModels)
+    {
+        $this->home_models->removeElement($homeModels);
+    }
+
+    /**
+     * Get home_models
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getHomeModels()
+    {
+        return $this->home_models;
+    }
+
+    /**
+     * Set builder
+     *
+     * @param string $builder
+     * @return Community
+     */
+    public function setBuilder($builder)
+    {
+        $this->builder = $builder;
+
+        return $this;
+    }
+
+    /**
+     * Get builder
+     *
+     * @return string 
+     */
+    public function getBuilder()
+    {
+        return $this->builder;
     }
 }

@@ -79,6 +79,7 @@ class __TwigTemplate_b1160fe190f1c462dce05dd2525b3682733cd5d3ec73d6bb1c43e36248c
 \t\t\t\t\toption += '<option>' + val + '</option>';
 \t\t\t\t});
             \t\$('#builder').html(option);
+            \t
             },
          \terror: function (xhr, ajaxOptions, thrownError) {
            \t\talert(xhr.status + \" \"+ thrownError);

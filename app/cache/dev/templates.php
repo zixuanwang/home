@@ -83,7 +83,10 @@
   'AcmeMyBundle:Manage:community.html.twig' => '/home/zxwang/workspace/home/src/Acme/MyBundle/Resources/views/Manage/community.html.twig',
   'AcmeMyBundle:Manage:model.html.twig' => '/home/zxwang/workspace/home/src/Acme/MyBundle/Resources/views/Manage/model.html.twig',
   'AcmeMyBundle:Manage:album.html.twig' => '/home/zxwang/workspace/home/src/Acme/MyBundle/Resources/views/Manage/album.html.twig',
+  'AcmeMyBundle:Manage:home.html.twig' => '/home/zxwang/workspace/home/src/Acme/MyBundle/Resources/views/Manage/home.html.twig',
   'AcmeMyBundle:Manage:index.html.twig' => '/home/zxwang/workspace/home/src/Acme/MyBundle/Resources/views/Manage/index.html.twig',
+  'AcmeMyBundle:Default:builder.show.html.twig' => '/home/zxwang/workspace/home/src/Acme/MyBundle/Resources/views/Default/builder.show.html.twig',
+  'AcmeMyBundle:Default:model.show.html.twig' => '/home/zxwang/workspace/home/src/Acme/MyBundle/Resources/views/Default/model.show.html.twig',
   'AcmeMyBundle:Default:index.html.twig' => '/home/zxwang/workspace/home/src/Acme/MyBundle/Resources/views/Default/index.html.twig',
   'DebugBundle:Profiler:dump.html.twig' => '/home/zxwang/workspace/home/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views/Profiler/dump.html.twig',
   'AcmeDemoBundle::layout.html.twig' => '/home/zxwang/workspace/home/src/Acme/DemoBundle/Resources/views/layout.html.twig',
@@ -134,4 +137,5 @@
   'SensioDistributionBundle:Configurator/Step:doctrine.html.twig' => '/home/zxwang/workspace/home/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/views/Configurator/Step/doctrine.html.twig',
   ':default:index.html.twig' => '/home/zxwang/workspace/home/app/Resources/views/default/index.html.twig',
   '::base.html.twig' => '/home/zxwang/workspace/home/app/Resources/views/base.html.twig',
+  '::header.html.twig' => '/home/zxwang/workspace/home/app/Resources/views/header.html.twig',
 );

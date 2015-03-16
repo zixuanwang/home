@@ -9,6 +9,13 @@
 				placeholder="Hickory">
 		</div>
 		<div class="form-group">
+			<label for="builder">Choose the Builder</label> <select
+				name="builder" class="form-control" id="builder"> {% for builder in
+				builders %}
+				<option>{{builder.getName()}}</option> {% endfor %}
+			</select>
+		</div>
+		<div class="form-group">
 			<label for="numofbed">Number of Bedrooms</label> <input
 				name="numofbed" type="text" class="form-control" id="numofbed"
 				placeholder="4">

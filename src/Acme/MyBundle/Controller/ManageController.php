@@ -8,11 +8,14 @@ use Acme\MyBundle\Entity\Community;
 use Acme\MyBundle\Entity\HomeModel;
 use Acme\MyBundle\Entity\Photo;
 use Acme\MyBundle\Lib\GlobalConfig;
+use Acme\MyBundle\Lib\LennarParser;
 use Acme\MyBundle\Lib\Utility;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Acme\MyBundle\Lib\Acme\MyBundle\Lib;
+use Symfony\Component\HttpFoundation\Symfony\Component\HttpFoundation;
 
 class ManageController extends Controller {
 	public function indexAction($type) {
@@ -33,6 +36,38 @@ class ManageController extends Controller {
 		}
 		if ($type == 'home') {
 			return $this->addHome ();
+		}
+		if ($type == 'ajax') {
+			return $this->handleAjax ();
+		}
+		if ($type == 'lennar') {
+			$parser = new LennarParser ( $this->getDoctrine ()->getManager () );
+			
+			$parser->parse_seattle ();
+			return new Response ( 'parse' );
+		}
+	}
+	private function parseLennar() {
+	}
+	private function handleAjax() {
+		$request = Request::createFromGlobals ();
+		$target = $request->query->get ( 'target' );
+		if ($target == 'community') {
+			$builder = $request->query->get ( 'builder' );
+			if (! empty ( $builder )) {
+				$repository = $this->getDoctrine ()->getRepository ( 'AcmeMyBundle:Builder' );
+				$query = $repository->createQueryBuilder ( 'p' )->where ( 'p.name = :builder' )->setParameter ( 'builder', $builder )->getQuery ();
+				$results = $query->getResult ();
+				if (count ( $results ) > 0) {
+					$models = $results [0]->getHomeModels ();
+					$names = array ();
+					foreach ( $models as $model ) {
+						$names [] = $model->getName ();
+						;
+					}
+					return new JsonResponse ( $names );
+				}
+			}
 		}
 	}
 	private function addBuilder() {
@@ -95,6 +130,13 @@ class ManageController extends Controller {
 				$em->persist ( $photo );
 			}
 			$community->setAlbum ( $album );
+			// save home models
+			foreach ( $data ['model'] as $model_name ) {
+				$home_model = $this->getDoctrine ()->getRepository ( 'AcmeMyBundle:HomeModel' )->findOneByName ( $model_name );
+				$community->addHomeModel ( $home_model );
+				$home_model->addCommunity ( $community );
+				$em->persist ( $home_model );
+			}
 			$em->persist ( $builder );
 			$em->persist ( $community );
 			$em->persist ( $map_photo );
@@ -152,7 +194,6 @@ class ManageController extends Controller {
 			$home_model->setSquareFeet ( $data ['squarefeet'] );
 			$home_model->setDescription ( $data ['description'] );
 			$em = $this->getDoctrine ()->getManager ();
-			print_r($_FILES);
 			$facade_path = $this->upload_file ( $_FILES ['facade'] )[0];
 			$image_paths = $this->upload_file ( $_FILES ['image'] );
 			$floorplan_paths = $this->upload_file ( $_FILES ['floorplan'] );
@@ -176,6 +217,10 @@ class ManageController extends Controller {
 				$photo->setPath ( Utility::get_stem ( $floorplan_path ) );
 				$em->persist ( $photo );
 			}
+			// save builder
+			$builder_name = $data ['builder'];
+			$builder = $this->getDoctrine ()->getRepository ( 'AcmeMyBundle:Builder' )->findOneByName ( $builder_name );
+			$home_model->setBuilder ( $builder );
 			$em->persist ( $floorplan_album );
 			$home_model->setImages ( $image_album );
 			$home_model->setFloorplans ( $floorplan_album );
@@ -183,7 +228,10 @@ class ManageController extends Controller {
 			$em->flush ();
 			return new Response ( 'Model added.' );
 		}
-		return $this->render ( 'AcmeMyBundle:Manage:model.html.twig' );
+		$builders = $this->getDoctrine ()->getRepository ( 'AcmeMyBundle:Builder' )->findAll ();
+		return $this->render ( 'AcmeMyBundle:Manage:model.html.twig', array (
+				'builders' => $builders 
+		) );
 	}
 	private function addHome() {
 		if ($this->get ( 'request' )->getMethod () == 'GET') {

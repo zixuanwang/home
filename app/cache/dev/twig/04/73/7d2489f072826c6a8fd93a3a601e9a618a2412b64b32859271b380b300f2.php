@@ -45,6 +45,24 @@ class __TwigTemplate_04737d2489f072826c6a8fd93a3a601e9a618a2412b64b32859271b380b
 \t\t\t\tplaceholder=\"Hickory\">
 \t\t</div>
 \t\t<div class=\"form-group\">
+\t\t\t<label for=\"builder\">Choose the Builder</label> <select
+\t\t\t\tname=\"builder\" class=\"form-control\" id=\"builder\"> ";
+        // line 13
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["builders"]) ? $context["builders"] : $this->getContext($context, "builders")));
+        foreach ($context['_seq'] as $context["_key"] => $context["builder"]) {
+            // line 15
+            echo "\t\t\t\t<option>";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["builder"], "getName", array(), "method"), "html", null, true);
+            echo "</option> ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['builder'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 16
+        echo "\t\t\t</select>
+\t\t</div>
+\t\t<div class=\"form-group\">
 \t\t\t<label for=\"numofbed\">Number of Bedrooms</label> <input
 \t\t\t\tname=\"numofbed\" type=\"text\" class=\"form-control\" id=\"numofbed\"
 \t\t\t\tplaceholder=\"4\">
@@ -105,6 +123,6 @@ class __TwigTemplate_04737d2489f072826c6a8fd93a3a601e9a618a2412b64b32859271b380b
 
     public function getDebugInfo()
     {
-        return array (  38 => 2,  11 => 1,);
+        return array (  63 => 16,  55 => 15,  51 => 13,  38 => 2,  11 => 1,);
     }
 }

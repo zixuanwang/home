@@ -32,26 +32,25 @@ class __TwigTemplate_144e0ad9bd0044073398ff2414ed87d5479dd3b9e9fcb4a92eb6b56239c
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
-    // line 3
     public function block_body($context, array $blocks = array())
     {
-        // line 4
-        echo "\t<form>
-\t  <div class=\"form-group\">
-\t    <label>Builder Name</label>
-\t    <input type=\"text\" class=\"form-control\" placeholder=\"Enter Builder Name\">
-\t  </div>
-\t  <div class=\"form-group\">
-\t    <label>Description</label>
-\t    <input type=\"text\" class=\"form-control\" placeholder=\"Description\">
-\t  </div>
-\t  <div class=\"form-group\">
-\t    <label>Website</label>
-\t    <input type=\"text\" class=\"form-control\" placeholder=\"http://\">
-\t  </div>
-\t  <button type=\"submit\" class=\"btn btn-default\">Submit</button>
-\t</form>
- ";
+        // line 2
+        echo "<form>
+\t<div class=\"form-group\">
+\t\t<label>Builder Name</label> <input type=\"text\" class=\"form-control\"
+\t\t\tplaceholder=\"Enter Builder Name\">
+\t</div>
+\t<div class=\"form-group\">
+\t\t<label>Description</label> <input type=\"text\" class=\"form-control\"
+\t\t\tplaceholder=\"Description\">
+\t</div>
+\t<div class=\"form-group\">
+\t\t<label>Website</label> <input type=\"text\" class=\"form-control\"
+\t\t\tplaceholder=\"http://\">
+\t</div>
+\t<button type=\"submit\" class=\"btn btn-default\">Submit</button>
+</form>
+";
     }
 
     public function getTemplateName()
@@ -66,6 +65,6 @@ class __TwigTemplate_144e0ad9bd0044073398ff2414ed87d5479dd3b9e9fcb4a92eb6b56239c
 
     public function getDebugInfo()
     {
-        return array (  39 => 4,  36 => 3,  11 => 1,);
+        return array (  38 => 2,  11 => 1,);
     }
 }

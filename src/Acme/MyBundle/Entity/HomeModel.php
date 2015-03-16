@@ -4,6 +4,7 @@ namespace Acme\MyBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Doctrine\Common\Collections;
 /**
  * @ORM\Entity
  * @ORM\Table(name="homemodel")
@@ -11,9 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
 class HomeModel
 {
 	/**
-	 * @ORM\ManyToOne(targetEntity="Builder", inversedBy="home_models")
+	 * @ORM\Column(type="string", length=30)
 	 */
 	protected $builder;
+	/**
+	 * @ORM\ManyToMany(targetEntity="Community", mappedBy="home_models")
+	 **/
+	protected $communities;
 	/**
 	 * @ORM\Column(type="string", length=1000, nullable=true)
 	 */
@@ -70,6 +75,7 @@ class HomeModel
     protected $updated;
     public function __construct()
     {
+    	$this->communities = new ArrayCollection();
     	$this->homes = new ArrayCollection();
     	$this->updated = new \DateTime();
     }  
@@ -371,12 +377,45 @@ class HomeModel
     }
 
     /**
-     * Set builder
+     * Add communities
      *
-     * @param \Acme\MyBundle\Entity\Builder $builder
+     * @param \Acme\MyBundle\Entity\Community $communities
      * @return HomeModel
      */
-    public function setBuilder(\Acme\MyBundle\Entity\Builder $builder = null)
+    public function addCommunity(\Acme\MyBundle\Entity\Community $communities)
+    {
+        $this->communities[] = $communities;
+
+        return $this;
+    }
+
+    /**
+     * Remove communities
+     *
+     * @param \Acme\MyBundle\Entity\Community $communities
+     */
+    public function removeCommunity(\Acme\MyBundle\Entity\Community $communities)
+    {
+        $this->communities->removeElement($communities);
+    }
+
+    /**
+     * Get communities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCommunities()
+    {
+        return $this->communities;
+    }
+
+    /**
+     * Set builder
+     *
+     * @param string $builder
+     * @return HomeModel
+     */
+    public function setBuilder($builder)
     {
         $this->builder = $builder;
 
@@ -386,7 +425,7 @@ class HomeModel
     /**
      * Get builder
      *
-     * @return \Acme\MyBundle\Entity\Builder 
+     * @return string 
      */
     public function getBuilder()
     {

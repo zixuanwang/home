@@ -9,4 +9,5 @@ class Utility{
 	public static function get_extension($path){
 		return pathinfo($path, PATHINFO_EXTENSION);
 	}
+	
 }

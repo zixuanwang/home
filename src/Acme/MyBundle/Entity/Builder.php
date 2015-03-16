@@ -14,18 +14,18 @@ class Builder {
 	 * @ORM\OneToOne(targetEntity="Album")
 	 */
 	protected $album;
-	/**
-	 * @ORM\OneToMany(targetEntity="Community", mappedBy="builder")
-	 */
-	protected $communities;
+// 	/**
+// 	 * @ORM\OneToMany(targetEntity="Community", mappedBy="builder")
+// 	 */
+// 	protected $communities;
 	/**
 	 * @ORM\Column(type="string", length=10000)
 	 */
 	protected $description;
-	/**
-	 * @ORM\OneToMany(targetEntity="HomeModel", mappedBy="builder")
-	 */
-	protected $home_models;
+// 	/**
+// 	 * @ORM\OneToMany(targetEntity="HomeModel", mappedBy="builder")
+// 	 */
+// 	protected $home_models;
 	/**
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
