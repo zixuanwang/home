@@ -2,10 +2,14 @@
 
 namespace Acme\MyBundle\Lib;
 
+use Acme\MyBundle\Entity\Album;
 use Acme\MyBundle\Entity\Community;
 use Acme\MyBundle\Entity\HomeModel;
+use Acme\MyBundle\Entity\Photo;
 use Acme\MyBundle\Entity\Acme\MyBundle\Entity;
+use Acme\MyBundle\Lib\phpQuery\phpQuery;
 use Doctrine\ORM\EntityManager;
+use phpQuery_phpQuery;
 
 class LennarParser {
 	private function curl_get_contents($url, $json_string) {
@@ -28,17 +32,91 @@ class LennarParser {
 		$this->home_models = array ();
 		$this->root_url = 'http://www.lennar.com';
 	}
-	
-	/*** this function fetches images embedded in the model page ***/
-	// facade image, model home images and floor plans are extracted.
-	public function parse_image($html) {
-		$dom = new DOMDocument;
-		$dom->loadHTML($html);
-		$floorplan_element = $dom->getElementById('floorplans');
-		var_dump($floorplan_element);
+	/**
+	 * this function save the image from the url to the local file system
+	 * images are renamed to a unique name and the unique name is returned.
+	 */
+	public function save_image($url) {
+		echo implode('/', array_map('urlencode', explode('/', $url)));
+		echo '<br>';
+		$one_filename = sha1 ( uniqid ( mt_rand (), true ) );
+// 		$curl_handle=curl_init();
+// 		curl_setopt($curl_handle, CURLOPT_URL, urlencode($url));
+// 		curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+// 		curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+// 		curl_setopt($curl_handle, CURLOPT_USERAGENT, 'firefox');
+// 		$content = curl_exec($curl_handle);
+// 		curl_close($curl_handle);
+		exec('wget ' . implode('/', array_map('urlencode', explode('/', $url))) . ' -O uploads/' . $one_filename . '.jpg');
+// 		$fp = fopen ( 'uploads/' . $one_filename . '.jpg', 'w' );
+// 		fwrite ( $fp, $content );
+// 		fclose ( $fp );
+		return $one_filename;
 	}
 	
-	/*** this function parse the web page of seattle and update the database ***/
+	/**
+	 * this function fetches images embedded in the model page
+	 * an array containing saved image names is returned.
+	 */
+	public function parse_image($url) {
+		// parse html using phpQuery
+		$html = file_get_contents ( $url );
+		$php_query = new phpQuery_phpQuery ();
+		$doc = $php_query->newDocument ( $html );
+		// $doc = phpQuery::newDocument ( $html );
+		$floorplan_urls = array ();
+		$model_urls = array ();
+		$facade_urls = array ();
+		foreach ( $doc ['#floorplans li > img'] as $element ) {
+			$floorplan_urls [] = pq ( $element )->attr ( 'src' );
+		}
+		foreach ( $doc ['.scrapbook > img'] as $element ) {
+			$model_urls [] = pq ( $element )->attr ( 'data-src' );
+		}
+		foreach ( $doc ['.masthead .SlideImage'] as $element ) {
+			$query = pq ( $element );
+			if (! empty ( $query->attr ( 'data-src' ) )) {
+				$facade_urls [] = $query->attr ( 'data-src' );
+			} else {
+				$facade_urls [] = $query->attr ( 'src' );
+			}
+		}
+		// save images.
+		$images = array ();
+		$images ['floorplan'] = array ();
+		$images ['model'] = array ();
+		$images ['facade'] = array ();
+		foreach ( $floorplan_urls as $url ) {
+			$images ['floorplan'] [] = $this->save_image ( $url );
+		}
+		foreach ( $model_urls as $url ) {
+			$images ['mode'] [] = $this->save_image ( $url );
+		}
+		foreach ( $facade_urls as $url ) {
+			$images ['facade'] [] = $this->save_image ( $url );
+		}
+		return $images;
+	}
+	public function persist_album($em, $images) {
+		$album = new Album ();
+		foreach ( $images as $image ) {
+			$photo = $this->persist_photo ( $em, $image );
+			$photo->setAlbum ( $album );
+			$album->addPhoto ( $photo );
+		}
+		$em->persist ( $album );
+		return $album;
+	}
+	public function persist_photo($em, $image) {
+		$photo = new Photo ();
+		$photo->setPath ( $image );
+		$em->persist ( $photo );
+		return $photo;
+	}
+	
+	/**
+	 * * this function parse the web page of seattle and update the database **
+	 */
 	public function parse_seattle() {
 		// get facet results
 		// construct REST request
@@ -111,7 +189,7 @@ class LennarParser {
 			);
 			$json_string = json_encode ( $data_array );
 			$model_result = $this->curl_get_contents ( $home_url, $json_string );
-			$model_array = json_decode ( $model_result, true);
+			$model_array = json_decode ( $model_result, true );
 			foreach ( $model_array ['pr'] as $model ) {
 				// check for duplication. if we can find one, we skip
 				$model_entity = $model_repository->findOneBy ( array (
@@ -129,6 +207,21 @@ class LennarParser {
 					$model_entity->setName ( $model ['plmktnm'] );
 					$model_entity->addCommunity ( $community_entity );
 					$community_entity->addHomeModel ( $model_entity );
+					// fetch images from the web page
+					$page_url = $this->root_url . $model ['vtlURL'];
+					$images = $this->parse_image ( $page_url );
+					if (! empty ( $images ['facade'] )) {
+						$photo = $this->persist_photo ( $this->em, $images ['facade'] [0] );
+						$model_entity->setFacade ( $photo );
+					}
+					if (! empty ( $images ['model'] )) {
+						$album = $this->persist_album ( $this->em, $images ['model'] );
+						$model_entity->setImages ( $album );
+					}
+					if (! empty ( $images ['floorplan'] )) {
+						$album = $this->persist_album ( $this->em, $images ['floorplan'] );
+						$model_entity->setImages ( $album );
+					}
 					$this->em->persist ( $model_entity );
 				}
 			}

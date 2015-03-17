@@ -19,7 +19,6 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
 
         $this->blocks = array(
             'body' => array($this, 'block_body'),
-            'javascripts' => array($this, 'block_javascripts'),
         );
     }
 
@@ -36,126 +35,46 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
     public function block_body($context, array $blocks = array())
     {
         // line 2
-        echo " <header class=\"header\">
-\t<a href=\"/\" class=\"headerLogo\"><svg>
-\t\t\t<use xlink:href=\"/fonts/header.svg#shapeLogo\"></use></svg></a>
-\t<div class=\"headerCases\">
-\t\t<div class=\"headerCasesLine\"></div>
-\t\t<div class=\"headerCasesFilters\">
-\t\t\t<button class=\"cta grey small rounded\" data-filter=\"*\">西雅图</button>
-\t\t\t<button class=\"cta grey small rounded\" data-filter=\".digitalt\">旧金山</button>
-\t\t\t<button class=\"cta grey small rounded\" data-filter=\".grafisk\">洛杉矶</button>
-\t\t</div>
-\t</div>
-
-\t<div class=\"headerTools\">
-\t\t<p>
-\t\t\tFanges på
-\t\t\t<svg>
-\t\t\t\t<use xlink:href=\"/fonts/header.svg#shapeSmallArrow\"></use></svg>
-\t\t</p>
-\t\t<div class=\"headerToolsIcons\">
-\t\t\t<a href=\"tel:+4529902543\" class=\"headerToolsIconsMobile\"><svg>
-\t\t\t\t\t<use xlink:href=\"/fonts/header.svg#shapeMobile\"></use></svg></a> <a
-\t\t\t\thref=\"mailto:hello@sampedro.dk\" class=\"headerToolsIconsMail\"><svg>
-\t\t\t\t\t<use xlink:href=\"/fonts/header.svg#shapeMail\"></use></svg></a>
-\t\t</div>
-\t</div>
-</header>
-<div class=\"content-wrapper\">
-\t<div class=\"inner-container container\">
-\t\t<div class=\"row\">
-\t\t\t<div class=\"section-header col-md-12\">
-\t\t\t</div>
-\t\t\t<!-- /.section-header -->
-\t\t</div>
-\t\t<!-- /.row -->
-\t\t<div class=\"row\">
-\t\t\t<div class=\"blog-masonry masonry-true\">
-\t\t\t\t";
-        // line 38
+        echo "<div class=\"container\">
+\t";
+        // line 3
+        echo twig_include($this->env, $context, "::header.html.twig");
+        echo "
+\t<div class=\"row model-gallery\">
+\t\t<div id=\"columns\">
+\t\t\t";
+        // line 6
         $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["home_posts"]) ? $context["home_posts"] : null));
-        foreach ($context['_seq'] as $context["_key"] => $context["home_post"]) {
-            // line 39
-            echo "\t\t\t\t<div class=\"post-masonry col-md-4 col-sm-6\">
-\t\t\t\t\t<div class=\"blog-thumb\">
-\t\t\t\t\t\t<img src=\"";
-            // line 41
-            echo twig_escape_filter($this->env, (("/uploads/" . $this->getAttribute($context["home_post"], "cover_photo", array())) . ".jpg"), "html", null, true);
-            echo "\" alt=\"\">
-\t\t\t\t\t\t<div>hello</div>
-\t\t\t\t\t</div>
-\t\t\t\t\t<div class=\"blog-body\">
-\t\t\t\t\t\t<div class=\"box-content\">
-\t\t\t\t\t\t\t<h3 class=\"post-title\">
-\t\t\t\t\t\t\t\t<a href=\"blog-single.html\">";
-            // line 47
-            echo twig_escape_filter($this->env, $this->getAttribute($context["home_post"], "name", array()), "html", null, true);
-            echo "</a>
-\t\t\t\t\t\t\t</h3>
-\t\t\t\t\t\t\t<span class=\"blog-meta\">";
-            // line 49
-            echo twig_escape_filter($this->env, $this->getAttribute($context["home_post"], "post_time", array()), "html", null, true);
-            echo "</span>
-\t\t\t\t\t\t\t<p>";
-            // line 50
-            echo twig_escape_filter($this->env, $this->getAttribute($context["home_post"], "description", array()), "html", null, true);
-            echo "</p>
-\t\t\t\t\t\t</div>
-\t\t\t\t\t</div>
-\t\t\t\t</div>
-\t\t\t\t<!-- /.post-masonry -->
-\t\t\t\t";
+        $context['_seq'] = twig_ensure_traversable((isset($context["models"]) ? $context["models"] : null));
+        foreach ($context['_seq'] as $context["_key"] => $context["model"]) {
+            // line 7
+            echo "\t\t\t<div class=\"pin\">
+\t\t\t\t<a href=\"";
+            // line 8
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("model", array("id" => $this->getAttribute($context["model"], "getId", array(), "method"))), "html", null, true);
+            echo "\"> <img
+\t\t\t\t\tsrc=\"";
+            // line 9
+            echo twig_escape_filter($this->env, (("/uploads/" . $this->getAttribute($this->getAttribute($context["model"], "getFacade", array(), "method"), "getPath", array(), "method")) . ".jpg"), "html", null, true);
+            echo "\"></a>
+\t\t\t\t<h4>";
+            // line 10
+            echo twig_escape_filter($this->env, $this->getAttribute($context["model"], "getName", array(), "method"), "html", null, true);
+            echo "</h4>
+\t\t\t\t<p>";
+            // line 11
+            echo twig_escape_filter($this->env, twig_round(($this->getAttribute($context["model"], "getSquareFeet", array(), "method") * 0.092903)), "html", null, true);
+            echo " 平方米</p>
+\t\t\t</div>
+\t\t\t";
         }
         $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['home_post'], $context['_parent'], $context['loop']);
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['model'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 56
-        echo "\t\t\t</div>
-\t\t\t<!-- /.blog-masonry -->
-\t\t</div>
-\t\t<!-- /.row -->
+        // line 14
+        echo "\t\t</div>
 \t</div>
-\t<!-- /.inner-content -->
 </div>
-<!-- /.content-wrapper -->
-";
-    }
-
-    // line 64
-    public function block_javascripts($context, array $blocks = array())
-    {
-        // line 65
-        echo "<!-- Preloader -->
-<script type=\"text/javascript\">
-    //<![CDATA[
-    \$(window).load(function() { // makes sure the whole site is loaded
-        \$('.loader-item').fadeOut(); // will first fade out the loading animation
-            \$('#pageloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-        \$('body').delay(350).css({'overflow-y':'visible'});
-    })
-    //]]>
-</script>
-<script src=\"";
-        // line 75
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/jquery.easing.min.js"), "html", null, true);
-        echo "\"></script>
-<script src=\"";
-        // line 76
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/bloxhover.jquery.min.js"), "html", null, true);
-        echo "\"></script>
-<script> 
-    \$(document).ready(function() {
-        \$('.blog-thumb').bloxhover({
-            effect: \"square\", // accepted strings: 'square', 'square reveal', 'vertical', 'vertical reveal', 'vertical alternate', 'vertical alternate reveal', 'horizontal', 'horizontal reveal', 'horizontal alternate', 'horizontal alternate reveal'
-            sliceCount: 8, // the number of slices 
-            color: 'rgba(0, 0, 0, 0.5)', //rgba color of the slices
-            duration: 90, //how long should the animation of each slice last
-            delay: 30 // delay between slice animations
-   \t \t});
-    });
-</script>
 ";
     }
 
@@ -171,6 +90,6 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
 
     public function getDebugInfo()
     {
-        return array (  146 => 76,  142 => 75,  130 => 65,  127 => 64,  115 => 56,  103 => 50,  99 => 49,  94 => 47,  85 => 41,  81 => 39,  77 => 38,  39 => 2,  11 => 1,);
+        return array (  75 => 14,  66 => 11,  62 => 10,  58 => 9,  54 => 8,  51 => 7,  47 => 6,  41 => 3,  38 => 2,  11 => 1,);
     }
 }

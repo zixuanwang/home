@@ -408,4 +408,27 @@ class HomeModel
     {
         return $this->communities;
     }
+
+    /**
+     * Set builder
+     *
+     * @param string $builder
+     * @return HomeModel
+     */
+    public function setBuilder($builder)
+    {
+        $this->builder = $builder;
+
+        return $this;
+    }
+
+    /**
+     * Get builder
+     *
+     * @return string 
+     */
+    public function getBuilder()
+    {
+        return $this->builder;
+    }
 }

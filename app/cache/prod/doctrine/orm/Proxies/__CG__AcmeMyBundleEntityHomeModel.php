@@ -64,10 +64,10 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'album', 'description', 'floor_plan', 'homes', 'id', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
+            return array('__isInitialized__', 'builder', 'communities', 'description', 'facade', 'floorplans', 'homes', 'id', 'images', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
         }
 
-        return array('__isInitialized__', 'album', 'description', 'floor_plan', 'homes', 'id', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
+        return array('__isInitialized__', 'builder', 'communities', 'description', 'facade', 'floorplans', 'homes', 'id', 'images', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
     }
 
     /**
@@ -356,28 +356,6 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function setAlbum(\Acme\MyBundle\Entity\Album $album = NULL)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAlbum', array($album));
-
-        return parent::setAlbum($album);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getAlbum()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAlbum', array());
-
-        return parent::getAlbum();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function setDescription($description)
     {
 
@@ -417,6 +395,127 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdated', array());
 
         return parent::getUpdated();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setFacade(\Acme\MyBundle\Entity\Photo $facade = NULL)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFacade', array($facade));
+
+        return parent::setFacade($facade);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFacade()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFacade', array());
+
+        return parent::getFacade();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setFloorplans(\Acme\MyBundle\Entity\Album $floorplans = NULL)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFloorplans', array($floorplans));
+
+        return parent::setFloorplans($floorplans);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFloorplans()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFloorplans', array());
+
+        return parent::getFloorplans();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setImages(\Acme\MyBundle\Entity\Album $images = NULL)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setImages', array($images));
+
+        return parent::setImages($images);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getImages()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getImages', array());
+
+        return parent::getImages();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addCommunity(\Acme\MyBundle\Entity\Community $communities)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addCommunity', array($communities));
+
+        return parent::addCommunity($communities);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeCommunity(\Acme\MyBundle\Entity\Community $communities)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeCommunity', array($communities));
+
+        return parent::removeCommunity($communities);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCommunities()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCommunities', array());
+
+        return parent::getCommunities();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setBuilder($builder)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setBuilder', array($builder));
+
+        return parent::setBuilder($builder);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getBuilder()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getBuilder', array());
+
+        return parent::getBuilder();
     }
 
 }

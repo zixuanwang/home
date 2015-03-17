@@ -108,10 +108,10 @@ class Album extends \Acme\MyBundle\Entity\Album implements \Doctrine\ORM\Proxy\P
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'community', 'cover', 'id', 'home_model', 'photos');
+            return array('__isInitialized__', 'cover', 'id', 'photos');
         }
 
-        return array('__isInitialized__', 'community', 'cover', 'id', 'home_model');
+        return array('__isInitialized__', 'cover', 'id');
     }
 
     /**

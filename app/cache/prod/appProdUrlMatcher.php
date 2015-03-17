@@ -32,9 +32,31 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'album')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\AlbumController::indexAction',));
         }
 
-        // manage
-        if (0 === strpos($pathinfo, '/manage') && preg_match('#^/manage/(?P<type>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'manage')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\ManageController::indexAction',));
+        // builder
+        if (0 === strpos($pathinfo, '/builder') && preg_match('#^/builder/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'builder')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\BuilderController::indexAction',));
+        }
+
+        // home
+        if (rtrim($pathinfo, '/') === '/home') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'home');
+            }
+
+            return array (  '_controller' => 'Acme\\MyBundle\\Controller\\HomeController::indexAction',  '_route' => 'home',);
+        }
+
+        if (0 === strpos($pathinfo, '/m')) {
+            // manage
+            if (0 === strpos($pathinfo, '/manage') && preg_match('#^/manage/(?P<type>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'manage')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\ManageController::indexAction',));
+            }
+
+            // model
+            if (0 === strpos($pathinfo, '/model') && preg_match('#^/model/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'model')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\ModelController::indexAction',));
+            }
+
         }
 
         // homepage

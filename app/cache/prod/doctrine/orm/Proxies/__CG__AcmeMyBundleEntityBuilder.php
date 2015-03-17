@@ -64,10 +64,10 @@ class Builder extends \Acme\MyBundle\Entity\Builder implements \Doctrine\ORM\Pro
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'communities', 'description', 'id', 'name', 'website');
+            return array('__isInitialized__', 'album', 'description', 'id', 'logo', 'name', 'website');
         }
 
-        return array('__isInitialized__', 'communities', 'description', 'id', 'name', 'website');
+        return array('__isInitialized__', 'album', 'description', 'id', 'logo', 'name', 'website');
     }
 
     /**
@@ -285,6 +285,83 @@ class Builder extends \Acme\MyBundle\Entity\Builder implements \Doctrine\ORM\Pro
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getName', array());
 
         return parent::getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setLogo(\Acme\MyBundle\Entity\Photo $logo = NULL)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLogo', array($logo));
+
+        return parent::setLogo($logo);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getLogo()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLogo', array());
+
+        return parent::getLogo();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setAlbum(\Acme\MyBundle\Entity\Album $album = NULL)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAlbum', array($album));
+
+        return parent::setAlbum($album);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAlbum()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAlbum', array());
+
+        return parent::getAlbum();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addHomeModel(\Acme\MyBundle\Entity\HomeModel $homeModels)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addHomeModel', array($homeModels));
+
+        return parent::addHomeModel($homeModels);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeHomeModel(\Acme\MyBundle\Entity\HomeModel $homeModels)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeHomeModel', array($homeModels));
+
+        return parent::removeHomeModel($homeModels);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHomeModels()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHomeModels', array());
+
+        return parent::getHomeModels();
     }
 
 }

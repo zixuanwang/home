@@ -64,10 +64,10 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'album', 'builder', 'city', 'county', 'description', 'homes', 'id', 'name', 'school_district', 'schools', 'zipcode');
+            return array('__isInitialized__', 'address', 'album', 'builder', 'city', 'county', 'description', 'home_models', 'id', 'map', 'name', 'school_district', 'schools', 'state', 'zipcode');
         }
 
-        return array('__isInitialized__', 'album', 'builder', 'city', 'county', 'description', 'homes', 'id', 'name', 'school_district', 'schools', 'zipcode');
+        return array('__isInitialized__', 'address', 'album', 'builder', 'city', 'county', 'description', 'home_models', 'id', 'map', 'name', 'school_district', 'schools', 'state', 'zipcode');
     }
 
     /**
@@ -301,39 +301,6 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function addHome(\Acme\MyBundle\Entity\Home $homes)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addHome', array($homes));
-
-        return parent::addHome($homes);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removeHome(\Acme\MyBundle\Entity\Home $homes)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeHome', array($homes));
-
-        return parent::removeHome($homes);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getHomes()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHomes', array());
-
-        return parent::getHomes();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function addSchool(\Acme\MyBundle\Entity\School $schools)
     {
 
@@ -389,28 +356,6 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function setBuilder(\Acme\MyBundle\Entity\Builder $builder = NULL)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setBuilder', array($builder));
-
-        return parent::setBuilder($builder);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getBuilder()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getBuilder', array());
-
-        return parent::getBuilder();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function setZipcode($zipcode)
     {
 
@@ -428,6 +373,171 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getZipcode', array());
 
         return parent::getZipcode();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setState($state)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setState', array($state));
+
+        return parent::setState($state);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getState()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getState', array());
+
+        return parent::getState();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setAddress($address)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAddress', array($address));
+
+        return parent::setAddress($address);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAddress()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAddress', array());
+
+        return parent::getAddress();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setLatitude($latitude)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLatitude', array($latitude));
+
+        return parent::setLatitude($latitude);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getLatitude()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLatitude', array());
+
+        return parent::getLatitude();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setLongitude($longitude)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLongitude', array($longitude));
+
+        return parent::setLongitude($longitude);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getLongitude()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLongitude', array());
+
+        return parent::getLongitude();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setMap(\Acme\MyBundle\Entity\Photo $map = NULL)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setMap', array($map));
+
+        return parent::setMap($map);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getMap()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getMap', array());
+
+        return parent::getMap();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addHomeModel(\Acme\MyBundle\Entity\HomeModel $homeModels)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addHomeModel', array($homeModels));
+
+        return parent::addHomeModel($homeModels);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeHomeModel(\Acme\MyBundle\Entity\HomeModel $homeModels)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeHomeModel', array($homeModels));
+
+        return parent::removeHomeModel($homeModels);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHomeModels()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHomeModels', array());
+
+        return parent::getHomeModels();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setBuilder($builder)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setBuilder', array($builder));
+
+        return parent::setBuilder($builder);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getBuilder()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getBuilder', array());
+
+        return parent::getBuilder();
     }
 
 }

@@ -64,10 +64,10 @@ class Home extends \Acme\MyBundle\Entity\Home implements \Doctrine\ORM\Proxy\Pro
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'address', 'community', 'direction', 'hoa', 'home_model', 'id', 'latitude', 'longitude', 'lot_size', 'price', 'price_history', 'price_per_foot', 'status', '' . "\0" . 'Acme\\MyBundle\\Entity\\Home' . "\0" . 'users', 'year_built');
+            return array('__isInitialized__', 'address', 'community', 'description', 'direction', 'hoa', 'home_model', 'id', 'latitude', 'longitude', 'lot_size', 'price', 'price_history', 'price_per_foot', 'status', '' . "\0" . 'Acme\\MyBundle\\Entity\\Home' . "\0" . 'users', 'year_built');
         }
 
-        return array('__isInitialized__', 'address', 'community', 'direction', 'hoa', 'home_model', 'id', 'latitude', 'longitude', 'lot_size', 'price', 'price_history', 'price_per_foot', 'status', '' . "\0" . 'Acme\\MyBundle\\Entity\\Home' . "\0" . 'users', 'year_built');
+        return array('__isInitialized__', 'address', 'community', 'description', 'direction', 'hoa', 'home_model', 'id', 'latitude', 'longitude', 'lot_size', 'price', 'price_history', 'price_per_foot', 'status', '' . "\0" . 'Acme\\MyBundle\\Entity\\Home' . "\0" . 'users', 'year_built');
     }
 
     /**
@@ -516,6 +516,28 @@ class Home extends \Acme\MyBundle\Entity\Home implements \Doctrine\ORM\Proxy\Pro
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsers', array());
 
         return parent::getUsers();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDescription($description)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDescription', array($description));
+
+        return parent::setDescription($description);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDescription()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', array());
+
+        return parent::getDescription();
     }
 
 }

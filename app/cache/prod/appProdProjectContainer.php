@@ -110,6 +110,7 @@ class appProdProjectContainer extends Container
             'monolog.logger.router' => 'getMonolog_Logger_RouterService',
             'monolog.logger.security' => 'getMonolog_Logger_SecurityService',
             'monolog.logger.translation' => 'getMonolog_Logger_TranslationService',
+            'parser.class' => 'getParser_ClassService',
             'property_accessor' => 'getPropertyAccessorService',
             'request' => 'getRequestService',
             'request_stack' => 'getRequestStackService',
@@ -660,6 +661,10 @@ class appProdProjectContainer extends Container
         $instance->pushHandler($this->get('monolog.handler.console'));
         $instance->pushHandler($this->get('monolog.handler.main'));
         return $instance;
+    }
+    protected function getParser_ClassService()
+    {
+        return $this->services['parser.class'] = new \Acme\MyBundle\Lib\LennarParser($this->get('doctrine.orm.default_entity_manager'));
     }
     protected function getPropertyAccessorService()
     {
@@ -1687,7 +1692,7 @@ class appProdProjectContainer extends Container
             'assetic.variables' => array(
             ),
             'assetic.java.bin' => '/usr/bin/java',
-            'assetic.node.bin' => '/usr/bin/node',
+            'assetic.node.bin' => '/usr/local/bin/node',
             'assetic.ruby.bin' => '/usr/bin/ruby',
             'assetic.sass.bin' => '/usr/bin/sass',
             'assetic.filter.cssrewrite.class' => 'Assetic\\Filter\\CssRewriteFilter',
