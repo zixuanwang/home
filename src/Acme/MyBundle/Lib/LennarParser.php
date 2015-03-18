@@ -37,20 +37,9 @@ class LennarParser {
 	 * images are renamed to a unique name and the unique name is returned.
 	 */
 	public function save_image($url) {
-		echo implode('/', array_map('urlencode', explode('/', $url)));
-		echo '<br>';
+		$new_url = str_replace ( ' ', '%20', $url );
 		$one_filename = sha1 ( uniqid ( mt_rand (), true ) );
-// 		$curl_handle=curl_init();
-// 		curl_setopt($curl_handle, CURLOPT_URL, urlencode($url));
-// 		curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
-// 		curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-// 		curl_setopt($curl_handle, CURLOPT_USERAGENT, 'firefox');
-// 		$content = curl_exec($curl_handle);
-// 		curl_close($curl_handle);
-		exec('wget ' . implode('/', array_map('urlencode', explode('/', $url))) . ' -O uploads/' . $one_filename . '.jpg');
-// 		$fp = fopen ( 'uploads/' . $one_filename . '.jpg', 'w' );
-// 		fwrite ( $fp, $content );
-// 		fclose ( $fp );
+		copy ( $new_url, 'uploads/' . $one_filename . '.jpg' );
 		return $one_filename;
 	}
 	
@@ -70,7 +59,7 @@ class LennarParser {
 		foreach ( $doc ['#floorplans li > img'] as $element ) {
 			$floorplan_urls [] = pq ( $element )->attr ( 'src' );
 		}
-		foreach ( $doc ['.scrapbook > img'] as $element ) {
+		foreach ( $doc ['.scrapbook img'] as $element ) {
 			$model_urls [] = pq ( $element )->attr ( 'data-src' );
 		}
 		foreach ( $doc ['.masthead .SlideImage'] as $element ) {
@@ -81,6 +70,7 @@ class LennarParser {
 				$facade_urls [] = $query->attr ( 'src' );
 			}
 		}
+		print_r($model_urls);
 		// save images.
 		$images = array ();
 		$images ['floorplan'] = array ();
@@ -90,7 +80,7 @@ class LennarParser {
 			$images ['floorplan'] [] = $this->save_image ( $url );
 		}
 		foreach ( $model_urls as $url ) {
-			$images ['mode'] [] = $this->save_image ( $url );
+			$images ['model'] [] = $this->save_image ( $url );
 		}
 		foreach ( $facade_urls as $url ) {
 			$images ['facade'] [] = $this->save_image ( $url );
@@ -220,7 +210,7 @@ class LennarParser {
 					}
 					if (! empty ( $images ['floorplan'] )) {
 						$album = $this->persist_album ( $this->em, $images ['floorplan'] );
-						$model_entity->setImages ( $album );
+						$model_entity->setFloorplans ( $album );
 					}
 					$this->em->persist ( $model_entity );
 				}
@@ -229,8 +219,10 @@ class LennarParser {
 		}
 	}
 	public function get_communities() {
+	
 	}
 	public function get_models() {
+	
 	}
 	public $builder_name;
 	public $communities;

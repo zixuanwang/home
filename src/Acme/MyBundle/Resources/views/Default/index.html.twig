@@ -6,6 +6,7 @@
 			{% for model in models %}
 			<div class="pin">
 				<a href="{{ path('model', {'id': model.getId()}) }}"> <img
+					class="pin-image"
 					src="{{ '/uploads/'~model.getFacade().getPath()~'.jpg' }}"></a>
 				<h4>{{ model.getName() }}</h4>
 				<p>{{ (model.getSquareFeet() * 0.092903) | round}} 平方米</p>
