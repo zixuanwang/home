@@ -58,23 +58,48 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
             // line 10
             echo twig_escape_filter($this->env, (("/uploads/" . $this->getAttribute($this->getAttribute($context["model"], "getFacade", array(), "method"), "getPath", array(), "method")) . ".jpg"), "html", null, true);
             echo "\"></a>
-\t\t\t\t<h4>";
-            // line 11
+\t\t\t\t<div class=\"row\">
+\t\t\t\t\t<div class=\"col-xs-8\">
+\t\t\t\t\t\t<h4>";
+            // line 13
             echo twig_escape_filter($this->env, $this->getAttribute($context["model"], "getName", array(), "method"), "html", null, true);
             echo "</h4>
-\t\t\t\t<p>";
-            // line 12
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"col-xs-4\">
+\t\t\t\t\t\t<h4>
+\t\t\t\t\t\t\t<img src=\"/images/lennar.png\" class=\"pin-builder\">
+\t\t\t\t\t\t</h4>
+\t\t\t\t\t</div>
+\t\t\t\t</div>
+\t\t\t\t<div class=\"row\">
+\t\t\t\t\t<div class=\"col-xs-9\">";
+            // line 22
             echo twig_escape_filter($this->env, twig_round(($this->getAttribute($context["model"], "getSquareFeet", array(), "method") * 0.092903)), "html", null, true);
-            echo " 平方米</p>
+            // line 23
+            echo " 平方米</div>
+\t\t\t\t\t<div class=\"col-xs-1\">
+\t\t\t\t\t\t<span class=\"glyphicon glyphicon-eye-open pin-glyphicon\" aria-hidden=\"true\"></span>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"col-xs-1\">
+\t\t\t\t\t\t<span class=\"glyphicon glyphicon-heart pin-glyphicon\" aria-hidden=\"true\"></span>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"col-xs-1\">
+\t\t\t\t\t</div>
+\t\t\t\t</div>
 \t\t\t</div>
 \t\t\t";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['model'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 15
+        // line 35
         echo "\t\t</div>
 \t</div>
+\t<hr/>
+\t";
+        // line 38
+        echo twig_include($this->env, $context, "::footer.html.twig");
+        echo "
 </div>
 ";
     }
@@ -91,6 +116,6 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
 
     public function getDebugInfo()
     {
-        return array (  76 => 15,  67 => 12,  63 => 11,  59 => 10,  54 => 8,  51 => 7,  47 => 6,  41 => 3,  38 => 2,  11 => 1,);
+        return array (  101 => 38,  96 => 35,  79 => 23,  77 => 22,  65 => 13,  59 => 10,  54 => 8,  51 => 7,  47 => 6,  41 => 3,  38 => 2,  11 => 1,);
     }
 }

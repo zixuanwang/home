@@ -39,8 +39,11 @@ class LennarParser {
 	public function save_image($url) {
 		$new_url = str_replace ( ' ', '%20', $url );
 		$one_filename = sha1 ( uniqid ( mt_rand (), true ) );
-		copy ( $new_url, 'uploads/' . $one_filename . '.jpg' );
-		return $one_filename;
+		$local_path = 'uploads/' . $one_filename . '.jpg';
+		copy ( $new_url,  $local_path);
+		$md5_string = md5_file($local_path);
+		rename($local_path, 'uploads/' . $md5_string . '.jpg');
+		return $md5_string;
 	}
 	
 	/**
@@ -70,7 +73,7 @@ class LennarParser {
 				$facade_urls [] = $query->attr ( 'src' );
 			}
 		}
-		print_r($model_urls);
+		print_r ( $model_urls );
 		// save images.
 		$images = array ();
 		$images ['floorplan'] = array ();
@@ -188,41 +191,40 @@ class LennarParser {
 				) );
 				if ($model_entity == NULL) {
 					$model_entity = new HomeModel ();
-					$model_entity->setBuilder ( $this->builder_name );
-					$model_entity->setSquareFeet ( $model ['sgft'] );
-					$model_entity->setNumBaths ( $model ['bathrm'] );
-					$model_entity->setNumBeds ( $model ['bedrm'] );
-					$model_entity->setNumGarages ( $model ['gagebay'] );
-					$model_entity->setNumStories ( $model ['story'] );
-					$model_entity->setName ( $model ['plmktnm'] );
 					$model_entity->addCommunity ( $community_entity );
 					$community_entity->addHomeModel ( $model_entity );
-					// fetch images from the web page
-					$page_url = $this->root_url . $model ['vtlURL'];
-					$images = $this->parse_image ( $page_url );
-					if (! empty ( $images ['facade'] )) {
-						$photo = $this->persist_photo ( $this->em, $images ['facade'] [0] );
-						$model_entity->setFacade ( $photo );
-					}
-					if (! empty ( $images ['model'] )) {
-						$album = $this->persist_album ( $this->em, $images ['model'] );
-						$model_entity->setImages ( $album );
-					}
-					if (! empty ( $images ['floorplan'] )) {
-						$album = $this->persist_album ( $this->em, $images ['floorplan'] );
-						$model_entity->setFloorplans ( $album );
-					}
-					$this->em->persist ( $model_entity );
 				}
+				$model_entity->setBuilder ( $this->builder_name );
+				$model_entity->setSquareFeet ( $model ['sgft'] );
+				$model_entity->setNumBaths ( $model ['bathrm'] );
+				$model_entity->setNumBeds ( $model ['bedrm'] );
+				$model_entity->setNumGarages ( $model ['gagebay'] );
+				$model_entity->setNumStories ( $model ['story'] );
+				$model_entity->setName ( $model ['plmktnm'] );
+				// fetch images from the web page
+				$page_url = $this->root_url . $model ['vtlURL'];
+				$images = $this->parse_image ( $page_url );
+				if (! empty ( $images ['facade'] )) {
+					$photo = $this->persist_photo ( $this->em, $images ['facade'] [0] );
+					$model_entity->setFacade ( $photo );
+				}
+				// TODO: handle duplicate images
+				if (! empty ( $images ['model'] )) {
+					$album = $this->persist_album ( $this->em, $images ['model'] );
+					$model_entity->setImages ( $album );
+				}
+				if (! empty ( $images ['floorplan'] )) {
+					$album = $this->persist_album ( $this->em, $images ['floorplan'] );
+					$model_entity->setFloorplans ( $album );
+				}
+				$this->em->persist ( $model_entity );
 			}
 			$this->em->flush ();
 		}
 	}
 	public function get_communities() {
-	
 	}
 	public function get_models() {
-	
 	}
 	public $builder_name;
 	public $communities;

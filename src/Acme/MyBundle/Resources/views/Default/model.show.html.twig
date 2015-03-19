@@ -2,52 +2,56 @@
 <div class="container">
 	{{ include('::header.html.twig') }}
 	<div class="row">
-		<img src="{{ '/uploads/'~model.getFacade().getPath()~'.jpg' }}"
-			width="100%">
-	</div>
-	<div class="row">
 		<div class="col-md-12">
-			<h2 class="text-center">{{ model.getName() }}户型</h2>
+			<img src="{{ '/uploads/'~model.getFacade().getPath()~'.jpg' }}"
+				class="img-responsive">
 		</div>
 	</div>
 	<div class="row">
-		<table class="table table-hover">
-			<tbody>
-				<tr>
-					<td scope="row">使用面积</td>
-					<td>{{ (model.getSquareFeet() * 0.092903) | round}} 平方米</td>
-				</tr>
-				<tr>
-					<td scope="row">楼层</td>
-					<td>{{ model.getNumStories() }}</td>
-				</tr>
-				<tr>
-					<td scope="row">卧室</td>
-					<td>{{ model.getNumBeds() }}</td>
-				</tr>
-				<tr>
-					<td scope="row">洗手间</td>
-					<td>{{ model.getNumBaths() }}</td>
-				</tr>
-				<tr>
-					<td scope="row">车库</td>
-					<td>{{ model.getNumGarages() }}</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="col-md-12">
+			<h3 class="text-center">{{ model.getName() }}户型</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-hover">
+				<tbody>
+					<tr>
+						<td scope="row">使用面积</td>
+						<td>{{ (model.getSquareFeet() * 0.092903) | round}} 平方米</td>
+					</tr>
+					<tr>
+						<td scope="row">楼层</td>
+						<td>{{ model.getNumStories() }}</td>
+					</tr>
+					<tr>
+						<td scope="row">卧室</td>
+						<td>{{ model.getNumBeds() }}</td>
+					</tr>
+					<tr>
+						<td scope="row">洗手间</td>
+						<td>{{ model.getNumBaths() }}</td>
+					</tr>
+					<tr>
+						<td scope="row">车库</td>
+						<td>{{ model.getNumGarages() }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 	<hr />
 	<div class="row">
 		<div class="col-md-12">
-			<h2 class="text-center">样板间</h2>
+			<h3 class="text-center">样板间</h3>
 		</div>
 	</div>
 	<div class="row">
 		{% for image in images %}
-		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 thumb">
 			<a class="fancybox" rel="group"
 				href="{{'/uploads/'~image.getPath()~'.jpg'}}">
-				<div class="model_thumb fade"
+				<div class="model_thumb fade img-responsive"
 					style="background-image: url('{{'/uploads/'~image.getPath()~'.jpg'}}');"></div>
 			</a>
 		</div>
@@ -56,12 +60,12 @@
 	<hr />
 	<div class="row">
 		<div class="col-md-12">
-			<h2 class="text-center">户型图</h2>
+			<h3 class="text-center">户型图</h3>
 		</div>
 	</div>
 	<div class="row">
 		{% for floorplan in floorplans %}
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 thumb">
 			<a class="fancybox" rel="group"
 				href="{{'/uploads/'~floorplan.getPath()~'.jpg'}}">
 				<div class="floorplan_thumb fade"
