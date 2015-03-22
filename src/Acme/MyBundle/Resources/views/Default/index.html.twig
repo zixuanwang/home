@@ -19,22 +19,18 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-9">{{ (model.getSquareFeet() * 0.092903) |
+					<div class="col-xs-12">{{ (model.getSquareFeet() * 0.092903) |
 						round}} 平方米</div>
-					<div class="col-xs-1">
-						<span class="glyphicon glyphicon-eye-open pin-glyphicon" aria-hidden="true"></span>
-					</div>
-					<div class="col-xs-1">
-						<span class="glyphicon glyphicon-heart pin-glyphicon" aria-hidden="true"></span>
-					</div>
-					<div class="col-xs-1">
-					</div>
+
+					<div class="col-xs-12">{% if starting_prices[model.getId()] == 0 %}
+						无现房 {% else %} {{ (starting_prices[model.getId()] * 6.3 /
+						10000) | round }} 万元起 {% endif %}</div>	
 				</div>
 			</div>
 			{% endfor %}
 		</div>
 	</div>
-	<hr/>
+	<hr />
 	{{ include('::footer.html.twig') }}
 </div>
 {% endblock %}

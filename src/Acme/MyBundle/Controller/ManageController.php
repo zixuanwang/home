@@ -43,7 +43,7 @@ class ManageController extends Controller {
 		if ($type == 'lennar') {
 			$parser = new LennarParser ( $this->getDoctrine ()->getManager () );
 			
-			$parser->parse_seattle ();
+			$parser->fetch_seattle ();
 			return new Response ( 'parse' );
 		}
 	}

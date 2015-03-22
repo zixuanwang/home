@@ -72,19 +72,24 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
 \t\t\t\t\t</div>
 \t\t\t\t</div>
 \t\t\t\t<div class=\"row\">
-\t\t\t\t\t<div class=\"col-xs-9\">";
+\t\t\t\t\t<div class=\"col-xs-12\">";
             // line 22
             echo twig_escape_filter($this->env, twig_round(($this->getAttribute($context["model"], "getSquareFeet", array(), "method") * 0.092903)), "html", null, true);
             // line 23
             echo " 平方米</div>
-\t\t\t\t\t<div class=\"col-xs-1\">
-\t\t\t\t\t\t<span class=\"glyphicon glyphicon-eye-open pin-glyphicon\" aria-hidden=\"true\"></span>
-\t\t\t\t\t</div>
-\t\t\t\t\t<div class=\"col-xs-1\">
-\t\t\t\t\t\t<span class=\"glyphicon glyphicon-heart pin-glyphicon\" aria-hidden=\"true\"></span>
-\t\t\t\t\t</div>
-\t\t\t\t\t<div class=\"col-xs-1\">
-\t\t\t\t\t</div>
+
+\t\t\t\t\t<div class=\"col-xs-12\">";
+            // line 25
+            if (($this->getAttribute((isset($context["starting_prices"]) ? $context["starting_prices"] : $this->getContext($context, "starting_prices")), $this->getAttribute($context["model"], "getId", array(), "method"), array(), "array") == 0)) {
+                // line 26
+                echo "\t\t\t\t\t\t无现房 ";
+            } else {
+                echo " ";
+                echo twig_escape_filter($this->env, twig_round((($this->getAttribute((isset($context["starting_prices"]) ? $context["starting_prices"] : $this->getContext($context, "starting_prices")), $this->getAttribute($context["model"], "getId", array(), "method"), array(), "array") * 6.3) / 10000)), "html", null, true);
+                // line 27
+                echo " 万元起 ";
+            }
+            echo "</div>\t
 \t\t\t\t</div>
 \t\t\t</div>
 \t\t\t";
@@ -92,12 +97,12 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['model'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 35
+        // line 31
         echo "\t\t</div>
 \t</div>
-\t<hr/>
+\t<hr />
 \t";
-        // line 38
+        // line 34
         echo twig_include($this->env, $context, "::footer.html.twig");
         echo "
 </div>
@@ -116,6 +121,6 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
 
     public function getDebugInfo()
     {
-        return array (  101 => 38,  96 => 35,  79 => 23,  77 => 22,  65 => 13,  59 => 10,  54 => 8,  51 => 7,  47 => 6,  41 => 3,  38 => 2,  11 => 1,);
+        return array (  106 => 34,  101 => 31,  90 => 27,  85 => 26,  83 => 25,  79 => 23,  77 => 22,  65 => 13,  59 => 10,  54 => 8,  51 => 7,  47 => 6,  41 => 3,  38 => 2,  11 => 1,);
     }
 }

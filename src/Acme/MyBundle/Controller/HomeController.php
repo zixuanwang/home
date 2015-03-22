@@ -6,17 +6,30 @@ use Acme\MyBundle\Lib\HomePost;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class HomeController extends Controller
-{
-    public function indexAction()
-    {
-    	// select all home models
-    	$repository = $this->getDoctrine()
-    	->getRepository('AcmeMyBundle:HomeModel');
-    	$query = $repository->createQueryBuilder('p')
-    	->orderBy('p.updated', 'DESC')
-    	->getQuery();
-    	$models = $query->getResult();
-    	return $this->render ( 'AcmeMyBundle:Default:index.html.twig', array('models' => $models) );
-    }
+class HomeController extends Controller {
+	public function indexAction() {
+		// select all home models
+		$repository = $this->getDoctrine ()->getRepository ( 'AcmeMyBundle:HomeModel' );
+		$query = $repository->createQueryBuilder ( 'p' )->orderBy ( 'p.updated', 'DESC' )->getQuery ();
+		$models = $query->getResult ();
+		$starting_price_array = array ();
+		foreach ( $models as $model ) {
+			$id = $model->getId ();
+			$price_array = array ();
+			$homes = $model->getHomes ();
+			foreach ( $homes as $home ) {
+				$price_array [] = $home->getPrice ();
+			}
+			if (! empty ( $price_array )) {
+				$min_price = min ( $price_array );
+				$starting_price_array [$id] = $min_price;
+			} else {
+				$starting_price_array [$id] = '';
+			}
+		}
+		return $this->render ( 'AcmeMyBundle:Default:index.html.twig', array (
+				'models' => $models,
+				'starting_prices' => $starting_price_array 
+		) );
+	}
 }
