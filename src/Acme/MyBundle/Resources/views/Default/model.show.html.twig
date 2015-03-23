@@ -75,6 +75,41 @@
 		{% endfor %}
 	</div>
 	<hr />
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-center">位置</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div id="bing_map_canvas"></div>
+			<br />
+		</div>
+	</div>
+	<hr />
 
 
-	{% endblock %} {% block javascripts %} {% endblock %}
+	{% endblock %} {% block javascripts %}
+	<script type="text/javascript"
+		src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+	<script type="text/javascript">
+    function getMap(){
+        var mapInitOpts = {
+            credentials: 'AqpckLVrDZE9ehOKwFREOF16SWFONVDd9KqviWPOeoiE6oSn-Fu6YZZjalMvvWXg',
+            center: new Microsoft.Maps.Location(45.5, -122.5),
+            mapTypeId: Microsoft.Maps.MapTypeId.road,
+            zoom: 7
+        };
+       var map = new Microsoft.Maps.Map(document.getElementById("bing_map_canvas"), mapInitOpts);
+       // Retrieve the location of the map center 
+       var center = map.getCenter();
+       
+       // Add a pin to the center of the map, using a custom icon
+       var pin = new Microsoft.Maps.Pushpin(center, {icon: '/images/home_icon.png', width: 30, height: 30, draggable: true}); 
+
+       map.entities.push(pin);
+     }
+    getMap();
+      </script>
+
+	{% endblock %}

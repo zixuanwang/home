@@ -168,15 +168,50 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
         // line 76
         echo "\t</div>
 \t<hr />
+\t<div class=\"row\">
+\t\t<div class=\"col-md-12\">
+\t\t\t<h3 class=\"text-center\">位置</h3>
+\t\t</div>
+\t</div>
+\t<div class=\"row\">
+\t\t<div class=\"col-lg-12\">
+\t\t\t<div id=\"bing_map_canvas\"></div>
+\t\t\t<br />
+\t\t</div>
+\t</div>
+\t<hr />
 
 
 \t";
     }
 
-    // line 80
+    // line 92
     public function block_javascripts($context, array $blocks = array())
     {
-        echo " ";
+        // line 93
+        echo "\t<script type=\"text/javascript\"
+\t\tsrc=\"http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0\"></script>
+\t<script type=\"text/javascript\">
+    function getMap(){
+        var mapInitOpts = {
+            credentials: 'AqpckLVrDZE9ehOKwFREOF16SWFONVDd9KqviWPOeoiE6oSn-Fu6YZZjalMvvWXg',
+            center: new Microsoft.Maps.Location(45.5, -122.5),
+            mapTypeId: Microsoft.Maps.MapTypeId.road,
+            zoom: 7
+        };
+       var map = new Microsoft.Maps.Map(document.getElementById(\"bing_map_canvas\"), mapInitOpts);
+       // Retrieve the location of the map center 
+       var center = map.getCenter();
+       
+       // Add a pin to the center of the map, using a custom icon
+       var pin = new Microsoft.Maps.Pushpin(center, {icon: '/images/home_icon.png', width: 30, height: 30, draggable: true}); 
+
+       map.entities.push(pin);
+     }
+    getMap();
+      </script>
+
+\t";
     }
 
     public function getTemplateName()
@@ -191,6 +226,6 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
 
     public function getDebugInfo()
     {
-        return array (  177 => 80,  169 => 76,  159 => 72,  154 => 70,  150 => 68,  146 => 67,  136 => 59,  126 => 55,  121 => 53,  117 => 51,  113 => 50,  97 => 37,  90 => 33,  83 => 29,  76 => 25,  69 => 21,  57 => 12,  48 => 6,  42 => 3,  39 => 2,  11 => 1,);
+        return array (  192 => 93,  189 => 92,  169 => 76,  159 => 72,  154 => 70,  150 => 68,  146 => 67,  136 => 59,  126 => 55,  121 => 53,  117 => 51,  113 => 50,  97 => 37,  90 => 33,  83 => 29,  76 => 25,  69 => 21,  57 => 12,  48 => 6,  42 => 3,  39 => 2,  11 => 1,);
     }
 }

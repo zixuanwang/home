@@ -241,13 +241,13 @@ class LennarParser {
 				$album = $this->persist_album ( $this->em, $images ['model'] );
 				$model_entity->setImages ( $album );
 				$album = $this->persist_album ( $this->em, $images ['floorplan'] );
-				$model_entity->setFloorplans ( $album );	
+				$model_entity->setFloorplans ( $album );
 				$this->em->persist ( $model_entity );
 				// fetch home information
 				$model_id = $model ['pid'];
 				$this->fetch_home ( $community_id, $model_id, $community_entity, $model_entity );
+				$this->em->flush ();
 			}
-			$this->em->flush ();
 		}
 	}
 	

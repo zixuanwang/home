@@ -1,6 +1,6 @@
-body{
-  background-image: url(/images/bg.png);
-  background-repeat:repeat;
+body {
+	background-image: url(/images/bg.png);
+	background-repeat: repeat;
 }
 
 /* Header */
@@ -252,4 +252,10 @@ body{
 	padding-top: 20px;
 	margin-left: 0px;
 	margin-right: 0px;
+}
+
+#bing_map_canvas {
+   display: block;
+   width: 100%;
+   height: 600px;
 }
