@@ -1,22 +1,22 @@
-<?php 
+<?php
 // src/Acme/MyBundle/Entity/Community.php
 namespace Acme\MyBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="community")
  */
-class Community
-{
+class Community {
 	/**
 	 * @ORM\Column(type="string", length=100)
 	 */
 	protected $address;
 	/**
 	 * @ORM\OneToOne(targetEntity="Album")
-	 **/
+	 */
 	protected $album;
 	/**
 	 * @ORM\Column(type="string", length=30)
@@ -35,10 +35,9 @@ class Community
 	 */
 	protected $description;
 	/**
-	 * @ORM\ManyToMany(targetEntity="HomeModel", inversedBy="communities")
-	 * @ORM\JoinTable(name="communities_home_models")
+	 * @ORM\OneToMany(targetEntity="Home", mappedBy="community")
 	 */
-	protected $home_models;
+	protected $homes;
 	/**
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
@@ -46,8 +45,16 @@ class Community
 	 */
 	protected $id;
 	/**
+	 * @ORM\Column(type="decimal", scale=10, nullable=true)
+	 */
+	protected $latitude;
+	/**
+	 * @ORM\Column(type="decimal", scale=10, nullable=true)
+	 */
+	protected $longitude;
+	/**
 	 * @ORM\OneToOne(targetEntity="Photo")
-	 **/
+	 */
 	protected $map;
 	/**
 	 * @ORM\Column(type="string", length=30)
@@ -57,10 +64,10 @@ class Community
 	 * @ORM\Column(type="string", length=30, nullable=true)
 	 */
 	protected $school_district;
-    /**
-     * @ORM\ManyToMany(targetEntity="School", inversedBy="communities")
-     * @ORM\JoinTable(name="communities_schools")
-     **/
+	/**
+	 * @ORM\ManyToMany(targetEntity="School", inversedBy="communities")
+	 * @ORM\JoinTable(name="communities_schools")
+	 */
 	protected $schools;
 	/**
 	 * @ORM\Column(type="string", length=10)
@@ -70,11 +77,60 @@ class Community
 	 * @ORM\Column(type="string", length=10)
 	 */
 	protected $zipcode;
-	public function __construct()
-	{
-		$this->home_models = new ArrayCollection();
-		$this->schools = new ArrayCollection();
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->homes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->schools = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return Community
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set builder
+     *
+     * @param string $builder
+     * @return Community
+     */
+    public function setBuilder($builder)
+    {
+        $this->builder = $builder;
+
+        return $this;
+    }
+
+    /**
+     * Get builder
+     *
+     * @return string 
+     */
+    public function getBuilder()
+    {
+        return $this->builder;
+    }
 
     /**
      * Set city
@@ -156,177 +212,6 @@ class Community
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Community
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set school_district
-     *
-     * @param string $schoolDistrict
-     * @return Community
-     */
-    public function setSchoolDistrict($schoolDistrict)
-    {
-        $this->school_district = $schoolDistrict;
-
-        return $this;
-    }
-
-    /**
-     * Get school_district
-     *
-     * @return string 
-     */
-    public function getSchoolDistrict()
-    {
-        return $this->school_district;
-    }
-
-    /**
-     * Add schools
-     *
-     * @param \Acme\MyBundle\Entity\School $schools
-     * @return Community
-     */
-    public function addSchool(\Acme\MyBundle\Entity\School $schools)
-    {
-        $this->schools[] = $schools;
-
-        return $this;
-    }
-
-    /**
-     * Remove schools
-     *
-     * @param \Acme\MyBundle\Entity\School $schools
-     */
-    public function removeSchool(\Acme\MyBundle\Entity\School $schools)
-    {
-        $this->schools->removeElement($schools);
-    }
-
-    /**
-     * Get schools
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getSchools()
-    {
-        return $this->schools;
-    }
-
-    /**
-     * Set album
-     *
-     * @param \Acme\MyBundle\Entity\Album $album
-     * @return Community
-     */
-    public function setAlbum(\Acme\MyBundle\Entity\Album $album = null)
-    {
-        $this->album = $album;
-
-        return $this;
-    }
-
-    /**
-     * Get album
-     *
-     * @return \Acme\MyBundle\Entity\Album 
-     */
-    public function getAlbum()
-    {
-        return $this->album;
-    }
-
-    /**
-     * Set zipcode
-     *
-     * @param string $zipcode
-     * @return Community
-     */
-    public function setZipcode($zipcode)
-    {
-        $this->zipcode = $zipcode;
-
-        return $this;
-    }
-
-    /**
-     * Get zipcode
-     *
-     * @return string 
-     */
-    public function getZipcode()
-    {
-        return $this->zipcode;
-    }
-
-    /**
-     * Set state
-     *
-     * @param string $state
-     * @return Community
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Get state
-     *
-     * @return string 
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
-
-    /**
-     * Set address
-     *
-     * @param string $address
-     * @return Community
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get address
-     *
-     * @return string 
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
      * Set latitude
      *
      * @param string $latitude
@@ -373,6 +258,154 @@ class Community
     }
 
     /**
+     * Set name
+     *
+     * @param string $name
+     * @return Community
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set school_district
+     *
+     * @param string $schoolDistrict
+     * @return Community
+     */
+    public function setSchoolDistrict($schoolDistrict)
+    {
+        $this->school_district = $schoolDistrict;
+
+        return $this;
+    }
+
+    /**
+     * Get school_district
+     *
+     * @return string 
+     */
+    public function getSchoolDistrict()
+    {
+        return $this->school_district;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     * @return Community
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string 
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * Set zipcode
+     *
+     * @param string $zipcode
+     * @return Community
+     */
+    public function setZipcode($zipcode)
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    /**
+     * Get zipcode
+     *
+     * @return string 
+     */
+    public function getZipcode()
+    {
+        return $this->zipcode;
+    }
+
+    /**
+     * Set album
+     *
+     * @param \Acme\MyBundle\Entity\Album $album
+     * @return Community
+     */
+    public function setAlbum(\Acme\MyBundle\Entity\Album $album = null)
+    {
+        $this->album = $album;
+
+        return $this;
+    }
+
+    /**
+     * Get album
+     *
+     * @return \Acme\MyBundle\Entity\Album 
+     */
+    public function getAlbum()
+    {
+        return $this->album;
+    }
+
+    /**
+     * Add homes
+     *
+     * @param \Acme\MyBundle\Entity\Home $homes
+     * @return Community
+     */
+    public function addHome(\Acme\MyBundle\Entity\Home $homes)
+    {
+        $this->homes[] = $homes;
+
+        return $this;
+    }
+
+    /**
+     * Remove homes
+     *
+     * @param \Acme\MyBundle\Entity\Home $homes
+     */
+    public function removeHome(\Acme\MyBundle\Entity\Home $homes)
+    {
+        $this->homes->removeElement($homes);
+    }
+
+    /**
+     * Get homes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getHomes()
+    {
+        return $this->homes;
+    }
+
+    /**
      * Set map
      *
      * @param \Acme\MyBundle\Entity\Photo $map
@@ -396,58 +429,35 @@ class Community
     }
 
     /**
-     * Add home_models
+     * Add schools
      *
-     * @param \Acme\MyBundle\Entity\HomeModel $homeModels
+     * @param \Acme\MyBundle\Entity\School $schools
      * @return Community
      */
-    public function addHomeModel(\Acme\MyBundle\Entity\HomeModel $homeModels)
+    public function addSchool(\Acme\MyBundle\Entity\School $schools)
     {
-        $this->home_models[] = $homeModels;
+        $this->schools[] = $schools;
 
         return $this;
     }
 
     /**
-     * Remove home_models
+     * Remove schools
      *
-     * @param \Acme\MyBundle\Entity\HomeModel $homeModels
+     * @param \Acme\MyBundle\Entity\School $schools
      */
-    public function removeHomeModel(\Acme\MyBundle\Entity\HomeModel $homeModels)
+    public function removeSchool(\Acme\MyBundle\Entity\School $schools)
     {
-        $this->home_models->removeElement($homeModels);
+        $this->schools->removeElement($schools);
     }
 
     /**
-     * Get home_models
+     * Get schools
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getHomeModels()
+    public function getSchools()
     {
-        return $this->home_models;
-    }
-
-    /**
-     * Set builder
-     *
-     * @param string $builder
-     * @return Community
-     */
-    public function setBuilder($builder)
-    {
-        $this->builder = $builder;
-
-        return $this;
-    }
-
-    /**
-     * Get builder
-     *
-     * @return string 
-     */
-    public function getBuilder()
-    {
-        return $this->builder;
+        return $this->schools;
     }
 }

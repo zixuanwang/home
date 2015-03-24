@@ -172,6 +172,13 @@ class LennarParser {
 			$community_entity->setCity ( $community ['cty'] );
 			$community_entity->setState ( $community ['sco'] );
 			$community_entity->setZipcode ( $community ['zip'] );
+			// find location using Bing map api
+			// TODO: error handling
+// 			$lat_long = Utility::address_to_latlong ( $community ['add'], $community ['cty'], $community ['sco'], $community ['zip'] );
+// 			if (! empty ( $lat_long )) {
+// 				$community_entity->setLatitude ( $lat_long [0] );
+// 				$community_entity->setLongitude ( $lat_long [1] );
+// 			}
 			$this->em->persist ( $community_entity );
 			$community_id = $community ['cid'];
 			$this->fetch_model ( $community_id, $community_entity );
@@ -207,7 +214,6 @@ class LennarParser {
 		$model_result = $this->curl_get_contents ( $home_url, $json_string );
 		$model_array = json_decode ( $model_result, true );
 		$model_repository = $this->em->getRepository ( 'AcmeMyBundle:HomeModel' );
-		$new_model = false;
 		foreach ( $model_array ['pr'] as $model ) {
 			// we use builder name and plan name the check whether this model has been added.
 			$model_entity = $model_repository->findOneBy ( array (
@@ -216,9 +222,6 @@ class LennarParser {
 			) );
 			if ($model_entity == NULL) {
 				$model_entity = new HomeModel ();
-				$new_model = true;
-			} else {
-				$new_model = false;
 			}
 			$model_entity->setBuilder ( $this->builder_name );
 			$model_entity->setSquareFeet ( $model ['sgft'] );
@@ -232,10 +235,6 @@ class LennarParser {
 			$images = $this->parse_image ( $page_url );
 			// TODO: we only add models with images
 			if (! empty ( $images ['facade'] ) && ! empty ( $images ['model'] ) && ! empty ( $images ['floorplan'] )) {
-				if ($new_model) {
-					$model_entity->addCommunity ( $community_entity );
-					$community_entity->addHomeModel ( $model_entity );
-				}
 				$photo = $this->persist_photo ( $this->em, $images ['facade'] [0] );
 				$model_entity->setFacade ( $photo );
 				$album = $this->persist_album ( $this->em, $images ['model'] );

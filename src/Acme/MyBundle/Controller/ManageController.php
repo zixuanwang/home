@@ -42,9 +42,12 @@ class ManageController extends Controller {
 		}
 		if ($type == 'lennar') {
 			$parser = new LennarParser ( $this->getDoctrine ()->getManager () );
-			
 			$parser->fetch_seattle ();
 			return new Response ( 'parse' );
+		}
+		if ($type == 'test') {
+			Utility::address_to_latlong ( '11101 NE 12th St', 'Bellevue', 'WA', '98004' );
+			return new Response ( 'ok' );
 		}
 	}
 	private function parseLennar() {

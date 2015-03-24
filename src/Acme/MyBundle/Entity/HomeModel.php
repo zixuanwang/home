@@ -16,10 +16,6 @@ class HomeModel
 	 */
 	protected $builder;
 	/**
-	 * @ORM\ManyToMany(targetEntity="Community", mappedBy="home_models")
-	 **/
-	protected $communities;
-	/**
 	 * @ORM\Column(type="string", length=1000, nullable=true)
 	 */
 	protected $description;
@@ -75,10 +71,55 @@ class HomeModel
     protected $updated;
     public function __construct()
     {
-    	$this->communities = new ArrayCollection();
     	$this->homes = new ArrayCollection();
     	$this->updated = new \DateTime();
     }  
+
+    /**
+     * Set builder
+     *
+     * @param string $builder
+     * @return HomeModel
+     */
+    public function setBuilder($builder)
+    {
+        $this->builder = $builder;
+
+        return $this;
+    }
+
+    /**
+     * Get builder
+     *
+     * @return string 
+     */
+    public function getBuilder()
+    {
+        return $this->builder;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return HomeModel
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
     /**
      * Get id
@@ -229,62 +270,6 @@ class HomeModel
     }
 
     /**
-     * Add homes
-     *
-     * @param \Acme\MyBundle\Entity\Home $homes
-     * @return HomeModel
-     */
-    public function addHome(\Acme\MyBundle\Entity\Home $homes)
-    {
-        $this->homes[] = $homes;
-
-        return $this;
-    }
-
-    /**
-     * Remove homes
-     *
-     * @param \Acme\MyBundle\Entity\Home $homes
-     */
-    public function removeHome(\Acme\MyBundle\Entity\Home $homes)
-    {
-        $this->homes->removeElement($homes);
-    }
-
-    /**
-     * Get homes
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getHomes()
-    {
-        return $this->homes;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return HomeModel
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
      * Set updated
      *
      * @param \DateTime $updated
@@ -354,6 +339,39 @@ class HomeModel
     }
 
     /**
+     * Add homes
+     *
+     * @param \Acme\MyBundle\Entity\Home $homes
+     * @return HomeModel
+     */
+    public function addHome(\Acme\MyBundle\Entity\Home $homes)
+    {
+        $this->homes[] = $homes;
+
+        return $this;
+    }
+
+    /**
+     * Remove homes
+     *
+     * @param \Acme\MyBundle\Entity\Home $homes
+     */
+    public function removeHome(\Acme\MyBundle\Entity\Home $homes)
+    {
+        $this->homes->removeElement($homes);
+    }
+
+    /**
+     * Get homes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getHomes()
+    {
+        return $this->homes;
+    }
+
+    /**
      * Set images
      *
      * @param \Acme\MyBundle\Entity\Album $images
@@ -374,61 +392,5 @@ class HomeModel
     public function getImages()
     {
         return $this->images;
-    }
-
-    /**
-     * Add communities
-     *
-     * @param \Acme\MyBundle\Entity\Community $communities
-     * @return HomeModel
-     */
-    public function addCommunity(\Acme\MyBundle\Entity\Community $communities)
-    {
-        $this->communities[] = $communities;
-
-        return $this;
-    }
-
-    /**
-     * Remove communities
-     *
-     * @param \Acme\MyBundle\Entity\Community $communities
-     */
-    public function removeCommunity(\Acme\MyBundle\Entity\Community $communities)
-    {
-        $this->communities->removeElement($communities);
-    }
-
-    /**
-     * Get communities
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCommunities()
-    {
-        return $this->communities;
-    }
-
-    /**
-     * Set builder
-     *
-     * @param string $builder
-     * @return HomeModel
-     */
-    public function setBuilder($builder)
-    {
-        $this->builder = $builder;
-
-        return $this;
-    }
-
-    /**
-     * Get builder
-     *
-     * @return string 
-     */
-    public function getBuilder()
-    {
-        return $this->builder;
     }
 }

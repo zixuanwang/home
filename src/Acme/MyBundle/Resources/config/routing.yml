@@ -4,6 +4,9 @@ album:
 builder:
     path:     /builder/{name}
     defaults: { _controller: AcmeMyBundle:Builder:index }
+community:
+    path:     /community/{id}
+    defaults: { _controller: AcmeMyBundle:Community:index }
 home:
     path:     /home/
     defaults: { _controller: AcmeMyBundle:Home:index }
