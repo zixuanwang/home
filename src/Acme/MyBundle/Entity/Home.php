@@ -2,7 +2,6 @@
 // src/Acme/MyBundle/Entity/Home.php
 namespace Acme\MyBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

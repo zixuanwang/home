@@ -7,11 +7,7 @@ use Acme\MyBundle\Entity\Community;
 use Acme\MyBundle\Entity\Home;
 use Acme\MyBundle\Entity\HomeModel;
 use Acme\MyBundle\Entity\Photo;
-use Acme\MyBundle\Entity\Acme\MyBundle\Entity;
-use Acme\MyBundle\Lib\phpQuery\phpQuery;
-use Doctrine\ORM\EntityManager;
 use phpQuery_phpQuery;
-use Assetic\Exception\Exception;
 
 class LennarParser {
 	private function curl_get_contents($url, $json_string) {
@@ -33,6 +29,14 @@ class LennarParser {
 		$this->em = $entity_manager;
 		$this->home_models = array ();
 		$this->root_url = 'http://www.lennar.com';
+		// find all models in the database
+		$model_repository = $this->em->getRepository ( 'AcmeMyBundle:HomeModel' );
+		$query = $model_repository->createQueryBuilder ( 'p' )->where ( 'p.builder > :builder' )->setParameter ( 'builder', $this->builder_name )->getQuery ();
+		$models = $query->getResult ();
+		$this->model_names = array ();
+		foreach ( $models as $model ) {
+			$this->model_names [$model->getName ()] = $model;
+		}
 	}
 	/**
 	 * this function save the image from the url to the local file system
@@ -172,13 +176,6 @@ class LennarParser {
 			$community_entity->setCity ( $community ['cty'] );
 			$community_entity->setState ( $community ['sco'] );
 			$community_entity->setZipcode ( $community ['zip'] );
-			// find location using Bing map api
-			// TODO: error handling
-// 			$lat_long = Utility::address_to_latlong ( $community ['add'], $community ['cty'], $community ['sco'], $community ['zip'] );
-// 			if (! empty ( $lat_long )) {
-// 				$community_entity->setLatitude ( $lat_long [0] );
-// 				$community_entity->setLongitude ( $lat_long [1] );
-// 			}
 			$this->em->persist ( $community_entity );
 			$community_id = $community ['cid'];
 			$this->fetch_model ( $community_id, $community_entity );
@@ -215,13 +212,12 @@ class LennarParser {
 		$model_array = json_decode ( $model_result, true );
 		$model_repository = $this->em->getRepository ( 'AcmeMyBundle:HomeModel' );
 		foreach ( $model_array ['pr'] as $model ) {
-			// we use builder name and plan name the check whether this model has been added.
-			$model_entity = $model_repository->findOneBy ( array (
-					'name' => $model ['plmktnm'],
-					'builder' => $this->builder_name 
-			) );
-			if ($model_entity == NULL) {
+			$save_model = false;
+			if (! isset ( $this->model_names [$model ['plmktnm']] )) {
 				$model_entity = new HomeModel ();
+			} else {
+				$model_entity = $this->model_names [$model ['plmktnm']];
+				$save_model = true;
 			}
 			$model_entity->setBuilder ( $this->builder_name );
 			$model_entity->setSquareFeet ( $model ['sgft'] );
@@ -235,17 +231,20 @@ class LennarParser {
 			$images = $this->parse_image ( $page_url );
 			// TODO: we only add models with images
 			if (! empty ( $images ['facade'] ) && ! empty ( $images ['model'] ) && ! empty ( $images ['floorplan'] )) {
+				$save_model = true;
 				$photo = $this->persist_photo ( $this->em, $images ['facade'] [0] );
 				$model_entity->setFacade ( $photo );
 				$album = $this->persist_album ( $this->em, $images ['model'] );
 				$model_entity->setImages ( $album );
 				$album = $this->persist_album ( $this->em, $images ['floorplan'] );
 				$model_entity->setFloorplans ( $album );
+				$this->model_names [$model ['plmktnm']] = $model_entity;
+			}
+			if ($save_model) {
 				$this->em->persist ( $model_entity );
 				// fetch home information
 				$model_id = $model ['pid'];
 				$this->fetch_home ( $community_id, $model_id, $community_entity, $model_entity );
-				$this->em->flush ();
 			}
 		}
 	}
@@ -306,4 +305,5 @@ class LennarParser {
 	public $em;
 	public $home_models;
 	public $root_url;
+	public $model_names;
 }

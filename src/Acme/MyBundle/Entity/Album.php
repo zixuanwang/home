@@ -2,9 +2,7 @@
 // src/Acme/MyBundle/Entity/Album.php
 namespace Acme\MyBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * @ORM\Entity
  * @ORM\Table(name="album")

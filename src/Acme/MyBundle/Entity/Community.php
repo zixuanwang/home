@@ -2,7 +2,6 @@
 // src/Acme/MyBundle/Entity/Community.php
 namespace Acme\MyBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -77,7 +76,7 @@ class Community {
 	 * @ORM\Column(type="string", length=10)
 	 */
 	protected $zipcode;
-    /**
+    /**http://forums.zend.com/viewtopic.php?f=59&t=121303
      * Constructor
      */
     public function __construct()
