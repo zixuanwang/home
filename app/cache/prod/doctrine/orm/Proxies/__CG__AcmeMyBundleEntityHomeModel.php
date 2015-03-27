@@ -64,10 +64,10 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'builder', 'communities', 'description', 'facade', 'floorplans', 'homes', 'id', 'images', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
+            return array('__isInitialized__', 'builder', 'description', 'facade', 'floorplans', 'homes', 'id', 'images', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
         }
 
-        return array('__isInitialized__', 'builder', 'communities', 'description', 'facade', 'floorplans', 'homes', 'id', 'images', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
+        return array('__isInitialized__', 'builder', 'description', 'facade', 'floorplans', 'homes', 'id', 'images', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
     }
 
     /**
@@ -173,6 +173,50 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
     }
 
     
+    /**
+     * {@inheritDoc}
+     */
+    public function setBuilder($builder)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setBuilder', array($builder));
+
+        return parent::setBuilder($builder);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getBuilder()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getBuilder', array());
+
+        return parent::getBuilder();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDescription($description)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDescription', array($description));
+
+        return parent::setDescription($description);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDescription()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', array());
+
+        return parent::getDescription();
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -323,61 +367,6 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function addHome(\Acme\MyBundle\Entity\Home $homes)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addHome', array($homes));
-
-        return parent::addHome($homes);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removeHome(\Acme\MyBundle\Entity\Home $homes)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeHome', array($homes));
-
-        return parent::removeHome($homes);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getHomes()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHomes', array());
-
-        return parent::getHomes();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setDescription($description)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDescription', array($description));
-
-        return parent::setDescription($description);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDescription()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', array());
-
-        return parent::getDescription();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function setUpdated($updated)
     {
 
@@ -444,6 +433,39 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
+    public function addHome(\Acme\MyBundle\Entity\Home $homes)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addHome', array($homes));
+
+        return parent::addHome($homes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeHome(\Acme\MyBundle\Entity\Home $homes)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeHome', array($homes));
+
+        return parent::removeHome($homes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHomes()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHomes', array());
+
+        return parent::getHomes();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setImages(\Acme\MyBundle\Entity\Album $images = NULL)
     {
 
@@ -461,61 +483,6 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getImages', array());
 
         return parent::getImages();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addCommunity(\Acme\MyBundle\Entity\Community $communities)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addCommunity', array($communities));
-
-        return parent::addCommunity($communities);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removeCommunity(\Acme\MyBundle\Entity\Community $communities)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeCommunity', array($communities));
-
-        return parent::removeCommunity($communities);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getCommunities()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCommunities', array());
-
-        return parent::getCommunities();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setBuilder($builder)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setBuilder', array($builder));
-
-        return parent::setBuilder($builder);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getBuilder()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getBuilder', array());
-
-        return parent::getBuilder();
     }
 
 }

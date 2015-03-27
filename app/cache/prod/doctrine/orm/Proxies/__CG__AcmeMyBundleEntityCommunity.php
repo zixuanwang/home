@@ -64,10 +64,10 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'address', 'album', 'builder', 'city', 'county', 'description', 'home_models', 'id', 'map', 'name', 'school_district', 'schools', 'state', 'zipcode');
+            return array('__isInitialized__', 'address', 'album', 'builder', 'city', 'county', 'description', 'homes', 'id', 'latitude', 'longitude', 'map', 'name', 'school_district', 'schools', 'state', 'zipcode');
         }
 
-        return array('__isInitialized__', 'address', 'album', 'builder', 'city', 'county', 'description', 'home_models', 'id', 'map', 'name', 'school_district', 'schools', 'state', 'zipcode');
+        return array('__isInitialized__', 'address', 'album', 'builder', 'city', 'county', 'description', 'homes', 'id', 'latitude', 'longitude', 'map', 'name', 'school_district', 'schools', 'state', 'zipcode');
     }
 
     /**
@@ -176,6 +176,50 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
+    public function setAddress($address)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAddress', array($address));
+
+        return parent::setAddress($address);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAddress()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAddress', array());
+
+        return parent::getAddress();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setBuilder($builder)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setBuilder', array($builder));
+
+        return parent::setBuilder($builder);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getBuilder()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getBuilder', array());
+
+        return parent::getBuilder();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setCity($city)
     {
 
@@ -257,171 +301,6 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function setName($name)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setName', array($name));
-
-        return parent::setName($name);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getName()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getName', array());
-
-        return parent::getName();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setSchoolDistrict($schoolDistrict)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSchoolDistrict', array($schoolDistrict));
-
-        return parent::setSchoolDistrict($schoolDistrict);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getSchoolDistrict()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSchoolDistrict', array());
-
-        return parent::getSchoolDistrict();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addSchool(\Acme\MyBundle\Entity\School $schools)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addSchool', array($schools));
-
-        return parent::addSchool($schools);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removeSchool(\Acme\MyBundle\Entity\School $schools)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeSchool', array($schools));
-
-        return parent::removeSchool($schools);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getSchools()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSchools', array());
-
-        return parent::getSchools();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setAlbum(\Acme\MyBundle\Entity\Album $album = NULL)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAlbum', array($album));
-
-        return parent::setAlbum($album);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getAlbum()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAlbum', array());
-
-        return parent::getAlbum();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setZipcode($zipcode)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setZipcode', array($zipcode));
-
-        return parent::setZipcode($zipcode);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getZipcode()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getZipcode', array());
-
-        return parent::getZipcode();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setState($state)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setState', array($state));
-
-        return parent::setState($state);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getState()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getState', array());
-
-        return parent::getState();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setAddress($address)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAddress', array($address));
-
-        return parent::setAddress($address);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getAddress()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAddress', array());
-
-        return parent::getAddress();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function setLatitude($latitude)
     {
 
@@ -466,6 +345,149 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
+    public function setName($name)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setName', array($name));
+
+        return parent::setName($name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getName', array());
+
+        return parent::getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setSchoolDistrict($schoolDistrict)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSchoolDistrict', array($schoolDistrict));
+
+        return parent::setSchoolDistrict($schoolDistrict);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSchoolDistrict()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSchoolDistrict', array());
+
+        return parent::getSchoolDistrict();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setState($state)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setState', array($state));
+
+        return parent::setState($state);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getState()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getState', array());
+
+        return parent::getState();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setZipcode($zipcode)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setZipcode', array($zipcode));
+
+        return parent::setZipcode($zipcode);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getZipcode()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getZipcode', array());
+
+        return parent::getZipcode();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setAlbum(\Acme\MyBundle\Entity\Album $album = NULL)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAlbum', array($album));
+
+        return parent::setAlbum($album);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAlbum()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAlbum', array());
+
+        return parent::getAlbum();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addHome(\Acme\MyBundle\Entity\Home $homes)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addHome', array($homes));
+
+        return parent::addHome($homes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeHome(\Acme\MyBundle\Entity\Home $homes)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeHome', array($homes));
+
+        return parent::removeHome($homes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHomes()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHomes', array());
+
+        return parent::getHomes();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setMap(\Acme\MyBundle\Entity\Photo $map = NULL)
     {
 
@@ -488,56 +510,34 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function addHomeModel(\Acme\MyBundle\Entity\HomeModel $homeModels)
+    public function addSchool(\Acme\MyBundle\Entity\School $schools)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addHomeModel', array($homeModels));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addSchool', array($schools));
 
-        return parent::addHomeModel($homeModels);
+        return parent::addSchool($schools);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function removeHomeModel(\Acme\MyBundle\Entity\HomeModel $homeModels)
+    public function removeSchool(\Acme\MyBundle\Entity\School $schools)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeHomeModel', array($homeModels));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeSchool', array($schools));
 
-        return parent::removeHomeModel($homeModels);
+        return parent::removeSchool($schools);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getHomeModels()
+    public function getSchools()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHomeModels', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSchools', array());
 
-        return parent::getHomeModels();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setBuilder($builder)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setBuilder', array($builder));
-
-        return parent::setBuilder($builder);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getBuilder()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getBuilder', array());
-
-        return parent::getBuilder();
+        return parent::getSchools();
     }
 
 }

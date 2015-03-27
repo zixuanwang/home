@@ -138,24 +138,33 @@ body {
 
 .model_thumb {
 	display: inline-block;
-	width: 360px;
+	width: 344px;
 	height: 220px;
 	border: 0px;
 	margin-top: 15px;
-	margin-bottom: 15px;
+	margin-right: 15px;
 	background-position: center center;
 	background-size: cover;
 }
 
-.floorplan_thumb {
+.floorplan-thumb-box {
 	display: inline-block;
-	width: 360px;
-	height: 700px;
-	border: 0px;
+	width: 344px;
+	height: 344px;
+	border: 1px;
+	border-style: solid;
+	border-color: #2092d7;
 	margin-top: 15px;
-	margin-bottom: 15px;
-	background-position: center center;
-	background-size: cover;
+	margin-right: 15px;
+	padding: 5px 5px 5px 5px;
+}
+
+.floorplan-thumb {
+	width: auto;
+	max-height: 334px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .fade {
@@ -194,10 +203,6 @@ body {
 	padding-bottom: 5px;
 	background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
 	opacity: 1;
-	-webkit-transition: all .2s ease;
-	-moz-transition: all .2s ease;
-	-o-transition: all .2s ease;
-	transition: all .2s ease;
 }
 
 .pin img {
@@ -255,7 +260,38 @@ body {
 }
 
 #bing_map_canvas {
-   display: block;
-   width: 100%;
-   height: 600px;
+	display: block;
+	width: 100%;
+	height: 600px;
+}
+
+.model-main {
+	width: 741px;
+	float: left;
+	position: relative;
+}
+
+.model-side {
+	width: 378px;
+	float: right;
+}
+
+.model-side-detail {
+	margin-top: 15px;
+	margin-right: 15px;
+}
+
+.piece {
+	background: #FEFEFE;
+	border: 2px solid #FAFAFA;
+	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+	margin: 0 0px 15px;
+	-webkit-column-break-inside: avoid;
+	-moz-column-break-inside: avoid;
+	column-break-inside: avoid;
+	padding-top: 15px;
+	padding-left: 15px;
+	padding-right: 0px;
+	padding-bottom: 15px;
+	background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
 }

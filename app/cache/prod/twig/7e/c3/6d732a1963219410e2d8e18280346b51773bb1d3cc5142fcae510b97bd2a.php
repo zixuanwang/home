@@ -16,9 +16,8 @@ class __TwigTemplate_7ec36d732a1963219410e2d8e18280346b51773bb1d3cc5142fcae510b9
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        echo "
-<div class=\"row\">
-\t<nav class=\"navbar navbar-inverse navbar-static-top\">
+        echo "<nav class=\"navbar navbar-inverse navbar-static-top\">
+\t<div class=\"container\">
 \t\t<!-- Brand and toggle get grouped for better mobile display -->
 \t\t<div class=\"navbar-header\">
 \t\t\t<button type=\"button\" class=\"navbar-toggle collapsed\"
@@ -27,7 +26,7 @@ class __TwigTemplate_7ec36d732a1963219410e2d8e18280346b51773bb1d3cc5142fcae510b9
 \t\t\t\t\tclass=\"icon-bar\"></span> <span class=\"icon-bar\"></span> <span
 \t\t\t\t\tclass=\"icon-bar\"></span>
 \t\t\t</button>
-\t\t\t<a class=\"navbar-brand\" href=\"#\">搜美房</a>
+\t\t\t<a class=\"navbar-brand\" href=\"/\">搜美房</a>
 \t\t</div>
 \t\t<!-- Collect the nav links, forms, and other content for toggling -->
 \t\t<div class=\"collapse navbar-collapse\" id=\"home-header\">
@@ -37,8 +36,8 @@ class __TwigTemplate_7ec36d732a1963219410e2d8e18280346b51773bb1d3cc5142fcae510b9
 \t\t\t\t<li><button class=\"cta grey small rounded\">洛杉矶</button></li>
 \t\t\t</ul>
 \t\t</div>
-\t</nav>
-</div>
+\t</div>
+</nav>
 ";
     }
 

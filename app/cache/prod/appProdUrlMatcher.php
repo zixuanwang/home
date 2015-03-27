@@ -37,6 +37,11 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'builder')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\BuilderController::indexAction',));
         }
 
+        // community
+        if (0 === strpos($pathinfo, '/community') && preg_match('#^/community/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'community')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\CommunityController::indexAction',));
+        }
+
         // home
         if (rtrim($pathinfo, '/') === '/home') {
             if (substr($pathinfo, -1) !== '/') {

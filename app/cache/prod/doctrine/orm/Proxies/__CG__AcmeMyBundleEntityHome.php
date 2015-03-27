@@ -64,10 +64,10 @@ class Home extends \Acme\MyBundle\Entity\Home implements \Doctrine\ORM\Proxy\Pro
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'address', 'community', 'description', 'direction', 'hoa', 'home_model', 'id', 'latitude', 'longitude', 'lot_size', 'price', 'price_history', 'price_per_foot', 'status', '' . "\0" . 'Acme\\MyBundle\\Entity\\Home' . "\0" . 'users', 'year_built');
+            return array('__isInitialized__', 'address', 'community', 'description', 'direction', 'hoa', 'home_model', 'id', 'latitude', 'longitude', 'lot_size', 'price', 'price_history', 'price_per_foot', 'status', '' . "\0" . 'Acme\\MyBundle\\Entity\\Home' . "\0" . 'users', 'year_built', 'zipcode');
         }
 
-        return array('__isInitialized__', 'address', 'community', 'description', 'direction', 'hoa', 'home_model', 'id', 'latitude', 'longitude', 'lot_size', 'price', 'price_history', 'price_per_foot', 'status', '' . "\0" . 'Acme\\MyBundle\\Entity\\Home' . "\0" . 'users', 'year_built');
+        return array('__isInitialized__', 'address', 'community', 'description', 'direction', 'hoa', 'home_model', 'id', 'latitude', 'longitude', 'lot_size', 'price', 'price_history', 'price_per_foot', 'status', '' . "\0" . 'Acme\\MyBundle\\Entity\\Home' . "\0" . 'users', 'year_built', 'zipcode');
     }
 
     /**
@@ -173,6 +173,50 @@ class Home extends \Acme\MyBundle\Entity\Home implements \Doctrine\ORM\Proxy\Pro
     }
 
     
+    /**
+     * {@inheritDoc}
+     */
+    public function setAddress($address)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAddress', array($address));
+
+        return parent::setAddress($address);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAddress()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAddress', array());
+
+        return parent::getAddress();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDescription($description)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDescription', array($description));
+
+        return parent::setDescription($description);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDescription()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', array());
+
+        return parent::getDescription();
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -389,6 +433,28 @@ class Home extends \Acme\MyBundle\Entity\Home implements \Doctrine\ORM\Proxy\Pro
     /**
      * {@inheritDoc}
      */
+    public function setZipcode($zipcode)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setZipcode', array($zipcode));
+
+        return parent::setZipcode($zipcode);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getZipcode()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getZipcode', array());
+
+        return parent::getZipcode();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setCommunity(\Acme\MyBundle\Entity\Community $community = NULL)
     {
 
@@ -428,28 +494,6 @@ class Home extends \Acme\MyBundle\Entity\Home implements \Doctrine\ORM\Proxy\Pro
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHomeModel', array());
 
         return parent::getHomeModel();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setAddress($address)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAddress', array($address));
-
-        return parent::setAddress($address);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getAddress()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAddress', array());
-
-        return parent::getAddress();
     }
 
     /**
@@ -516,28 +560,6 @@ class Home extends \Acme\MyBundle\Entity\Home implements \Doctrine\ORM\Proxy\Pro
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsers', array());
 
         return parent::getUsers();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setDescription($description)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDescription', array($description));
-
-        return parent::setDescription($description);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDescription()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', array());
-
-        return parent::getDescription();
     }
 
 }
