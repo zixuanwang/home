@@ -71,11 +71,11 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
         // line 15
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["model"]) ? $context["model"] : $this->getContext($context, "model")), "getName", array(), "method"), "html", null, true);
         echo "户型</h3>
-\t\t\t<img src=\"";
-        // line 16
+\t\t\t<div class=\"model_thumb img-responsive\"
+\t\t\t\t\tstyle=\"background-image: url('";
+        // line 17
         echo twig_escape_filter($this->env, (("/uploads/" . $this->getAttribute($this->getAttribute((isset($context["model"]) ? $context["model"] : $this->getContext($context, "model")), "getFacade", array(), "method"), "getPath", array(), "method")) . ".jpg"), "html", null, true);
-        echo "\"
-\t\t\t\tclass=\"model_thumb img-responsive\">
+        echo "');\"></div>
 \t\t\t<div class=\"model-side-detail\">
 \t\t\t\t<table class=\"table table-hover\">
 \t\t\t\t\t<tbody>
@@ -167,6 +167,6 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
 
     public function getDebugInfo()
     {
-        return array (  152 => 58,  147 => 55,  137 => 51,  133 => 50,  129 => 48,  125 => 47,  114 => 39,  107 => 35,  100 => 31,  93 => 27,  86 => 23,  76 => 16,  72 => 15,  67 => 12,  59 => 10,  54 => 8,  48 => 7,  41 => 3,  38 => 2,  11 => 1,);
+        return array (  152 => 58,  147 => 55,  137 => 51,  133 => 50,  129 => 48,  125 => 47,  114 => 39,  107 => 35,  100 => 31,  93 => 27,  86 => 23,  77 => 17,  72 => 15,  67 => 12,  59 => 10,  54 => 8,  48 => 7,  41 => 3,  38 => 2,  11 => 1,);
     }
 }

@@ -13,8 +13,8 @@
 
 		<div class="model-side piece">
 			<h3 class="text-center">{{ model.getName() }}户型</h3>
-			<img src="{{ '/uploads/'~model.getFacade().getPath()~'.jpg' }}"
-				class="model_thumb img-responsive">
+			<div class="model_thumb img-responsive"
+					style="background-image: url('{{'/uploads/'~model.getFacade().getPath()~'.jpg'}}');"></div>
 			<div class="model-side-detail">
 				<table class="table table-hover">
 					<tbody>
