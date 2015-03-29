@@ -31,7 +31,7 @@ class LennarParser {
 		$this->root_url = 'http://www.lennar.com';
 		// find all models in the database
 		$model_repository = $this->em->getRepository ( 'AcmeMyBundle:HomeModel' );
-		$query = $model_repository->createQueryBuilder ( 'p' )->where ( 'p.builder > :builder' )->setParameter ( 'builder', $this->builder_name )->getQuery ();
+		$query = $model_repository->createQueryBuilder ( 'p' )->where ( 'p.builder = :builder' )->setParameter ( 'builder', $this->builder_name )->getQuery ();
 		$models = $query->getResult ();
 		$this->model_names = array ();
 		foreach ( $models as $model ) {
@@ -222,7 +222,6 @@ class LennarParser {
 		$json_string = json_encode ( $data_array );
 		$model_result = $this->curl_get_contents ( $home_url, $json_string );
 		$model_array = json_decode ( $model_result, true );
-		$model_repository = $this->em->getRepository ( 'AcmeMyBundle:HomeModel' );
 		foreach ( $model_array ['pr'] as $model ) {
 			$save_model = false;
 			if (! isset ( $this->model_names [$model ['plmktnm']] )) {

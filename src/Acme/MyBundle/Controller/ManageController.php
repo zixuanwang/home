@@ -14,8 +14,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Acme\MyBundle\Lib\Acme\MyBundle\Lib;
-use Symfony\Component\HttpFoundation\Symfony\Component\HttpFoundation;
 
 class ManageController extends Controller {
 	public function indexAction($type) {
@@ -46,8 +44,7 @@ class ManageController extends Controller {
 			return new Response ( 'parse' );
 		}
 		if ($type == 'test') {
-			print_r ( Utility::address_to_latlong ( '11101 NE 12th St', 'Bellevue', 'WA', '98004' ) );
-			return new Response ( 'ok' );
+			echo phpinfo();
 		}
 	}
 	private function parseLennar() {
