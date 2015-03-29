@@ -176,6 +176,18 @@ class LennarParser {
 			$community_entity->setCity ( $community ['cty'] );
 			$community_entity->setState ( $community ['sco'] );
 			$community_entity->setZipcode ( $community ['zip'] );
+			$facade_url = substr ( $community ['img'], 0, strpos ( $community ['img'], 'ashx?' ) + 5 );
+			$community_entity->setFacade ( $this->persist_photo ( $this->em, $this->save_image ( $facade_url ) ) );
+			// get latitude and longitude from Bing map.
+			$lat_long = Utility::address_to_latlong ( $community ['add'], $community ['cty'], $community ['sco'], $community ['zip'] );
+			if (! empty ( $lat_long )) {
+				$community_entity->setLatitude ( $lat_long [0] );
+				echo $lat_long [0];
+				echo '<br/>';
+				echo $lat_long [1];
+				echo '<br/>';
+				$community_entity->setLongitude ( $lat_long [1] );
+			}
 			$this->em->persist ( $community_entity );
 			$community_id = $community ['cid'];
 			$this->fetch_model ( $community_id, $community_entity );

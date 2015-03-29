@@ -64,10 +64,10 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'address', 'album', 'builder', 'city', 'county', 'description', 'homes', 'id', 'latitude', 'longitude', 'map', 'name', 'school_district', 'schools', 'state', 'zipcode');
+            return array('__isInitialized__', 'address', 'album', 'builder', 'city', 'county', 'description', 'facade', 'homes', 'id', 'latitude', 'longitude', 'map', 'name', 'school_district', 'schools', 'state', 'zipcode');
         }
 
-        return array('__isInitialized__', 'address', 'album', 'builder', 'city', 'county', 'description', 'homes', 'id', 'latitude', 'longitude', 'map', 'name', 'school_district', 'schools', 'state', 'zipcode');
+        return array('__isInitialized__', 'address', 'album', 'builder', 'city', 'county', 'description', 'facade', 'homes', 'id', 'latitude', 'longitude', 'map', 'name', 'school_district', 'schools', 'state', 'zipcode');
     }
 
     /**
@@ -538,6 +538,28 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSchools', array());
 
         return parent::getSchools();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setFacade(\Acme\MyBundle\Entity\Photo $facade = NULL)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFacade', array($facade));
+
+        return parent::setFacade($facade);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFacade()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFacade', array());
+
+        return parent::getFacade();
     }
 
 }

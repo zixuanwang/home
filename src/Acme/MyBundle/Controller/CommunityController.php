@@ -18,7 +18,7 @@ class CommunityController extends Controller {
 			);
 		}
 		return $this->render ( 'AcmeMyBundle:Default:community.show.html.twig', array (
-				'model_price_array' => $model_price_array 
+				'model_price_array' => $model_price_array, 'community' => $community
 		) );
 	}
 }

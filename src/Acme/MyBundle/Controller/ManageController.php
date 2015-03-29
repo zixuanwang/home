@@ -46,7 +46,7 @@ class ManageController extends Controller {
 			return new Response ( 'parse' );
 		}
 		if ($type == 'test') {
-			Utility::address_to_latlong ( '11101 NE 12th St', 'Bellevue', 'WA', '98004' );
+			print_r ( Utility::address_to_latlong ( '11101 NE 12th St', 'Bellevue', 'WA', '98004' ) );
 			return new Response ( 'ok' );
 		}
 	}
