@@ -2,7 +2,7 @@
 <div class="container">
 	{{ include('::header.html.twig') }}
 	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-8 model-block">
+		<div class="col-xs-12 col-sm-12 col-md-8">
 			<div class="piece">
 				<h4>样板间</h4>
 				{% for image in images %} <a class="fancybox" rel="group"
@@ -11,42 +11,6 @@
 						style="background-image: url('{{'/uploads/'~image.getPath()~'.jpg'}}');"></div>
 				</a> {% endfor %}
 			</div>
-		</div>
-
-		<div class="col-xs-12 col-sm-12 col-md-4 model-block">
-			<div class="piece">
-				<h4 class="text-center">{{ model.getName() }}户型</h4>
-				<div class="model-facade-thumb img-responsive"
-					style="background-image: url('{{'/uploads/'~model.getFacade().getPath()~'.jpg'}}');"></div>
-				<div class="model-side-detail">
-					<table class="table table-hover">
-						<tbody>
-							<tr>
-								<td scope="row">使用面积</td>
-								<td>{{ (model.getSquareFeet() * 0.092903) | round}} 平方米</td>
-							</tr>
-							<tr>
-								<td scope="row">楼层</td>
-								<td>{{ model.getNumStories() }}</td>
-							</tr>
-							<tr>
-								<td scope="row">卧室</td>
-								<td>{{ model.getNumBeds() }}</td>
-							</tr>
-							<tr>
-								<td scope="row">洗手间</td>
-								<td>{{ model.getNumBaths() }}</td>
-							</tr>
-							<tr>
-								<td scope="row">车库</td>
-								<td>{{ model.getNumGarages() }}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-8 model-block">
 			<div class="piece">
 				<h4>户型图</h4>
 				{% for floorplan in floorplans %}
@@ -60,26 +24,66 @@
 				{% endfor %}
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-4 model-block">
+
+		<div class="col-xs-12 col-sm-12 col-md-4">
+			<div class="piece">
+				<h4 class="text-center">{{ model.getName() }}户型</h4>
+				<div class="model-facade-thumb img-responsive"
+					style="background-image: url('{{'/uploads/'~model.getFacade().getPath()~'.jpg'}}');"></div>
+				<div class="model-side-detail">
+					<table class="table table-hover">
+						<tbody>
+							<tr>
+								<td scope="row">使用面积：</td>
+								<td>{{ (model.getSquareFeet() * 0.092903) | round}} 平方米</td>
+							</tr>
+							<tr>
+								<td scope="row">楼层：</td>
+								<td>{{ model.getNumStories() }}</td>
+							</tr>
+							<tr>
+								<td scope="row">卧室：</td>
+								<td>{{ model.getNumBeds() }}</td>
+							</tr>
+							<tr>
+								<td scope="row">洗手间：</td>
+								<td>{{ model.getNumBaths() }}</td>
+							</tr>
+							<tr>
+								<td scope="row">车库：</td>
+								<td>{{ model.getNumGarages() }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="piece" id="map-piece">
+				<h4>地图</h4>
+				<div id="bing_map_canvas"></div>
+			</div>
 			<div class="piece">
 				<h4>所在社区</h4>
 				{% for id, community in communities %}
-				<div class="model-facade-thumb img-responsive"
-					style="background-image: url('{{'/uploads/'~community.getFacade().getPath()~'.jpg'}}');"></div>
-				<h4 class="text-center">{{ community.getName() }}社区</h4>
 				<div class="model-side-detail">
-					<p>地址：{{ community.getAddress() }} {{ community.getCity() }}, {{
-						community.getState() }} {{ community.getZipcode() }}</p>
-					<p>价格： {{ (prices[id] * 6.3 / 10000) | round }} 万元起
-				
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<td><strong><a href="{{ path('community', {'id': community.getId()}) }}">{{ community.getName() }}社区</a></strong></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td scope="row">地址： {{ community.getAddress() }} {{
+									community.getCity() }}, {{ community.getState() }} {{
+									community.getZipcode() }}</td>
+							</tr>
+							<tr>
+								<td scope="row">价格： {{ (prices[id] * 6.3 / 10000) | round }} 万元起</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 				{% endfor %}
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-8 model-block">
-			<div class="piece">
-				<h4>地图</h4>
-				<div id="bing_map_canvas"></div>
 			</div>
 		</div>
 	</div>
@@ -91,19 +95,23 @@
 	src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
 <script type="text/javascript">
     function getMap(){
+        var w = $("#map-piece").width();
         var mapInitOpts = {
             credentials: 'AqpckLVrDZE9ehOKwFREOF16SWFONVDd9KqviWPOeoiE6oSn-Fu6YZZjalMvvWXg',
             center: new Microsoft.Maps.Location({{ map_center['latitude'] }}, {{ map_center['longitude'] }}),
             mapTypeId: Microsoft.Maps.MapTypeId.road,
-            zoom: 9,
-            width: 600,
-            height:500
+            zoom: 7,
+            width: w - 15,
+            height:w - 15
         };
        var map = new Microsoft.Maps.Map(document.getElementById("bing_map_canvas"), mapInitOpts);
        {% for community in communities %}
        	var location = new Microsoft.Maps.Location({{ community.getLatitude() }}, {{ community.getLongitude() }});
        	// Add a pin to the center of the map, using a custom icon
-       	var pin = new Microsoft.Maps.Pushpin(location, {icon: '/images/home_icon.png', width: 30, height: 30, draggable: true}); 
+       	//var name = {{ community.getName() }};
+       	var pin = new Microsoft.Maps.Pushpin(location, {typeName: 'pushpinStyle', htmlContent: '<img src="/images/home_icon.png" alt=""/>' +
+            '<span>haha</span>'}); 
+     	// Create the infobox for the pushpin
        	map.entities.push(pin);
        {% endfor %}
      }

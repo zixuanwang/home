@@ -17,7 +17,7 @@ class __TwigTemplate_7cf02c1bba322ab2e26375f369df19323a312cd87821a6b5e03321ab9b9
     {
         // line 1
         echo "<footer class=\"footer\">
-<p>someifang.com</p>
+<p class=\"text-center\">搜美房 2015</p>
 </footer>
 ";
     }

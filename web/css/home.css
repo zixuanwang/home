@@ -290,17 +290,13 @@ body {
 	margin-right: 0px;
 }
 
-
 .model-side-detail {
 	margin-top: 15px;
 	margin-right: 15px;
 }
 
-.model-block {
-	margin-top: 20px;
-}
-
 .piece {
+	margin-top: 20px;
 	background: #FEFEFE;
 	border: 2px solid #FAFAFA;
 	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
@@ -313,5 +309,5 @@ body {
 	padding-bottom: 15px;
 	background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
 	-webkit-column-break-inside: avoid;
-	-webkit-column-break-inside: avoid
+	display: block;
 }

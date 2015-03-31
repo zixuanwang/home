@@ -32,8 +32,6 @@ class __TwigTemplate_7ec36d732a1963219410e2d8e18280346b51773bb1d3cc5142fcae510b9
 \t\t<div class=\"collapse navbar-collapse\" id=\"home-header\">
 \t\t\t<ul class=\"nav navbar-nav headerCases\">
 \t\t\t\t<li><button class=\"cta grey small rounded\">西雅图</button></li>
-\t\t\t\t<li><button class=\"cta grey small rounded\">旧金山</button></li>
-\t\t\t\t<li><button class=\"cta grey small rounded\">洛杉矶</button></li>
 \t\t\t</ul>
 \t\t</div>
 \t</div>
