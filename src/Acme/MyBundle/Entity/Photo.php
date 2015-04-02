@@ -7,13 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="photo")
+ * @ORM\Table(name="photo", indexes={@ORM\Index(name="search_idx", columns={"path"})})
  */
 class Photo {
-	/**
-	 * @ORM\ManyToOne(targetEntity="Album", inversedBy="photos")
-	 **/
-	private $album;
 	/**
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
@@ -28,6 +24,14 @@ class Photo {
 	 * @ORM\Column(type="string", length=100, nullable=false)
 	 */
 	protected $path;
+	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	protected $url;
+	
+	public function __toString() {
+		return $this->path;
+	}
 	/**
 	 * Get id
 	 *
@@ -59,46 +63,44 @@ class Photo {
 	}
 	
 	/**
-	 * Set album
+	 * Set path
 	 *
-	 * @param \Acme\MyBundle\Entity\Album $album        	
+	 * @param string $path        	
 	 * @return Photo
 	 */
-	public function setAlbum(\Acme\MyBundle\Entity\Album $album = null) {
-		$this->album = $album;
+	public function setPath($path) {
+		$this->path = $path;
 		
 		return $this;
 	}
 	
 	/**
-	 * Get album
+	 * Get path
 	 *
-	 * @return \Acme\MyBundle\Entity\Album
+	 * @return string
 	 */
-	public function getAlbum() {
-		return $this->album;
+	public function getPath() {
+		return $this->path;
 	}
-
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return Photo
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * Get path
-     *
-     * @return string 
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
+	
+	/**
+	 * Set url
+	 *
+	 * @param string $url        	
+	 * @return Photo
+	 */
+	public function setUrl($url) {
+		$this->url = $url;
+		
+		return $this;
+	}
+	
+	/**
+	 * Get url
+	 *
+	 * @return string
+	 */
+	public function getUrl() {
+		return $this->url;
+	}
 }

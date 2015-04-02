@@ -44,7 +44,19 @@ class ManageController extends Controller {
 			return new Response ( 'parse' );
 		}
 		if ($type == 'test') {
-			echo phpinfo();
+			$repository1 = $this->getDoctrine ()->getManager ()->getRepository ( 'AcmeMyBundle:Photo' );
+			$repository2 = $this->getDoctrine ()->getManager ()->getRepository ( 'AcmeMyBundle:HomeModel' );
+			$p1 = $repository1->findOneById ( 87 );
+			$p2 = $repository1->findOneById ( 88 );
+			$m = $repository2->findOneById ( 7 );
+			$m->clearFloorplans ();
+			$m->addFloorplan ( $p1 );
+			$m->addFloorplan ( $p2 );
+			$this->getDoctrine ()->getManager ()->persist ( $p1 );
+			$this->getDoctrine ()->getManager ()->persist ( $p2 );
+			$this->getDoctrine ()->getManager ()->persist ( $m );
+			$this->getDoctrine ()->getManager ()->flush ();
+			return new Response ( 'hello' );
 		}
 	}
 	private function parseLennar() {

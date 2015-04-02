@@ -64,10 +64,10 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'address', 'album', 'builder', 'city', 'county', 'description', 'facade', 'homes', 'id', 'latitude', 'longitude', 'map', 'name', 'school_district', 'schools', 'state', 'zipcode');
+            return array('__isInitialized__', 'address', 'builder', 'city', 'county', 'description', 'facades', 'homes', 'id', 'images', 'latitude', 'longitude', 'map', 'name', 'school_district', 'schools', 'state', 'updated', 'zipcode');
         }
 
-        return array('__isInitialized__', 'address', 'album', 'builder', 'city', 'county', 'description', 'facade', 'homes', 'id', 'latitude', 'longitude', 'map', 'name', 'school_district', 'schools', 'state', 'zipcode');
+        return array('__isInitialized__', 'address', 'builder', 'city', 'county', 'description', 'facades', 'homes', 'id', 'images', 'latitude', 'longitude', 'map', 'name', 'school_district', 'schools', 'state', 'updated', 'zipcode');
     }
 
     /**
@@ -411,6 +411,28 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
+    public function setUpdated($updated)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdated', array($updated));
+
+        return parent::setUpdated($updated);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUpdated()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdated', array());
+
+        return parent::getUpdated();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setZipcode($zipcode)
     {
 
@@ -433,23 +455,34 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function setAlbum(\Acme\MyBundle\Entity\Album $album = NULL)
+    public function addFacade(\Acme\MyBundle\Entity\Photo $facades)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAlbum', array($album));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addFacade', array($facades));
 
-        return parent::setAlbum($album);
+        return parent::addFacade($facades);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getAlbum()
+    public function removeFacade(\Acme\MyBundle\Entity\Photo $facades)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAlbum', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeFacade', array($facades));
 
-        return parent::getAlbum();
+        return parent::removeFacade($facades);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFacades()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFacades', array());
+
+        return parent::getFacades();
     }
 
     /**
@@ -483,6 +516,39 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHomes', array());
 
         return parent::getHomes();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addImage(\Acme\MyBundle\Entity\Photo $images)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addImage', array($images));
+
+        return parent::addImage($images);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeImage(\Acme\MyBundle\Entity\Photo $images)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeImage', array($images));
+
+        return parent::removeImage($images);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getImages()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getImages', array());
+
+        return parent::getImages();
     }
 
     /**
@@ -538,28 +604,6 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSchools', array());
 
         return parent::getSchools();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setFacade(\Acme\MyBundle\Entity\Photo $facade = NULL)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFacade', array($facade));
-
-        return parent::setFacade($facade);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getFacade()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFacade', array());
-
-        return parent::getFacade();
     }
 
 }

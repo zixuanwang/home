@@ -18,7 +18,7 @@ class HomeController extends Controller {
 			$price_array = array ();
 			$homes = $model->getHomes ();
 			foreach ( $homes as $home ) {
-				$price_array [] = $home->getPrice ();
+				$price_array [] = $home->getPrices ()[0]->getPrice ();
 			}
 			if (! empty ( $price_array )) {
 				$min_price = min ( $price_array );

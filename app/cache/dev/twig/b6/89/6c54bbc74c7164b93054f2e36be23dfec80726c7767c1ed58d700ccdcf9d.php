@@ -56,7 +56,7 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
 \t\t\t\t\tclass=\"pin-image\"
 \t\t\t\t\tsrc=\"";
             // line 10
-            echo twig_escape_filter($this->env, (("/uploads/" . $this->getAttribute($this->getAttribute($context["model"], "getFacade", array(), "method"), "getPath", array(), "method")) . ".jpg"), "html", null, true);
+            echo twig_escape_filter($this->env, (("/uploads/" . $this->getAttribute($this->getAttribute($this->getAttribute($context["model"], "getFacades", array(), "method"), 0, array(), "array"), "getPath", array(), "method")) . ".jpg"), "html", null, true);
             echo "\"></a>
 \t\t\t\t<div class=\"row\">
 \t\t\t\t\t<div class=\"col-xs-8\">

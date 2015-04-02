@@ -10,10 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="builder")
  */
 class Builder {
-	/**
-	 * @ORM\OneToOne(targetEntity="Album")
-	 */
-	protected $album;
 // 	/**
 // 	 * @ORM\OneToMany(targetEntity="Community", mappedBy="builder")
 // 	 */
@@ -33,6 +29,12 @@ class Builder {
 	 */
 	protected $id;
 	/**
+	 * @ORM\ManyToMany(targetEntity="Photo")
+	 * @ORM\JoinTable(name="builders_images", joinColumns={@ORM\JoinColumn(name="builder_id", referencedColumnName="id")},
+	 *      inverseJoinColumns={@ORM\JoinColumn(name="photo_id", referencedColumnName="id")})
+	 */
+	protected $images;
+	/**
 	 * @ORM\OneToOne(targetEntity="Photo")
 	 */
 	protected $logo;
@@ -44,186 +46,146 @@ class Builder {
 	 * @ORM\Column(type="string", length=100)
 	 */
 	protected $website;
-	public function __construct() {
-		$this->communities = new ArrayCollection ();
-	}
-	
-	/**
-	 * Set description
-	 *
-	 * @param string $description        	
-	 * @return Builder
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-		
-		return $this;
-	}
-	
-	/**
-	 * Get description
-	 *
-	 * @return string
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
-	
-	/**
-	 * Get id
-	 *
-	 * @return integer
-	 */
-	public function getId() {
-		return $this->id;
-	}
-	
-	/**
-	 * Set website
-	 *
-	 * @param string $website        	
-	 * @return Builder
-	 */
-	public function setWebsite($website) {
-		$this->website = $website;
-		
-		return $this;
-	}
-	
-	/**
-	 * Get website
-	 *
-	 * @return string
-	 */
-	public function getWebsite() {
-		return $this->website;
-	}
-	
-	/**
-	 * Add communities
-	 *
-	 * @param \Acme\MyBundle\Entity\Community $communities        	
-	 * @return Builder
-	 */
-	public function addCommunity(\Acme\MyBundle\Entity\Community $communities) {
-		$this->communities [] = $communities;
-		
-		return $this;
-	}
-	
-	/**
-	 * Remove communities
-	 *
-	 * @param \Acme\MyBundle\Entity\Community $communities        	
-	 */
-	public function removeCommunity(\Acme\MyBundle\Entity\Community $communities) {
-		$this->communities->removeElement ( $communities );
-	}
-	
-	/**
-	 * Get communities
-	 *
-	 * @return \Doctrine\Common\Collections\Collection
-	 */
-	public function getCommunities() {
-		return $this->communities;
-	}
-	
-	/**
-	 * Set name
-	 *
-	 * @param string $name        	
-	 * @return Builder
-	 */
-	public function setName($name) {
-		$this->name = $name;
-		
-		return $this;
-	}
-	
-	/**
-	 * Get name
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return $this->name;
-	}
-	
-	/**
-	 * Set logo
-	 *
-	 * @param \Acme\MyBundle\Entity\Photo $logo        	
-	 * @return Builder
-	 */
-	public function setLogo(\Acme\MyBundle\Entity\Photo $logo = null) {
-		$this->logo = $logo;
-		
-		return $this;
-	}
-	
-	/**
-	 * Get logo
-	 *
-	 * @return \Acme\MyBundle\Entity\Photo
-	 */
-	public function getLogo() {
-		return $this->logo;
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
-     * Set album
+     * Set description
      *
-     * @param \Acme\MyBundle\Entity\Album $album
+     * @param string $description
      * @return Builder
      */
-    public function setAlbum(\Acme\MyBundle\Entity\Album $album = null)
+    public function setDescription($description)
     {
-        $this->album = $album;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get album
+     * Get description
      *
-     * @return \Acme\MyBundle\Entity\Album 
+     * @return string 
      */
-    public function getAlbum()
+    public function getDescription()
     {
-        return $this->album;
+        return $this->description;
     }
 
     /**
-     * Add home_models
+     * Get id
      *
-     * @param \Acme\MyBundle\Entity\HomeModel $homeModels
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
      * @return Builder
      */
-    public function addHomeModel(\Acme\MyBundle\Entity\HomeModel $homeModels)
+    public function setName($name)
     {
-        $this->home_models[] = $homeModels;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Remove home_models
+     * Get name
      *
-     * @param \Acme\MyBundle\Entity\HomeModel $homeModels
+     * @return string 
      */
-    public function removeHomeModel(\Acme\MyBundle\Entity\HomeModel $homeModels)
+    public function getName()
     {
-        $this->home_models->removeElement($homeModels);
+        return $this->name;
     }
 
     /**
-     * Get home_models
+     * Set website
+     *
+     * @param string $website
+     * @return Builder
+     */
+    public function setWebsite($website)
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string 
+     */
+    public function getWebsite()
+    {
+        return $this->website;
+    }
+
+    /**
+     * Add images
+     *
+     * @param \Acme\MyBundle\Entity\Photo $images
+     * @return Builder
+     */
+    public function addImage(\Acme\MyBundle\Entity\Photo $images)
+    {
+        $this->images[] = $images;
+
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \Acme\MyBundle\Entity\Photo $images
+     */
+    public function removeImage(\Acme\MyBundle\Entity\Photo $images)
+    {
+        $this->images->removeElement($images);
+    }
+
+    /**
+     * Get images
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getHomeModels()
+    public function getImages()
     {
-        return $this->home_models;
+        return $this->images;
+    }
+
+    /**
+     * Set logo
+     *
+     * @param \Acme\MyBundle\Entity\Photo $logo
+     * @return Builder
+     */
+    public function setLogo(\Acme\MyBundle\Entity\Photo $logo = null)
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * Get logo
+     *
+     * @return \Acme\MyBundle\Entity\Photo 
+     */
+    public function getLogo()
+    {
+        return $this->logo;
     }
 }

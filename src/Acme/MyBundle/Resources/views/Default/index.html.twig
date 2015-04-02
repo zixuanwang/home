@@ -7,7 +7,7 @@
 			<div class="pin">
 				<a href="{{ path('model', {'id': model.getId()}) }}"> <img
 					class="pin-image"
-					src="{{ '/uploads/'~model.getFacade().getPath()~'.jpg' }}"></a>
+					src="{{ '/uploads/'~model.getFacades()[0].getPath()~'.jpg' }}"></a>
 				<div class="row">
 					<div class="col-xs-8">
 						<h4>{{ model.getName() }}</h4>

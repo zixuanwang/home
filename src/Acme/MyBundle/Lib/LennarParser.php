@@ -2,14 +2,14 @@
 
 namespace Acme\MyBundle\Lib;
 
-use Acme\MyBundle\Entity\Album;
 use Acme\MyBundle\Entity\Community;
 use Acme\MyBundle\Entity\Home;
 use Acme\MyBundle\Entity\HomeModel;
 use Acme\MyBundle\Entity\Photo;
+use Acme\MyBundle\Entity\Price;
 use phpQuery_phpQuery;
 
-class LennarParser {
+class LennarParser extends Parser {
 	private function curl_get_contents($url, $json_string) {
 		$ch = curl_init ( $url );
 		curl_setopt ( $ch, CURLOPT_CUSTOMREQUEST, "POST" );
@@ -24,36 +24,9 @@ class LennarParser {
 		return $result;
 	}
 	public function __construct($entity_manager) {
+		parent::__construct ( $entity_manager );
 		$this->builder_name = 'Lennar';
-		$this->communities = array ();
-		$this->em = $entity_manager;
-		$this->home_models = array ();
 		$this->root_url = 'http://www.lennar.com';
-		// find all models in the database
-		$model_repository = $this->em->getRepository ( 'AcmeMyBundle:HomeModel' );
-		$query = $model_repository->createQueryBuilder ( 'p' )->where ( 'p.builder = :builder' )->setParameter ( 'builder', $this->builder_name )->getQuery ();
-		$models = $query->getResult ();
-		$this->model_names = array ();
-		foreach ( $models as $model ) {
-			$this->model_names [$model->getName ()] = $model;
-		}
-	}
-	/**
-	 * this function save the image from the url to the local file system
-	 * images are renamed to a unique name and the unique name is returned.
-	 */
-	public function save_image($url) {
-		$new_url = str_replace ( ' ', '%20', $url );
-		$one_filename = sha1 ( uniqid ( mt_rand (), true ) );
-		$local_path = 'uploads/' . $one_filename . '.jpg';
-		// skip the image we cannot download
-		if (substr ( $new_url, 0, 1 ) != '/') {
-			copy ( $new_url, $local_path );
-			$md5_string = md5_file ( $local_path );
-			rename ( $local_path, 'uploads/' . $md5_string . '.jpg' );
-			return $md5_string;
-		}
-		return '';
 	}
 	
 	/**
@@ -65,7 +38,6 @@ class LennarParser {
 		$html = file_get_contents ( $url );
 		$php_query = new phpQuery_phpQuery ();
 		$doc = $php_query->newDocument ( $html );
-		// $doc = phpQuery::newDocument ( $html );
 		$floorplan_urls = array ();
 		$model_urls = array ();
 		$facade_urls = array ();
@@ -107,22 +79,6 @@ class LennarParser {
 		}
 		return $images;
 	}
-	public function persist_album($em, $images) {
-		$album = new Album ();
-		foreach ( $images as $image ) {
-			$photo = $this->persist_photo ( $em, $image );
-			$photo->setAlbum ( $album );
-			$album->addPhoto ( $photo );
-		}
-		$em->persist ( $album );
-		return $album;
-	}
-	public function persist_photo($em, $image) {
-		$photo = new Photo ();
-		$photo->setPath ( $image );
-		$em->persist ( $photo );
-		return $photo;
-	}
 	
 	/**
 	 * this function parses the page of seattle.
@@ -158,18 +114,8 @@ class LennarParser {
 		$community_result = $this->curl_get_contents ( $community_url, $json_string );
 		// delve into each community
 		$community_array = json_decode ( $community_result, true );
-		$community_repository = $this->em->getRepository ( 'AcmeMyBundle:Community' );
 		foreach ( $community_array as $community ) {
-			// save community
-			$community_entity = $community_repository->findOneBy ( array (
-					'city' => $community ['cty'],
-					'state' => $community ['sco'],
-					'name' => $community ['cnm'],
-					'builder' => $this->builder_name 
-			) );
-			if ($community_entity == NULL) {
-				$community_entity = new Community ();
-			}
+			$community_entity = new Community ();
 			$community_entity->setBuilder ( $this->builder_name );
 			$community_entity->setName ( $community ['cnm'] );
 			$community_entity->setAddress ( $community ['add'] );
@@ -177,21 +123,17 @@ class LennarParser {
 			$community_entity->setState ( $community ['sco'] );
 			$community_entity->setZipcode ( $community ['zip'] );
 			$facade_url = substr ( $community ['img'], 0, strpos ( $community ['img'], 'ashx?' ) + 5 );
-			$community_entity->setFacade ( $this->persist_photo ( $this->em, $this->save_image ( $facade_url ) ) );
+			$facade_photo = new Photo ();
+			$facade_photo->setPath ( parent::save_image ( $facade_url ) );
+			$community_entity->addFacade ( $facade_photo );
 			// get latitude and longitude from Bing map.
 			$lat_long = Utility::address_to_latlong ( $community ['add'], $community ['cty'], $community ['sco'], $community ['zip'] );
 			if (! empty ( $lat_long )) {
 				$community_entity->setLatitude ( $lat_long [0] );
-				echo $lat_long [0];
-				echo '<br/>';
-				echo $lat_long [1];
-				echo '<br/>';
 				$community_entity->setLongitude ( $lat_long [1] );
 			}
-			$this->em->persist ( $community_entity );
-			$community_id = $community ['cid'];
-			$this->fetch_model ( $community_id, $community_entity );
-			$this->em->flush ();
+			$c = parent::add_community ( $community_entity );
+			$this->fetch_model ( $community ['cid'], $c );
 		}
 	}
 	
@@ -223,13 +165,7 @@ class LennarParser {
 		$model_result = $this->curl_get_contents ( $home_url, $json_string );
 		$model_array = json_decode ( $model_result, true );
 		foreach ( $model_array ['pr'] as $model ) {
-			$save_model = false;
-			if (! isset ( $this->model_names [$model ['plmktnm']] )) {
-				$model_entity = new HomeModel ();
-			} else {
-				$model_entity = $this->model_names [$model ['plmktnm']];
-				$save_model = true;
-			}
+			$model_entity = new HomeModel ();
 			$model_entity->setBuilder ( $this->builder_name );
 			$model_entity->setSquareFeet ( $model ['sgft'] );
 			$model_entity->setNumBaths ( $model ['bathrm'] );
@@ -240,22 +176,24 @@ class LennarParser {
 			// fetch images from the web page
 			$page_url = $this->root_url . $model ['vtlURL'];
 			$images = $this->parse_image ( $page_url );
-			// TODO: we only add models with images
-			if (! empty ( $images ['facade'] ) && ! empty ( $images ['model'] ) && ! empty ( $images ['floorplan'] )) {
-				$save_model = true;
-				$photo = $this->persist_photo ( $this->em, $images ['facade'] [0] );
-				$model_entity->setFacade ( $photo );
-				$album = $this->persist_album ( $this->em, $images ['model'] );
-				$model_entity->setImages ( $album );
-				$album = $this->persist_album ( $this->em, $images ['floorplan'] );
-				$model_entity->setFloorplans ( $album );
-				$this->model_names [$model ['plmktnm']] = $model_entity;
+			foreach ( $images ['facade'] as $image ) {
+				$photo = new Photo ();
+				$photo->setPath ( $image );
+				$model_entity->addFacade ( $photo );
 			}
-			if ($save_model) {
-				$this->em->persist ( $model_entity );
-				// fetch home information
-				$model_id = $model ['pid'];
-				$this->fetch_home ( $community_id, $model_id, $community_entity, $model_entity );
+			foreach ( $images ['floorplan'] as $image ) {
+				$photo = new Photo ();
+				$photo->setPath ( $image );
+				$model_entity->addFloorplan ( $photo );
+			}
+			foreach ( $images ['model'] as $image ) {
+				$photo = new Photo ();
+				$photo->setPath ( $image );
+				$model_entity->addImage ( $photo );
+			}
+			$m = parent::add_model ( $model_entity );
+			if ($m != null) {
+				$this->fetch_home ( $community_id, $model ['pid'], $community_entity, $m );
 			}
 		}
 	}
@@ -265,11 +203,11 @@ class LennarParser {
 	 * price and available homes are fetched.
 	 * for example, see ajax queries in http://www.lennar.com/New-Homes/Washington/Seattle/Bothell/Canton-Ridge/Bainbridge
 	 */
-	public function fetch_home($community_id, $plan_id, $community_entity, $model_entity) {
+	public function fetch_home($community_id, $model_id, $community_entity, $model_entity) {
 		$home_url = $this->root_url . '/Services/Rest/SearchMethods.svc/GetPlanInventoryTabDetails';
 		$data_array = array ();
 		$data_array ['CommunityID'] = $community_id;
-		$data_array ['PlanID'] = $plan_id;
+		$data_array ['PlanID'] = $model_id;
 		$data_array ['pageState'] = array (
 				'ct' => 'A',
 				'sb' => 'price',
@@ -288,33 +226,23 @@ class LennarParser {
 		$json_string = json_encode ( $data_array );
 		$home_result = $this->curl_get_contents ( $home_url, $json_string );
 		$home_array = json_decode ( $home_result, true );
-		$home_repository = $this->em->getRepository ( 'AcmeMyBundle:Home' );
 		foreach ( $home_array ['ir'] as $home ) {
-			// we use address and zipcode the check whether this home has been added.
-			$home_entity = $home_repository->findOneBy ( array (
-					'address' => $home ['spdAdd'],
-					'zipcode' => $home ['spZip'] 
-			) );
-			if ($home_entity == NULL) {
-				$home_entity = new Home ();
-				$home_entity->setCommunity ( $community_entity );
-				$home_entity->setHomeModel ( $model_entity );
-			}
+			$home_entity = new Home ();
+			$home_entity->setCommunity ( $community_entity );
+			$home_entity->setHomeModel ( $model_entity );
 			$price = $home ['price'];
 			$price = str_replace ( '$', '', $price );
 			$price = str_replace ( ',', '', $price );
-			$home_entity->setPrice ( $price );
+			$p = new Price ();
+			$p->setPrice ( $price );
+			$home_entity->addPrice ( $p );
 			$price_per_foot = floatval ( $price ) / $home ['sgft'];
 			$home_entity->setPricePerFoot ( $price_per_foot );
 			$home_entity->setAddress ( $home ['spdAdd'] );
 			$home_entity->setZipcode ( $home ['spZip'] );
-			$this->em->persist ( $home_entity );
+			parent::add_home ( $home_entity );
 		}
 	}
 	public $builder_name;
-	public $communities;
-	public $em;
-	public $home_models;
 	public $root_url;
-	public $model_names;
 }

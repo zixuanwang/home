@@ -14,10 +14,6 @@ class Community {
 	 */
 	protected $address;
 	/**
-	 * @ORM\OneToOne(targetEntity="Album")
-	 */
-	protected $album;
-	/**
 	 * @ORM\Column(type="string", length=30)
 	 */
 	protected $builder;
@@ -34,9 +30,11 @@ class Community {
 	 */
 	protected $description;
 	/**
-	 * @ORM\OneToOne(targetEntity="Photo")
+	 * @ORM\ManyToMany(targetEntity="Photo", cascade={"persist"})
+	 * @ORM\JoinTable(name="communities_facades", joinColumns={@ORM\JoinColumn(name="community_id", referencedColumnName="id")},
+	 * inverseJoinColumns={@ORM\JoinColumn(name="photo_id", referencedColumnName="id")})
 	 */
-	protected $facade;
+	protected $facades;
 	/**
 	 * @ORM\OneToMany(targetEntity="Home", mappedBy="community")
 	 */
@@ -47,6 +45,12 @@ class Community {
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 */
 	protected $id;
+	/**
+	 * @ORM\ManyToMany(targetEntity="Photo", cascade={"persist"})
+	 * @ORM\JoinTable(name="communities_images", joinColumns={@ORM\JoinColumn(name="community_id", referencedColumnName="id")},
+	 * inverseJoinColumns={@ORM\JoinColumn(name="photo_id", referencedColumnName="id")})
+	 */
+	protected $images;
 	/**
 	 * @ORM\Column(type="decimal", precision=10, scale=7, nullable=true)
 	 */
@@ -77,16 +81,26 @@ class Community {
 	 */
 	protected $state;
 	/**
+	 * @ORM\Column(type="datetime")
+	 */
+	protected $updated;
+	/**
 	 * @ORM\Column(type="string", length=10)
 	 */
 	protected $zipcode;
+	public function clearFacades() {
+		$this->facades = new \Doctrine\Common\Collections\ArrayCollection ();
+	}
+	
 	/**
-	 * http://forums.zend.com/viewtopic.php?f=59&t=121303
 	 * Constructor
 	 */
 	public function __construct() {
+		$this->facades = new \Doctrine\Common\Collections\ArrayCollection ();
 		$this->homes = new \Doctrine\Common\Collections\ArrayCollection ();
+		$this->images = new \Doctrine\Common\Collections\ArrayCollection ();
 		$this->schools = new \Doctrine\Common\Collections\ArrayCollection ();
+		$this->updated = new \DateTime ();
 	}
 	
 	/**
@@ -309,6 +323,27 @@ class Community {
 	}
 	
 	/**
+	 * Set updated
+	 *
+	 * @param \DateTime $updated        	
+	 * @return Community
+	 */
+	public function setUpdated($updated) {
+		$this->updated = $updated;
+		
+		return $this;
+	}
+	
+	/**
+	 * Get updated
+	 *
+	 * @return \DateTime
+	 */
+	public function getUpdated() {
+		return $this->updated;
+	}
+	
+	/**
 	 * Set zipcode
 	 *
 	 * @param string $zipcode        	
@@ -330,24 +365,33 @@ class Community {
 	}
 	
 	/**
-	 * Set album
+	 * Add facades
 	 *
-	 * @param \Acme\MyBundle\Entity\Album $album        	
+	 * @param \Acme\MyBundle\Entity\Photo $facades        	
 	 * @return Community
 	 */
-	public function setAlbum(\Acme\MyBundle\Entity\Album $album = null) {
-		$this->album = $album;
+	public function addFacade(\Acme\MyBundle\Entity\Photo $facades) {
+		$this->facades [] = $facades;
 		
 		return $this;
 	}
 	
 	/**
-	 * Get album
+	 * Remove facades
 	 *
-	 * @return \Acme\MyBundle\Entity\Album
+	 * @param \Acme\MyBundle\Entity\Photo $facades        	
 	 */
-	public function getAlbum() {
-		return $this->album;
+	public function removeFacade(\Acme\MyBundle\Entity\Photo $facades) {
+		$this->facades->removeElement ( $facades );
+	}
+	
+	/**
+	 * Get facades
+	 *
+	 * @return \Doctrine\Common\Collections\Collection
+	 */
+	public function getFacades() {
+		return $this->facades;
 	}
 	
 	/**
@@ -378,6 +422,36 @@ class Community {
 	 */
 	public function getHomes() {
 		return $this->homes;
+	}
+	
+	/**
+	 * Add images
+	 *
+	 * @param \Acme\MyBundle\Entity\Photo $images        	
+	 * @return Community
+	 */
+	public function addImage(\Acme\MyBundle\Entity\Photo $images) {
+		$this->images [] = $images;
+		
+		return $this;
+	}
+	
+	/**
+	 * Remove images
+	 *
+	 * @param \Acme\MyBundle\Entity\Photo $images        	
+	 */
+	public function removeImage(\Acme\MyBundle\Entity\Photo $images) {
+		$this->images->removeElement ( $images );
+	}
+	
+	/**
+	 * Get images
+	 *
+	 * @return \Doctrine\Common\Collections\Collection
+	 */
+	public function getImages() {
+		return $this->images;
 	}
 	
 	/**
@@ -430,27 +504,4 @@ class Community {
 	public function getSchools() {
 		return $this->schools;
 	}
-
-    /**
-     * Set facade
-     *
-     * @param \Acme\MyBundle\Entity\Photo $facade
-     * @return Community
-     */
-    public function setFacade(\Acme\MyBundle\Entity\Photo $facade = null)
-    {
-        $this->facade = $facade;
-
-        return $this;
-    }
-
-    /**
-     * Get facade
-     *
-     * @return \Acme\MyBundle\Entity\Photo 
-     */
-    public function getFacade()
-    {
-        return $this->facade;
-    }
 }

@@ -106,7 +106,7 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
 \t\t\t\t<div class=\"model-facade-thumb img-responsive\"
 \t\t\t\t\tstyle=\"background-image: url('";
         // line 32
-        echo twig_escape_filter($this->env, (("/uploads/" . $this->getAttribute($this->getAttribute((isset($context["model"]) ? $context["model"] : $this->getContext($context, "model")), "getFacade", array(), "method"), "getPath", array(), "method")) . ".jpg"), "html", null, true);
+        echo twig_escape_filter($this->env, (("/uploads/" . $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["model"]) ? $context["model"] : $this->getContext($context, "model")), "getFacades", array(), "method"), 0, array(), "array"), "getPath", array(), "method")) . ".jpg"), "html", null, true);
         echo "');\"></div>
 \t\t\t\t<div class=\"model-side-detail\">
 \t\t\t\t\t<table class=\"table table-hover\">

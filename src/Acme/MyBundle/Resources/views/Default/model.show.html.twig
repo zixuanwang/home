@@ -29,7 +29,7 @@
 			<div class="piece">
 				<h4 class="text-center">{{ model.getName() }}户型</h4>
 				<div class="model-facade-thumb img-responsive"
-					style="background-image: url('{{'/uploads/'~model.getFacade().getPath()~'.jpg'}}');"></div>
+					style="background-image: url('{{'/uploads/'~model.getFacades()[0].getPath()~'.jpg'}}');"></div>
 				<div class="model-side-detail">
 					<table class="table table-hover">
 						<tbody>

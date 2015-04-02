@@ -11,16 +11,16 @@ class ModelController extends Controller {
 		$model = $repository->find ( $id );
 		$images = array ();
 		if ($model->getImages () != NULL) {
-			$images = $model->getImages ()->getPhotos ();
+			$images = $model->getImages ();
 		}
-		$floorplans = $model->getFloorplans ()->getPhotos ();
+		$floorplans = $model->getFloorplans ();
 		// get communities that have the model
 		$communities = array ();
 		$prices = array ();
 		$homes = $model->getHomes ();
 		foreach ( $homes as $home ) {
 			$community = $home->getCommunity ();
-			$price = $home->getPrice ();
+			$price = $home->getPrices ()[0]->getPrice ();
 			$communities [$community->getId ()] = $community;
 			if (! isset ( $prices [$community->getId ()] )) {
 				$prices [$community->getId ()] = $price;
