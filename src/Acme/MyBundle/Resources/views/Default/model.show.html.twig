@@ -27,7 +27,7 @@
 
 		<div class="col-xs-12 col-sm-12 col-md-4">
 			<div class="piece">
-				<h4 class="text-center">{{ model.getName() }}户型</h4>
+				<h4>{{ model.getName() }}户型</h4>
 				<div class="model-facade-thumb img-responsive"
 					style="background-image: url('{{'/uploads/'~model.getFacades()[0].getPath()~'.jpg'}}');"></div>
 				<div class="model-side-detail">
@@ -109,13 +109,11 @@
        	var location = new Microsoft.Maps.Location({{ community.getLatitude() }}, {{ community.getLongitude() }});
        	// Add a pin to the center of the map, using a custom icon
        	//var name = {{ community.getName() }};
-       	var pin = new Microsoft.Maps.Pushpin(location, {typeName: 'pushpinStyle', htmlContent: '<img src="/images/home_icon.png" alt=""/>' +
-            '<span>haha</span>'}); 
+       	var pin = new Microsoft.Maps.Pushpin(location); 
      	// Create the infobox for the pushpin
        	map.entities.push(pin);
        {% endfor %}
      }
     getMap();
-      </script>
-
+</script>
 {% endblock %}

@@ -311,3 +311,7 @@ body {
 	-webkit-column-break-inside: avoid;
 	display: block;
 }
+
+table {
+	font-size: small;
+}

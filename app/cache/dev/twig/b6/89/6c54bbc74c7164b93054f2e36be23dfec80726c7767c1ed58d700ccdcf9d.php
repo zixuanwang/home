@@ -76,7 +76,11 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
             // line 22
             echo twig_escape_filter($this->env, twig_round(($this->getAttribute($context["model"], "getSquareFeet", array(), "method") * 0.092903)), "html", null, true);
             // line 23
-            echo " 平方米</div>
+            echo " 平方米， ";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["model"], "getNumBeds", array(), "method"), "html", null, true);
+            echo "卧，";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["model"], "getNumBaths", array(), "method"), "html", null, true);
+            echo "卫</div>
 
 \t\t\t\t\t<div class=\"col-xs-12\">";
             // line 25
@@ -84,7 +88,7 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
                 // line 26
                 echo "\t\t\t\t\t\t无现房 ";
             } else {
-                echo " ";
+                echo " ￥";
                 echo twig_escape_filter($this->env, twig_round((($this->getAttribute((isset($context["starting_prices"]) ? $context["starting_prices"] : $this->getContext($context, "starting_prices")), $this->getAttribute($context["model"], "getId", array(), "method"), array(), "array") * 6.3) / 10000)), "html", null, true);
                 // line 27
                 echo " 万元起 ";
@@ -121,6 +125,6 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
 
     public function getDebugInfo()
     {
-        return array (  106 => 34,  101 => 31,  90 => 27,  85 => 26,  83 => 25,  79 => 23,  77 => 22,  65 => 13,  59 => 10,  54 => 8,  51 => 7,  47 => 6,  41 => 3,  38 => 2,  11 => 1,);
+        return array (  110 => 34,  105 => 31,  94 => 27,  89 => 26,  87 => 25,  79 => 23,  77 => 22,  65 => 13,  59 => 10,  54 => 8,  51 => 7,  47 => 6,  41 => 3,  38 => 2,  11 => 1,);
     }
 }

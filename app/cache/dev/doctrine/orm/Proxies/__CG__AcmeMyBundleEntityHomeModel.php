@@ -64,10 +64,10 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'builder', 'description', 'facade', 'floorplans', 'homes', 'id', 'images', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
+            return array('__isInitialized__', 'builder', 'description', 'facades', 'floorplans', 'homes', 'id', 'images', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
         }
 
-        return array('__isInitialized__', 'builder', 'description', 'facade', 'floorplans', 'homes', 'id', 'images', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
+        return array('__isInitialized__', 'builder', 'description', 'facades', 'floorplans', 'homes', 'id', 'images', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
     }
 
     /**
@@ -389,34 +389,56 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function setFacade(\Acme\MyBundle\Entity\Photo $facade = NULL)
+    public function addFacade(\Acme\MyBundle\Entity\Photo $facades)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFacade', array($facade));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addFacade', array($facades));
 
-        return parent::setFacade($facade);
+        return parent::addFacade($facades);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getFacade()
+    public function removeFacade(\Acme\MyBundle\Entity\Photo $facades)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFacade', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeFacade', array($facades));
 
-        return parent::getFacade();
+        return parent::removeFacade($facades);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setFloorplans(\Acme\MyBundle\Entity\Album $floorplans = NULL)
+    public function getFacades()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFloorplans', array($floorplans));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFacades', array());
 
-        return parent::setFloorplans($floorplans);
+        return parent::getFacades();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addFloorplan(\Acme\MyBundle\Entity\Photo $floorplans)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addFloorplan', array($floorplans));
+
+        return parent::addFloorplan($floorplans);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeFloorplan(\Acme\MyBundle\Entity\Photo $floorplans)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeFloorplan', array($floorplans));
+
+        return parent::removeFloorplan($floorplans);
     }
 
     /**
@@ -466,12 +488,23 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function setImages(\Acme\MyBundle\Entity\Album $images = NULL)
+    public function addImage(\Acme\MyBundle\Entity\Photo $images)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setImages', array($images));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addImage', array($images));
 
-        return parent::setImages($images);
+        return parent::addImage($images);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeImage(\Acme\MyBundle\Entity\Photo $images)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeImage', array($images));
+
+        return parent::removeImage($images);
     }
 
     /**

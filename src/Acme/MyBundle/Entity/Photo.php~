@@ -25,9 +25,19 @@ class Photo {
 	 */
 	protected $path;
 	/**
+	 * @ORM\Column(type="datetime")
+	 */
+	protected $updated;
+	/**
 	 * @ORM\Column(type="string", length=255, nullable=true)
 	 */
 	protected $url;
+	/**
+	 * Constructor
+	 */
+	public function __construct() {
+		$this->updated = new \DateTime ();
+	}
 	
 	public function __toString() {
 		return $this->path;
@@ -103,4 +113,27 @@ class Photo {
 	public function getUrl() {
 		return $this->url;
 	}
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Photo
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
 }

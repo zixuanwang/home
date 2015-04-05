@@ -20,10 +20,10 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-12">{{ (model.getSquareFeet() * 0.092903) |
-						round}} 平方米</div>
+						round}} 平方米， {{ model.getNumBeds() }}卧，{{ model.getNumBaths() }}卫</div>
 
 					<div class="col-xs-12">{% if starting_prices[model.getId()] == 0 %}
-						无现房 {% else %} {{ (starting_prices[model.getId()] * 6.3 /
+						无现房 {% else %} ￥{{ (starting_prices[model.getId()] * 6.3 /
 						10000) | round }} 万元起 {% endif %}</div>	
 				</div>
 			</div>

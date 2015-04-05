@@ -99,7 +99,7 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
 
 \t\t<div class=\"col-xs-12 col-sm-12 col-md-4\">
 \t\t\t<div class=\"piece\">
-\t\t\t\t<h4 class=\"text-center\">";
+\t\t\t\t<h4>";
         // line 30
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["model"]) ? $context["model"] : $this->getContext($context, "model")), "getName", array(), "method"), "html", null, true);
         echo "户型</h4>
@@ -255,8 +255,7 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
             // line 111
             echo twig_escape_filter($this->env, $this->getAttribute($context["community"], "getName", array(), "method"), "html", null, true);
             echo ";
-       \tvar pin = new Microsoft.Maps.Pushpin(location, {typeName: 'pushpinStyle', htmlContent: '<img src=\"/images/home_icon.png\" alt=\"\"/>' +
-            '<span>haha</span>'}); 
+       \tvar pin = new Microsoft.Maps.Pushpin(location); 
      \t// Create the infobox for the pushpin
        \tmap.entities.push(pin);
        ";
@@ -264,7 +263,7 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['community'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 117
+        // line 116
         echo "     }
     getMap();
       </script>
@@ -284,6 +283,6 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
 
     public function getDebugInfo()
     {
-        return array (  268 => 117,  256 => 111,  248 => 109,  244 => 108,  232 => 101,  223 => 94,  220 => 93,  213 => 91,  207 => 87,  195 => 81,  190 => 78,  185 => 77,  181 => 76,  171 => 71,  165 => 67,  161 => 66,  146 => 54,  139 => 50,  132 => 46,  125 => 42,  118 => 38,  109 => 32,  104 => 30,  97 => 25,  86 => 20,  82 => 19,  78 => 17,  74 => 16,  69 => 13,  61 => 11,  56 => 9,  50 => 8,  42 => 3,  39 => 2,  11 => 1,);
+        return array (  267 => 116,  256 => 111,  248 => 109,  244 => 108,  232 => 101,  223 => 94,  220 => 93,  213 => 91,  207 => 87,  195 => 81,  190 => 78,  185 => 77,  181 => 76,  171 => 71,  165 => 67,  161 => 66,  146 => 54,  139 => 50,  132 => 46,  125 => 42,  118 => 38,  109 => 32,  104 => 30,  97 => 25,  86 => 20,  82 => 19,  78 => 17,  74 => 16,  69 => 13,  61 => 11,  56 => 9,  50 => 8,  42 => 3,  39 => 2,  11 => 1,);
     }
 }

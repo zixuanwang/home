@@ -88,9 +88,6 @@ class Community {
 	 * @ORM\Column(type="string", length=10)
 	 */
 	protected $zipcode;
-	public function clearFacades() {
-		$this->facades = new \Doctrine\Common\Collections\ArrayCollection ();
-	}
 	
 	/**
 	 * Constructor

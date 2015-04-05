@@ -44,6 +44,7 @@ class HomeModel {
 	 * @ORM\ManyToMany(targetEntity="Photo", cascade={"persist"})
 	 * @ORM\JoinTable(name="homemodels_images", joinColumns={@ORM\JoinColumn(name="homemodel_id", referencedColumnName="id")},
 	 * inverseJoinColumns={@ORM\JoinColumn(name="photo_id", referencedColumnName="id")})
+	 * @ORM\OrderBy({"updated"="DESC"})
 	 */
 	protected $images;
 	/**
@@ -74,16 +75,6 @@ class HomeModel {
 	 * @ORM\Column(type="datetime")
 	 */
 	protected $updated;
-	public function clearFacades() {
-		$this->facades = new \Doctrine\Common\Collections\ArrayCollection ();
-	}
-	public function clearFloorplans() {
-		$this->floorplans = new \Doctrine\Common\Collections\ArrayCollection ();
-	}
-	public function clearImages() {
-		$this->images = new \Doctrine\Common\Collections\ArrayCollection ();
-	}
-	
 	/**
 	 * Constructor
 	 */

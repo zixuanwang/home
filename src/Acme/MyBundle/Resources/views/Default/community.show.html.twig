@@ -8,7 +8,7 @@
 				<div class="pin">
 					<a href="{{ path('model', {'id': model_price['model'].getId()}) }}">
 						<img class="pin-image"
-						src="{{ '/uploads/'~model_price['model'].getFacade().getPath()~'.jpg' }}">
+						src="{{ '/uploads/'~model_price['model'].getFacades()[0].getPath()~'.jpg' }}">
 					</a>
 					<div class="row">
 						<div class="col-xs-8">
@@ -32,19 +32,55 @@
 			</div>
 		</div>
 
-		<div class="col-xs-12 col-sm-12 col-md-4 model-block">
+		<div class="col-xs-12 col-sm-12 col-md-4">
 			<div class="piece">
-				<div class="model-facade-thumb img-responsive"
-					style="background-image: url('{{'/uploads/'~community.getFacade().getPath()~'.jpg'}}');"></div>
-						<h4 class="text-center">{{ community.getName() }}社区</h4>
-				<div class="model-side-detail">
-					<p>地址：{{ community.getAddress() }} {{ community.getCity() }}, {{
-						community.getState() }} {{ community.getZipcode() }}</p>
-				</div>
+				<h4>
+					<a href="{{ path('community', {'id': community.getId()}) }}">{{
+						community.getName() }}社区</a>
+				</h4>
+				<table class="table table-hover">
+					<tbody>
+						<tr>
+							<td scope="row">地址： {{ community.getAddress() }} {{
+								community.getCity() }}, {{ community.getState() }} {{
+								community.getZipcode() }}</td>
+						</tr>
+						<tr>
+							<td scope="row">现房：{{ model_price_array|length }}套</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="piece" id="map-piece">
+				<h4>地图</h4>
+				<div id="bing_map_canvas"></div>
 			</div>
 		</div>
 	</div>
 	<hr />
 	{{ include('::footer.html.twig') }}
 </div>
+{% endblock %} {% block javascripts %}
+<script type="text/javascript"
+	src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+<script type="text/javascript">
+    function getMap(){
+        var w = $("#map-piece").width();
+        var mapInitOpts = {
+            credentials: 'AqpckLVrDZE9ehOKwFREOF16SWFONVDd9KqviWPOeoiE6oSn-Fu6YZZjalMvvWXg',
+            center: new Microsoft.Maps.Location({{ community.getLatitude() }}, {{ community.getLongitude() }}),
+            mapTypeId: Microsoft.Maps.MapTypeId.road,
+            zoom: 7,
+            width: w - 15,
+            height:w - 15
+        };
+       var map = new Microsoft.Maps.Map(document.getElementById("bing_map_canvas"), mapInitOpts);
+       var location = new Microsoft.Maps.Location({{ community.getLatitude() }}, {{ community.getLongitude() }});
+        // Add a pin to the center of the map, using a custom icon
+       var pin = new Microsoft.Maps.Pushpin(location); 
+     	// Create the infobox for the pushpin
+       map.entities.push(pin);
+     }
+    getMap();
+</script>
 {% endblock %}

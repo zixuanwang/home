@@ -45,6 +45,7 @@ class Parser {
 			$saved_photo->setUrl ( $photo->getUrl () );
 			$p = $saved_photo;
 		}
+		$p->setUpdated ( new \DateTime () );
 		$this->em->persist ( $p );
 		$this->em->flush ();
 		return $p;
