@@ -10,9 +10,21 @@ community:
 home:
     path:     /home/
     defaults: { _controller: AcmeMyBundle:Home:index }
+la:
+    path:     /la/
+    defaults: { _controller: AcmeMyBundle:LA:index }
 manage:
     path:     /manage/{type}
     defaults: { _controller: AcmeMyBundle:Manage:index }
 model:
     path:     /model/{id}
     defaults: { _controller: AcmeMyBundle:Model:index }
+portland:
+    path:     /portland/
+    defaults: { _controller: AcmeMyBundle:Portland:index }
+seattle:
+    path:     /seattle/
+    defaults: { _controller: AcmeMyBundle:Seattle:index }
+sf:
+    path:     /sf/
+    defaults: { _controller: AcmeMyBundle:SF:index }

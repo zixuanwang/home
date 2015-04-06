@@ -1,0 +1,43 @@
+ {% extends '::base.html.twig' %} {% block body %}
+<div class="container">
+	{{ include('::header.html.twig') }}
+	<div class="row">
+		<div class="col-lg-12">
+			<div id="columns">
+				{% for model in models %}
+				<div class="pin">
+					<a href="{{ path('model', {'id': model.getId()}) }}"> <img
+						class="pin-image"
+						src="{{ '/uploads/'~model.getFacades()[0].getPath()~'.jpg' }}"></a>
+					<div class="row">
+						<div class="col-xs-8">
+							<h4>{{ model.getName() }}</h4>
+						</div>
+						<div class="col-xs-4">
+							<h4>
+								<img src="/images/lennar.png" class="pin-builder">
+							</h4>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">{{ (model.getSquareFeet() * 0.092903) |
+							round}} 平方米， {{ model.getNumBeds() }}卧，{{ model.getNumBaths() }}卫</div>
+
+						<div class="col-xs-12">{% if starting_prices[model.getId()] == 0
+							%} 无现房 {% else %} ￥{{ (starting_prices[model.getId()] * 6.3 /
+							10000) | round }} 万元起 {% endif %}</div>
+					</div>
+				</div>
+
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<hr />
+	{{ include('::footer.html.twig') }}
+</div>
+{% endblock %}{% block javascripts %}
+<script type="text/javascript">
+	$('#sf-button').addClass('active');
+</script>
+{% endblock %}

@@ -26,12 +26,30 @@ class __TwigTemplate_7ec36d732a1963219410e2d8e18280346b51773bb1d3cc5142fcae510b9
 \t\t\t\t\tclass=\"icon-bar\"></span> <span class=\"icon-bar\"></span> <span
 \t\t\t\t\tclass=\"icon-bar\"></span>
 \t\t\t</button>
-\t\t\t<a class=\"navbar-brand\" href=\"/\">搜美房</a>
+\t\t\t<a class=\"navbar-brand\" href=\"";
+        // line 11
+        echo $this->env->getExtension('routing')->getPath("home");
+        echo "\">搜美房</a>
 \t\t</div>
 \t\t<!-- Collect the nav links, forms, and other content for toggling -->
 \t\t<div class=\"collapse navbar-collapse\" id=\"home-header\">
 \t\t\t<ul class=\"nav navbar-nav headerCases\">
-\t\t\t\t<li><button class=\"cta grey small rounded\">西雅图</button></li>
+\t\t\t\t<li><a class=\"cta grey small rounded\" href=\"";
+        // line 16
+        echo $this->env->getExtension('routing')->getPath("seattle");
+        echo "\" id=\"seattle-button\">西雅图</a></li>
+\t\t\t\t<li><a class=\"cta grey small rounded\" href=\"";
+        // line 17
+        echo $this->env->getExtension('routing')->getPath("portland");
+        echo "\" id=\"portland-button\">波特兰</a></li>
+\t\t\t\t<li><a class=\"cta grey small rounded\" href=\"";
+        // line 18
+        echo $this->env->getExtension('routing')->getPath("sf");
+        echo "\" id=\"sf-button\">旧金山</a></li>
+\t\t\t\t<li><a class=\"cta grey small rounded\" href=\"";
+        // line 19
+        echo $this->env->getExtension('routing')->getPath("la");
+        echo "\" id=\"la-button\">洛杉矶</a></li>
 \t\t\t</ul>
 \t\t</div>
 \t</div>
@@ -44,8 +62,13 @@ class __TwigTemplate_7ec36d732a1963219410e2d8e18280346b51773bb1d3cc5142fcae510b9
         return "::header.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  19 => 1,);
+        return array (  51 => 19,  47 => 18,  43 => 17,  39 => 16,  31 => 11,  19 => 1,);
     }
 }

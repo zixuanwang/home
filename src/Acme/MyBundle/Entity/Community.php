@@ -6,13 +6,17 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="community")
+ * @ORM\Table(name="community", indexes={@ORM\Index(name="area_idx", columns={"area"})})
  */
 class Community {
 	/**
 	 * @ORM\Column(type="string", length=100)
 	 */
 	protected $address;
+	/**
+	 * @ORM\Column(type="string", length=100)
+	 */
+	protected $area;
 	/**
 	 * @ORM\Column(type="string", length=30)
 	 */
@@ -501,4 +505,27 @@ class Community {
 	public function getSchools() {
 		return $this->schools;
 	}
+
+    /**
+     * Set area
+     *
+     * @param string $area
+     * @return Community
+     */
+    public function setArea($area)
+    {
+        $this->area = $area;
+
+        return $this;
+    }
+
+    /**
+     * Get area
+     *
+     * @return string 
+     */
+    public function getArea()
+    {
+        return $this->area;
+    }
 }

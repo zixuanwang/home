@@ -107,7 +107,7 @@ class Parser {
 		$unique_facades = array_unique ( $model->getFacades ()->toArray () );
 		$unique_floorplans = array_unique ( $model->getFloorplans ()->toArray () );
 		$unique_images = array_unique ( $model->getImages ()->toArray () );
-		if (empty ( $unique_facades ) || empty ( $unique_floorplans ) || empty ( $unique_images )) {
+		if (empty ( $unique_facades ) || empty ( $unique_floorplans )) {
 			return null;
 		}
 		$m_facades = $m->getFacades ();

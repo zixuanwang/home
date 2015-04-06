@@ -4,5 +4,5 @@ $(".headerCasesFilters button").on("click", function() {
 });
 
 $(document).ready(function() {
-  $(".fancybox").fancybox();
+	$(".fancybox").fancybox();
 });

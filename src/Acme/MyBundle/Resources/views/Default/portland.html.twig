@@ -1,0 +1,51 @@
+ {% extends '::base.html.twig' %} {% block body %}
+<div class="container">
+	{{ include('::header.html.twig') }}
+	<div class="row area-cover">
+		<div class="col-lg-12">
+			<img src="/images/portland_cover.jpg" class="img-responsive">
+			<div class="cover-text">
+				<h2>波特兰</h2>
+				<h4>玫瑰之城是俄勒冈州的中心城市。她是美国西海岸的经济中心之一：耐克的总部座落在这里，英特尔在这里设有最大的子公司，每天都有步履匆匆的白领们在城市里辛勤奔忙。与此同时，波特兰也是全美知名的绿色城市和艺术城市，这青山环绕，绿水常萦，城郊是户外运动者的宝地，城里聚居着大量的艺廊，艺术派对和艺术街区。</h4>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div id="columns">
+				{% for model in models %}
+				<div class="pin">
+					<a href="{{ path('model', {'id': model.getId()}) }}"> <img
+						class="pin-image"
+						src="{{ '/uploads/'~model.getFacades()[0].getPath()~'.jpg' }}"></a>
+					<div class="row">
+						<div class="col-xs-8">
+							<h4>{{ model.getName() }}</h4>
+						</div>
+						<div class="col-xs-4">
+							<h4>
+								<img src="/images/lennar.png" class="pin-builder">
+							</h4>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">{{ (model.getSquareFeet() * 0.092903) |
+							round}} 平方米， {{ model.getNumBeds() }}卧，{{ model.getNumBaths() }}卫</div>
+
+						<div class="col-xs-12">{% if starting_prices[model.getId()] == 0
+							%} 无现房 {% else %} ￥{{ (starting_prices[model.getId()] * 6.3 /
+							10000) | round }} 万元起 {% endif %}</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<hr />
+	{{ include('::footer.html.twig') }}
+</div>
+{% endblock %}{% block javascripts %}
+<script type="text/javascript">
+	$('#portland-button').addClass('active');
+</script>
+{% endblock %}

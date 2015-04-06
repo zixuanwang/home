@@ -64,10 +64,10 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'builder', 'description', 'facades', 'floorplans', 'homes', 'id', 'images', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
+            return array('__isInitialized__', 'area', 'builder', 'description', 'facades', 'floorplans', 'homes', 'id', 'images', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
         }
 
-        return array('__isInitialized__', 'builder', 'description', 'facades', 'floorplans', 'homes', 'id', 'images', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
+        return array('__isInitialized__', 'area', 'builder', 'description', 'facades', 'floorplans', 'homes', 'id', 'images', 'name', 'num_baths', 'num_beds', 'num_garages', 'num_stories', 'square_feet', 'updated');
     }
 
     /**
@@ -516,6 +516,28 @@ class HomeModel extends \Acme\MyBundle\Entity\HomeModel implements \Doctrine\ORM
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getImages', array());
 
         return parent::getImages();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setArea($area)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setArea', array($area));
+
+        return parent::setArea($area);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getArea()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getArea', array());
+
+        return parent::getArea();
     }
 
 }

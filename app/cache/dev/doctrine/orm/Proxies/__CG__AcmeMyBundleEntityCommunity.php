@@ -64,10 +64,10 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'address', 'builder', 'city', 'county', 'description', 'facades', 'homes', 'id', 'images', 'latitude', 'longitude', 'map', 'name', 'school_district', 'schools', 'state', 'updated', 'zipcode');
+            return array('__isInitialized__', 'address', 'area', 'builder', 'city', 'county', 'description', 'facades', 'homes', 'id', 'images', 'latitude', 'longitude', 'map', 'name', 'school_district', 'schools', 'state', 'updated', 'zipcode');
         }
 
-        return array('__isInitialized__', 'address', 'builder', 'city', 'county', 'description', 'facades', 'homes', 'id', 'images', 'latitude', 'longitude', 'map', 'name', 'school_district', 'schools', 'state', 'updated', 'zipcode');
+        return array('__isInitialized__', 'address', 'area', 'builder', 'city', 'county', 'description', 'facades', 'homes', 'id', 'images', 'latitude', 'longitude', 'map', 'name', 'school_district', 'schools', 'state', 'updated', 'zipcode');
     }
 
     /**
@@ -604,6 +604,28 @@ class Community extends \Acme\MyBundle\Entity\Community implements \Doctrine\ORM
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSchools', array());
 
         return parent::getSchools();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setArea($area)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setArea', array($area));
+
+        return parent::setArea($area);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getArea()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getArea', array());
+
+        return parent::getArea();
     }
 
 }

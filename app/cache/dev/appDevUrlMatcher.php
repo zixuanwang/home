@@ -151,6 +151,15 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'Acme\\MyBundle\\Controller\\HomeController::indexAction',  '_route' => 'home',);
         }
 
+        // la
+        if (rtrim($pathinfo, '/') === '/la') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'la');
+            }
+
+            return array (  '_controller' => 'Acme\\MyBundle\\Controller\\LAController::indexAction',  '_route' => 'la',);
+        }
+
         if (0 === strpos($pathinfo, '/m')) {
             // manage
             if (0 === strpos($pathinfo, '/manage') && preg_match('#^/manage/(?P<type>[^/]++)$#s', $pathinfo, $matches)) {
@@ -160,6 +169,36 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             // model
             if (0 === strpos($pathinfo, '/model') && preg_match('#^/model/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'model')), array (  '_controller' => 'Acme\\MyBundle\\Controller\\ModelController::indexAction',));
+            }
+
+        }
+
+        // portland
+        if (rtrim($pathinfo, '/') === '/portland') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'portland');
+            }
+
+            return array (  '_controller' => 'Acme\\MyBundle\\Controller\\PortlandController::indexAction',  '_route' => 'portland',);
+        }
+
+        if (0 === strpos($pathinfo, '/s')) {
+            // seattle
+            if (rtrim($pathinfo, '/') === '/seattle') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'seattle');
+                }
+
+                return array (  '_controller' => 'Acme\\MyBundle\\Controller\\SeattleController::indexAction',  '_route' => 'seattle',);
+            }
+
+            // sf
+            if (rtrim($pathinfo, '/') === '/sf') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'sf');
+                }
+
+                return array (  '_controller' => 'Acme\\MyBundle\\Controller\\SFController::indexAction',  '_route' => 'sf',);
             }
 
         }

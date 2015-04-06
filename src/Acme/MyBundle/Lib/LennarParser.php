@@ -79,17 +79,23 @@ class LennarParser extends Parser {
 		}
 		return $images;
 	}
-	
-	/**
-	 * this function parses the page of seattle.
-	 * for example, see ajax queries in http://www.lennar.com/New-Homes/Washington/Seattle
-	 */
-	public function fetch_seattle() {
+	public function fetch_area($area) {
 		// get facet results
 		// construct REST request
 		$facet_url = $this->root_url . '/Services/REST/Facets.svc/GetFacetResults';
-		$json_string = '{"searchState":{"ctx":"Market","stcd":"WA","mkid":86,"ddmd":"","loc":[0,0,0,0,0,0,0,0,0,0],"sch":[0,0,0,0,0,0,0,0,0,0,0,0,0],"mnpr":[0,0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0],"bed":[0,0,0],"bat":[0,0,0,0,0],"gar":[0,0],"str":[0,0,0],"mvdt":"No Preference","type":[0,0,0,0],"amen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":50,"sb":"communityname","so":"asc"}}';
-		$facet_result = $this->curl_get_contents ( $facet_url, $json_string );
+		if ($area == 'seattle') {
+			$request_string = '{"searchState":{"ctx":"Market","stcd":"WA","mkid":86,"ddmd":"","loc":[0,0,0,0,0,0,0,0,0,0],"sch":[0,0,0,0,0,0,0,0,0,0,0,0,0],"mnpr":[0,0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0],"bed":[0,0,0],"bat":[0,0,0,0,0],"gar":[0,0],"str":[0,0,0],"mvdt":"No Preference","type":[0,0,0,0],"amen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":50,"sb":"communityname","so":"asc"}}';
+		}
+		if ($area == 'portland') {
+			$request_string = '{"searchState":{"ctx":"Market","stcd":"OR","mkid":88,"ddmd":"","loc":[0,0,0,0,0,0,0,0],"sch":[0,0,0,0,0,0],"mnpr":[0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0,0],"bed":[0,0,0],"bat":[0,0,0],"gar":[0,0],"str":[0,0,0],"mvdt":"No Preference","type":[0,0],"amen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":50,"sb":"communityname","so":"asc"}}';
+		}
+		if ($area == 'sf') {
+			$request_string = '{"searchState":{"ctx":"Market","stcd":"CA","mkid":67,"ddmd":"","loc":[0,0,0,0,0,0,0,0],"sch":[0,0],"mnpr":[0,0,0,0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0,0,0],"bed":[0,0,0,0,0],"bat":[0,0,0,0,0],"gar":[0,0,0],"str":[0,0],"mvdt":"No Preference","type":[0,0,0,0,0,0],"amen":[0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":50,"sb":"communityname","so":"asc"}}';
+		}
+		if ($area == 'la') {
+			$request_string = '{"searchState":{"ctx":"Market","stcd":"CA","mkid":37,"ddmd":"","loc":[0,0,0],"sch":[0],"mnpr":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0],"bed":[0,0,0,0],"bat":[0,0,0,0],"gar":[0,0],"str":[0,0],"mvdt":"No Preference","type":[0,0,0],"amen":[0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":50,"sb":"communityname","so":"asc"}}';
+		}
+		$facet_result = $this->curl_get_contents ( $facet_url, $request_string );
 		$facet_array = json_decode ( $facet_result, true );
 		// get community details
 		// construct REST request
@@ -122,19 +128,37 @@ class LennarParser extends Parser {
 			$community_entity->setCity ( $community ['cty'] );
 			$community_entity->setState ( $community ['sco'] );
 			$community_entity->setZipcode ( $community ['zip'] );
+			$community_entity->setArea ( $area );
 			$facade_url = substr ( $community ['img'], 0, strpos ( $community ['img'], 'ashx?' ) + 5 );
 			$facade_photo = new Photo ();
 			$facade_photo->setPath ( parent::save_image ( $facade_url ) );
 			$community_entity->addFacade ( $facade_photo );
 			// get latitude and longitude from Bing map.
-			$lat_long = Utility::address_to_latlong ( $community ['add'], $community ['cty'], $community ['sco'], $community ['zip'] );
-			if (! empty ( $lat_long )) {
-				$community_entity->setLatitude ( $lat_long [0] );
-				$community_entity->setLongitude ( $lat_long [1] );
-			}
+// 			$lat_long = Utility::address_to_latlong ( $community ['add'], $community ['cty'], $community ['sco'], $community ['zip'] );
+// 			if (! empty ( $lat_long )) {
+// 				$community_entity->setLatitude ( $lat_long [0] );
+// 				$community_entity->setLongitude ( $lat_long [1] );
+// 			}
 			$c = parent::add_community ( $community_entity );
 			$this->fetch_model ( $community ['cid'], $c );
 		}
+	}
+	
+	/**
+	 * this function parses the page of seattle.
+	 * for example, see ajax queries in http://www.lennar.com/New-Homes/Washington/Seattle
+	 */
+	public function fetch_seattle() {
+		$this->fetch_area ( 'seattle' );
+	}
+	public function fetch_portland() {
+		$this->fetch_area ( 'portland' );
+	}
+	public function fetch_sf() {
+		$this->fetch_area ( 'sf' );
+	}
+	public function fetch_la() {
+		$this->fetch_area ( 'la' );
 	}
 	
 	/**
@@ -173,6 +197,7 @@ class LennarParser extends Parser {
 			$model_entity->setNumGarages ( $model ['gagebay'] );
 			$model_entity->setNumStories ( $model ['story'] );
 			$model_entity->setName ( $model ['plmktnm'] );
+			$model_entity->setArea ( $community_entity->getArea () );
 			// fetch images from the web page
 			$page_url = $this->root_url . $model ['vtlURL'];
 			$images = $this->parse_image ( $page_url );
