@@ -2,16 +2,26 @@
 
 namespace Acme\MyBundle\Controller;
 
-use Acme\MyBundle\Lib\HomePost;
+use Acme\MyBundle\Entity\HomeModel;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends Controller {
-	public function indexAction() {
-		// select all home models
+	/**
+	 * @Route("/home/{page}", defaults={"page" = 1})
+	 */
+	public function indexAction($page) {
+		$limit = 15;
 		$repository = $this->getDoctrine ()->getRepository ( 'AcmeMyBundle:HomeModel' );
-		$query = $repository->createQueryBuilder ( 'p' )->orderBy ( 'p.updated', 'DESC' )->getQuery ();
-		$models = $query->getResult ();
+		$qb = $repository->createQueryBuilder ( 'p' );
+		$qb->setFirstResult ( ($page - 1) * $limit )->setMaxResults ( $limit );
+		$models = new Paginator ( $qb );
+		// $c = count ( $paginator );
+		// $repository = $this->getDoctrine ()->getRepository ( 'AcmeMyBundle:HomeModel' );
+		// $query = $repository->createQueryBuilder ( 'p' )->orderBy ( 'p.updated', 'DESC' )->getQuery ();
+		// $models = $query->getResult ();
 		$starting_price_array = array ();
 		foreach ( $models as $model ) {
 			$id = $model->getId ();
@@ -29,7 +39,8 @@ class HomeController extends Controller {
 		}
 		return $this->render ( 'AcmeMyBundle:Default:index.html.twig', array (
 				'models' => $models,
-				'starting_prices' => $starting_price_array 
+				'starting_prices' => $starting_price_array,
+				'page' => $page
 		) );
 	}
 }

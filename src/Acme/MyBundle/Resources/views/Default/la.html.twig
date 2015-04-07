@@ -1,9 +1,18 @@
  {% extends '::base.html.twig' %} {% block body %}
 <div class="container">
 	{{ include('::header.html.twig') }}
+	<div class="row area-cover">
+		<div class="col-lg-12">
+			<img src="/images/la_cover.jpg" class="img-responsive">
+			<div class="cover-text">
+				<h2>洛杉矶</h2>
+				<h4>天使之城是全世界的文化、科学、技术、国际贸易和高等教育中心之一，还拥有世界知名的各种专业与文化领域的机构。该市及紧邻的区域，在大众娱乐—诸如电影、电视、音乐方面构成了洛杉矶的国际声誉和全球地位的基础。</h4>
+			</div>
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-lg-12">
-			<div id="columns">
+			<div id="container">
 				{% for model in models %}
 				<div class="pin">
 					<a href="{{ path('model', {'id': model.getId()}) }}"> <img

@@ -28,7 +28,7 @@ class __TwigTemplate_7ec36d732a1963219410e2d8e18280346b51773bb1d3cc5142fcae510b9
 \t\t\t</button>
 \t\t\t<a class=\"navbar-brand\" href=\"";
         // line 11
-        echo $this->env->getExtension('routing')->getPath("home");
+        echo $this->env->getExtension('routing')->getPath("home", array("page" => 1));
         echo "\">搜美房</a>
 \t\t</div>
 \t\t<!-- Collect the nav links, forms, and other content for toggling -->

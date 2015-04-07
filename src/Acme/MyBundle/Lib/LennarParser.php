@@ -134,11 +134,11 @@ class LennarParser extends Parser {
 			$facade_photo->setPath ( parent::save_image ( $facade_url ) );
 			$community_entity->addFacade ( $facade_photo );
 			// get latitude and longitude from Bing map.
-// 			$lat_long = Utility::address_to_latlong ( $community ['add'], $community ['cty'], $community ['sco'], $community ['zip'] );
-// 			if (! empty ( $lat_long )) {
-// 				$community_entity->setLatitude ( $lat_long [0] );
-// 				$community_entity->setLongitude ( $lat_long [1] );
-// 			}
+			$lat_long = Utility::address_to_latlong ( $community ['add'], $community ['cty'], $community ['sco'], $community ['zip'] );
+			if (! empty ( $lat_long )) {
+				$community_entity->setLatitude ( $lat_long [0] );
+				$community_entity->setLongitude ( $lat_long [1] );
+			}
 			$c = parent::add_community ( $community_entity );
 			$this->fetch_model ( $community ['cid'], $c );
 		}

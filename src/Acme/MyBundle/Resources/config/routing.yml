@@ -8,7 +8,7 @@ community:
     path:     /community/{id}
     defaults: { _controller: AcmeMyBundle:Community:index }
 home:
-    path:     /home/
+    path:     /home/{page}
     defaults: { _controller: AcmeMyBundle:Home:index }
 la:
     path:     /la/
