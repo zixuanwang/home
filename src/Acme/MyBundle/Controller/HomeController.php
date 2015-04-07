@@ -12,7 +12,7 @@ class HomeController extends Controller {
 	/**
 	 * @Route("/home/{page}", defaults={"page" = 1})
 	 */
-	public function indexAction($page) {
+	public function indexAction($page = 1) {
 		$limit = 15;
 		$repository = $this->getDoctrine ()->getRepository ( 'AcmeMyBundle:HomeModel' );
 		$qb = $repository->createQueryBuilder ( 'p' );

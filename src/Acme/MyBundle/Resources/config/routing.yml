@@ -10,6 +10,9 @@ community:
 home:
     path:     /home/{page}
     defaults: { _controller: AcmeMyBundle:Home:index }
+homepage:
+    path:     /
+    defaults: { _controller: AcmeMyBundle:Home:index }
 la:
     path:     /la/
     defaults: { _controller: AcmeMyBundle:LA:index }
