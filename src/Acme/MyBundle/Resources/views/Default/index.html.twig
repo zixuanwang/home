@@ -1,6 +1,34 @@
  {% extends '::base.html.twig' %} {% block body %}
 <div class="container">
 	{{ include('::header.html.twig') }}
+	<div class="row category-bar">
+		<div class="col-lg-12 text-center">
+			<div class="category-item">
+				<img src="/images/school.jpg" alt="..." class="img-rounded">
+				<div class="category-desc">
+					<h5>学区房</h5>
+				</div>
+			</div>
+			<div class="category-item">
+				<img src="/images/invest.jpg" alt="..." class="img-rounded">
+				<div class="category-desc">
+					<h5>投资房</h5>
+				</div>
+			</div>
+			<div class="category-item">
+				<img src="/images/downtown.jpg" alt="..." class="img-rounded">
+				<div class="category-desc">
+					<h5>市中心</h5>
+				</div>
+			</div>
+			<div class="category-item">
+				<img src="/images/sea.jpg" alt="..." class="img-rounded">
+				<div class="category-desc">
+					<h5>海景房</h5>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-lg-12">
 			<div id="container">
@@ -27,6 +55,11 @@
 							%} 无现房 {% else %} ￥{{ (starting_prices[model.getId()] * 6.3 /
 							10000) | round }} 万元起 {% endif %}</div>
 					</div>
+					{% if not model.getImages() is empty %}
+					<div class="ribbon-wrapper-green">
+						<div class="ribbon-green">样板间</div>
+					</div>
+					{% endif %}
 				</div>
 				{% endfor %}
 			</div>
@@ -37,8 +70,8 @@
 			<nav>
 				<ul class="pagination">
 					{% for i in 1..7 %} {% if i == page %}
-					<li class="active"><a href="{{ path('home', {'page': i}) }}">{{ i }}</a></li>
-					{% else %}
+					<li class="active"><a href="{{ path('home', {'page': i}) }}">{{ i
+							}}</a></li> {% else %}
 					<li><a href="{{ path('home', {'page': i}) }}">{{ i }}</a></li> {%
 					endif %} {% endfor %}
 				</ul>

@@ -2,32 +2,36 @@
 <div class="container">
 	{{ include('::header.html.twig') }}
 	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-8">
+		<div class="col-xs-12 col-sm-8 col-md-8">
 			{% if not images is empty %}
 			<div class="piece">
 				<h4>样板间</h4>
-				{% for image in images %} <a class="fancybox" rel="group"
-					href="{{'/uploads/'~image.getPath()~'.jpg'}}">
-					<div class="model-thumb fade img-responsive"
-						style="background-image: url('{{'/uploads/'~image.getPath()~'.jpg'}}');"></div>
-				</a> {% endfor %}
+				<div id="model-image-container">
+					{% for image in images %} <a class="fancybox" rel="group"
+						href="{{'/uploads/'~image.getPath()~'.jpg'}}">
+						<div class="model-thumb fade img-responsive"
+							style="background-image: url('{{'/uploads/'~image.getPath()~'.jpg'}}');"></div>
+					</a> {% endfor %}
+				</div>
 			</div>
 			{% endif %}
 			<div class="piece">
 				<h4>户型图</h4>
-				{% for floorplan in floorplans %}
-				<div class="floorplan-thumb-box">
-					<a class="fancybox" rel="group"
-						href="{{'/uploads/'~floorplan.getPath()~'.jpg'}}"> <img
-						src="{{'/uploads/'~floorplan.getPath()~'.jpg'}}"
-						class="floorplan-thumb">
-					</a>
+				<div id="model-floorplan-container">
+					{% for floorplan in floorplans %}
+					<div class="floorplan-thumb-box">
+						<a class="fancybox" rel="group"
+							href="{{'/uploads/'~floorplan.getPath()~'.jpg'}}"> <img
+							src="{{'/uploads/'~floorplan.getPath()~'.jpg'}}"
+							class="floorplan-thumb">
+						</a>
+					</div>
+					{% endfor %}
 				</div>
-				{% endfor %}
 			</div>
 		</div>
 
-		<div class="col-xs-12 col-sm-12 col-md-4">
+		<div class="col-xs-12 col-sm-4 col-md-4 model-detail-column">
 			<div class="piece">
 				<h4>{{ model.getName() }}户型</h4>
 				<div class="model-facade-thumb img-responsive"
@@ -98,26 +102,74 @@
 <script type="text/javascript"
 	src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
 <script type="text/javascript">
-    function getMap(){
-        var w = $("#map-piece").width();
-        var mapInitOpts = {
-            credentials: 'AqpckLVrDZE9ehOKwFREOF16SWFONVDd9KqviWPOeoiE6oSn-Fu6YZZjalMvvWXg',
-            center: new Microsoft.Maps.Location({{ map_center['latitude'] }}, {{ map_center['longitude'] }}),
-            mapTypeId: Microsoft.Maps.MapTypeId.road,
-            zoom: 7,
-            width: w - 15,
-            height:w - 15
-        };
-       var map = new Microsoft.Maps.Map(document.getElementById("bing_map_canvas"), mapInitOpts);
-       {% for community in communities %}
-       	var location = new Microsoft.Maps.Location({{ community.getLatitude() }}, {{ community.getLongitude() }});
-       	// Add a pin to the center of the map, using a custom icon
-       	//var name = {{ community.getName() }};
-       	var pin = new Microsoft.Maps.Pushpin(location); 
-     	// Create the infobox for the pushpin
-       	map.entities.push(pin);
-       {% endfor %}
-     }
-    getMap();
+    (function($) {
+        var getMap = function() {
+            var w = $("#map-piece").width();
+            var mapInitOpts = {
+                credentials: 'AqpckLVrDZE9ehOKwFREOF16SWFONVDd9KqviWPOeoiE6oSn-Fu6YZZjalMvvWXg',
+                center: new Microsoft.Maps.Location({{ map_center['latitude'] }}, {{ map_center['longitude'] }}),
+                mapTypeId: Microsoft.Maps.MapTypeId.road,
+                zoom: 7,
+                width: w - 15,
+                height:w - 15
+            };
+            $('#bing_map_canvas').empty();
+           var map = new Microsoft.Maps.Map(document.getElementById("bing_map_canvas"), mapInitOpts);
+           {% for community in communities %}
+           	var location = new Microsoft.Maps.Location({{ community.getLatitude() }}, {{ community.getLongitude() }});
+           	// Add a pin to the center of the map, using a custom icon
+           	//var name = {{ community.getName() }};
+           	var pin = new Microsoft.Maps.Pushpin(location); 
+         	// Create the infobox for the pushpin
+           	map.entities.push(pin);
+           {% endfor %}
+        }
+    	var $container = $('#model-image-container');
+    	var $floorplan_container = $('#model-floorplan-container');
+    	var colWidth = function() {
+    		var w = $container.width(), columnNum = 1, columnWidth = w -15;
+    	 	if (w > 500) {
+    			columnNum = 2;
+    			columnWidth = (w - 30) / columnNum;
+    		}
+    		$container.find('.model-thumb').each(function() {
+    			var $item = $(this);
+    			$item.css({
+    				width : columnWidth
+    			});
+    		});
+    		$floorplan_container.find('.floorplan-thumb-box').each(function() {
+    			var $item = $(this);
+    			$item.css({
+    				width : columnWidth
+    			});
+    		});
+    		return columnWidth;
+    	};
+    	var image_isotope = function() {
+    		$container.isotope({
+    			itemSelector : '.model-thumb',
+    			masonry : {
+    				columnWidth : colWidth(),
+    				gutter : 15
+    			}
+    		});
+    	};
+    	var floorplan_isotope = function() {
+    		$floorplan_container.isotope({
+    			itemSelector : '.floorplan-thumb-box',
+    			masonry : {
+    				columnWidth : colWidth(),
+    				gutter : 15
+    			}
+    		});
+    	};
+    	$(window).on('debouncedresize', image_isotope);
+    	$(window).on('debouncedresize', floorplan_isotope);
+    	$('#model-image-container').imagesLoaded(image_isotope);
+    	$('#model-floorplan-container').imagesLoaded(floorplan_isotope);
+    	$(window).on('debouncedresize', getMap);
+    	$(document).ready(getMap);
+    }(jQuery));
 </script>
 {% endblock %}
