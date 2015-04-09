@@ -43,9 +43,13 @@ $(document).ready(function() {
 	var colWidth = function() {
 		var w = $container.width(), columnNum = 1, columnWidth = w;
 		if (w > 1100) {
+			columnNum = 4;
+			columnWidth = (w - 51) / columnNum;
+		} else if (w > 750) {
 			columnNum = 3;
 			columnWidth = (w - 33) / columnNum;
-		} else if (w > 500) {
+		}
+		else if (w > 450) {
 			columnNum = 2;
 			columnWidth = (w - 17) / columnNum;
 		}

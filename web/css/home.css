@@ -346,7 +346,7 @@ table {
 	height: 88px;
 	overflow: hidden;
 	position: absolute;
-	top: -7px;
+	top: -5px;
 	right: -5px;
 }
 
@@ -424,4 +424,3 @@ table {
 	z-index: 2;
 	color: #eeeeee;
 }
-t
