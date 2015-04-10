@@ -151,34 +151,36 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
             echo " ";
             if (($context["i"] == (isset($context["page"]) ? $context["page"] : $this->getContext($context, "page")))) {
                 // line 68
-                echo "\t\t\t\t\t<li class=\"active\"><a href=\"";
-                echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("page" => $context["i"])), "html", null, true);
-                echo "\">";
-                echo twig_escape_filter($this->env, $context["i"], "html", null, true);
+                echo "\t\t\t\t\t<li class=\"active\"><a
+\t\t\t\t\t\thref=\"";
                 // line 69
-                echo "</a></li> ";
-            } else {
-                // line 70
-                echo "\t\t\t\t\t<li><a href=\"";
-                echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("page" => $context["i"])), "html", null, true);
+                echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("area" => (isset($context["area"]) ? $context["area"] : $this->getContext($context, "area")), "page" => $context["i"])), "html", null, true);
                 echo "\">";
                 echo twig_escape_filter($this->env, $context["i"], "html", null, true);
+                echo "</a></li>
+\t\t\t\t\t";
+            } else {
+                // line 71
+                echo "\t\t\t\t\t<li><a href=\"";
+                echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("area" => (isset($context["area"]) ? $context["area"] : $this->getContext($context, "area")), "page" => $context["i"])), "html", null, true);
+                echo "\">";
+                echo twig_escape_filter($this->env, $context["i"], "html", null, true);
+                // line 72
                 echo "</a></li> ";
             }
-            // line 71
             echo " ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['i'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 72
+        // line 73
         echo "\t\t\t\t</ul>
 \t\t\t</nav>
 \t\t</div>
 \t</div>
 \t<hr />
 \t";
-        // line 77
+        // line 78
         echo twig_include($this->env, $context, "::footer.html.twig");
         echo "
 </div>
@@ -197,6 +199,6 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
 
     public function getDebugInfo()
     {
-        return array (  182 => 77,  175 => 72,  169 => 71,  162 => 70,  159 => 69,  154 => 68,  148 => 67,  139 => 60,  132 => 58,  126 => 54,  124 => 53,  118 => 51,  113 => 50,  111 => 49,  103 => 47,  101 => 46,  94 => 42,  88 => 39,  83 => 37,  80 => 36,  76 => 35,  41 => 3,  38 => 2,  11 => 1,);
+        return array (  184 => 78,  177 => 73,  169 => 72,  164 => 71,  157 => 69,  154 => 68,  148 => 67,  139 => 60,  132 => 58,  126 => 54,  124 => 53,  118 => 51,  113 => 50,  111 => 49,  103 => 47,  101 => 46,  94 => 42,  88 => 39,  83 => 37,  80 => 36,  76 => 35,  41 => 3,  38 => 2,  11 => 1,);
     }
 }

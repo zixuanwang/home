@@ -65,10 +65,11 @@
 			<nav>
 				<ul class="pagination">
 					{% for i in page_array %} {% if i == page %}
-					<li class="active"><a href="{{ path('home', {'page': i}) }}">{{ i
-							}}</a></li> {% else %}
-					<li><a href="{{ path('home', {'page': i}) }}">{{ i }}</a></li> {%
-					endif %} {% endfor %}
+					<li class="active"><a
+						href="{{ path('home', {'area': area, 'page': i}) }}">{{ i }}</a></li>
+					{% else %}
+					<li><a href="{{ path('home', {'area': area, 'page': i}) }}">{{ i
+							}}</a></li> {% endif %} {% endfor %}
 				</ul>
 			</nav>
 		</div>

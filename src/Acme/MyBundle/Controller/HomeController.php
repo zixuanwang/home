@@ -10,12 +10,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends Controller {
 	/**
-	 * @Route("/home/{page}", defaults={"page" = 1})
+	 * @Route("/home/{area}/{page}")
 	 */
-	public function indexAction($page = 1) {
+	public function indexAction($area = 'all', $page = 1) {
 		$page_size = 16;
 		$repository = $this->getDoctrine ()->getRepository ( 'AcmeMyBundle:HomeModel' );
-		$qb = $repository->createQueryBuilder ( 'p' )->select ( 'p' )->leftJoin ( 'p.homes', 'h' )->where ( 'h is NOT NULL' );
+		if ($area == 'all') {
+			$qb = $repository->createQueryBuilder ( 'p' )->select ( 'p' )->leftJoin ( 'p.homes', 'h' )->where ( 'h is NOT NULL' );
+		} else {
+			$qb = $repository->createQueryBuilder ( 'p' )->select ( 'p' )->leftJoin ( 'p.homes', 'h' )->where ( 'p.area = :area AND h is NOT NULL' )->setParameter ( 'area', $area );
+		}
 		$paginator = new Paginator ( $qb );
 		$total_count = count ( $paginator );
 		$page_count = ceil ( $total_count / $page_size );
@@ -36,13 +40,11 @@ class HomeController extends Controller {
 			}
 		}
 		return $this->render ( 'AcmeMyBundle:Default:index.html.twig', array (
+				'area' => $area,
 				'models' => $paginator,
 				'starting_prices' => $starting_price_array,
 				'page' => $page,
-				'page_array' => range (
-						1,
-						$page_count 
-				) 
+				'page_array' => range ( 1, $page_count ) 
 		) );
 	}
 }
