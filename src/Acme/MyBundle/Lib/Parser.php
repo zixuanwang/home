@@ -12,7 +12,7 @@ use Acme\MyBundle\Lib\Utility;
 class Parser {
 	public function __construct($entity_manager) {
 		$this->em = $entity_manager;
-		$this->root_path = $_SERVER['DOCUMENT_ROOT'];
+		$this->root_path = __DIR__ . '/../../../../web';
 	}
 	
 	/**

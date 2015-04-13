@@ -30,7 +30,6 @@ class LennarConsole extends ContainerAwareCommand {
 		$parser->fetch_miami ();
 		$output->writeln ( 'parsing Atlanta' );
 		$parser->fetch_atlanta ();
-		
 		$output->writeln ( 'done' );
 	}
 }
