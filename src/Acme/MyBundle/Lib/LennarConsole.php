@@ -16,18 +16,18 @@ class LennarConsole extends ContainerAwareCommand {
 	}
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
-// 		$output->writeln ( 'parsing Seattle' );
-// 		$parser->fetch_seattle ();
-// 		$output->writeln ( 'parsing LA' );
-// 		$parser->fetch_la ();
-// 		$output->writeln ( 'parsing Portland' );
-// 		$parser->fetch_portland ();
-// 		$output->writeln ( 'parsing SF' );
-// 		$parser->fetch_sf ();
-// 		$output->writeln ( 'parsing Houston' );
-// 		$parser->fetch_houston ();
-// 		$output->writeln ( 'parsing Miami' );
-// 		$parser->fetch_miami ();
+		$output->writeln ( 'parsing Seattle' );
+		$parser->fetch_seattle ();
+		$output->writeln ( 'parsing LA' );
+		$parser->fetch_la ();
+		$output->writeln ( 'parsing Portland' );
+		$parser->fetch_portland ();
+		$output->writeln ( 'parsing SF' );
+		$parser->fetch_sf ();
+		$output->writeln ( 'parsing Houston' );
+		$parser->fetch_houston ();
+		$output->writeln ( 'parsing Miami' );
+		$parser->fetch_miami ();
 		$output->writeln ( 'parsing Atlanta' );
 		$parser->fetch_atlanta ();
 		
