@@ -7,7 +7,7 @@ use Acme\MyBundle\Lib\LennarConsole;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
-AnnotationRegistry::registerFile ( "/home/zxwang/workspace/home/vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php" );
+AnnotationRegistry::registerFile ( $_SERVER['DOCUMENT_ROOT'] . "/../vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php" );
 $input = new ArgvInput ();
 $env = $input->getParameterOption ( array (
 		'--env',
