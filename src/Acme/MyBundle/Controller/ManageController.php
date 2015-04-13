@@ -39,26 +39,9 @@ class ManageController extends Controller {
 			return $this->handleAjax ();
 		}
 		if ($type == 'lennar') {
-			$parser = new LennarParser ( $this->getDoctrine ()->getManager () );
-			$parser->fetch_seattle ();
-			$parser->fetch_la ();
-			$parser->fetch_portland ();
-			$parser->fetch_sf ();
-			return new Response ( 'parse' );
 		}
 		if ($type == 'test') {
-			$repository1 = $this->getDoctrine ()->getManager ()->getRepository ( 'AcmeMyBundle:Photo' );
-			$repository2 = $this->getDoctrine ()->getManager ()->getRepository ( 'AcmeMyBundle:HomeModel' );
-			$p1 = $repository1->findOneById ( 87 );
-			$p2 = $repository1->findOneById ( 88 );
-			$m = $repository2->findOneById ( 7 );
-			$m->clearFloorplans ();
-			$m->addFloorplan ( $p1 );
-			$m->addFloorplan ( $p2 );
-			$this->getDoctrine ()->getManager ()->persist ( $p1 );
-			$this->getDoctrine ()->getManager ()->persist ( $p2 );
-			$this->getDoctrine ()->getManager ()->persist ( $m );
-			$this->getDoctrine ()->getManager ()->flush ();
+			echo $_SERVER['DOCUMENT_ROOT'];
 			return new Response ( 'hello' );
 		}
 	}

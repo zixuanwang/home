@@ -11,11 +11,32 @@ class Utility {
 		return pathinfo ( $path, PATHINFO_EXTENSION );
 	}
 	public static function address_to_latlong($address, $city, $state, $zipcode) {
-		$url = 'http://dev.virtualearth.net/REST/v1/Locations/US/' . $state . '/' . $zipcode . '/' . $city . '/' . str_replace ( ' ', '%20', $address ) . '?o=json&key=AqpckLVrDZE9ehOKwFREOF16SWFONVDd9KqviWPOeoiE6oSn-Fu6YZZjalMvvWXg';
-		$url = str_replace ( ' ', '%20', $url );
-		$json_array = json_decode ( file_get_contents ( $url ), true );
-		if (isset ( $json_array ['resourceSets'] [0] ['resources'] [0] ['point'] ['coordinates'] )) {
-			return $json_array ['resourceSets'] [0] ['resources'] [0] ['point'] ['coordinates'];
+		try {
+			$strange_chars = array (
+					'&',
+					'/',
+					'*',
+					':',
+					'#',
+					'@ ',
+					'!',
+					'.',
+					' ' 
+			);
+			foreach ( $strange_chars as $char ) {
+				$address = str_replace ( $char, ' ', $address );
+			}
+			$address = preg_replace ( '!\s+!', ' ', $address );
+			$address = trim ( $address );
+			$address = str_replace ( ' ', '%20', $address );
+			$city = str_replace ( ' ', '%20', $city );
+			$url = 'http://dev.virtualearth.net/REST/v1/Locations/US/' . $state . '/' . $zipcode . '/' . $city . '/' . $address . '?o=json&key=AqpckLVrDZE9ehOKwFREOF16SWFONVDd9KqviWPOeoiE6oSn-Fu6YZZjalMvvWXg';
+			$json_array = json_decode ( file_get_contents ( $url ), true );
+			if (isset ( $json_array ['resourceSets'] [0] ['resources'] [0] ['point'] ['coordinates'] )) {
+				return $json_array ['resourceSets'] [0] ['resources'] [0] ['point'] ['coordinates'];
+			}
+		} catch ( \Exception $e ) {
+			echo "error in fetching latitude and longitude at " . $url . "\r\n";
 		}
 		return array ();
 	}

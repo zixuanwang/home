@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="photo", indexes={@ORM\Index(name="search_idx", columns={"path"})})
+ * @ORM\Table(name="photo", indexes={@ORM\Index(name="path_idx", columns={"path"}), @ORM\Index(name="url_index", columns={"url"})})
  */
 class Photo {
 	/**
@@ -38,7 +38,6 @@ class Photo {
 	public function __construct() {
 		$this->updated = new \DateTime ();
 	}
-	
 	public function __toString() {
 		return $this->path;
 	}
@@ -113,27 +112,25 @@ class Photo {
 	public function getUrl() {
 		return $this->url;
 	}
-
-    /**
-     * Set updated
-     *
-     * @param \DateTime $updated
-     * @return Photo
-     */
-    public function setUpdated($updated)
-    {
-        $this->updated = $updated;
-
-        return $this;
-    }
-
-    /**
-     * Get updated
-     *
-     * @return \DateTime 
-     */
-    public function getUpdated()
-    {
-        return $this->updated;
-    }
+	
+	/**
+	 * Set updated
+	 *
+	 * @param \DateTime $updated        	
+	 * @return Photo
+	 */
+	public function setUpdated($updated) {
+		$this->updated = $updated;
+		
+		return $this;
+	}
+	
+	/**
+	 * Get updated
+	 *
+	 * @return \DateTime
+	 */
+	public function getUpdated() {
+		return $this->updated;
+	}
 }

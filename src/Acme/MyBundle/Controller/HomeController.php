@@ -39,12 +39,14 @@ class HomeController extends Controller {
 				$starting_price_array [$id] = '';
 			}
 		}
+		$page_lower = max ( $page - 5, 1 );
+		$page_upper = min ( $page + 5, $page_count );
 		return $this->render ( 'AcmeMyBundle:Default:index.html.twig', array (
 				'area' => $area,
 				'models' => $paginator,
 				'starting_prices' => $starting_price_array,
 				'page' => $page,
-				'page_array' => range ( 1, $page_count ) 
+				'page_array' => range ( $page_lower, $page_upper )
 		) );
 	}
 }

@@ -63,18 +63,18 @@ class LennarParser extends Parser {
 		foreach ( $floorplan_urls as $url ) {
 			$name = $this->save_image ( $url );
 			if (! empty ( $name ))
-				$images ['floorplan'] [] = $name;
+				$images ['floorplan'] [$url] = $name;
 		}
 		foreach ( $model_urls as $url ) {
 			$name = $this->save_image ( $url );
 			if (! empty ( $name )) {
-				$images ['model'] [] = $name;
+				$images ['model'] [$url] = $name;
 			}
 		}
 		foreach ( $facade_urls as $url ) {
 			$name = $this->save_image ( $url );
 			if (! empty ( $name )) {
-				$images ['facade'] [] = $name;
+				$images ['facade'] [$url] = $name;
 			}
 		}
 		return $images;
@@ -84,16 +84,25 @@ class LennarParser extends Parser {
 		// construct REST request
 		$facet_url = $this->root_url . '/Services/REST/Facets.svc/GetFacetResults';
 		if ($area == 'seattle') {
-			$request_string = '{"searchState":{"ctx":"Market","stcd":"WA","mkid":86,"ddmd":"","loc":[0,0,0,0,0,0,0,0,0,0],"sch":[0,0,0,0,0,0,0,0,0,0,0,0,0],"mnpr":[0,0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0],"bed":[0,0,0],"bat":[0,0,0,0,0],"gar":[0,0],"str":[0,0,0],"mvdt":"No Preference","type":[0,0,0,0],"amen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":50,"sb":"communityname","so":"asc"}}';
+			$request_string = '{"searchState":{"ctx":"Market","stcd":"WA","mkid":86,"ddmd":"","loc":[0,0,0,0,0,0,0,0,0,0],"sch":[0,0,0,0,0,0,0,0,0,0,0,0,0],"mnpr":[0,0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0],"bed":[0,0,0],"bat":[0,0,0,0,0],"gar":[0,0],"str":[0,0,0],"mvdt":"No Preference","type":[0,0,0,0],"amen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":100,"sb":"communityname","so":"asc"}}';
 		}
 		if ($area == 'portland') {
-			$request_string = '{"searchState":{"ctx":"Market","stcd":"OR","mkid":88,"ddmd":"","loc":[0,0,0,0,0,0,0,0],"sch":[0,0,0,0,0,0],"mnpr":[0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0,0],"bed":[0,0,0],"bat":[0,0,0],"gar":[0,0],"str":[0,0,0],"mvdt":"No Preference","type":[0,0],"amen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":50,"sb":"communityname","so":"asc"}}';
+			$request_string = '{"searchState":{"ctx":"Market","stcd":"OR","mkid":88,"ddmd":"","loc":[0,0,0,0,0,0,0,0],"sch":[0,0,0,0,0,0],"mnpr":[0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0,0],"bed":[0,0,0],"bat":[0,0,0],"gar":[0,0],"str":[0,0,0],"mvdt":"No Preference","type":[0,0],"amen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":100,"sb":"communityname","so":"asc"}}';
 		}
 		if ($area == 'sf') {
-			$request_string = '{"searchState":{"ctx":"Market","stcd":"CA","mkid":67,"ddmd":"","loc":[0,0,0,0,0,0,0,0],"sch":[0,0],"mnpr":[0,0,0,0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0,0,0],"bed":[0,0,0,0,0],"bat":[0,0,0,0,0],"gar":[0,0,0],"str":[0,0],"mvdt":"No Preference","type":[0,0,0,0,0,0],"amen":[0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":50,"sb":"communityname","so":"asc"}}';
+			$request_string = '{"searchState":{"ctx":"Market","stcd":"CA","mkid":67,"ddmd":"","loc":[0,0,0,0,0,0,0,0],"sch":[0,0],"mnpr":[0,0,0,0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0,0,0],"bed":[0,0,0,0,0],"bat":[0,0,0,0,0],"gar":[0,0,0],"str":[0,0],"mvdt":"No Preference","type":[0,0,0,0,0,0],"amen":[0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":100,"sb":"communityname","so":"asc"}}';
 		}
 		if ($area == 'la') {
-			$request_string = '{"searchState":{"ctx":"Market","stcd":"CA","mkid":37,"ddmd":"","loc":[0,0,0],"sch":[0],"mnpr":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0],"bed":[0,0,0,0],"bat":[0,0,0,0],"gar":[0,0],"str":[0,0],"mvdt":"No Preference","type":[0,0,0],"amen":[0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":50,"sb":"communityname","so":"asc"}}';
+			$request_string = '{"searchState":{"ctx":"Market","stcd":"CA","mkid":37,"ddmd":"","loc":[0,0,0],"sch":[0],"mnpr":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0],"bed":[0,0,0,0],"bat":[0,0,0,0],"gar":[0,0],"str":[0,0],"mvdt":"No Preference","type":[0,0,0],"amen":[0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":100,"sb":"communityname","so":"asc"}}';
+		}
+		if ($area == 'houston') {
+			$request_string = '{"searchState":{"ctx":"Market","stcd":"TX","mkid":28,"ddmd":"","loc":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"sch":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"mnpr":[0,0,0,0,0,0,0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0,0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0,0,0,0,0,0],"bed":[0,0,0,0,0],"bat":[0,0,0,0,0],"gar":[0,0],"str":[0,0,0,0],"mvdt":"No Preference","type":[0,0,0,0,0],"amen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":100,"sb":"communityname","so":"asc"}}';
+		}
+		if ($area == 'miami') {
+			$request_string = '{"searchState":{"ctx":"Market","stcd":"FL","mkid":40,"ddmd":"","loc":[0,0,0,0,0],"sch":[0,0,0,0,0,0],"mnpr":[0,0,0,0,0,0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0,0],"bed":[0,0,0,0],"bat":[0,0,0,0,0],"gar":[0,0,0],"str":[0,0,0],"mvdt":"No Preference","type":[0,0,0],"amen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":100,"sb":"communityname","so":"asc"}}';
+		}
+		if ($area == 'atlanta') {
+			$request_string = '{"searchState":{"ctx":"Market","stcd":"GA","mkid":82,"ddmd":"","loc":[0,0,0,0,0,0,0,0,0],"sch":[0,0,0,0],"mnpr":[0,0,0,0,0,0,0,0],"mxpr":[0,0,0,0,0,0,0,0],"mnsf":[0,0,0,0,0,0,0],"mxsf":[0,0,0,0,0,0,0],"bed":[0,0,0,0],"bat":[0,0,0,0,0],"gar":[0,0],"str":[0],"mvdt":"No Preference","type":[0,0],"amen":[0,0,0,0,0,0,0,0,0,0,0,0,0,0],"rad":0,"lat":0,"long":0,"zip":""},"pageState":{"ct":"C","pn":1,"ps":100,"sb":"communityname","so":"asc"}}';
 		}
 		$facet_result = $this->curl_get_contents ( $facet_url, $request_string );
 		$facet_array = json_decode ( $facet_result, true );
@@ -123,7 +132,8 @@ class LennarParser extends Parser {
 		foreach ( $community_array as $community ) {
 			$community_entity = new Community ();
 			$community_entity->setBuilder ( $this->builder_name );
-			$community_entity->setName ( $community ['cnm'] );
+			$community_name = trim ( $community ['mcm'] . ' ' . $community ['cnm'] );
+			$community_entity->setName ( $community_name );
 			$community_entity->setAddress ( $community ['add'] );
 			$community_entity->setCity ( $community ['cty'] );
 			$community_entity->setState ( $community ['sco'] );
@@ -131,14 +141,9 @@ class LennarParser extends Parser {
 			$community_entity->setArea ( $area );
 			$facade_url = substr ( $community ['img'], 0, strpos ( $community ['img'], 'ashx?' ) + 5 );
 			$facade_photo = new Photo ();
-			$facade_photo->setPath ( parent::save_image ( $facade_url ) );
+			$facade_photo->setPath ( $this->save_image ( $facade_url ) );
+			$facade_photo->setUrl ( $facade_url );
 			$community_entity->addFacade ( $facade_photo );
-			// get latitude and longitude from Bing map.
-			$lat_long = Utility::address_to_latlong ( $community ['add'], $community ['cty'], $community ['sco'], $community ['zip'] );
-			if (! empty ( $lat_long )) {
-				$community_entity->setLatitude ( $lat_long [0] );
-				$community_entity->setLongitude ( $lat_long [1] );
-			}
 			$c = parent::add_community ( $community_entity );
 			$this->fetch_model ( $community ['cid'], $c );
 		}
@@ -159,6 +164,15 @@ class LennarParser extends Parser {
 	}
 	public function fetch_la() {
 		$this->fetch_area ( 'la' );
+	}
+	public function fetch_houston() {
+		$this->fetch_area ( 'houston' );
+	}
+	public function fetch_miami() {
+		$this->fetch_area ( 'miami' );
+	}
+	public function fetch_atlanta() {
+		$this->fetch_area ( 'atlanta' );
 	}
 	
 	/**
@@ -201,19 +215,22 @@ class LennarParser extends Parser {
 			// fetch images from the web page
 			$page_url = $this->root_url . $model ['vtlURL'];
 			$images = $this->parse_image ( $page_url );
-			foreach ( $images ['facade'] as $image ) {
+			foreach ( $images ['facade'] as $url => $image ) {
 				$photo = new Photo ();
 				$photo->setPath ( $image );
+				$photo->setUrl ( $url );
 				$model_entity->addFacade ( $photo );
 			}
-			foreach ( $images ['floorplan'] as $image ) {
+			foreach ( $images ['floorplan'] as $url => $image ) {
 				$photo = new Photo ();
 				$photo->setPath ( $image );
+				$photo->setUrl ( $url );
 				$model_entity->addFloorplan ( $photo );
 			}
-			foreach ( $images ['model'] as $image ) {
+			foreach ( $images ['model'] as $url => $image ) {
 				$photo = new Photo ();
 				$photo->setPath ( $image );
+				$photo->setUrl ( $url );
 				$model_entity->addImage ( $photo );
 			}
 			$m = parent::add_model ( $model_entity );

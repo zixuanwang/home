@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="community", indexes={@ORM\Index(name="area_idx", columns={"area"})})
+ * @ORM\Table(name="community", indexes={@ORM\Index(name="area_idx", columns={"area"}), @ORM\Index(name="unique_idx", columns={"address", "city", "state", "name", "builder"})})
  */
 class Community {
 	/**
@@ -68,7 +68,7 @@ class Community {
 	 */
 	protected $map;
 	/**
-	 * @ORM\Column(type="string", length=30)
+	 * @ORM\Column(type="string", length=100)
 	 */
 	protected $name;
 	/**

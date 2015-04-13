@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="home")
+ * @ORM\Table(name="home", indexes={@ORM\Index(name="unique_idx", columns={"address", "zipcode"})})
  */
 class Home {
 	/**
@@ -52,7 +52,7 @@ class Home {
 	 */
 	protected $lot_size;
 	/**
-	 * @ORM\OneToMany(targetEntity="Price", mappedBy="home")
+	 * @ORM\OneToMany(targetEntity="Price", mappedBy="home", cascade={"persist"})
 	 * @ORM\OrderBy({"updated"="DESC"})
 	 */
 	protected $prices;

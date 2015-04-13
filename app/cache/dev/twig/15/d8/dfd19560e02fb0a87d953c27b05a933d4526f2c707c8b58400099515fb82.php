@@ -23,7 +23,7 @@ class __TwigTemplate_15d8dfd19560e02fb0a87d953c27b05a933d4526f2c707c8b5840009951
         echo "<html>
     <head>
         <meta charset=\"UTF-8\" />
-        <meta name=\"keywords\" content=\"搜美房,美国房地产,美国新房,西雅图,旧金山,洛杉矶,海外购房\">
+        <meta name=\"keywords\" content=\"搜美房,房地产,房产,购房,搜房,美国,美国地产,新房,西雅图,旧金山,洛杉矶,休斯顿,迈阿密,亚特兰大,海外\">
         <title>";
         // line 5
         $this->displayBlock('title', $context, $blocks);
@@ -88,7 +88,7 @@ class __TwigTemplate_15d8dfd19560e02fb0a87d953c27b05a933d4526f2c707c8b5840009951
     // line 5
     public function block_title($context, array $blocks = array())
     {
-        echo "搜美房 美国新房房产";
+        echo "搜美房-美国新房房产";
     }
 
     // line 6

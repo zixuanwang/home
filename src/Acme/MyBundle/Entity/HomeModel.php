@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="homemodel", indexes={@ORM\Index(name="area_idx", columns={"area"})})
+ * @ORM\Table(name="homemodel", indexes={@ORM\Index(name="area_idx", columns={"area"}), @ORM\Index(name="unique_idx", columns={"name", "builder", "square_feet", "num_baths", "num_beds"})})
  */
 class HomeModel {
 	/**

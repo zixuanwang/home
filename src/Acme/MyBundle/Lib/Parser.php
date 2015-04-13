@@ -7,10 +7,12 @@ use Acme\MyBundle\Entity\Home;
 use Acme\MyBundle\Entity\HomeModel;
 use Acme\MyBundle\Entity\Photo;
 use Acme\MyBundle\Entity\Price;
+use Acme\MyBundle\Lib\Utility;
 
 class Parser {
 	public function __construct($entity_manager) {
 		$this->em = $entity_manager;
+		$this->root_path = $_SERVER['DOCUMENT_ROOT'];
 	}
 	
 	/**
@@ -18,17 +20,26 @@ class Parser {
 	 * images are renamed to a unique name and the unique name is returned.
 	 */
 	public function save_image($url) {
-		$new_url = str_replace ( ' ', '%20', $url );
-		$one_filename = sha1 ( uniqid ( mt_rand (), true ) );
-		$local_path = 'uploads/' . $one_filename . '.jpg';
-		// skip the image we cannot download
-		if (substr ( $new_url, 0, 1 ) != '/') {
-			copy ( $new_url, $local_path );
-			$md5_string = md5_file ( $local_path );
-			rename ( $local_path, 'uploads/' . $md5_string . '.jpg' );
-			return $md5_string;
+		$repository = $this->em->getRepository ( 'AcmeMyBundle:Photo' );
+		$saved_photo = $repository->findOneBy ( array (
+				'url' => $url 
+		) );
+		if ($saved_photo == null) {
+			// skip the image we cannot download
+			try {
+				$new_url = str_replace ( ' ', '%20', $url );
+				$one_filename = sha1 ( uniqid ( mt_rand (), true ) );
+				$local_path = $this->root_path . '/uploads/' . $one_filename . '.jpg';
+				copy ( $new_url, $local_path );
+				$md5_string = md5_file ( $local_path );
+				rename ( $local_path, $this->root_path . '/uploads/' . $md5_string . '.jpg' );
+				return $md5_string;
+			} catch ( \Exception $e ) {
+				echo "error in copying " . $new_url . "\r\n";
+			}
+			return '';
 		}
-		return '';
+		return $saved_photo->getPath ();
 	}
 	public function add_photo($photo) {
 		$repository = $this->em->getRepository ( 'AcmeMyBundle:Photo' );
@@ -78,6 +89,14 @@ class Parser {
 				$c->addFacade ( $p );
 			}
 		}
+		if ($c->getLongitude () == null || $c->getLatitude () == null) {
+			// get latitude and longitude from Bing map.
+			$lat_long = Utility::address_to_latlong ( $c->getAddress (), $c->getCity (), $c->getState (), $c->getZipcode () );
+			if (! empty ( $lat_long )) {
+				$c->setLatitude ( $lat_long [0] );
+				$c->setLongitude ( $lat_long [1] );
+			}
+		}
 		$c->setUpdated ( new \DateTime () );
 		$this->em->persist ( $c );
 		$this->em->flush ();
@@ -115,6 +134,10 @@ class Parser {
 		$m_images = $m->getImages ();
 		foreach ( $unique_facades as $i ) {
 			if (! $this->is_photo_in_array ( $i, $m_facades )) {
+				if ($m->getId () == 122 && $i == '2b788a36d8e7c2458d7ed280c5781616') {
+					$haha = 'temp';
+					echo $haha;
+				}
 				$p = $this->add_photo ( $i );
 				$m->addFacade ( $p );
 			}
@@ -171,4 +194,5 @@ class Parser {
 		return false;
 	}
 	private $em;
+	private $root_path;
 }

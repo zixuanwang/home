@@ -115,10 +115,9 @@
             };
             $('#bing_map_canvas').empty();
            var map = new Microsoft.Maps.Map(document.getElementById("bing_map_canvas"), mapInitOpts);
-           {% for community in communities %}
-           	var location = new Microsoft.Maps.Location({{ community.getLatitude() }}, {{ community.getLongitude() }});
+           {% for m in map_array %}
+           	var location = new Microsoft.Maps.Location({{ m['latitude'] }}, {{ m['longitude'] }});
            	// Add a pin to the center of the map, using a custom icon
-           	//var name = {{ community.getName() }};
            	var pin = new Microsoft.Maps.Pushpin(location); 
          	// Create the infobox for the pushpin
            	map.entities.push(pin);
@@ -127,7 +126,7 @@
     	var $container = $('#model-image-container');
     	var $floorplan_container = $('#model-floorplan-container');
     	var colWidth = function() {
-    		var w = $container.width(), columnNum = 1, columnWidth = w -15;
+    		var w = $floorplan_container.width(), columnNum = 1, columnWidth = w -15;
     	 	if (w > 500) {
     			columnNum = 2;
     			columnWidth = (w - 30) / columnNum;
@@ -165,8 +164,8 @@
     		});
     	};
     	$(window).on('debouncedresize', image_isotope);
-    	$(window).on('debouncedresize', floorplan_isotope);
     	$('#model-image-container').imagesLoaded(image_isotope);
+    	$(window).on('debouncedresize', floorplan_isotope);
     	$('#model-floorplan-container').imagesLoaded(floorplan_isotope);
     	$(window).on('debouncedresize', getMap);
     	$(document).ready(getMap);

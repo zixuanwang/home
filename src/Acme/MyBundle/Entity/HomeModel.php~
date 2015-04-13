@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="homemodel", indexes={@ORM\Index(name="area_idx", columns={"area"})})
+ * @ORM\Table(name="homemodel", indexes={@ORM\Index(name="area_idx", columns={"area"}), @ORM\Index(name="unique_idx", columns={"name", "builder", "square_feet", "num_baths", "num_beds"})})
  */
 class HomeModel {
 	/**
@@ -407,4 +407,27 @@ class HomeModel {
 	public function getImages() {
 		return $this->images;
 	}
+
+    /**
+     * Set area
+     *
+     * @param string $area
+     * @return HomeModel
+     */
+    public function setArea($area)
+    {
+        $this->area = $area;
+
+        return $this;
+    }
+
+    /**
+     * Get area
+     *
+     * @return string 
+     */
+    public function getArea()
+    {
+        return $this->area;
+    }
 }

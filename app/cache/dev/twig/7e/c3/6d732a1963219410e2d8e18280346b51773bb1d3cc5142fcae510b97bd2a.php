@@ -56,6 +56,24 @@ class __TwigTemplate_7ec36d732a1963219410e2d8e18280346b51773bb1d3cc5142fcae510b9
         // line 25
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("page" => 1, "area" => "la")), "html", null, true);
         echo "\" id=\"la-button\">洛杉矶</a></li>
+\t\t\t\t<li><a class=\"cta grey small rounded\"
+\t\t\t\t\thref=\"";
+        // line 27
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("page" => 1, "area" => "houston")), "html", null, true);
+        echo "\"
+\t\t\t\t\tid=\"la-button\">休斯顿</a></li>
+\t\t\t\t<li><a class=\"cta grey small rounded\"
+\t\t\t\t\thref=\"";
+        // line 30
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("page" => 1, "area" => "miami")), "html", null, true);
+        echo "\"
+\t\t\t\t\tid=\"la-button\">迈阿密</a></li>
+\t\t\t\t<li><a class=\"cta grey small rounded\"
+\t\t\t\t\thref=\"";
+        // line 33
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("page" => 1, "area" => "atlanta")), "html", null, true);
+        echo "\"
+\t\t\t\t\tid=\"la-button\">亚特兰大</a></li>
 \t\t\t</ul>
 \t\t</div>
 \t</div>
@@ -75,6 +93,6 @@ class __TwigTemplate_7ec36d732a1963219410e2d8e18280346b51773bb1d3cc5142fcae510b9
 
     public function getDebugInfo()
     {
-        return array (  57 => 25,  52 => 23,  46 => 20,  40 => 17,  31 => 11,  19 => 1,);
+        return array (  74 => 33,  68 => 30,  62 => 27,  57 => 25,  52 => 23,  46 => 20,  40 => 17,  31 => 11,  19 => 1,);
     }
 }

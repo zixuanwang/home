@@ -257,33 +257,29 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
            ";
         // line 118
         $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["communities"]) ? $context["communities"] : $this->getContext($context, "communities")));
-        foreach ($context['_seq'] as $context["_key"] => $context["community"]) {
+        $context['_seq'] = twig_ensure_traversable((isset($context["map_array"]) ? $context["map_array"] : $this->getContext($context, "map_array")));
+        foreach ($context['_seq'] as $context["_key"] => $context["m"]) {
             // line 119
             echo "           \tvar location = new Microsoft.Maps.Location(";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["community"], "getLatitude", array(), "method"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($context["m"], "latitude", array(), "array"), "html", null, true);
             echo ", ";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["community"], "getLongitude", array(), "method"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($context["m"], "longitude", array(), "array"), "html", null, true);
             echo ");
            \t// Add a pin to the center of the map, using a custom icon
-           \t//var name = ";
-            // line 121
-            echo twig_escape_filter($this->env, $this->getAttribute($context["community"], "getName", array(), "method"), "html", null, true);
-            echo ";
            \tvar pin = new Microsoft.Maps.Pushpin(location); 
          \t// Create the infobox for the pushpin
            \tmap.entities.push(pin);
            ";
         }
         $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['community'], $context['_parent'], $context['loop']);
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['m'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 126
+        // line 125
         echo "        }
     \tvar \$container = \$('#model-image-container');
     \tvar \$floorplan_container = \$('#model-floorplan-container');
     \tvar colWidth = function() {
-    \t\tvar w = \$container.width(), columnNum = 1, columnWidth = w -15;
+    \t\tvar w = \$floorplan_container.width(), columnNum = 1, columnWidth = w -15;
     \t \tif (w > 500) {
     \t\t\tcolumnNum = 2;
     \t\t\tcolumnWidth = (w - 30) / columnNum;
@@ -321,8 +317,8 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
     \t\t});
     \t};
     \t\$(window).on('debouncedresize', image_isotope);
-    \t\$(window).on('debouncedresize', floorplan_isotope);
     \t\$('#model-image-container').imagesLoaded(image_isotope);
+    \t\$(window).on('debouncedresize', floorplan_isotope);
     \t\$('#model-floorplan-container').imagesLoaded(floorplan_isotope);
     \t\$(window).on('debouncedresize', getMap);
     \t\$(document).ready(getMap);
@@ -343,6 +339,6 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
 
     public function getDebugInfo()
     {
-        return array (  282 => 126,  271 => 121,  263 => 119,  259 => 118,  246 => 110,  236 => 102,  233 => 101,  226 => 99,  220 => 95,  208 => 89,  203 => 86,  198 => 85,  194 => 84,  187 => 79,  183 => 78,  176 => 73,  172 => 72,  157 => 60,  150 => 56,  143 => 52,  136 => 48,  129 => 44,  120 => 38,  115 => 36,  107 => 30,  96 => 25,  92 => 24,  88 => 22,  84 => 21,  79 => 18,  74 => 15,  66 => 13,  61 => 11,  55 => 10,  50 => 7,  48 => 6,  42 => 3,  39 => 2,  11 => 1,);
+        return array (  278 => 125,  263 => 119,  259 => 118,  246 => 110,  236 => 102,  233 => 101,  226 => 99,  220 => 95,  208 => 89,  203 => 86,  198 => 85,  194 => 84,  187 => 79,  183 => 78,  176 => 73,  172 => 72,  157 => 60,  150 => 56,  143 => 52,  136 => 48,  129 => 44,  120 => 38,  115 => 36,  107 => 30,  96 => 25,  92 => 24,  88 => 22,  84 => 21,  79 => 18,  74 => 15,  66 => 13,  61 => 11,  55 => 10,  50 => 7,  48 => 6,  42 => 3,  39 => 2,  11 => 1,);
     }
 }

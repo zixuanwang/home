@@ -31,9 +31,18 @@ class ModelController extends Controller {
 		$map_center = array ();
 		$map_center ['latitude'] = 0;
 		$map_center ['longitude'] = 0;
+		$map_array = array ();
 		foreach ( $communities as $community ) {
-			$map_center ['latitude'] += $community->getLatitude ();
-			$map_center ['longitude'] += $community->getLongitude ();
+			$latitude = $community->getLatitude ();
+			$longitude = $community->getLongitude ();
+			if ($latitude != null && $longitude != null) {
+				$map_center ['latitude'] += $latitude;
+				$map_center ['longitude'] += $longitude;
+				$map_array [] = array (
+						'latitude' => $latitude,
+						'longitude' => $longitude 
+				);
+			}
 		}
 		if (! empty ( $communities )) {
 			$n = count ( $communities );
@@ -46,7 +55,8 @@ class ModelController extends Controller {
 				'model' => $model,
 				'communities' => $communities,
 				'prices' => $prices,
-				'map_center' => $map_center 
+				'map_center' => $map_center,
+				'map_array' => $map_array 
 		) );
 	}
 }
