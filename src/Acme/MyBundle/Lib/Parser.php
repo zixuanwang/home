@@ -14,7 +14,33 @@ class Parser {
 		$this->em = $entity_manager;
 		$this->root_path = __DIR__ . '/../../../../web';
 	}
-	
+	public function curl_get_contents($url, $json_string = '') {
+		if (empty ( $json_string )) {
+			$ch = curl_init ();
+			$agent = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)';
+			curl_setopt ( $ch, CURLOPT_URL, $url );
+			curl_setopt ( $ch, CURLOPT_USERAGENT, $agent );
+			curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+			curl_setopt ( $ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
+			curl_setopt ( $ch, CURLOPT_FOLLOWLOCATION, 1 );
+			curl_setopt ( $ch, CURLOPT_SSL_VERIFYHOST, false );
+			curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
+			$result = curl_exec ( $ch );
+			curl_close ( $ch );
+		} else {
+			$ch = curl_init ( $url );
+			curl_setopt ( $ch, CURLOPT_CUSTOMREQUEST, "POST" );
+			curl_setopt ( $ch, CURLOPT_POSTFIELDS, $json_string );
+			curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+			curl_setopt ( $ch, CURLOPT_HTTPHEADER, array (
+					'Content-Type: application/json',
+					'Content-Length: ' . strlen ( $json_string ) 
+			) );
+			$result = curl_exec ( $ch );
+			curl_close ( $ch );
+		}
+		return $result;
+	}
 	/**
 	 * this function save the image from the url to the local file system
 	 * images are renamed to a unique name and the unique name is returned.

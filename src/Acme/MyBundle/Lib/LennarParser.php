@@ -10,19 +10,6 @@ use Acme\MyBundle\Entity\Price;
 use phpQuery_phpQuery;
 
 class LennarParser extends Parser {
-	private function curl_get_contents($url, $json_string) {
-		$ch = curl_init ( $url );
-		curl_setopt ( $ch, CURLOPT_CUSTOMREQUEST, "POST" );
-		curl_setopt ( $ch, CURLOPT_POSTFIELDS, $json_string );
-		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
-		curl_setopt ( $ch, CURLOPT_HTTPHEADER, array (
-				'Content-Type: application/json',
-				'Content-Length: ' . strlen ( $json_string ) 
-		) );
-		$result = curl_exec ( $ch );
-		curl_close ( $ch );
-		return $result;
-	}
 	public function __construct($entity_manager) {
 		parent::__construct ( $entity_manager );
 		$this->builder_name = 'Lennar';
@@ -79,6 +66,7 @@ class LennarParser extends Parser {
 		}
 		return $images;
 	}
+	
 	public function fetch_area($area) {
 		// get facet results
 		// construct REST request
