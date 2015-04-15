@@ -55,13 +55,23 @@ class Parser {
 			try {
 				$new_url = str_replace ( ' ', '%20', $url );
 				$one_filename = sha1 ( uniqid ( mt_rand (), true ) );
-				$local_path = $this->root_path . '/uploads/' . $one_filename . '.jpg';
+				$local_path = $this->root_path . '/uploads/' . $one_filename;
 				copy ( $new_url, $local_path );
-				$md5_string = md5_file ( $local_path );
-				rename ( $local_path, $this->root_path . '/uploads/' . $md5_string . '.jpg' );
+				switch (exif_imagetype($local_path)){
+					case IMAGETYPE_JPEG:
+						rename ( $local_path, $local_path . '.jpg' );
+						break;
+					case IMAGETYPE_PNG:
+						exec('convert ' . $local_path . '.png ' . $local_path . '.jpg');
+						break;
+					default:
+						throw new \Exception('unsupported image format.');
+				}
+				$md5_string = md5_file ( $local_path . '.jpg' );
+				rename ( $local_path . '.jpg', $this->root_path . '/uploads/' . $md5_string . '.jpg' );
 				return $md5_string;
 			} catch ( \Exception $e ) {
-				echo "error in copying " . $new_url . "\r\n";
+				echo "error in copying " . $url . "\r\n";
 			}
 			return '';
 		}
@@ -193,7 +203,8 @@ class Parser {
 		$repository = $this->em->getRepository ( 'AcmeMyBundle:Home' );
 		$saved_home = $repository->findOneBy ( array (
 				'address' => $home->getAddress (),
-				'zipcode' => $home->getZipcode () 
+				'zipcode' => $home->getZipcode (),
+				'home_model' => $home->getHomeModel () 
 		) );
 		$h = null;
 		if ($saved_home == null) {

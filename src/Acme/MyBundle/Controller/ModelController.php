@@ -49,6 +49,13 @@ class ModelController extends Controller {
 			$map_center ['latitude'] /= $n;
 			$map_center ['longitude'] /= $n;
 		}
+		$builder = $model->getBuilder();
+		if ($builder == 'Lennar'){
+			$builder_logo = 'lennar.png';
+		}
+		if ($builder == 'Pulte Homes'){
+			$builder_logo = 'pulte.png';
+		}
 		return $this->render ( 'AcmeMyBundle:Default:model.show.html.twig', array (
 				'images' => $images,
 				'floorplans' => $floorplans,
@@ -56,7 +63,8 @@ class ModelController extends Controller {
 				'communities' => $communities,
 				'prices' => $prices,
 				'map_center' => $map_center,
-				'map_array' => $map_array 
+				'map_array' => $map_array,
+				'builder_logo' => $builder_logo
 		) );
 	}
 }

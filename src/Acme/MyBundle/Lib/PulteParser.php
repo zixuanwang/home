@@ -26,6 +26,18 @@ class PulteParser extends Parser {
 		if ($area == 'seattle') {
 			$url = 'http://www.pulte.com/new-homes/washington/seattle/index.aspx';
 		}
+		if ($area == 'sf') {
+			$url = 'http://www.pulte.com/new-homes/california/northern-california/index.aspx';
+		}
+		if ($area == 'la') {
+			$url = 'http://www.pulte.com/new-homes/california/southern-california/index.aspx';
+		}
+		if ($area == 'houston') {
+			$url = 'http://www.pulte.com/new-homes/texas/the-houston-area/index.aspx';
+		}
+		if ($area == 'atlanta') {
+			$url = 'http://www.pulte.com/new-homes/georgia/the-atlanta-area/index.aspx';
+		}
 		$html = $this->curl_get_contents ( $url );
 		$php_query = new phpQuery_phpQuery ();
 		$doc = $php_query->newDocument ( $html );
@@ -45,10 +57,11 @@ class PulteParser extends Parser {
 				$community_entity->setName ( $c_name );
 				$c_address1 = pq ( $c_doc->find ( '.header_left_container .comm_address1 span span' ) )->text ();
 				$c_address2 = pq ( $c_doc->find ( '.header_left_container .comm_address2 span span' ) )->text ();
-				$c_address2_array = explode ( ' ', str_replace ( ',', '', $c_address2 ) );
-				$city = $c_address2_array [0];
-				$state = $c_address2_array [1];
-				$zipcode = substr ( $c_address2_array [2], 0, 5 );
+				$address2_array = explode ( ',', $c_address2 );
+				$city = $address2_array [0];
+				$state_zipcode = explode ( ' ', trim ( $address2_array [1] ) );
+				$state = $state_zipcode [0];
+				$zipcode = substr ( $state_zipcode [1], 0, 5 );
 				$community_entity->setAddress ( $c_address1 );
 				$community_entity->setCity ( $city );
 				$community_entity->setState ( $state );
@@ -90,27 +103,33 @@ class PulteParser extends Parser {
 		$model_entity->setNumStories ( 0 );
 		$model_entity->setName ( $name );
 		$model_entity->setArea ( $community_entity->getArea () );
-		foreach ( $doc->find ( '.plan_photo_gallery li a' ) as $pq_model_image ) {
+		foreach ( $doc->find ( '#photo_gallery_plan li a' ) as $pq_model_image ) {
 			$image_url = $this->root_url . pq ( $pq_model_image )->attr ( 'href' );
 			$path = $this->save_image ( $image_url );
-			$photo = new Photo ();
-			$photo->setPath ( $path );
-			$photo->setUrl ( $image_url );
-			$model_entity->addImage ( $photo );
+			if (! empty ( path )) {
+				$photo = new Photo ();
+				$photo->setPath ( $path );
+				$photo->setUrl ( $image_url );
+				$model_entity->addImage ( $photo );
+			}
 		}
 		foreach ( $floorplan_doc->find ( '.plan_top_inner_container .comm_tab_data' ) as $pq_floorplan_image ) {
 			$floorplan_url = $this->root_url . pq ( pq ( $pq_floorplan_image )->find ( 'img' ) )->attr ( 'src' );
 			$path = $this->save_image ( $floorplan_url );
-			$photo = new Photo ();
-			$photo->setPath ( $path );
-			$photo->setUrl ( $floorplan_url );
-			$model_entity->addFloorplan ( $photo );
+			if (! empty ( path )) {
+				$photo = new Photo ();
+				$photo->setPath ( $path );
+				$photo->setUrl ( $floorplan_url );
+				$model_entity->addFloorplan ( $photo );
+			}
 		}
 		$path = $this->save_image ( $model_facade_url );
-		$photo = new Photo ();
-		$photo->setPath ( $path );
-		$photo->setUrl ( $model_facade_url );
-		$model_entity->addFacade ( $photo );
+		if (! empty ( path )) {
+			$photo = new Photo ();
+			$photo->setPath ( $path );
+			$photo->setUrl ( $model_facade_url );
+			$model_entity->addFacade ( $photo );
+		}
 		$m = $this->add_model ( $model_entity );
 		$string_price = pq ( $doc->find ( '.header_right_container .plan_price' ) )->text ();
 		$price = str_replace ( ',', '', array_pop ( explode ( '$', $string_price ) ) );
@@ -122,7 +141,7 @@ class PulteParser extends Parser {
 		$home_entity->addPrice ( $p );
 		$price_per_foot = floatval ( $price ) / $square_feet;
 		$home_entity->setPricePerFoot ( $price_per_foot );
-		$home_entity->setAddress ( sha1 ( uniqid ( mt_rand (), true ) ) );
+		$home_entity->setAddress ( $community_entity->getAddress () );
 		$home_entity->setZipcode ( $community_entity->getZipcode () );
 		$this->add_home ( $home_entity );
 	}

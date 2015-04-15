@@ -114,11 +114,11 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
         // line 36
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["model"]) ? $context["model"] : $this->getContext($context, "model")), "getName", array(), "method"), "html", null, true);
         echo "户型</h4>
-\t\t\t\t<div class=\"model-facade-thumb img-responsive\"
-\t\t\t\t\tstyle=\"background-image: url('";
+\t\t\t\t<div style=\"padding-right: 15px\">
+\t\t\t\t\t<div class=\"model-facade-thumb img-responsive\" style=\"background-image: url('";
         // line 38
         echo twig_escape_filter($this->env, (("/uploads/" . $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["model"]) ? $context["model"] : $this->getContext($context, "model")), "getFacades", array(), "method"), 0, array(), "array"), "getPath", array(), "method")) . ".jpg"), "html", null, true);
-        echo "');\"></div>
+        echo "');\"></div></div>
 \t\t\t\t<div class=\"model-side-detail\">
 \t\t\t\t\t<table class=\"table table-hover\">
 \t\t\t\t\t\t<tbody>
@@ -159,6 +159,10 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
 \t\t\t\t\t\t\t</tr>
 \t\t\t\t\t\t</tbody>
 \t\t\t\t\t</table>
+\t\t\t\t\t<img src=\"/images/";
+        // line 64
+        echo twig_escape_filter($this->env, (isset($context["builder_logo"]) ? $context["builder_logo"] : $this->getContext($context, "builder_logo")), "html", null, true);
+        echo "\" width=\"40%\">
 \t\t\t\t</div>
 \t\t\t</div>
 \t\t\t<div class=\"piece\" id=\"map-piece\">
@@ -168,43 +172,43 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
 \t\t\t<div class=\"piece\">
 \t\t\t\t<h4>所在社区</h4>
 \t\t\t\t";
-        // line 72
+        // line 73
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["communities"]) ? $context["communities"] : $this->getContext($context, "communities")));
         foreach ($context['_seq'] as $context["id"] => $context["community"]) {
-            // line 73
+            // line 74
             echo "\t\t\t\t<div class=\"model-side-detail\">
 \t\t\t\t\t<table class=\"table table-hover\">
 \t\t\t\t\t\t<thead>
 \t\t\t\t\t\t\t<tr>
 \t\t\t\t\t\t\t\t<td><strong><a
 \t\t\t\t\t\t\t\t\t\thref=\"";
-            // line 78
+            // line 79
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("community", array("id" => $this->getAttribute($context["community"], "getId", array(), "method"))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["community"], "getName", array(), "method"), "html", null, true);
-            // line 79
+            // line 80
             echo "社区</a></strong></td>
 \t\t\t\t\t\t\t</tr>
 \t\t\t\t\t\t</thead>
 \t\t\t\t\t\t<tbody>
 \t\t\t\t\t\t\t<tr>
 \t\t\t\t\t\t\t\t<td scope=\"row\">地址： ";
-            // line 84
+            // line 85
             echo twig_escape_filter($this->env, $this->getAttribute($context["community"], "getAddress", array(), "method"), "html", null, true);
             echo " ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["community"], "getCity", array(), "method"), "html", null, true);
-            // line 85
+            // line 86
             echo ", ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["community"], "getState", array(), "method"), "html", null, true);
             echo " ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["community"], "getZipcode", array(), "method"), "html", null, true);
-            // line 86
+            // line 87
             echo "</td>
 \t\t\t\t\t\t\t</tr>
 \t\t\t\t\t\t\t<tr>
 \t\t\t\t\t\t\t\t<td scope=\"row\">价格： ";
-            // line 89
+            // line 90
             echo twig_escape_filter($this->env, twig_round((($this->getAttribute((isset($context["prices"]) ? $context["prices"] : $this->getContext($context, "prices")), $context["id"], array(), "array") * 6.3) / 10000)), "html", null, true);
             echo " 万元起</td>
 \t\t\t\t\t\t\t</tr>
@@ -216,23 +220,23 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['id'], $context['community'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 95
+        // line 96
         echo "\t\t\t</div>
 \t\t</div>
 \t</div>
 \t<hr />
 \t";
-        // line 99
+        // line 100
         echo twig_include($this->env, $context, "::footer.html.twig");
         echo "
 </div>
 ";
     }
 
-    // line 101
+    // line 102
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 102
+        // line 103
         echo "<script type=\"text/javascript\"
 \tsrc=\"http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0\"></script>
 <script type=\"text/javascript\">
@@ -242,7 +246,7 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
             var mapInitOpts = {
                 credentials: 'AqpckLVrDZE9ehOKwFREOF16SWFONVDd9KqviWPOeoiE6oSn-Fu6YZZjalMvvWXg',
                 center: new Microsoft.Maps.Location(";
-        // line 110
+        // line 111
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["map_center"]) ? $context["map_center"] : $this->getContext($context, "map_center")), "latitude", array(), "array"), "html", null, true);
         echo ", ";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["map_center"]) ? $context["map_center"] : $this->getContext($context, "map_center")), "longitude", array(), "array"), "html", null, true);
@@ -250,16 +254,17 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
                 mapTypeId: Microsoft.Maps.MapTypeId.road,
                 zoom: 7,
                 width: w - 15,
-                height:w - 15
+                height: w - 15,
+                disableKeyboardInput: true
             };
             \$('#bing_map_canvas').empty();
            var map = new Microsoft.Maps.Map(document.getElementById(\"bing_map_canvas\"), mapInitOpts);
            ";
-        // line 118
+        // line 120
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["map_array"]) ? $context["map_array"] : $this->getContext($context, "map_array")));
         foreach ($context['_seq'] as $context["_key"] => $context["m"]) {
-            // line 119
+            // line 121
             echo "           \tvar location = new Microsoft.Maps.Location(";
             echo twig_escape_filter($this->env, $this->getAttribute($context["m"], "latitude", array(), "array"), "html", null, true);
             echo ", ";
@@ -274,7 +279,7 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['m'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 125
+        // line 127
         echo "        }
     \tvar \$container = \$('#model-image-container');
     \tvar \$floorplan_container = \$('#model-floorplan-container');
@@ -339,6 +344,6 @@ class __TwigTemplate_1e7c96879cb1dc6e177cb8657ef6d26e652ea2eb243dd46e8e5ba69128f
 
     public function getDebugInfo()
     {
-        return array (  278 => 125,  263 => 119,  259 => 118,  246 => 110,  236 => 102,  233 => 101,  226 => 99,  220 => 95,  208 => 89,  203 => 86,  198 => 85,  194 => 84,  187 => 79,  183 => 78,  176 => 73,  172 => 72,  157 => 60,  150 => 56,  143 => 52,  136 => 48,  129 => 44,  120 => 38,  115 => 36,  107 => 30,  96 => 25,  92 => 24,  88 => 22,  84 => 21,  79 => 18,  74 => 15,  66 => 13,  61 => 11,  55 => 10,  50 => 7,  48 => 6,  42 => 3,  39 => 2,  11 => 1,);
+        return array (  283 => 127,  268 => 121,  264 => 120,  250 => 111,  240 => 103,  237 => 102,  230 => 100,  224 => 96,  212 => 90,  207 => 87,  202 => 86,  198 => 85,  191 => 80,  187 => 79,  180 => 74,  176 => 73,  164 => 64,  157 => 60,  150 => 56,  143 => 52,  136 => 48,  129 => 44,  120 => 38,  115 => 36,  107 => 30,  96 => 25,  92 => 24,  88 => 22,  84 => 21,  79 => 18,  74 => 15,  66 => 13,  61 => 11,  55 => 10,  50 => 7,  48 => 6,  42 => 3,  39 => 2,  11 => 1,);
     }
 }

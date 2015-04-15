@@ -66,7 +66,6 @@ class LennarParser extends Parser {
 		}
 		return $images;
 	}
-	
 	public function fetch_area($area) {
 		// get facet results
 		// construct REST request
@@ -128,11 +127,14 @@ class LennarParser extends Parser {
 			$community_entity->setZipcode ( $community ['zip'] );
 			$community_entity->setArea ( $area );
 			$facade_url = substr ( $community ['img'], 0, strpos ( $community ['img'], 'ashx?' ) + 5 );
-			$facade_photo = new Photo ();
-			$facade_photo->setPath ( $this->save_image ( $facade_url ) );
-			$facade_photo->setUrl ( $facade_url );
-			$community_entity->addFacade ( $facade_photo );
-			$c = parent::add_community ( $community_entity );
+			$facade_name = $this->save_image ( $facade_url );
+			if (! empty ( $facade_name )) {
+				$facade_photo = new Photo ();
+				$facade_photo->setPath ( $facade_name );
+				$facade_photo->setUrl ( $facade_url );
+				$community_entity->addFacade ( $facade_photo );
+			}
+			$c = $this->add_community ( $community_entity );
 			$this->fetch_model ( $community ['cid'], $c );
 		}
 	}
