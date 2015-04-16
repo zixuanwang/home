@@ -61,15 +61,15 @@
 </div>
 {% endblock %} {% block javascripts %}
 <script type="text/javascript"
-	src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+	src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&mkt=ngt"></script>
 <script type="text/javascript">
     function getMap(){
         var w = $("#map-piece").width();
         var mapInitOpts = {
             credentials: 'AqpckLVrDZE9ehOKwFREOF16SWFONVDd9KqviWPOeoiE6oSn-Fu6YZZjalMvvWXg',
             center: new Microsoft.Maps.Location({{ community.getLatitude() }}, {{ community.getLongitude() }}),
-            mapTypeId: Microsoft.Maps.MapTypeId.road,
-            zoom: 7,
+            mapTypeId: Microsoft.Maps.MapTypeId.birdseye,
+            zoom: 16,
             width: w - 15,
             height:w - 15
         };

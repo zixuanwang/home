@@ -106,7 +106,7 @@ class PulteParser extends Parser {
 		foreach ( $doc->find ( '#photo_gallery_plan li a' ) as $pq_model_image ) {
 			$image_url = $this->root_url . pq ( $pq_model_image )->attr ( 'href' );
 			$path = $this->save_image ( $image_url );
-			if (! empty ( path )) {
+			if (! empty ( $path )) {
 				$photo = new Photo ();
 				$photo->setPath ( $path );
 				$photo->setUrl ( $image_url );
@@ -116,7 +116,7 @@ class PulteParser extends Parser {
 		foreach ( $floorplan_doc->find ( '.plan_top_inner_container .comm_tab_data' ) as $pq_floorplan_image ) {
 			$floorplan_url = $this->root_url . pq ( pq ( $pq_floorplan_image )->find ( 'img' ) )->attr ( 'src' );
 			$path = $this->save_image ( $floorplan_url );
-			if (! empty ( path )) {
+			if (! empty ( $path )) {
 				$photo = new Photo ();
 				$photo->setPath ( $path );
 				$photo->setUrl ( $floorplan_url );
@@ -124,7 +124,7 @@ class PulteParser extends Parser {
 			}
 		}
 		$path = $this->save_image ( $model_facade_url );
-		if (! empty ( path )) {
+		if (! empty ( $path )) {
 			$photo = new Photo ();
 			$photo->setPath ( $path );
 			$photo->setUrl ( $model_facade_url );

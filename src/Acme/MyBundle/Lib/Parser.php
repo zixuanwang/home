@@ -62,6 +62,7 @@ class Parser {
 						rename ( $local_path, $local_path . '.jpg' );
 						break;
 					case IMAGETYPE_PNG:
+						rename ( $local_path, $local_path . '.png' );
 						exec('convert ' . $local_path . '.png ' . $local_path . '.jpg');
 						break;
 					default:

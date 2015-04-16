@@ -230,7 +230,7 @@ body {
 	padding-bottom: 5px;
 	background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
 	opacity: 1;
-	width: 370px;
+	width: 240px;
 }
 
 .pin img {
@@ -401,6 +401,7 @@ table {
 	margin-top: 15px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 10px;
 }
 
 .category-item {

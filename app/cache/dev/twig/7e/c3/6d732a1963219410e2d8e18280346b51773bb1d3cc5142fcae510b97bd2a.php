@@ -44,7 +44,7 @@ class __TwigTemplate_7ec36d732a1963219410e2d8e18280346b51773bb1d3cc5142fcae510b9
 \t\t\t\t\thref=\"";
         // line 20
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("page" => 1, "area" => "portland")), "html", null, true);
-        echo "
+        echo "\"
 \t\t\t\t\tid=\"portland-button\">波特兰</a></li>
 \t\t\t\t<li><a class=\"cta grey small rounded\"
 \t\t\t\t\thref=\"";

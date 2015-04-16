@@ -1,32 +1,71 @@
  {% extends '::base.html.twig' %} {% block body %}
 <div class="container">
 	{{ include('::header.html.twig') }}
-	<div class="row category-bar">
-		<div class="col-lg-12 text-center">
-			<div class="category-item">
-				<img src="/images/school.jpg" alt="..." class="img-rounded">
-				<div class="category-desc">
-					<h5>优秀学区</h5>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="row category-bar">
+				<div class="col-lg-12 text-center">
+					<div class="category-item">
+						<img src="/images/school.jpg" alt="..." class="img-rounded">
+						<div class="category-desc">
+							<h5>优秀学区</h5>
+						</div>
+					</div>
+					<div class="category-item">
+						<img src="/images/invest.jpg" alt="..." class="img-rounded">
+						<div class="category-desc">
+							<h5>投资升值</h5>
+						</div>
+					</div>
+					<div class="category-item">
+						<img src="/images/downtown.jpg" alt="..." class="img-rounded">
+						<div class="category-desc">
+							<h5>热门地段</h5>
+						</div>
+					</div>
+					<div class="category-item">
+						<img src="/images/sea.jpg" alt="..." class="img-rounded">
+						<div class="category-desc">
+							<h5>养老休闲</h5>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="category-item">
-				<img src="/images/invest.jpg" alt="..." class="img-rounded">
-				<div class="category-desc">
-					<h5>投资升值</h5>
-				</div>
-			</div>
-			<div class="category-item">
-				<img src="/images/downtown.jpg" alt="..." class="img-rounded">
-				<div class="category-desc">
-					<h5>热门地段</h5>
-				</div>
-			</div>
-			<div class="category-item">
-				<img src="/images/sea.jpg" alt="..." class="img-rounded">
-				<div class="category-desc">
-					<h5>养老休闲</h5>
-				</div>
-			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+			<select class="form-control">
+				<option>价格：人民币</option>
+				<option>小于200万</option>
+				<option>200万-500万</option>
+				<option>大于500万</option>
+			</select>
+		</div>
+		<div class="col-sm-3">
+			<select class="form-control">
+				<option>使用面积</option>
+				<option>小于200平方米</option>
+				<option>200-300平方米</option>
+				<option>300-400平方米</option>
+				<option>大于400平方米</option>
+			</select>
+		</div>
+		<div class="col-sm-3">
+			<select class="form-control">
+				<option>卧室数量</option>
+				<option>1-2</option>
+				<option>3-4</option>
+				<option>5以上</option>
+			</select>
+		</div>
+		<div class="col-sm-3">
+			<select class="form-control">
+				<option>户型</option>
+				<option>独栋别墅</option>
+				<option>连体别墅</option>
+				<option>公寓</option>
+			</select>
 		</div>
 	</div>
 	<div class="row">
@@ -68,8 +107,8 @@
 					<li class="active"><a
 						href="{{ path('home', {'area': area, 'page': i}) }}">{{ i }}</a></li>
 					{% else %}
-					<li><a href="{{ path('home', {'area': area, 'page': i}) }}">{{ i
-							}}</a></li> {% endif %} {% endfor %}
+					<li><a href="{{ path('home', {'area': area, 'page': i}) }}">{{ i }}</a></li>
+					{% endif %} {% endfor %}
 				</ul>
 			</nav>
 		</div>
