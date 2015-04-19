@@ -76,8 +76,9 @@ class Community {
 	 */
 	protected $school_district;
 	/**
-	 * @ORM\ManyToMany(targetEntity="School", inversedBy="communities")
-	 * @ORM\JoinTable(name="communities_schools")
+	 * @ORM\ManyToMany(targetEntity="School", cascade={"persist"})
+	 * @ORM\JoinTable(name="communities_schools", joinColumns={@ORM\JoinColumn(name="community_id", referencedColumnName="id")},
+	 * inverseJoinColumns={@ORM\JoinColumn(name="school_id", referencedColumnName="id")})
 	 */
 	protected $schools;
 	/**

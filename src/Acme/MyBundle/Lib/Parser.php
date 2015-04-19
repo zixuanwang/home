@@ -57,16 +57,16 @@ class Parser {
 				$one_filename = sha1 ( uniqid ( mt_rand (), true ) );
 				$local_path = $this->root_path . '/uploads/' . $one_filename;
 				copy ( $new_url, $local_path );
-				switch (exif_imagetype($local_path)){
-					case IMAGETYPE_JPEG:
+				switch (exif_imagetype ( $local_path )) {
+					case IMAGETYPE_JPEG :
 						rename ( $local_path, $local_path . '.jpg' );
 						break;
-					case IMAGETYPE_PNG:
+					case IMAGETYPE_PNG :
 						rename ( $local_path, $local_path . '.png' );
-						exec('convert ' . $local_path . '.png ' . $local_path . '.jpg');
+						exec ( 'convert ' . $local_path . '.png ' . $local_path . '.jpg' );
 						break;
-					default:
-						throw new \Exception('unsupported image format.');
+					default :
+						throw new \Exception ( 'unsupported image format.' );
 				}
 				$md5_string = md5_file ( $local_path . '.jpg' );
 				rename ( $local_path . '.jpg', $this->root_path . '/uploads/' . $md5_string . '.jpg' );
@@ -230,6 +230,60 @@ class Parser {
 			}
 		}
 		return false;
+	}
+	/*
+	 * If two home models have the same name and in the same state, we consider
+	 * they are the same school.
+	 */
+	public function add_school($school) {
+		$repository = $this->em->getRepository ( 'AcmeMyBundle:School' );
+		$saved_school = $repository->findOneBy ( array (
+				'name' => $school->getName (),
+				'state' => $school->getState () 
+		) );
+		$s = null;
+		if ($saved_school == null) {
+			try {
+				$s = $school;
+				// query greatschools.org API
+				$key = '6nx7p1nfibuutxapl3vkmwxx';
+				$state = $school->getState ();
+				$query_url = 'http://api.greatschools.org/search/schools?key=' . $key . '&state=' . $state . '&q=' . urlencode ( $school->getName () ) . '&limit=1';
+				$xml = file_get_contents ( $query_url );
+				$parsed_xml = simplexml_load_string ( $xml );
+				if ($parsed_xml === false) {
+					throw new \Exception ( 'error in parsing school xml' );
+				}
+				if (! isset ( $parsed_xml->school->gsId )) {
+					throw new \Exception ( 'school xml is empty' );
+				}
+				$s->setAddress ( ( string ) $parsed_xml->school->address );
+				$s->setCity ( ( string ) $parsed_xml->school->city );
+				$s->setDistrict ( ( string ) $parsed_xml->school->district );
+				$s->setGradeRange ( ( string ) $parsed_xml->school->gradeRange );
+				$s->setGsId ( ( string ) $parsed_xml->school->gsId );
+				$s->setGsRating ( ( string ) $parsed_xml->school->gsRating );
+				$s->setLatitude ( ( string ) $parsed_xml->school->lat );
+				$s->setLongitude ( ( string ) $parsed_xml->school->lon );
+				$s->setParentRating ( ( string ) $parsed_xml->school->parentRating );
+				$s->setType ( ( string ) $parsed_xml->school->type );
+				// query census data
+				$query_url = 'http://api.greatschools.org/school/census/' . $state . '/' . $s->getGsId () . '?key=' . $key;
+				$xml = file_get_contents ( $query_url );
+				$parsed_xml = simplexml_load_string ( $xml );
+				$s->setEnrollment ( ( string ) $parsed_xml->enrollment );
+				$s->setStudentTeacherRatio ( ( string ) $parsed_xml->studentTeacherRatio );
+				// TODO: add races
+			} catch ( \Exception $e ) {
+				echo $e->getMessage () . "\r\n";
+				return null;
+			}
+		} else {
+			$s = $saved_school;
+		}
+		$this->em->persist ( $s );
+		$this->em->flush ();
+		return $s;
 	}
 	private $em;
 	private $root_path;

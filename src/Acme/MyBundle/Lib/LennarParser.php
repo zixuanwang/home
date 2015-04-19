@@ -8,6 +8,7 @@ use Acme\MyBundle\Entity\HomeModel;
 use Acme\MyBundle\Entity\Photo;
 use Acme\MyBundle\Entity\Price;
 use phpQuery_phpQuery;
+use Acme\MyBundle\Entity\School;
 
 class LennarParser extends Parser {
 	public function __construct($entity_manager) {
@@ -126,6 +127,7 @@ class LennarParser extends Parser {
 			$community_entity->setState ( $community ['sco'] );
 			$community_entity->setZipcode ( $community ['zip'] );
 			$community_entity->setArea ( $area );
+			$this->fetch_school ( $community_entity, $this->root_url . $community ['vtlURL'] );
 			$facade_url = substr ( $community ['img'], 0, strpos ( $community ['img'], 'ashx?' ) + 5 );
 			$facade_name = $this->save_image ( $facade_url );
 			if (! empty ( $facade_name )) {
@@ -136,6 +138,31 @@ class LennarParser extends Parser {
 			}
 			$c = $this->add_community ( $community_entity );
 			$this->fetch_model ( $community ['cid'], $c );
+		}
+	}
+	public function fetch_school($community_entity, $community_page_url) {
+		$html = file_get_contents ( $community_page_url );
+		$php_query = new phpQuery_phpQuery ();
+		$doc = $php_query->newDocument ( $html );
+		$school_array = array ();
+		// only keep last three entries
+		foreach ( $doc->find ( '.detail-schools li' ) as $element ) {
+			$school_array [] = pq ( $element )->text ();
+		}
+		$school_array = array_reverse ( $school_array );
+		$i = 0;
+		foreach ( $school_array as $element ) {
+			$school = new School ();
+			$school->setName ( $element );
+			$school->setState ( $community_entity->getState () );
+			$s = $this->add_school ( $school );
+			if ($s != null) {
+				$community_entity->addSchool ( $s );
+			}
+			$i ++;
+			if ($i > 2) {
+				break;
+			}
 		}
 	}
 	
