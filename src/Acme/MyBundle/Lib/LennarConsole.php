@@ -17,6 +17,7 @@ class LennarConsole extends ContainerAwareCommand {
 		$this->setName ( 'demo:greet' )->setDescription ( 'Greet someone' )->addArgument ( 'name', InputArgument::OPTIONAL, 'Who do you want to greet?' )->addOption ( 'yell', null, InputOption::VALUE_NONE, 'If set, the task will yell in uppercase letters' );
 	}
 	protected function execute(InputInterface $input, OutputInterface $output) {
+		gc_enable();
 		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
 		$output->writeln ( 'parsing Seattle' );
 		$parser->fetch_seattle ();
