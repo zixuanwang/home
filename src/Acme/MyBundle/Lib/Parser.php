@@ -149,7 +149,6 @@ class Parser {
 				$c->setLongitude ( $lat_long [1] );
 			}
 		}
-		$c->setMap ( $community->getMap () );
 		$c->setUpdated ( new \DateTime () );
 		$this->em->persist ( $c );
 		$this->em->flush ();

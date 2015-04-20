@@ -181,7 +181,7 @@ class LennarParser extends Parser {
 				$path = $this->save_file ( $url, '.pdf' );
 				$photo->setPath ( $path );
 				$p = $this->add_photo ( $photo );
-				$community_entity->setMap ( $p );
+				$community_entity->addMap ( $p );
 			}
 		}
 	}
