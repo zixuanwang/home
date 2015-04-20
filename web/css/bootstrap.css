@@ -4855,8 +4855,7 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 }
 
 .navbar-inverse {
-	background-color: #2092d7;
-	border-color: #293e6a;
+	background: rgba(0,0,0,0.4);
 }
 
 .navbar-inverse .navbar-brand {

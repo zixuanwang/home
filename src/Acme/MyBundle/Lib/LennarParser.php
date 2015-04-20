@@ -127,7 +127,7 @@ class LennarParser extends Parser {
 			$community_entity->setState ( $community ['sco'] );
 			$community_entity->setZipcode ( $community ['zip'] );
 			$community_entity->setArea ( $area );
-			$this->fetch_school ( $community_entity, $this->root_url . $community ['vtlURL'] );
+			$this->fetch_community_page ( $community_entity, $this->root_url . $community ['vtlURL'] );
 			$facade_url = substr ( $community ['img'], 0, strpos ( $community ['img'], 'ashx?' ) + 5 );
 			$facade_name = $this->save_image ( $facade_url );
 			if (! empty ( $facade_name )) {
@@ -140,10 +140,11 @@ class LennarParser extends Parser {
 			$this->fetch_model ( $community ['cid'], $c );
 		}
 	}
-	public function fetch_school($community_entity, $community_page_url) {
+	public function fetch_community_page($community_entity, $community_page_url) {
 		$html = file_get_contents ( $community_page_url );
 		$php_query = new phpQuery_phpQuery ();
 		$doc = $php_query->newDocument ( $html );
+		// fetch schools
 		$school_array = array ();
 		// only keep last three entries
 		foreach ( $doc->find ( '.detail-schools li' ) as $element ) {
@@ -162,6 +163,25 @@ class LennarParser extends Parser {
 			$i ++;
 			if ($i > 2) {
 				break;
+			}
+		}
+		// fetch community map
+		foreach ( $doc->find ( '.detail-info-content a' ) as $element ) {
+			if (strtolower ( pq ( $element )->text () ) == 'site plan') {
+				$url = $this->root_url . pq ( $element )->attr ( 'href' );
+				$url_array = explode ( '&', $url );
+				foreach ( $url_array as $item ) {
+					if (substr ( $item, 0, 3 ) == 'np=') {
+						$url = str_replace ( '%2f', '/', $item );
+						$url = $this->root_url . substr($url, 3);
+						break;
+					}
+				}
+				$photo = new Photo ();
+				$path = $this->save_file ( $url, '.pdf' );
+				$photo->setPath ( $path );
+				$p = $this->add_photo ( $photo );
+				$community_entity->setMap ( $p );
 			}
 		}
 	}

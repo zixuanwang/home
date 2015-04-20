@@ -156,6 +156,7 @@ body {
 	margin-right: 15px;
 	background-position: center center;
 	background-size: cover;
+	background-position: center center;
 }
 
 .floorplan-thumb-box {
@@ -427,4 +428,40 @@ table {
 	left: 0;
 	z-index: 2;
 	color: #eeeeee;
+}
+
+.head-box {
+	position: relative;
+	max-width: 1140px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.head-box .banner-background {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	transition: opacity 200ms ease-in-out;
+}
+
+.head-box .new-banner {
+	position: relative;
+	height: 380px;
+	overflow: hidden;
+}
+
+#header {
+	position: fixed;
+	max-width: 1140px;
+	margin-left: auto;
+	margin-right: auto;
+	top : 0;
+	left: 0;
+	right: 0;
+	height: 48px;
+	z-index: 99997;
+	top: 0;
 }

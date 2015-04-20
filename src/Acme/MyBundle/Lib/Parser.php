@@ -19,10 +19,11 @@ class Parser {
 			$ch = curl_init ();
 			$agent = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)';
 			curl_setopt ( $ch, CURLOPT_URL, $url );
+			curl_setopt ( $ch, CURLOPT_HEADER, true );
 			curl_setopt ( $ch, CURLOPT_USERAGENT, $agent );
 			curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 			curl_setopt ( $ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
-			curl_setopt ( $ch, CURLOPT_FOLLOWLOCATION, 1 );
+			curl_setopt ( $ch, CURLOPT_FOLLOWLOCATION, true );
 			curl_setopt ( $ch, CURLOPT_SSL_VERIFYHOST, false );
 			curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
 			$result = curl_exec ( $ch );
@@ -77,6 +78,20 @@ class Parser {
 			return '';
 		}
 		return $saved_photo->getPath ();
+	}
+	public function save_file($url, $ext) {
+		try {
+			$new_url = str_replace ( ' ', '%20', $url );
+			$one_filename = sha1 ( uniqid ( mt_rand (), true ) );
+			$local_path = $this->root_path . '/uploads/' . $one_filename . $ext;
+			copy ( $new_url, $local_path );
+			$md5_string = md5_file ( $local_path );
+			rename ( $local_path, $this->root_path . '/uploads/' . $md5_string . $ext );
+		} catch ( \Exception $e ) {
+			echo "error in copying " . $url . "\r\n";
+			return '';
+		}
+		return $md5_string . $ext;
 	}
 	public function add_photo($photo) {
 		$repository = $this->em->getRepository ( 'AcmeMyBundle:Photo' );
@@ -134,6 +149,7 @@ class Parser {
 				$c->setLongitude ( $lat_long [1] );
 			}
 		}
+		$c->setMap ( $community->getMap () );
 		$c->setUpdated ( new \DateTime () );
 		$this->em->persist ( $c );
 		$this->em->flush ();
@@ -255,7 +271,7 @@ class Parser {
 					throw new \Exception ( 'error in parsing school xml' );
 				}
 				if (! isset ( $parsed_xml->school->gsId )) {
-					throw new \Exception ( 'school xml is empty' );
+					throw new \Exception ( 'school xml is empty and query name is: ' . $school->getName () );
 				}
 				$s->setAddress ( ( string ) $parsed_xml->school->address );
 				$s->setCity ( ( string ) $parsed_xml->school->city );

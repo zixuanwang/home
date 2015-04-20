@@ -35,11 +35,85 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
     public function block_body($context, array $blocks = array())
     {
         // line 2
-        echo "<div class=\"container\">
-\t";
-        // line 3
-        echo twig_include($this->env, $context, "::header.html.twig");
-        echo "
+        echo "<div class=\"head-box\">
+\t<div class=\"banner-background\"
+\t\tstyle=\"opacity: 1; background-image: url(/images/";
+        // line 4
+        echo twig_escape_filter($this->env, (isset($context["area"]) ? $context["area"] : $this->getContext($context, "area")), "html", null, true);
+        echo "_cover.jpg);\"></div>
+\t<div class=\"new-banner\"></div>
+\t<div id=\"header\">
+\t\t<nav class=\"navbar navbar-inverse navbar-static-top\">
+\t\t\t<div class=\"container\">
+\t\t\t\t<!-- Brand and toggle get grouped for better mobile display -->
+\t\t\t\t<div class=\"navbar-header\">
+\t\t\t\t\t<button type=\"button\" class=\"navbar-toggle collapsed\"
+\t\t\t\t\t\tdata-toggle=\"collapse\" data-target=\"#home-header\">
+\t\t\t\t\t\t<span class=\"sr-only\">Toggle navigation</span> <span
+\t\t\t\t\t\t\tclass=\"icon-bar\"></span> <span class=\"icon-bar\"></span> <span
+\t\t\t\t\t\t\tclass=\"icon-bar\"></span>
+\t\t\t\t\t</button>
+\t\t\t\t\t<a class=\"navbar-brand\" href=\"";
+        // line 17
+        echo $this->env->getExtension('routing')->getPath("homepage");
+        echo "\">搜美房</a>
+\t\t\t\t</div>
+\t\t\t\t<!-- Collect the nav links, forms, and other content for toggling -->
+\t\t\t\t<div class=\"collapse navbar-collapse\" id=\"home-header\">
+\t\t\t\t\t<ul class=\"nav navbar-nav headerCases\">
+\t\t\t\t\t\t<li><a class=\"cta grey small rounded\"
+\t\t\t\t\t\t\thref=\"";
+        // line 23
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("page" => 1, "area" => "seattle")), "html", null, true);
+        echo "\"
+\t\t\t\t\t\t\tid=\"seattle-button\">西雅图</a></li>
+\t\t\t\t\t\t<li><a class=\"cta grey small rounded\"
+\t\t\t\t\t\t\thref=\"";
+        // line 26
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("page" => 1, "area" => "portland")), "html", null, true);
+        echo "\"
+\t\t\t\t\t\t\tid=\"portland-button\">波特兰</a></li>
+\t\t\t\t\t\t<li><a class=\"cta grey small rounded\"
+\t\t\t\t\t\t\thref=\"";
+        // line 29
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("page" => 1, "area" => "sf")), "html", null, true);
+        echo "\"
+\t\t\t\t\t\t\tid=\"sf-button\">旧金山</a></li>
+\t\t\t\t\t\t<li><a class=\"cta grey small rounded\"
+\t\t\t\t\t\t\thref=\"";
+        // line 32
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("page" => 1, "area" => "la")), "html", null, true);
+        echo "\"
+\t\t\t\t\t\t\tid=\"la-button\">洛杉矶</a></li>
+\t\t\t\t\t\t<li><a class=\"cta grey small rounded\"
+\t\t\t\t\t\t\thref=\"";
+        // line 35
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("page" => 1, "area" => "houston")), "html", null, true);
+        echo "\"
+\t\t\t\t\t\t\tid=\"la-button\">休斯顿</a></li>
+\t\t\t\t\t\t<li><a class=\"cta grey small rounded\"
+\t\t\t\t\t\t\thref=\"";
+        // line 38
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("page" => 1, "area" => "miami")), "html", null, true);
+        echo "\"
+\t\t\t\t\t\t\tid=\"la-button\">迈阿密</a></li>
+\t\t\t\t\t\t<li><a class=\"cta grey small rounded\"
+\t\t\t\t\t\t\thref=\"";
+        // line 41
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("page" => 1, "area" => "atlanta")), "html", null, true);
+        echo "\"
+\t\t\t\t\t\t\tid=\"la-button\">亚特兰大</a></li>
+\t\t\t\t\t</ul>
+\t\t\t\t</div>
+\t\t\t</div>
+\t\t</nav>
+\t</div>
+</div>
+
+
+
+
+<div class=\"container\">
 \t<div class=\"row\">
 \t\t<div class=\"col-lg-12\">
 \t\t\t<div class=\"row category-bar\">
@@ -111,34 +185,34 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
 \t\t<div class=\"col-lg-12\">
 \t\t\t<div id=\"container\">
 \t\t\t\t";
-        // line 74
+        // line 124
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["models"]) ? $context["models"] : $this->getContext($context, "models")));
         foreach ($context['_seq'] as $context["_key"] => $context["model"]) {
-            // line 75
+            // line 125
             echo "\t\t\t\t<div class=\"pin\">
 \t\t\t\t\t<a href=\"";
-            // line 76
+            // line 126
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("model", array("id" => $this->getAttribute($context["model"], "getId", array(), "method"))), "html", null, true);
             echo "\"> <img
 \t\t\t\t\t\tclass=\"pin-image\"
 \t\t\t\t\t\tsrc=\"";
-            // line 78
+            // line 128
             echo twig_escape_filter($this->env, (("/uploads/" . $this->getAttribute($this->getAttribute($this->getAttribute($context["model"], "getFacades", array(), "method"), 0, array(), "array"), "getPath", array(), "method")) . ".jpg"), "html", null, true);
             echo "\"></a>
 \t\t\t\t\t<div class=\"row\">
 \t\t\t\t\t\t<div class=\"col-xs-12\">
 \t\t\t\t\t\t\t<h5>";
-            // line 81
+            // line 131
             echo twig_escape_filter($this->env, $this->getAttribute($context["model"], "getName", array(), "method"), "html", null, true);
             echo "</h5>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t</div>
 \t\t\t\t\t<div class=\"row\">
 \t\t\t\t\t\t<div class=\"col-xs-12\">";
-            // line 85
+            // line 135
             echo twig_escape_filter($this->env, twig_round(($this->getAttribute($context["model"], "getSquareFeet", array(), "method") * 0.092903)), "html", null, true);
-            // line 86
+            // line 136
             echo " 平方米， ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["model"], "getNumBeds", array(), "method"), "html", null, true);
             echo "卧，";
@@ -146,35 +220,35 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
             echo "卫
 \t\t\t\t\t\t</div>
 \t\t\t\t\t\t<div class=\"col-xs-12\">";
-            // line 88
+            // line 138
             if (($this->getAttribute((isset($context["starting_prices"]) ? $context["starting_prices"] : $this->getContext($context, "starting_prices")), $this->getAttribute($context["model"], "getId", array(), "method"), array(), "array") == 0)) {
-                // line 89
+                // line 139
                 echo " 无现房 ";
             } else {
                 echo " ￥";
                 echo twig_escape_filter($this->env, twig_round((($this->getAttribute((isset($context["starting_prices"]) ? $context["starting_prices"] : $this->getContext($context, "starting_prices")), $this->getAttribute($context["model"], "getId", array(), "method"), array(), "array") * 6.3) / 10000)), "html", null, true);
-                // line 90
+                // line 140
                 echo " 万元起 ";
             }
             echo "</div>
 \t\t\t\t\t</div>
 \t\t\t\t\t";
-            // line 92
+            // line 142
             if ( !twig_test_empty($this->getAttribute($context["model"], "getImages", array(), "method"))) {
-                // line 93
+                // line 143
                 echo "\t\t\t\t\t<div class=\"ribbon-wrapper-green\">
 \t\t\t\t\t\t<div class=\"ribbon-green\">样板间</div>
 \t\t\t\t\t</div>
 \t\t\t\t\t";
             }
-            // line 97
+            // line 147
             echo "\t\t\t\t</div>
 \t\t\t\t";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['model'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 99
+        // line 149
         echo "\t\t\t</div>
 \t\t</div>
 \t</div>
@@ -183,23 +257,23 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
 \t\t\t<nav>
 \t\t\t\t<ul class=\"pagination\">
 \t\t\t\t\t";
-        // line 106
+        // line 156
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["page_array"]) ? $context["page_array"] : $this->getContext($context, "page_array")));
         foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
             echo " ";
             if (($context["i"] == (isset($context["page"]) ? $context["page"] : $this->getContext($context, "page")))) {
-                // line 107
+                // line 157
                 echo "\t\t\t\t\t<li class=\"active\"><a
 \t\t\t\t\t\thref=\"";
-                // line 108
+                // line 158
                 echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("area" => (isset($context["area"]) ? $context["area"] : $this->getContext($context, "area")), "page" => $context["i"])), "html", null, true);
                 echo "\">";
                 echo twig_escape_filter($this->env, $context["i"], "html", null, true);
                 echo "</a></li>
 \t\t\t\t\t";
             } else {
-                // line 110
+                // line 160
                 echo "\t\t\t\t\t<li><a href=\"";
                 echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("home", array("area" => (isset($context["area"]) ? $context["area"] : $this->getContext($context, "area")), "page" => $context["i"])), "html", null, true);
                 echo "\">";
@@ -207,20 +281,20 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
                 echo "</a></li>
 \t\t\t\t\t";
             }
-            // line 111
+            // line 161
             echo " ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['i'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 112
+        // line 162
         echo "\t\t\t\t</ul>
 \t\t\t</nav>
 \t\t</div>
 \t</div>
 \t<hr />
 \t";
-        // line 117
+        // line 167
         echo twig_include($this->env, $context, "::footer.html.twig");
         echo "
 </div>
@@ -239,6 +313,6 @@ class __TwigTemplate_b6896c54bbc74c7164b93054f2e36be23dfec80726c7767c1ed58d700cc
 
     public function getDebugInfo()
     {
-        return array (  224 => 117,  217 => 112,  211 => 111,  203 => 110,  196 => 108,  193 => 107,  187 => 106,  178 => 99,  171 => 97,  165 => 93,  163 => 92,  157 => 90,  152 => 89,  150 => 88,  142 => 86,  140 => 85,  133 => 81,  127 => 78,  122 => 76,  119 => 75,  115 => 74,  41 => 3,  38 => 2,  11 => 1,);
+        return array (  298 => 167,  291 => 162,  285 => 161,  277 => 160,  270 => 158,  267 => 157,  261 => 156,  252 => 149,  245 => 147,  239 => 143,  237 => 142,  231 => 140,  226 => 139,  224 => 138,  216 => 136,  214 => 135,  207 => 131,  201 => 128,  196 => 126,  193 => 125,  189 => 124,  103 => 41,  97 => 38,  91 => 35,  85 => 32,  79 => 29,  73 => 26,  67 => 23,  58 => 17,  42 => 4,  38 => 2,  11 => 1,);
     }
 }

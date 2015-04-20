@@ -7,8 +7,8 @@ use Acme\MyBundle\Entity\Home;
 use Acme\MyBundle\Entity\HomeModel;
 use Acme\MyBundle\Entity\Photo;
 use Acme\MyBundle\Entity\Price;
+use Acme\MyBundle\Entity\School;
 use phpQuery_phpQuery;
-use Acme\MyBundle\Entity\Acme\MyBundle\Entity;
 
 class PulteParser extends Parser {
 	public function __construct($entity_manager) {
@@ -68,7 +68,22 @@ class PulteParser extends Parser {
 				$community_entity->setZipcode ( $zipcode );
 				$community_entity->setArea ( $area );
 				$c = $this->add_community ( $community_entity );
-				foreach ( $c_doc->find ( '.plan_container .comm_plan' ) as $pq_model ) {
+				// parse school
+				foreach ( $c_doc->find ( '.comm_about_area_tab_title' ) as $tab ) {
+					if (strtolower ( pq ( $tab )->text () ) == 'schools') {
+						$pq_ul = pq ( pq ( $tab )->parent () )->find ( 'ul' );
+						foreach ( pq ( $pq_ul )->find ( 'li' ) as $pq_name ) {
+							$school = new School ();
+							$school->setName ( pq ( $pq_name )->text () );
+							$school->setState ( $state );
+							$s = $this->add_school ( $school );
+							if ($s != null) {
+								$community_entity->addSchool ( $s );
+							}
+						}
+					}
+				}
+				foreach ( $c_doc->find ( '#tabComm-models .plan_container .comm_plan' ) as $pq_model ) {
 					$model_facade_url = $this->root_url . pq ( pq ( $pq_model )->find ( '.comm_plan_image_container > img' ) )->attr ( 'src' );
 					$model_url = pq ( pq ( $pq_model )->find ( '.comm_plan_view_details' ) )->attr ( 'href' );
 					preg_match_all ( "/'(.*?)'/", $model_url, $matches );
