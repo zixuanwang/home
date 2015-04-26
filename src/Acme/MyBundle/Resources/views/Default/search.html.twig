@@ -76,25 +76,24 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div id="container">
-				{% for model in models %}
+				{% for home in homes %}
 				<div class="pin">
-					<a href="{{ path('model', {'id': model.getId()}) }}"> <img
+					<a href="{{ path('h', {'id': home.getId()}) }}"> <img
 						class="pin-image"
-						src="{{ '/uploads/'~model.getFacades()[0].getPath()~'.jpg' }}"></a>
+						src="{{ '/uploads/'~home.getHomeModel().getFacades()[0].getPath()~'.jpg' }}"></a>
 					<div class="row">
 						<div class="col-xs-12">
-							<h5>{{ model.getName() }}</h5>
+							<h5>{{ home.getHomeModel().getName() }}</h5>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-xs-12">{{ (model.getSquareFeet() * 0.092903) |
-							round}} 平方米， {{ model.getNumBeds() }}卧，{{ model.getNumBaths() }}卫
-						</div>
-						<div class="col-xs-12">{% if starting_prices[model.getId()] == 0
-							%} 无现房 {% else %} ￥{{ (starting_prices[model.getId()] * 6.3 /
-							10000) | round }} 万元起 {% endif %}</div>
+						<div class="col-xs-12">{{ (home.getHomeModel().getSquareFeet() *
+							0.092903) | round}} 平方米， {{ home.getHomeModel().getNumBeds()
+							}}卧，{{ home.getHomeModel().getNumBaths() }}卫</div>
+						<div class="col-xs-12">￥{{ (home.getPrices()[0].getPrice() * 6.3 /
+							10000) | round }} 万元</div>
 					</div>
-					{% if not model.getImages() is empty %}
+					{% if not home.getHomeModel().getImages() is empty %}
 					<div class="ribbon-wrapper-green">
 						<div class="ribbon-green">样板间</div>
 					</div>
@@ -109,20 +108,19 @@
 			<nav>
 				<ul class="pagination">
 					{% for i in page_array %} {% if i == page %}
-					<li class="active"><a
-						href="{{ path('home', {'area': area, 'page': i}) }}">{{ i }}</a></li>
-					{% else %}
-					<li><a href="{{ path('home', {'area': area, 'page': i}) }}">{{ i }}</a></li>
-					{% endif %} {% endfor %}
+					<li class="active">{% else %}
+					
+					<li>{% endif %} <a
+						href="{{ path('search', {'area': area}) }}?p={{ price_index }}&s={{ sqft_index }}&b={{ bed_index }}&page={{ i }}">{{
+							i }}</a></li>{% endfor %}
 				</ul>
 			</nav>
 		</div>
 	</div>
 	<hr />
-	{{ include('::footer.html.twig') }}
-</div>
-{% endblock %} {% block javascripts %}
-<script type="text/javascript">
+	{{ include('::footer.html.twig') }}</ div> {% endblock %} {% block
+	javascripts %}
+	<script type="text/javascript">
 	var search_func = function() {
 		var price_index = $("#select-price").prop("selectedIndex");
 		var sqft_index = $("#select-sqft").prop("selectedIndex");
@@ -133,5 +131,10 @@
 	$('#select-price').on('change', search_func);
 	$('#select-sqft').on('change', search_func);
 	$('#select-bed').on('change', search_func);
+	$(function(){
+		$('#select-price option')[{{ price_index }}].selected = true;
+		$('#select-sqft option')[{{ sqft_index }}].selected = true;
+		$('#select-bed option')[{{ bed_index }}].selected = true;
+	});
 </script>
-{% endblock %}
+	{% endblock %}

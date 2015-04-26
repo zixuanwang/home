@@ -24,6 +24,10 @@ class Price {
 	 */
 	protected $price;
 	/**
+	 * @ORM\Column(type="string", length=30)
+	 */
+	protected $status;
+	/**
 	 * @ORM\Column(type="datetime")
 	 */
 	protected $updated;

@@ -1,3 +1,6 @@
+ajax:
+    path:     /ajax/
+    defaults: { _controller: AcmeMyBundle:Ajax:index }
 album:
     path:     /album/{type}
     defaults: { _controller: AcmeMyBundle:Album:index }
@@ -10,6 +13,9 @@ community:
 home:
     path:     /home/{area}/{page}
     defaults: { _controller: AcmeMyBundle:Home:index }
+h:
+    path:     /h/{id}
+    defaults: { _controller: AcmeMyBundle:Home:home_detail }
 homepage:
     path:     /location/
     defaults: { _controller: AcmeMyBundle:Home:index }
@@ -25,6 +31,9 @@ model:
 portland:
     path:     /portland/
     defaults: { _controller: AcmeMyBundle:Portland:index }
+search:
+    path:     /search/
+    defaults: { _controller: AcmeMyBundle:Home:home_search }
 seattle:
     path:     /seattle/
     defaults: { _controller: AcmeMyBundle:Seattle:index }

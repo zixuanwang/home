@@ -228,11 +228,16 @@ class Parser {
 		} else {
 			$h = $saved_home;
 			if ($h->getPrices ()[0]->getPrice () != $home->getPrices ()[0]->getPrice ()) {
+				foreach ( $h->getPrices () as $price ) {
+					$price->setStatus ( 'inactive' );
+					$this->em->persist ( $price );
+				}
 				$h->addPrice ( $home->getPrices ()[0] );
 			}
 		}
 		$h->setUpdated ( new \DateTime () );
 		$h->getPrices ()[0]->setHome ( $h );
+		$h->getPrices ()[0]->setStatus ( 'active' );
 		$this->em->persist ( $h->getPrices ()[0] );
 		$this->em->persist ( $h );
 		$this->em->flush ();

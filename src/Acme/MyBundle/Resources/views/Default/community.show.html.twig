@@ -50,19 +50,22 @@
 			</div>
 			<div class="piece">
 				<h4 class="text-center">学区</h4>
-				<table class="table table-hover">
-					<tbody>
-						{% for school in community.getSchools() %}
-						<tr>
-							<td scope="row"><span class="label label-danger">{{
-									school.getGsRating() }} 分</span>&nbsp;&nbsp;{{ school.getName() }}</td>
-						</tr>
-						{% endfor %}
-					</tbody>
-				</table>
+				<div class="model-side-detail">
+					<table class="table table-hover">
+						<tbody>
+							{% for school in community.getSchools() %}
+							<tr>
+								<td scope="row"><span class="label label-danger">{{
+										school.getGsRating() }} 分</span>&nbsp;&nbsp;{{
+									school.getName() }}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<div class="piece" id="map-piece">
-				<h4>地图</h4>
+				<h4 class="text-center">地图</h4>
 				<div id="bing_map_canvas"></div>
 			</div>
 		</div>

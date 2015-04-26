@@ -48,8 +48,7 @@ $(document).ready(function() {
 		} else if (w > 750) {
 			columnNum = 3;
 			columnWidth = (w - 33) / columnNum;
-		}
-		else if (w > 450) {
+		} else if (w > 450) {
 			columnNum = 2;
 			columnWidth = (w - 17) / columnNum;
 		}

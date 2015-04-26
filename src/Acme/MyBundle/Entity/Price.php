@@ -24,6 +24,10 @@ class Price {
 	 */
 	protected $price;
 	/**
+	 * @ORM\Column(type="string", length=30)
+	 */
+	protected $status;
+	/**
 	 * @ORM\Column(type="datetime")
 	 */
 	protected $updated;
@@ -106,5 +110,28 @@ class Price {
     public function getHome()
     {
         return $this->home;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return Price
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

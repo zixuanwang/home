@@ -17,22 +17,35 @@ class LennarConsole extends ContainerAwareCommand {
 		$this->setName ( 'demo:greet' )->setDescription ( 'Greet someone' )->addArgument ( 'name', InputArgument::OPTIONAL, 'Who do you want to greet?' )->addOption ( 'yell', null, InputOption::VALUE_NONE, 'If set, the task will yell in uppercase letters' );
 	}
 	protected function execute(InputInterface $input, OutputInterface $output) {
-		gc_enable();
+		gc_enable ();
 		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
 		$output->writeln ( 'parsing Seattle' );
 		$parser->fetch_seattle ();
+		unset ( $parser );
+		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
 		$output->writeln ( 'parsing LA' );
 		$parser->fetch_la ();
+		unset ( $parser );
+		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
 		$output->writeln ( 'parsing Portland' );
 		$parser->fetch_portland ();
+		unset ( $parser );
+		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
 		$output->writeln ( 'parsing SF' );
 		$parser->fetch_sf ();
+		unset ( $parser );
+		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
 		$output->writeln ( 'parsing Houston' );
 		$parser->fetch_houston ();
+		unset ( $parser );
+		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
 		$output->writeln ( 'parsing Miami' );
 		$parser->fetch_miami ();
+		unset ( $parser );
+		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
 		$output->writeln ( 'parsing Atlanta' );
 		$parser->fetch_atlanta ();
+		unset ( $parser );
 		$parser = new PulteParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
 		echo "parse seattle\r\n";
 		$parser->fetch_area ( 'seattle' );

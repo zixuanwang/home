@@ -40,4 +40,19 @@ class Utility {
 		}
 		return array ();
 	}
+	/*
+	 * square feet to square meters
+	 */
+	public static function sqft_to_sqmt($sqft) {
+		return $sqft * 0.092903;
+	}
+	public static function sqmt_to_sqft($sqmt) {
+		return $sqmt / 0.092903;
+	}
+	public static function dollor_to_rmb($dollor) {
+		return $dollor * 6.3;
+	}
+	public static function rmb_to_dollor($rmb) {
+		return $rmb / 6.3;
+	}
 }

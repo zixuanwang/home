@@ -270,7 +270,7 @@ class LennarParser extends Parser {
 				$photo->setUrl ( $url );
 				$model_entity->addImage ( $photo );
 			}
-			$m = parent::add_model ( $model_entity );
+			$m = $this->add_model ( $model_entity );
 			if ($m != null) {
 				$this->fetch_home ( $community_id, $model ['pid'], $community_entity, $m );
 			}
@@ -319,7 +319,7 @@ class LennarParser extends Parser {
 			$home_entity->setPricePerFoot ( $price_per_foot );
 			$home_entity->setAddress ( $home ['spdAdd'] );
 			$home_entity->setZipcode ( $home ['spZip'] );
-			parent::add_home ( $home_entity );
+			$this->add_home ( $home_entity );
 		}
 	}
 	public $builder_name;
