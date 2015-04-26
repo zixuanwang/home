@@ -111,7 +111,7 @@
 					<li class="active">{% else %}
 					
 					<li>{% endif %} <a
-						href="{{ path('search', {'area': area}) }}?p={{ price_index }}&s={{ sqft_index }}&b={{ bed_index }}&page={{ i }}">{{
+						href="{{ path('search') }}?area={{ area }}&p={{ price_index }}&s={{ sqft_index }}&b={{ bed_index }}&page={{ i }}">{{
 							i }}</a></li>{% endfor %}
 				</ul>
 			</nav>
