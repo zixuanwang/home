@@ -57,6 +57,7 @@ class HomeController extends Controller {
 		$price_index = $request->get ( 'p', 0 );
 		$sqft_index = $request->get ( 's', 0 );
 		$bed_index = $request->get ( 'b', 0 );
+		$builder_index = $request->get ( 'bu', 0 );
 		$price_array = array (
 				0 => array (
 						0,
@@ -115,24 +116,33 @@ class HomeController extends Controller {
 						1000000000 
 				) 
 		);
+		$builder_array = array (
+				0 => '',
+				1 => 'Lennar',
+				2 => 'Pulte Homes',
+				3 => 'D.R. Horton' 
+		);
 		$area = $request->get ( 'area', 'all' );
 		$page = $request->get ( 'page', 1 );
 		$page_size = 16;
 		$em = $this->getDoctrine ()->getManager ();
-		if ($area == 'all') {
-			$sql_string = 'SELECT h, p, m FROM AcmeMyBundle:Home h JOIN h.prices p JOIN h.home_model m WHERE p.price >= 
-					:price_min AND p.price < :price_max AND p.status = :status AND m.square_feet >= :area_min AND 
-					m.square_feet < :area_max AND m.num_beds >= :bed_min AND m.num_beds < :bed_max';
-			$qb = $em->createQuery ( $sql_string )->setParameter ( 'price_max', $price_array [$price_index] [1] )->setParameter ( 'price_min', $price_array [$price_index] [0] );
-			$qb = $qb->setParameter ( 'status', 'active' )->setParameter ( 'area_min', $sqft_array [$sqft_index] [0] )->setParameter ( 'area_max', $sqft_array [$sqft_index] [1] );
-			$qb = $qb->setParameter ( 'bed_min', $bed_array [$bed_index] [0] )->setParameter ( 'bed_max', $bed_array [$bed_index] [1] );
-		} else {
-			$sql_string = 'SELECT h, p, m FROM AcmeMyBundle:Home h JOIN h.prices p JOIN h.home_model m WHERE p.price >=
+		$sql_string = 'SELECT h, p, m FROM AcmeMyBundle:Home h JOIN h.prices p JOIN h.home_model m WHERE p.price >=
 					:price_min AND p.price < :price_max AND p.status = :status AND m.square_feet >= :area_min AND
-					m.square_feet < :area_max AND m.num_beds >= :bed_min AND m.num_beds < :bed_max AND m.area = :area';
-			$qb = $em->createQuery ( $sql_string )->setParameter ( 'price_max', $price_array [$price_index] [1] )->setParameter ( 'price_min', $price_array [$price_index] [0] );
-			$qb = $qb->setParameter ( 'status', 'active' )->setParameter ( 'area_min', $sqft_array [$sqft_index] [0] )->setParameter ( 'area_max', $sqft_array [$sqft_index] [1] );
-			$qb = $qb->setParameter ( 'bed_min', $bed_array [$bed_index] [0] )->setParameter ( 'bed_max', $bed_array [$bed_index] [1] )->setParameter ( 'area', $area );
+					m.square_feet < :area_max AND m.num_beds >= :bed_min AND m.num_beds < :bed_max';
+		if ($area != 'all') {
+			$sql_string .= ' AND m.area = :area';
+		}
+		if ($builder_index != 0) {
+			$sql_string .= ' AND m.builder = :builder';
+		}
+		$qb = $em->createQuery ( $sql_string )->setParameter ( 'price_max', $price_array [$price_index] [1] )->setParameter ( 'price_min', $price_array [$price_index] [0] );
+		$qb = $qb->setParameter ( 'status', 'active' )->setParameter ( 'area_min', $sqft_array [$sqft_index] [0] )->setParameter ( 'area_max', $sqft_array [$sqft_index] [1] );
+		$qb = $qb->setParameter ( 'bed_min', $bed_array [$bed_index] [0] )->setParameter ( 'bed_max', $bed_array [$bed_index] [1] );
+		if ($area != 'all') {
+			$qb->setParameter ( 'area', $area );
+		}
+		if ($builder_index != 0) {
+			$qb->setParameter ( 'builder', $builder_array [$builder_index] );
 		}
 		$paginator = new Paginator ( $qb );
 		$total_count = count ( $paginator );
@@ -147,7 +157,8 @@ class HomeController extends Controller {
 				'page_array' => range ( $page_lower, $page_upper ),
 				'price_index' => $price_index,
 				'sqft_index' => $sqft_index,
-				'bed_index' => $bed_index 
+				'bed_index' => $bed_index,
+				'builder_index' => $builder_index
 		) );
 	}
 	public function home_detailAction($id) {

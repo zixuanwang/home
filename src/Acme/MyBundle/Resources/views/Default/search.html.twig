@@ -6,39 +6,7 @@
 	<div id="header">{{ include('::header.html.twig') }}</div>
 </div>
 <div class="container">
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="row category-bar">
-				<div class="col-lg-12 text-center">
-					<div class="category-item">
-						<img src="/images/school.jpg" alt="..." class="img-rounded">
-						<div class="category-desc">
-							<h5>优秀学区</h5>
-						</div>
-					</div>
-					<div class="category-item">
-						<img src="/images/invest.jpg" alt="..." class="img-rounded">
-						<div class="category-desc">
-							<h5>投资升值</h5>
-						</div>
-					</div>
-					<div class="category-item">
-						<img src="/images/downtown.jpg" alt="..." class="img-rounded">
-						<div class="category-desc">
-							<h5>热门地段</h5>
-						</div>
-					</div>
-					<div class="category-item">
-						<img src="/images/sea.jpg" alt="..." class="img-rounded">
-						<div class="category-desc">
-							<h5>养老休闲</h5>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
+	<div class="row" style="margin-top:15px">
 		<div class="col-sm-3">
 			<select class="form-control" id="select-price">
 				<option>价格：人民币</option>
@@ -59,17 +27,17 @@
 		<div class="col-sm-3">
 			<select class="form-control" id="select-bed">
 				<option>卧室数量</option>
-				<option>1-2</option>
-				<option>3-4</option>
-				<option>5以上</option>
+				<option>1-2个卧室</option>
+				<option>3-4个卧室</option>
+				<option>5个以上卧室</option>
 			</select>
 		</div>
 		<div class="col-sm-3">
-			<select class="form-control" id="select-type">
-				<option>户型</option>
-				<option>独栋别墅</option>
-				<option>连体别墅</option>
-				<option>公寓</option>
+			<select class="form-control" id="select-builder">
+				<option>开发商</option>
+				<option>莱纳 (Lennar)</option>
+				<option>普尔特 (Pulte Homes)</option>
+				<option>霍顿 (D.R. Horton)</option>
 			</select>
 		</div>
 	</div>
@@ -125,16 +93,19 @@
 		var price_index = $("#select-price").prop("selectedIndex");
 		var sqft_index = $("#select-sqft").prop("selectedIndex");
 		var bed_index = $("#select-bed").prop("selectedIndex");
-		var url = "{{ path('search') }}?area={{ area }}" + "&p=" + price_index + "&s=" + sqft_index + "&b=" + bed_index;
+		var builder_index = $("#select-builder").prop("selectedIndex");
+		var url = "{{ path('search') }}?area={{ area }}" + "&p=" + price_index + "&s=" + sqft_index + "&b=" + bed_index + "&bu=" + builder_index;
 		window.location.replace(url);
 	};
 	$('#select-price').on('change', search_func);
 	$('#select-sqft').on('change', search_func);
 	$('#select-bed').on('change', search_func);
+	$('#select-builder').on('change', search_func);
 	$(function(){
 		$('#select-price option')[{{ price_index }}].selected = true;
 		$('#select-sqft option')[{{ sqft_index }}].selected = true;
 		$('#select-bed option')[{{ bed_index }}].selected = true;
+		$('#select-builder option')[{{ builder_index }}].selected = true;
 	});
 </script>
 	{% endblock %}
