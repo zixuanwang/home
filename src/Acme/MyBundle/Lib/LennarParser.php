@@ -187,32 +187,6 @@ class LennarParser extends Parser {
 	}
 	
 	/**
-	 * this function parses the page of seattle.
-	 * for example, see ajax queries in http://www.lennar.com/New-Homes/Washington/Seattle
-	 */
-	public function fetch_seattle() {
-		$this->fetch_area ( 'seattle' );
-	}
-	public function fetch_portland() {
-		$this->fetch_area ( 'portland' );
-	}
-	public function fetch_sf() {
-		$this->fetch_area ( 'sf' );
-	}
-	public function fetch_la() {
-		$this->fetch_area ( 'la' );
-	}
-	public function fetch_houston() {
-		$this->fetch_area ( 'houston' );
-	}
-	public function fetch_miami() {
-		$this->fetch_area ( 'miami' );
-	}
-	public function fetch_atlanta() {
-		$this->fetch_area ( 'atlanta' );
-	}
-	
-	/**
 	 * this function parses the page of community.
 	 * all information within the community are fetched.
 	 * for example, see ajax queries in http://www.lennar.com/New-Homes/Washington/Seattle/Bothell/Canton-Ridge

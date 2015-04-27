@@ -14,49 +14,16 @@ use Acme\MyBundle\Lib\PulteParser;
 
 class LennarConsole extends ContainerAwareCommand {
 	protected function configure() {
-		$this->setName ( 'demo:greet' )->setDescription ( 'Greet someone' )->addArgument ( 'name', InputArgument::OPTIONAL, 'Who do you want to greet?' )->addOption ( 'yell', null, InputOption::VALUE_NONE, 'If set, the task will yell in uppercase letters' );
+		$this->setName ( 'parse' )->setDescription ( 'Fetch area' )->addArgument ( 'area', InputArgument::OPTIONAL, 'Where do you want to fetch' );
 	}
 	protected function execute(InputInterface $input, OutputInterface $output) {
-		gc_enable ();
+		$area = $input->getArgument ( 'area' );
 		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
-		$output->writeln ( 'parsing Seattle' );
-		$parser->fetch_seattle ();
-		unset ( $parser );
-		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
-		$output->writeln ( 'parsing LA' );
-		$parser->fetch_la ();
-		unset ( $parser );
-		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
-		$output->writeln ( 'parsing Portland' );
-		$parser->fetch_portland ();
-		unset ( $parser );
-		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
-		$output->writeln ( 'parsing SF' );
-		$parser->fetch_sf ();
-		unset ( $parser );
-		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
-		$output->writeln ( 'parsing Houston' );
-		$parser->fetch_houston ();
-		unset ( $parser );
-		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
-		$output->writeln ( 'parsing Miami' );
-		$parser->fetch_miami ();
-		unset ( $parser );
-		$parser = new LennarParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
-		$output->writeln ( 'parsing Atlanta' );
-		$parser->fetch_atlanta ();
-		unset ( $parser );
+		$output->writeln ( 'Parsing Lennar ' . $area );
+		$parser->fetch_area ( $area );
 		$parser = new PulteParser ( $this->getContainer ()->get ( 'doctrine' )->getManager () );
-		echo "parse seattle\r\n";
-		$parser->fetch_area ( 'seattle' );
-		echo "parse sf\r\n";
-		$parser->fetch_area ( 'sf' );
-		echo "parse la\r\n";
-		$parser->fetch_area ( 'la' );
-		echo "parse houston\r\n";
-		$parser->fetch_area ( 'houston' );
-		echo "parse atlanta\r\n";
-		$parser->fetch_area ( 'atlanta' );
+		$output->writeln ( 'Parsing Pulte Homes ' . $area );
+		$parser->fetch_area ( $area );
 		$output->writeln ( 'done' );
 	}
 }
