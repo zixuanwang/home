@@ -4,25 +4,25 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-8 model-gallery">
 			<div id="container">
-				{% for model_price in model_price_array %}
+				{% for home in homes %}
 				<div class="pin">
-					<a href="{{ path('model', {'id': model_price['model'].getId()}) }}">
+					<a href="{{ path('h', {'id': home.getId()}) }}">
 						<img class="pin-image"
-						src="{{ '/uploads/'~model_price['model'].getFacades()[0].getPath()~'.jpg' }}">
+						src="{{ '/uploads/'~home.getHomeModel().getFacades()[0].getPath()~'.jpg' }}">
 					</a>
 					<div class="row">
 						<div class="col-xs-12">
-							<h5>{{ model_price['model'].getName() }}</h5>
+							<h5>{{ home.getHomeModel().getName() }}</h5>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-xs-12">{{ (model_price['model'].getSquareFeet() *
-							0.092903) | round}} 平方米， {{ model_price['model'].getNumBeds()
-							}}卧，{{ model_price['model'].getNumBaths() }}卫</div>
-						<div class="col-xs-12">￥{{ (model_price['price'] * 6.3 / 10000) |
+						<div class="col-xs-12">{{ (home.getHomeModel().getSquareFeet() *
+							0.092903) | round}} 平方米， {{ home.getHomeModel().getNumBeds()
+							}}卧，{{ home.getHomeModel().getNumBaths() }}卫</div>
+						<div class="col-xs-12">￥{{ (home.getPrices()[0].getPrice() * 6.3 / 10000) |
 							round }} 万元</div>
 					</div>
-					{% if not model_price['model'].getImages() is empty %}
+					{% if not home.getHomeModel().getImages() is empty %}
 					<div class="ribbon-wrapper-green">
 						<div class="ribbon-green">样板间</div>
 					</div>
@@ -43,7 +43,7 @@
 								community.getZipcode() }}</td>
 						</tr>
 						<tr>
-							<td scope="row">现房：{{ model_price_array|length }}套</td>
+							<td scope="row">现房：{{ homes|length }}套</td>
 						</tr>
 					</tbody>
 				</table>

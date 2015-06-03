@@ -10,15 +10,8 @@ class CommunityController extends Controller {
 		$repository = $this->getDoctrine ()->getRepository ( 'AcmeMyBundle:Community' );
 		$community = $repository->find ( $id );
 		$homes = $community->getHomes ();
-		$model_price_array = array ();
-		foreach ( $homes as $home ) {
-			$model_price_array [] = array (
-					'model' => $home->getHomeModel (),
-					'price' => $home->getPrices ()[0]->getPrice () 
-			);
-		}
 		return $this->render ( 'AcmeMyBundle:Default:community.show.html.twig', array (
-				'model_price_array' => $model_price_array,
+				'homes' => $homes,
 				'community' => $community 
 		) );
 	}
