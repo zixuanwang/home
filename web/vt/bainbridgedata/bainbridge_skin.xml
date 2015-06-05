@@ -1998,161 +1998,14 @@
 />
 
 
-  <!-- ************* -->
-  <!-- Panorama Menu -->
-  <!-- ************* -->
-
-<ptplugin name="panoramaMenu" engine="kolorMenu">
-	<settings>
-		<option name="position" value="top" type="string" />
-		<option name="orientation" value="horizontal" type="string" />
-		<option name="sub_orientation" value="vertical" type="string" />
-		<option name="margin_x" value="5" type="int" />
-		<option name="margin_y" value="5" type="int" />
-		<option name="background_color" value="b3b3b3" type="string" />
-		<option name="background_alpha" value="1" type="float" />
-		<option name="item_spacer" value="5" type="int" />
-		<option name="border_radius" value="7" type="int" />
-		<option name="full_size" value="false" type="bool" />
-		<option name="use_out_effect" value="true" type="bool" />
-		<option name="item_out_border_radius" value="7" type="int" />
-		<option name="item_hover_border_radius" value="7" type="int" />
-		<option name="item_out_border_width" value="0" type="int" />
-		<option name="item_hover_border_width" value="0" type="int" />
-		<option name="item_out_bg_color" value="b3b3b3" type="string" />
-		<option name="item_out_bg_alpha" value="1" type="float" />
-		<option name="item_out_font_color" value="ffffff" type="string" />
-		<option name="item_out_font_family" value="Arial" type="string" />
-		<option name="item_out_font_size" value="14" type="int" />
-		<option name="item_out_font_weight" value="normal" type="string" />
-		<option name="item_out_font_style" value="normal" type="string" />
-		<option name="item_out_font_decoration" value="normal" type="string" />
-		<option name="use_hover_effect" value="true" type="bool" />
-		<option name="item_hover_bg_color" value="d7d7d7" type="string" />
-		<option name="item_hover_bg_alpha" value="1" type="float" />
-		<option name="item_hover_font_color" value="ffffff" type="string" />
-		<option name="item_hover_font_family" value="Arial" type="string" />
-		<option name="item_hover_font_size" value="14" type="int" />
-		<option name="item_hover_font_weight" value="normal" type="string" />
-		<option name="item_hover_font_style" value="normal" type="string" />
-		<option name="item_hover_font_decoration" value="normal" type="string" />
-		<option name="force_font_menu" value="true" type="bool" />
-		<option name="force_font_menu_color" value="ffffff" type="string" />
-		<option name="force_font_menu_family" value="Arial" type="string" />
-		<option name="force_font_menu_size" value="16" type="int" />
-		<option name="force_font_menu_weight" value="normal" type="string" />
-		<option name="force_font_menu_style" value="normal" type="string" />
-		<option name="force_font_menu_decoration" value="normal" type="string" />
-		<option name="text_align" value="right" type="string" />
-		<option name="item_thumb_max_width" value="200" type="int" />
-		<option name="item_thumb_max_height" value="100" type="int" />
-		<option name="zorder" value="5" type="int" />
-	</settings>
-	<internaldata>
-				<group name="group_1"
-						titleID="panogroup21_title"
-						thumbnail="bainbridgedata/pano_20/thumbnail.jpg"
-						subMenu="false"
-						cssClass="panogroup21"> 
-
-				
-				
-						<item name="group_1_item_1"
-							action="invokeKrFunction('mainloadscene', 'pano20')"
-								titleID="pano20_title"
-								thumbnail="bainbridgedata/pano_20/thumbnail.jpg"
-							cssClass="pano20">
-						
-						
-						</item>
-					
-						<option name="background_color" value="808080" type="string" />
-						<option name="background_alpha" value="1" type="float" />
-				
-				</group>
-				<group name="group_2"
-						titleID="panogroup23_title"
-						thumbnail="bainbridgedata/pano_22/thumbnail.jpg"
-						subMenu="false"
-						cssClass="panogroup23"> 
-
-				
-				
-						<item name="group_2_item_1"
-							action="invokeKrFunction('mainloadscene', 'pano22')"
-								titleID="pano22_title"
-								thumbnail="bainbridgedata/pano_22/thumbnail.jpg"
-							cssClass="pano22">
-						
-						
-						</item>
-					
-						<option name="background_color" value="808080" type="string" />
-						<option name="background_alpha" value="1" type="float" />
-				
-				</group>
-				<group name="group_3"
-						titleID="panogroup25_title"
-						thumbnail="bainbridgedata/pano_24/thumbnail.jpg"
-						subMenu="false"
-						cssClass="panogroup25"> 
-
-				
-				
-						<item name="group_3_item_1"
-							action="invokeKrFunction('mainloadscene', 'pano24')"
-								titleID="pano24_title"
-								thumbnail="bainbridgedata/pano_24/thumbnail.jpg"
-							cssClass="pano24">
-						
-						
-						</item>
-					
-						<option name="background_color" value="808080" type="string" />
-						<option name="background_alpha" value="1" type="float" />
-				
-				</group>
-	</internaldata>
-</ptplugin>
-
-<action name="kolorMenuJsReady-panoramaMenu">
-	set(ptplugin[panoramaMenu].jsready, true);
-</action>
-
-<action name="showKolorMenu-panoramaMenu">
-	
-	ifnot(ptplugin[panoramaMenu].isOpen,
-		set(ptplugin[panoramaMenu].isOpen, true);
-		js(openKolorMenu(panoramaMenu));
-	,
-		if(ptplugin[panoramaMenu].jsready,
-			js(invokePluginFunction(panoramaMenu, showKolorMenu));
-		);
-	);
-</action>
-
-<action name="hideKolorMenu-panoramaMenu">
-	if(ptplugin[panoramaMenu].jsready,
-		js(invokePluginFunction(panoramaMenu, hideKolorMenu));
-	);
-</action>
-
-
-<events name="kolorMenuEvents-panoramaMenu" 
-	keep="true"
-	
-	
-	onTourStart="showKolorMenu-panoramaMenu();"
-/>
-
   <!-- Hide / Show Controls -->
   <action name="hideTourControls">set(tour_displaycontrols, false);events.dispatch(hidetourcontrols);</action>
   <action name="showTourControls">set(tour_displaycontrols, true); events.dispatch(showtourcontrols);</action>
 
 
   <!-- Fullscreen Management -->
-  <action name="exitFullScreen" devices="fullscreensupport">set(tour_fullscreen,false);js(setFullscreen(false));</action>
-  <action name="enterFullScreen" devices="fullscreensupport">set(tour_fullscreen,true);js(setFullscreen(true));</action>
+  <action name="exitFullScreen" devices="fullscreensupport">set(tour_fullscreen,false);set(fullscreen,false);</action>
+  <action name="enterFullScreen" devices="fullscreensupport">set(tour_fullscreen,true);set(fullscreen,true);</action>
   <action name="switchFullScreen">if(tour_fullscreen,exitFullScreen();,enterFullScreen(););</action>
 
   
@@ -2161,11 +2014,6 @@
     keep="true" />
 
   <action name="exitFullScreenChangeEvent" devices="fullscreensupport">set(tour_fullscreen,false);events.dispatch(onexitfullscreen);</action>
-  <action name="enterFullScreenChangeEvent" devices="fullscreensupport">set(tour_fullscreen,true);events.dispatch(onenterfullscreen);</action>
-  <action name="exitFullScreenFallback">set(fullscreen,false);</action>
-  <action name="enterFullScreenFallback">set(fullscreen,true);</action>
-  
-  <action name="resizeFullScreenEvent">delayedcall(0,updatescreen(););</action>
 
   <action name="enableGyroscope">
     changeGyroscopeState(true);
