@@ -68,7 +68,10 @@
 						</tbody>
 					</table>
 					<p class="text-center">
-						<img src="/images/{{ builder_logo }}" width="40%">
+						{% if model.getHasPanorama() == 'yes' %} <a
+							href="/vt/{{ model.getName() }}.html"
+							class="btn btn-primary btn-lg" target="_blank">虚拟全景图</a> {% endif
+						%}
 					</p>
 				</div>
 			</div>

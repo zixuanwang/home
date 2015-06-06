@@ -15,6 +15,9 @@ class LennarParser extends Parser {
 		parent::__construct ( $entity_manager );
 		$this->builder_name = 'Lennar';
 		$this->root_url = 'http://www.lennar.com';
+		$this->panorama_array = array (
+				'bainbridge' => 1 
+		);
 	}
 	
 	/**
@@ -173,7 +176,7 @@ class LennarParser extends Parser {
 				foreach ( $url_array as $item ) {
 					if (substr ( $item, 0, 3 ) == 'np=') {
 						$url = str_replace ( '%2f', '/', $item );
-						$url = $this->root_url . substr($url, 3);
+						$url = $this->root_url . substr ( $url, 3 );
 						break;
 					}
 				}
@@ -223,6 +226,10 @@ class LennarParser extends Parser {
 			$model_entity->setNumStories ( $model ['story'] );
 			$model_entity->setName ( $model ['plmktnm'] );
 			$model_entity->setArea ( $community_entity->getArea () );
+			$model_entity->setHasPanorama ( 'no' );
+			if (array_key_exists ( strtolower ( $model ['plmktnm'] ), $this->panorama_array )) {
+				$model_entity->setHasPanorama ( 'yes' );
+			}
 			// fetch images from the web page
 			$page_url = $this->root_url . $model ['vtlURL'];
 			$images = $this->parse_image ( $page_url );
@@ -298,4 +305,5 @@ class LennarParser extends Parser {
 	}
 	public $builder_name;
 	public $root_url;
+	public $panorama_array;
 }

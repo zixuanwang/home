@@ -35,6 +35,10 @@ class HomeModel {
 	 */
 	protected $floorplans;
 	/**
+	 * @ORM\Column(type="string", length=5, nullable=true)
+	 */
+	protected $has_panorama;
+	/**
 	 * @ORM\OneToMany(targetEntity="Home", mappedBy="home_model")
 	 */
 	protected $homes;
@@ -429,5 +433,28 @@ class HomeModel {
     public function getArea()
     {
         return $this->area;
+    }
+
+    /**
+     * Set has_panorama
+     *
+     * @param string $hasPanorama
+     * @return HomeModel
+     */
+    public function setHasPanorama($hasPanorama)
+    {
+        $this->has_panorama = $hasPanorama;
+
+        return $this;
+    }
+
+    /**
+     * Get has_panorama
+     *
+     * @return string 
+     */
+    public function getHasPanorama()
+    {
+        return $this->has_panorama;
     }
 }

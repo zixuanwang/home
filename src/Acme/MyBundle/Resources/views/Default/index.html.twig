@@ -62,11 +62,15 @@
 							%} 无现房 {% else %} ￥{{ (starting_prices[model.getId()] * 6.3 /
 							10000) | round }} 万元起 {% endif %}</div>
 					</div>
-					{% if not model.getImages() is empty %}
+					{% if model.getHasPanorama() == 'yes' %}
+					<div class="ribbon-wrapper-red">
+						<div class="ribbon-red">全景图</div>
+					</div>
+					{% else %} {% if not model.getImages() is empty %}
 					<div class="ribbon-wrapper-green">
 						<div class="ribbon-green">样板间</div>
 					</div>
-					{% endif %}
+					{% endif %} {% endif %}
 				</div>
 				{% endfor %}
 			</div>

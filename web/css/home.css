@@ -398,6 +398,59 @@ table {
 	right: 0;
 }
 
+.ribbon-wrapper-red {
+	width: 85px;
+	height: 88px;
+	overflow: hidden;
+	position: absolute;
+	top: -5px;
+	right: -5px;
+}
+
+.ribbon-red {
+	font: bold 15px Sans-Serif;
+	color: #333;
+	text-align: center;
+	text-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	position: relative;
+	padding: 7px 0;
+	left: -5px;
+	top: 15px;
+	width: 120px;
+	background-color: #BFDC7A;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#e84040),
+		to(#8EBF45));
+	background-image: -webkit-linear-gradient(top, #e84040, #B83030);
+	background-image: -moz-linear-gradient(top, #e84040, #B83030);
+	background-image: -ms-linear-gradient(top, #e84040, #B83030);
+	background-image: -o-linear-gradient(top, #e84040, #B83030);
+	color: #dddddd;
+	-webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
+
+.ribbon-red:before, .ribbon-red:after {
+	content: "";
+	border-top: 3px solid #cc3b3b;
+	border-left: 3px solid transparent;
+	border-right: 3px solid transparent;
+	position: absolute;
+	bottom: -3px;
+}
+
+.ribbon-red:before {
+	left: 0;
+}
+
+.ribbon-red:after {
+	right: 0;
+}
+
 .category-bar {
 	margin-top: 15px;
 	margin-left: auto;
@@ -458,7 +511,7 @@ table {
 	max-width: 1140px;
 	margin-left: auto;
 	margin-right: auto;
-	top : 0;
+	top: 0;
 	left: 0;
 	right: 0;
 	height: 48px;

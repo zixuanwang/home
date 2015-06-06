@@ -35,7 +35,9 @@
 			<div class="piece">
 				<h4>{{ model.getName() }}户型</h4>
 				<div style="padding-right: 15px">
-					<div class="model-facade-thumb img-responsive" style="background-image: url('{{'/uploads/'~model.getFacades()[0].getPath()~'.jpg'}}');"></div></div>
+					<div class="model-facade-thumb img-responsive"
+						style="background-image: url('{{'/uploads/'~model.getFacades()[0].getPath()~'.jpg'}}');"></div>
+				</div>
 				<div class="model-side-detail">
 					<table class="table table-hover">
 						<tbody>
@@ -61,7 +63,12 @@
 							</tr>
 						</tbody>
 					</table>
-					<img src="/images/{{ builder_logo }}" width="40%">
+					<p class="text-center">
+						{% if model.getHasPanorama() == 'yes' %} <a
+							href="/vt/{{ model.getName() }}.html"
+							class="btn btn-primary btn-lg" target="_blank">虚拟全景图</a> {% endif
+						%}
+					</p>
 				</div>
 			</div>
 			<div class="piece" id="map-piece">

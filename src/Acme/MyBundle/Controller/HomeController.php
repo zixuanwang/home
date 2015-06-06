@@ -19,9 +19,9 @@ class HomeController extends Controller {
 		$page_size = 16;
 		$repository = $this->getDoctrine ()->getRepository ( 'AcmeMyBundle:HomeModel' );
 		if ($area == 'all') {
-			$qb = $repository->createQueryBuilder ( 'p' )->select ( 'p' )->leftJoin ( 'p.homes', 'h' )->where ( 'h is NOT NULL' );
+			$qb = $repository->createQueryBuilder ( 'p' )->select ( 'p' )->leftJoin ( 'p.homes', 'h' )->where ( 'h is NOT NULL' )->orderBy('p.name', 'ASC');
 		} else {
-			$qb = $repository->createQueryBuilder ( 'p' )->select ( 'p' )->leftJoin ( 'p.homes', 'h' )->where ( 'p.area = :area AND h is NOT NULL' )->setParameter ( 'area', $area );
+			$qb = $repository->createQueryBuilder ( 'p' )->select ( 'p' )->leftJoin ( 'p.homes', 'h' )->where ( 'p.area = :area AND h is NOT NULL' )->setParameter ( 'area', $area )->orderBy('p.name', 'ASC');
 		}
 		$paginator = new Paginator ( $qb );
 		$total_count = count ( $paginator );

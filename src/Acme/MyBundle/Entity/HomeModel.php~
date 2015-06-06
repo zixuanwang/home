@@ -35,6 +35,10 @@ class HomeModel {
 	 */
 	protected $floorplans;
 	/**
+	 * @ORM\Column(type="string", length=5, nullable=true)
+	 */
+	protected $has_panorama;
+	/**
 	 * @ORM\OneToMany(targetEntity="Home", mappedBy="home_model")
 	 */
 	protected $homes;
