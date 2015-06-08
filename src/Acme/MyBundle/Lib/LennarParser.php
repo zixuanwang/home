@@ -16,7 +16,8 @@ class LennarParser extends Parser {
 		$this->builder_name = 'Lennar';
 		$this->root_url = 'http://www.lennar.com';
 		$this->panorama_array = array (
-				'bainbridge' => 1 
+				'bainbridge' => 1,
+				'hickory' => 1
 		);
 	}
 	
