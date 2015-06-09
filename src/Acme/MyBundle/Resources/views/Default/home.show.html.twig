@@ -73,6 +73,63 @@
 							class="btn btn-primary btn-lg" target="_blank">虚拟全景图</a> {% endif
 						%}
 					</p>
+					<p class="text-center">
+						<button type="button" class="btn btn-primary" data-toggle="modal"
+							data-target="#myModal">了解更多</button>
+					
+					
+					<div class="modal" role="dialog"
+						aria-labelledby="gridSystemModalLabel" aria-hidden="true"
+						id="myModal">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title" id="gridSystemModalLabel">了解更多信息</h4>
+								</div>
+								<div class="modal-body">
+									<form id="query_form" action="{{ path('mail') }}" method="post">
+										<div class="form-group">
+											<label for="input_name">姓名</label> <input type="text"
+												class="form-control" id="input_name" name="input_name"
+												placeholder="">
+										</div>
+										<div class="form-group">
+											<label for="input_email">电子邮件</label> <input type="text"
+												class="form-control" id="input_email" name="input_email"
+												placeholder="">
+										</div>
+										<div class="form-group">
+											<label for="input_phone">联系电话</label> <input type="text"
+												class="form-control" id="input_phone" name="input_phone"
+												placeholder="">
+										</div>
+										<div class="form-group">
+											<label for="input_info">消息内容</label>
+											<textarea class="form-control" rows="5" id="input_info"
+												name="input_info">我对于位于{{community.getName()}}的{{ model.getName() }}户型感兴趣，请提供更多信息。</textarea>
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="submit" form="query_form" class="btn btn-primary">发送</button>
+								</div>
+							</div>
+
+
+							<!-- /.modal-content -->
+						</div>
+
+
+						<!-- /.modal-dialog -->
+					</div>
+
+
+					<!-- /.modal -->
+					</p>
 				</div>
 			</div>
 			<div class="piece">

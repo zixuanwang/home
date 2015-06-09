@@ -61,11 +61,15 @@
 						<div class="col-xs-12">￥{{ (home.getPrices()[0].getPrice() * 6.3 /
 							10000) | round }} 万元</div>
 					</div>
-					{% if not home.getHomeModel().getImages() is empty %}
+					{% if home.getHomeModel().getHasPanorama() == 'yes' %}
+					<div class="ribbon-wrapper-red">
+						<div class="ribbon-red">全景图</div>
+					</div>
+					{% else %} {% if not home.getHomeModel().getImages() is empty %}
 					<div class="ribbon-wrapper-green">
 						<div class="ribbon-green">样板间</div>
 					</div>
-					{% endif %}
+					{% endif %} {% endif %}
 				</div>
 				{% endfor %}
 			</div>
