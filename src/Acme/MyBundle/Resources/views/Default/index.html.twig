@@ -9,35 +9,35 @@
 	<div class="row" style="margin-top: 15px">
 		<div class="col-sm-3">
 			<select class="form-control" id="select-price">
-				<option>价格：人民币</option>
-				<option>小于200万</option>
-				<option>200万-500万</option>
-				<option>大于500万</option>
+				<option>Price</option>
+				<option>Below 320k</option>
+				<option>320k-790k</option>
+				<option>Above 790k</option>
 			</select>
 		</div>
 		<div class="col-sm-3">
 			<select class="form-control" id="select-sqft">
-				<option>使用面积</option>
-				<option>小于200平方米</option>
-				<option>200-300平方米</option>
-				<option>300-400平方米</option>
-				<option>大于400平方米</option>
+				<option>Square Feet</option>
+				<option>Below 2150</option>
+				<option>2150-3230</option>
+				<option>3230-4300</option>
+				<option>Above 4300</option>
 			</select>
 		</div>
 		<div class="col-sm-3">
 			<select class="form-control" id="select-bed">
-				<option>卧室数量</option>
-				<option>1-2个卧室</option>
-				<option>3-4个卧室</option>
-				<option>5个以上卧室</option>
+				<option>Bedrooms</option>
+				<option>1-2</option>
+				<option>3-4</option>
+				<option>5 and above</option>
 			</select>
 		</div>
 		<div class="col-sm-3">
 			<select class="form-control" id="select-builder">
-				<option>开发商</option>
-				<option>莱纳 (Lennar)</option>
-				<option>普尔特 (Pulte Homes)</option>
-				<option>霍顿 (D.R. Horton)</option>
+				<option>Builder</option>
+				<option>Lennar</option>
+				<option>Pulte Homes</option>
+				<option>D.R. Horton</option>
 			</select>
 		</div>
 	</div>
@@ -55,20 +55,20 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-xs-12">{{ (model.getSquareFeet() * 0.092903) |
-							round}} 平方米， {{ model.getNumBeds() }}卧，{{ model.getNumBaths() }}卫
+						<div class="col-xs-12">{{ model.getSquareFeet() |
+							round}} sqft， {{ model.getNumBeds() }} Beds，{{ model.getNumBaths() }} Baths
 						</div>
 						<div class="col-xs-12">{% if starting_prices[model.getId()] == 0
-							%} 无现房 {% else %} ￥{{ (starting_prices[model.getId()] * 6.3 /
-							10000) | round }} 万元起 {% endif %}</div>
+							%} Sold out {% else %} Starting from ${{ (starting_prices[model.getId()] / 
+							1000) | round }}k {% endif %}</div>
 					</div>
 					{% if model.getHasPanorama() == 'yes' %}
 					<div class="ribbon-wrapper-red">
-						<div class="ribbon-red">全景图</div>
+						<div class="ribbon-red">Panorama</div>
 					</div>
 					{% else %} {% if not model.getImages() is empty %}
 					<div class="ribbon-wrapper-green">
-						<div class="ribbon-green">样板间</div>
+						<div class="ribbon-green">Photos</div>
 					</div>
 					{% endif %} {% endif %}
 				</div>

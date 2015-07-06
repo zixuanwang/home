@@ -16,15 +16,14 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-xs-12">{{ (home.getHomeModel().getSquareFeet() *
-							0.092903) | round}} 平方米， {{ home.getHomeModel().getNumBeds()
-							}}卧，{{ home.getHomeModel().getNumBaths() }}卫</div>
-						<div class="col-xs-12">￥{{ (home.getPrices()[0].getPrice() * 6.3 / 10000) |
-							round }} 万元</div>
+						<div class="col-xs-12">{{ home.getHomeModel().getSquareFeet() | round}} square feet, {{ home.getHomeModel().getNumBeds()
+							}} bedrooms，{{ home.getHomeModel().getNumBaths() }} bathrooms</div>
+						<div class="col-xs-12">${{ home.getPrices()[0].getPrice() / 1000 |
+							round }}k</div>
 					</div>
 					{% if not home.getHomeModel().getImages() is empty %}
 					<div class="ribbon-wrapper-green">
-						<div class="ribbon-green">样板间</div>
+						<div class="ribbon-green">Photos</div>
 					</div>
 					{% endif %}
 				</div>
@@ -34,29 +33,29 @@
 
 		<div class="col-xs-12 col-sm-12 col-md-4">
 			<div class="piece">
-				<h4 class="text-center">{{ community.getName() }}社区</h4>
+				<h4 class="text-center">{{ community.getName() }} community</h4>
 				<table class="table table-hover">
 					<tbody>
 						<tr>
-							<td scope="row">地址： {{ community.getAddress() }} {{
+							<td scope="row">Address{{ community.getAddress() }} {{
 								community.getCity() }}, {{ community.getState() }} {{
 								community.getZipcode() }}</td>
 						</tr>
 						<tr>
-							<td scope="row">现房：{{ homes|length }}套</td>
+							<td scope="row">Homes available: {{ homes|length }}</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="piece">
-				<h4 class="text-center">学区</h4>
+				<h4 class="text-center">Schools</h4>
 				<div class="model-side-detail">
 					<table class="table table-hover">
 						<tbody>
 							{% for school in community.getSchools() %}
 							<tr>
 								<td scope="row"><span class="label label-danger">{{
-										school.getGsRating() }} 分</span>&nbsp;&nbsp;{{
+										school.getGsRating() }}</span>&nbsp;&nbsp;{{
 									school.getName() }}</td>
 							</tr>
 							{% endfor %}
@@ -65,7 +64,7 @@
 				</div>
 			</div>
 			<div class="piece" id="map-piece">
-				<h4 class="text-center">地图</h4>
+				<h4 class="text-center">Map</h4>
 				<div id="bing_map_canvas"></div>
 			</div>
 		</div>
